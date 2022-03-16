@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <h1>{{ article.title }}</h1>
+        <p>{{ article.content }}</p>
+    </div>
+    <div>
+        {%  if user == article.author %}
+            <a href="{% url 'edit' article.pk %}">글 수정하기</a>
+            <a href="{% url 'delete' article.pk %}">글 삭제하기</a>
+        {% endif %}
+        <a href="{% url 'index' %}">홈으로</a>
+    </div>
+</body>
+</html>
