@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'articleapp',
     'commentapp',
     'likeapp',
-    'careerapp',
+
 
 ]
 
