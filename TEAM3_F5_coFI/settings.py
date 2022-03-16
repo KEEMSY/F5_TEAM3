@@ -14,13 +14,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import json
 import os
 from pathlib import Path
-from django.core.exceptions import ImproperlyConfigured
-import pymysql
 
-
-import os
-from pathlib import Path
 import environ
+import pymysql
+from django.core.exceptions import ImproperlyConfigured
 
 env = environ.Env(
     # set casting, default value
