@@ -14,18 +14,17 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import json
 import os
 from pathlib import Path
-from django.core.exceptions import ImproperlyConfigured
-import pymysql
 
-
-import os
-from pathlib import Path
 import environ
+import pymysql
+from django.core.exceptions import ImproperlyConfigured
 
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False)
+    DEBUG=(bool, False),
+    SECRET_KEY=(str, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
 )
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -56,6 +55,7 @@ INSTALLED_APPS = [
     'articleapp',
     'commentapp',
     'likeapp',
+    'careerapp',
 
 ]
 
