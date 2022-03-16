@@ -14,18 +14,17 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import json
 import os
 from pathlib import Path
-from django.core.exceptions import ImproperlyConfigured
-import pymysql
 
-
-import os
-from pathlib import Path
 import environ
+import pymysql
+from django.core.exceptions import ImproperlyConfigured
 
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False)
+    DEBUG=(bool, False),
+    SECRET_KEY=(str, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
 )
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -56,7 +55,7 @@ INSTALLED_APPS = [
     'articleapp',
     'commentapp',
     'likeapp',
-    'bookmarkapp',
+
 
 ]
 
@@ -73,13 +72,13 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'TEAM3_F5_coFI.urls'
 
 # aws.json 가져와서 버킷,db 접근권한 주기
-with open(os.path.join(BASE_DIR, 'aws.json')) as f:
-    secrets = json.loads(f.read())
+# with open(os.path.join(BASE_DIR, 'aws.json')) as f:
+#     secrets = json.loads(f.read())
 
-AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
-AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
-AWS_STORAGE_BUCKET_NAME = secrets['AWS']['STORAGE_BUCKET_NAME']
-AWS_DEFAULT_ACL = 'public-read'
+# AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
+# AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
+# AWS_STORAGE_BUCKET_NAME = secrets['AWS']['STORAGE_BUCKET_NAME']
+# AWS_DEFAULT_ACL = 'public-read'
 
 TEMPLATES = [
     {
@@ -107,27 +106,27 @@ WSGI_APPLICATION = 'TEAM3_F5_coFI.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 # 로컬 db 연결
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# AWS db 연결
 DATABASES = {
     'default': {
-        'ENGINE': secrets['default']['ENGINE'],
-        'NAME': secrets['default']['NAME'],
-        'USER': secrets['default']['USER'],
-        'PASSWORD': secrets['default']['PASSWORD'],
-        'HOST': secrets['default']['HOST'],
-        'PORT': secrets['default']['PORT'],
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# AWS db 연결
+# DATABASES = {
+#     'default': {
+#         'ENGINE': secrets['default']['ENGINE'],
+#         'NAME': secrets['default']['NAME'],
+#         'USER': secrets['default']['USER'],
+#         'PASSWORD': secrets['default']['PASSWORD'],
+#         'HOST': secrets['default']['HOST'],
+#         'PORT': secrets['default']['PORT'],
+#         'OPTIONS': {
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+#         },
+#     }
+# }
 
 
 # Password validation
