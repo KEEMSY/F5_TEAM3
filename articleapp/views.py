@@ -7,8 +7,11 @@ from articleapp.models import Article
 
 def show_article(request):
     articles = Article.objects.all()
-    return render(request, 'community.html', {'articles':articles})
+    return render(request, 'templates/community.html', {'articles':articles})
 
+# def index(request):
+#     articles = Article.objects.all()
+#     return render(request, 'blog/index.html', {'articles': articles})
 
 
 @login_required(login_url='signin')
@@ -32,7 +35,7 @@ def detail(request, pk):
 @login_required(login_url='signin') # 로그인하지 않을 경우 리다이렉트
 def edit(request, pk):
     article = Article.objects.get(pk=pk)
-    # 남이 쓴 글에 대해서 수정 요청을 방지
+    # 남이 쓴 글 수정 방지
     if request.user == article.author:
         if request.method == 'POST':
             # POST 일때는 글 수정
@@ -48,7 +51,7 @@ def edit(request, pk):
 @login_required(login_url='signin')  # 로그인하지 않을 경우 리다이렉트
 def delete(request, pk):
     article = Article.objects.get(pk=pk)
-    # 남이 쓴 글에 대해서 수정 요청을 방지
+    # 남이 쓴 글 수정 방지
     if request.user == article.author:
         article.delete()
         return redirect('index')
