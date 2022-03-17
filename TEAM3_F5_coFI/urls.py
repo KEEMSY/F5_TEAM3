@@ -21,9 +21,10 @@ from commentapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.show_home, name="home"),
+    path('communities/', include("articleapp.urls")),
+    path('careers/', include("careerapp.urls")),
+    path('mypage/', include("bookmarkapp.urls")),
+    path('login/', include("userapp.urls")),
 
-    path('articles/', include("articleapp.urls")),
-
-    path('careers/', include("careerapp.urls"))
 
 ]
