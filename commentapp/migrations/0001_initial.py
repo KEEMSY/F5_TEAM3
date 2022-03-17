@@ -12,16 +12,17 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Article',
+            name='Comment',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=50)),
-                ('user', models.CharField(max_length=50, null=True)),
-                ('category', models.TextField(null=True)),
-                ('content', models.TextField(null=True)),
+                ('updated_at', models.DateTimeField(auto_now=True)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('article_id', models.TextField()),
+                ('user_id', models.TextField()),
+                ('content', models.TextField()),
             ],
             options={
-                'db_table': 'article',
+                'db_table': 'comments',
             },
         ),
     ]
