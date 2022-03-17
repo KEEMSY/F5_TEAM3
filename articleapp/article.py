@@ -3,7 +3,7 @@ from django.test import TestCase
 from articleapp.models import Article
 from articleapp.services.service_article import (article_category_read,
                                                  article_create,
-                                                 article_delete,
+                                                 # article_delete,
                                                  article_update,
                                                  article_user_search)
 
@@ -68,30 +68,30 @@ class TestView(TestCase):
         self.assertEqual(2, len(category2_read))
         self.assertEqual(3, len(category3_read))
 
-    def article_update(self):
-        # Given  ##user1이 있음
+    # def article_update(self):
+    #     # Given  ##user1이 있음
+    #
+    #     user1 = 'user1'
+    #
+    #     # When   ##하나의 article 갱신 필요
+    #     article_update(user1)
+    #
+    #     # Then   ##title, category 맞는 하나의 article 갱신
+    #     article_update(title, user1, category1)
+    #
+    #     # expect ##갱신 전 Ccategory1의 길이와 같아짐
+    #     self.assertEqual(1, len(category1))
 
-        user1 = 'user1'
-
-        # When   ##하나의 article 갱신 필요
-        article_update(user1)
-
-        # Then   ##title, category 맞는 하나의 article 갱신
-        article_update(title, user1, category1)
-
-        # expect ##갱신 전 Ccategory1의 길이와 같아짐
-        self.assertEqual(1, len(category1))
-
-    def article_delete(self):
-        # Given  ##user1이 있음
-
-        user1 = 'user1'
-
-        # When   ##user1이 게시글 삭제 필요
-        article_delete(user1)
-
-        # Then   ## title, category2 맞는 하나의 article 삭제
-        article_delete('title', user1, category1)
-
-        # expect ## category2 길이가 1이 됨
-        self.assertEqual(1, len(category1))
+    # def article_delete(self):
+    #     # Given  ##user1이 있음
+    #
+    #     user1 = 'user1'
+    #
+    #     # When   ##user1이 게시글 삭제 필요
+    #     article_delete(user1)
+    #
+    #     # Then   ## title, category2 맞는 하나의 article 삭제
+    #     article_delete('title', user1, category1)
+    #
+    #     # expect ## category2 길이가 1이 됨
+    #     self.assertEqual(1, len(category1))
