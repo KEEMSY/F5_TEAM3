@@ -4,9 +4,9 @@ from django.shortcuts import render
 
 
 def show_job(request):
-    return render(request,'community.html')
+    return render(request,'career.html')
 
 
 # 수정해야하는 부분
 def show_job_detail(request):
-    return render(request,'community.html')
+    return render(request,'career-details.html')
