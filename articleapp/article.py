@@ -1,6 +1,12 @@
 from django.test import TestCase
+
 from articleapp.models import Article
-from articleapp.services.service_article import article_create, article_user_search, article_category_read, article_update, article_delete
+from articleapp.services.service_article import (article_category_read,
+                                                 article_create,
+                                                 article_delete,
+                                                 article_update,
+                                                 article_user_search)
+
 
 class TestView(TestCase):
 

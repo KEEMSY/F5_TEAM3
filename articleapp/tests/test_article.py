@@ -3,6 +3,7 @@
 # Then
 # expect
 from django.test import TestCase
+
 from articleapp.models import Article
 from articleapp.services.service_article import article_create
 

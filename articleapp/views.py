@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from articleapp.models import Article
+from django.shortcuts import redirect, render
 
+from articleapp.models import Article
 
 # Create your views here.
 

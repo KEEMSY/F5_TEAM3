@@ -1,7 +1,10 @@
-from django.db import models
-from django.contrib.auth.models import AbstractUser
 from django.conf import settings
+from django.contrib.auth.models import AbstractUser
+from django.db import models
+
 from articleapp.models import Article
+
+
 # Create your models here.
 class ArticleLikes(models.Model):
     class Meta:
