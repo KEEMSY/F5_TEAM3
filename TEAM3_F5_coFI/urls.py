@@ -16,15 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from commentapp import views
+from TEAM3_F5_coFI import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.show_home, name="home"),
+    path('users/', include("userapp.urls")),
+    path('', views.show_home, name='home'),
     path('communities/', include("articleapp.urls")),
     path('careers/', include("careerapp.urls")),
     path('mypage/', include("bookmarkapp.urls")),
-    path('login/', include("userapp.urls")),
+
 
 
 ]
