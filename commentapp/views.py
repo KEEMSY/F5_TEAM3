@@ -15,19 +15,6 @@ def show_home(request):
     return render(request, 'base.html')
 
 
-def post_comment(request):
-    try:
-        comment = create_comment(
-            user_id=request.user.id,
-            article_id=request.article.id,
-            content=request.content
-        )
-        return HttpResponse(status=201)
-
-    except ObjectDoesNotExist:
-        return JsonResponse({'msg':'Does Not Exist'},status=400)
-
-
 class CommentView(View):
     def post(self, request):
         try:
@@ -35,12 +22,12 @@ class CommentView(View):
             return HttpResponse(status=200)
 
         except IntegrityError:
-            return JsonResponse({'msg':'게시글이 존재하지 않습니다.'}, status=400)
+            return JsonResponse({'msg': '게시글이 존재하지 않습니다.'}, status=400)
 
     def patch(self, request):
         try:
             update_comment(comment_id=request.comment_id, content=request.content)
-            return JsonResponse({'msg':'댓글이 수정되었습니다.'}, status=200)
+            return JsonResponse({'msg': '댓글이 수정되었습니다.'}, status=200)
 
         except ObjectDoesNotExist:
             return JsonResponse({'msg': '댓글이 존재하지 않습니다.'}, status=400)
@@ -48,7 +35,7 @@ class CommentView(View):
     def delete(self, request):
         try:
             delete_comment(comment_id=request.comment_id)
-            return JsonResponse({'msg':'댓글이 삭제되었습니다.'}, status=200)
+            return JsonResponse({'msg': '댓글이 삭제되었습니다.'}, status=200)
 
         except ObjectDoesNotExist:
             return JsonResponse({'msg': '댓글이 존재하지 않습니다.'}, status=400)

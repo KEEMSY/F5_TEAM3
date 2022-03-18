@@ -25,6 +25,6 @@ urlpatterns = [
     path('careers/', include("careerapp.urls")),
     path('mypage/', include("bookmarkapp.urls")),
     path('login/', include("userapp.urls")),
-
+    path('comments/', include("commentapp.urls")),
 
 ]
