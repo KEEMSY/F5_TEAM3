@@ -47,17 +47,18 @@
                 </div>
                 <form action="/users/login/" method="post" id="login-form">
                     {% csrf_token %}
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="form-group">
-                        <input class="form-control" type="email" placeholder="Email">
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <div class="form-group">
-                        <input class="form-control" type="password" placeholder="Password">
-                      </div>
-                    </div>
+                    {{form.as_p}}
+{#                  <div class="row">#}
+{#                    <div class="col-12">#}
+{#                      <div class="form-group">#}
+{#                        <input class="form-control" type="email" placeholder="Email">#}
+{#                      </div>#}
+{#                    </div>#}
+{#                    <div class="col-12">#}
+{#                      <div class="form-group">#}
+{#                        <input class="form-control" type="password" placeholder="Password">#}
+{#                      </div>#}
+{#                    </div>#}
                     <div class="col-12">
                       <div class="form-group">
                         <div class="remember-forgot-info">

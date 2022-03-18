@@ -58,27 +58,27 @@
                     <form action="/users/sign_up/" method="post" id="signup-form">
                         {% csrf_token %}
                       <div class="row">
-
-                        <div class="col-12">
-                          <div class="form-group">
-                            <input class="form-control" type="email" placeholder="Email">
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <div class="form-group">
-                            <input class="form-control" type="text" placeholder="Name">
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <div class="form-group">
-                            <input class="form-control" type="password" placeholder="Password">
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <div class="form-group">
-                            <input class="form-control" type="password" placeholder="Confirm Password">
-                          </div>
-                        </div>
+                          {{form.as_p}}
+{#                        <div class="col-12">#}
+{#                          <div class="form-group">#}
+{#                            <input class="form-control" type="email" placeholder="Email">#}
+{#                          </div>#}
+{#                        </div>#}
+{#                        <div class="col-12">#}
+{#                          <div class="form-group">#}
+{#                            <input class="form-control" type="text" placeholder="Name">#}
+{#                          </div>#}
+{#                        </div>#}
+{#                        <div class="col-12">#}
+{#                          <div class="form-group">#}
+{#                            <input class="form-control" type="password" placeholder="Password">#}
+{#                          </div>#}
+{#                        </div>#}
+{#                        <div class="col-12">#}
+{#                          <div class="form-group">#}
+{#                            <input class="form-control" type="password" placeholder="Confirm Password">#}
+{#                          </div>#}
+{#                        </div>#}
 
                         <div class="col-12">
                           <div class="form-group">
