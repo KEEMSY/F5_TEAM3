@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
 from django.contrib import auth
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-# from user.models import UserModel
+from django.shortcuts import redirect, render
+from django.views.generic import FormView
 
 # AWS json 가져오기 위한 장치
 # import os
@@ -32,13 +33,9 @@ from django.contrib.auth.decorators import login_required
 #         #회원 가입 성공하면
 #         return redirect('/')
 from . import forms
-from django.views.generic import FormView
-from django.urls import reverse_lazy
-from django.contrib import auth
-from django.shortcuts import render, redirect
-from django.urls import reverse
-from django.contrib.auth import logout, authenticate, login
-from django.contrib.auth.decorators import login_required
+
+# from user.models import UserModel
+
 
 
 class SignUpView(FormView):
@@ -69,7 +66,7 @@ def login_view(request):
             return redirect("/")
         else:
             return render(request, "userapp/login.html", {"form": form})
-            # return redirect(reverse("users:login"))
+
     elif request.method == "GET":
         form = forms.LoginForm()
         return render(request, "userapp/login.html", {"form": form})
