@@ -13,7 +13,7 @@ from commentapp.services.comment_service import (create_comment,
 
 
 class TestView(TestCase):
-
+    # comment 생성
     def test_create_comment(self):
         # Given
         user = Author.objects.create(name="test_name")
@@ -28,6 +28,17 @@ class TestView(TestCase):
         self.assertEqual(user.id, comment.user.id)
         self.assertEqual(article.id, comment.article.id)
 
+    def test_when_create_comment_article_does_not_exist(self):
+        # Given
+        user = Author.objects.create(name="test_name")
+        article_id = 9999
+        content = 'test'
+
+        # Expect
+        with self.assertRaises(IntegrityError):
+            comment = create_comment(article_id, user.id, content)
+
+    # comment 수정 시
     def test_update_target_comment(self):
         # Given
         user = Author.objects.create(name="test_name")
@@ -44,6 +55,7 @@ class TestView(TestCase):
         comment = Comment.objects.get(id=comment_id)
         self.assertEqual(update_content, comment.content)
 
+    # comment 삭제 시
     def test_comment_can_delete_by_deleting_article(self):
         # Given
         user = Author.objects.create(name="test_name")
@@ -94,18 +106,6 @@ class TestView(TestCase):
         user.delete()
         article.delete()
 
-
         # Expect
         with self.assertRaises(ObjectDoesNotExist):
             delete_comment(comment.id)
-
-    def test_when_create_comment_article_does_not_exist(self):
-        # Given
-        user = Author.objects.create(name="test_name")
-        article_id = 9999
-        content = 'test'
-
-        # Expect
-        with self.assertRaises(IntegrityError):
-            comment = create_comment(article_id, user.id, content)
-
