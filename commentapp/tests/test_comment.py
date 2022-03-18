@@ -33,9 +33,9 @@ class TestView(TestCase):
 
         # When
         comment_id = comment.id
-        user_id = comment.user_id
         update_content = 'update_Content!'
-        update_comment(comment_id, user_id, update_content)
+        update_comment(comment_id, update_content)
 
         # Expect
+        comment = Comment.objects.get(id=comment_id)
         self.assertEqual(update_content, comment.content)

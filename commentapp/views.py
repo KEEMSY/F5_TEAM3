@@ -6,3 +6,5 @@ def show_home(request):
     return render(request, 'base.html')
 
 
+
+
