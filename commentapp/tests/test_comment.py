@@ -1,4 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.db import IntegrityError
 from django.test import TestCase
 
 # Given
@@ -6,7 +7,9 @@ from django.test import TestCase
 # Then
 # expect
 from commentapp.models import Author, Comment, Post
-from commentapp.services.comment_service import create_comment, update_comment, delete_comment
+from commentapp.services.comment_service import (create_comment,
+                                                 delete_comment,
+                                                 update_comment)
 
 
 class TestView(TestCase):
@@ -18,7 +21,7 @@ class TestView(TestCase):
         content = 'test'
 
         # When
-        comment = create_comment(article, user, content)
+        comment = create_comment(article.id, user.id, content)
 
         # expect
         self.assertIsNotNone(Comment.id)
@@ -30,7 +33,7 @@ class TestView(TestCase):
         user = Author.objects.create(name="test_name")
         article = Post.objects.create(title="test_title")
         content = 'test'
-        comment = create_comment(article, user, content)
+        comment = create_comment(article.id, user.id, content)
 
         # When
         comment_id = comment.id
@@ -46,7 +49,7 @@ class TestView(TestCase):
         user = Author.objects.create(name="test_name")
         article = Post.objects.create(title="test_title")
         content = 'test'
-        comment = create_comment(article, user, content)
+        comment = create_comment(article.id, user.id, content)
 
         # When
         article.delete()
@@ -59,7 +62,7 @@ class TestView(TestCase):
         user = Author.objects.create(name="test_name")
         article = Post.objects.create(title="test_title")
         content = 'test'
-        comment = create_comment(article, user, content)
+        comment = create_comment(article.id, user.id, content)
 
         # When
         user.delete()
@@ -72,7 +75,7 @@ class TestView(TestCase):
         user = Author.objects.create(name="test_name")
         article = Post.objects.create(title="test_title")
         content = 'test'
-        comment = create_comment(article, user, content)
+        comment = create_comment(article.id, user.id, content)
 
         # When
         delete_comment(comment.id)
@@ -85,7 +88,7 @@ class TestView(TestCase):
         user = Author.objects.create(name="test_name")
         article = Post.objects.create(title="test_title")
         content = 'test'
-        comment = create_comment(article, user, content)
+        comment = create_comment(article.id, user.id, content)
 
         # When
         user.delete()
@@ -96,5 +99,13 @@ class TestView(TestCase):
         with self.assertRaises(ObjectDoesNotExist):
             delete_comment(comment.id)
 
+    def test_when_create_comment_article_does_not_exist(self):
+        # Given
+        user = Author.objects.create(name="test_name")
+        article_id = 9999
+        content = 'test'
 
+        # Expect
+        with self.assertRaises(IntegrityError):
+            comment = create_comment(article_id, user.id, content)
 
