@@ -45,7 +45,8 @@
                 <div class="form-title">
                   <h4 class="title">Sign In</h4>
                 </div>
-                <form action="#">
+                <form action="/users/login/" method="post" id="login-form">
+                    {% csrf_token %}
                   <div class="row">
                     <div class="col-12">
                       <div class="form-group">
@@ -72,13 +73,13 @@
                     </div>
                     <div class="col-12">
                       <div class="form-group">
-                        <button type="button" class="btn-theme">Sign In</button>
+                        <button type="submit" class="btn-theme">Sign In</button>
                       </div>
                     </div>
                   </div>
                 </form>
                 <div class="login-register-form-info">
-                  <p>Don't you have an account? <a href="sign-up.html">Register</a></p>
+                  <p>Don't you have an account? <a href="/users/sign_up/">Register</a></p>
                 </div>
               </div>
             </div>

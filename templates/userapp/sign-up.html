@@ -55,11 +55,18 @@
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                   <div class="tab-pane fade show active" id="candidate" role="tabpanel" aria-labelledby="candidate-tab">
-                    <form action="#">
+                    <form action="/users/sign_up/" method="post" id="signup-form">
+                        {% csrf_token %}
                       <div class="row">
+
                         <div class="col-12">
                           <div class="form-group">
                             <input class="form-control" type="email" placeholder="Email">
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Name">
                           </div>
                         </div>
                         <div class="col-12">
@@ -72,6 +79,7 @@
                             <input class="form-control" type="password" placeholder="Confirm Password">
                           </div>
                         </div>
+
                         <div class="col-12">
                           <div class="form-group">
                             <div class="remember-forgot-info">
@@ -84,7 +92,7 @@
                         </div>
                         <div class="col-12">
                           <div class="form-group">
-                            <button type="button" class="btn-theme">Register Now</button>
+                            <button type="submit" class="btn-theme">Register Now</button>
                           </div>
                         </div>
                       </div>
@@ -128,7 +136,7 @@
                   </div>
                 </div>
                 <div class="login-register-form-info">
-                  <p>Already have an account? <a href="login.html">Login</a></p>
+                  <p>Already have an account? <a href="/users/login/">Login</a></p>
                 </div>
               </div>
             </div>
