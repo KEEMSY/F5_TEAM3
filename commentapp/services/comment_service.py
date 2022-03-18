@@ -7,3 +7,9 @@ def create_comment(article_id, user_id, content):
         user_id=user_id,
         content=content
     )
+
+
+def update_comment(user_id, comment_id, content):
+    target_comment = Comment.objects.get(id=comment_id)
+    target_comment.content = content
+    target_comment.save()

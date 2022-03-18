@@ -4,6 +4,14 @@ from django.db import models
 from TEAM3_F5_coFI.models import BaseModel
 
 
+class Author(models.Model):
+    name = models.CharField(max_length=50)
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=50)
+
+
 class Comment(BaseModel):
     class Meta:
         db_table = "comments"
@@ -11,6 +19,6 @@ class Comment(BaseModel):
     def __str__(self):
         return self.writer
 
-    article_id = models.TextField()
-    user_id = models.TextField()
+    article = models.ForeignKey(Post, on_delete=models.CASCADE())
+    user = models.ForeignKey(Author, on_delete=models.CASCADE())
     content = models.TextField()
