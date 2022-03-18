@@ -1,10 +1,10 @@
 from commentapp.models import Comment
 
 
-def create_comment(article_id, user_id, content):
+def create_comment(article, user, content):
     return Comment.objects.create(
-        article_id=article_id,
-        user_id=user_id,
+        article=article,
+        user=user,
         content=content
     )
 

@@ -4,7 +4,7 @@ from django.test import TestCase
 # When
 # Then
 # expect
-from commentapp.models import Comment
+from commentapp.models import Comment, Author, Post
 from commentapp.services.comment_service import create_comment, update_comment
 
 
@@ -12,21 +12,22 @@ class TestView(TestCase):
 
     def test_create_comment(self):
         # Given
-        user = 'user1'
-        article_id = 'article1'
+        user = Author.objects.create(name="test_name")
+        article = Post.objects.create(title="test_title")
         content = 'test'
 
         # When
-        comment = create_comment(article_id, user, content)
+        comment = create_comment(article, user, content)
 
         # expect
         self.assertIsNotNone(Comment.id)
-        self.assertEqual('user1', comment.user_id)
+        self.assertEqual(user.id, comment.user.id)
+        self.assertEqual(article.id, comment.article.id)
 
     def test_update_target_comment(self):
         # Given
-        user = 'user1'
-        article = 'article1'
+        user = Author.objects.create(name="test_name")
+        article = Post.objects.create(title="test_title")
         content = 'test'
         comment = create_comment(article, user, content)
 

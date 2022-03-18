@@ -19,6 +19,6 @@ class Comment(BaseModel):
     def __str__(self):
         return self.writer
 
-    article = models.ForeignKey(Post, on_delete=models.CASCADE())
-    user = models.ForeignKey(Author, on_delete=models.CASCADE())
+    article = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(Author, on_delete=models.CASCADE)
     content = models.TextField()
