@@ -17,7 +17,7 @@ class Comment(BaseModel):
         db_table = "comments"
 
     def __str__(self):
-        return self.writer
+        return self.user
 
     article = models.ForeignKey(Post, on_delete=models.CASCADE)
     user = models.ForeignKey(Author, on_delete=models.CASCADE)
