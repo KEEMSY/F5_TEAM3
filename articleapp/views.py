@@ -14,7 +14,7 @@ def show_article(request):
 #     return render(request, 'blog/index.html', {'articles': articles})
 
 
-@login_required(login_url='signin')
+# @login_required(login_url='signin')
 def new(request):
     if request.method == 'POST':
         # POST 일때는 글 수정
@@ -27,12 +27,12 @@ def new(request):
     else:
         return render(request, 'templates/new.html')
 
-@login_required(login_url='signin')
+# @login_required(login_url='signin')
 def detail(request, pk):
     article = Article.objects.get(pk=pk)  #L=필드명, R=변수
     return render(request, 'blog/detail.html', {'article': article})  # L=html 변수, R=views 변수
 
-@login_required(login_url='signin') # 로그인하지 않을 경우 리다이렉트
+# @login_required(login_url='signin') # 로그인하지 않을 경우 리다이렉트
 def edit(request, pk):
     article = Article.objects.get(pk=pk)
     # 남이 쓴 글 수정 방지
@@ -48,7 +48,7 @@ def edit(request, pk):
     else:
         return render(request, 'templates/edit.html', {'error': '잘못된 접근'})
 
-@login_required(login_url='signin')  # 로그인하지 않을 경우 리다이렉트
+# @login_required(login_url='signin')  # 로그인하지 않을 경우 리다이렉트
 def delete(request, pk):
     article = Article.objects.get(pk=pk)
     # 남이 쓴 글 수정 방지
