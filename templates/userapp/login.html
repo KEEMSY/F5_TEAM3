@@ -1,3 +1,5 @@
+{% load socialaccount %}
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -45,6 +47,7 @@
                 <div class="form-title">
                   <h4 class="title">Sign In</h4>
                 </div>
+
                 <form action="/users/login/" method="post" id="login-form">
                     {% csrf_token %}
 {#                    {{form.as_p}}#}
@@ -88,6 +91,7 @@
                     </div>
                   </div>
                 </form>
+                <a href="{% provider_login_url 'google'%}">Google 계정으로 로그인</a>
                 <div class="login-register-form-info">
                   <p>Don't you have an account? <a href="/users/sign_up/">Register</a></p>
                 </div>

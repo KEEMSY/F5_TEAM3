@@ -26,6 +26,9 @@ urlpatterns = [
     path('careers/', include("careerapp.urls")),
     path('mypage/', include("bookmarkapp.urls")),
 
+    path('accounts/', include('allauth.urls')),
+    path('google/', include('allauth.urls')),
+
 
 
 ]

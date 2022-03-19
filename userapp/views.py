@@ -60,6 +60,7 @@ def login_view(request):
         email = request.POST.get("email", '')
         password = request.POST.get("password", '')
 
+
         get_user = auth.authenticate(request, email=email, password=password)
         if get_user is not None:
             auth.login(request, get_user)
