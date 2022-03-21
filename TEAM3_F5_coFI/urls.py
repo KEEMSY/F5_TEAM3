@@ -20,10 +20,15 @@ from commentapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('', include("likeapp.urls")),
+
     path('', views.show_home, name="home"),
 
     path('articles/', include("articleapp.urls")),
 
-    path('careers/', include("careerapp.urls"))
+    path('careers/', include("careerapp.urls")),
+
+    path('articles/', include("bookmarkapp.urls")),
 
 ]
