@@ -27,5 +27,4 @@ urlpatterns = [
     path('mypage/', include("bookmarkapp.urls")),
 
 
-
 ]

@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
+
 # from user.models import UserModel
 
 # AWS json 가져오기 위한 장치
