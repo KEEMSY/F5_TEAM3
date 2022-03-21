@@ -2,35 +2,28 @@
 # When
 # Then
 # expect
-<<<<<<< HEAD
+
 from django.test import TestCase
 from articleapp.models import Article
 from articleapp.services.service_article import article_create, article_user_search, article_category_read, article_update, article_delete
-=======
-# from django.test import TestCase
-#
-# from articleapp.models import Article
-# from articleapp.services.service_article import (article_category_read,
-#                                                  article_create,
-#                                                  article_update,
-#                                                  article_user_search)
-#
-#
-# class TestView(TestCase):
-#
-#     def test_article_create(self):
-#         # Given   ##title = 'test_title' 제목 입력
-#         title = 'test_title'
-#
-#         # When   ##article = article_create 하는데 title(제목) 필요 title = 'test_title'
-#                  ##article의 type 출력 (article = article_create ())
-#
-#         article = article_create(title, 'user', 'category')
-#         print(type(article))
-#
-#         # expect  ##article.title, title 이 두 개가 같을 것이다.
-#         self.assertEqual(article.title, title)
-#
+
+
+
+class TestView(TestCase):
+
+    def test_article_create(self):
+        # Given   ##title = 'test_title' 제목 입력
+        title = 'test_title'
+
+        # When   ##article = article_create 하는데 title(제목) 필요 title = 'test_title'
+                 ##article의 type 출력 (article = article_create ())
+
+        article = article_create(title, 'user', 'category')
+        print(type(article))
+
+        # expect  ##article.title, title 이 두 개가 같을 것이다.
+        self.assertEqual(article.title, title)
+
 #     def test_article_user_search(self):
 #         # Given   ##user1이 있음
 #         user1 = 'user1'
@@ -75,33 +68,37 @@ from articleapp.services.service_article import article_create, article_user_sea
 #         self.assertEqual(1, len(category1_read))
 #         self.assertEqual(2, len(category2_read))
 #         self.assertEqual(3, len(category3_read))
+#
+#     def test_article_update(self):
+#         # Given  ##user1이 있음
+#
+#         user1 = 'user1'
+#         category1 = 'category1'
+#
+#         # When   ##하나의 article 갱신 필요
+#         article_update(user1)
+#
+#         # Then   ##title, category 맞는 하나의 article 갱신
+#         article_update('title', user1, category1)
+#
+#         # expect ##갱신 전 Ccategory1의 길이와 같아짐
+#         self.assertEqual(1, len(category1))
+#
+#
+#     def test_article_delete(self):
+#         # Given  ##user1이 있음
+#
+#         user1 = 'user1'
+#
+#         # When   ##user1이 게시글 삭제 필요
+#         article_delete(user1)
+#
+#         # Then   ## title, category2 맞는 하나의 article 삭제
+#         article_delete('title', user1, category2)
+#
+#         # expect ## category2 길이가 1이 됨
+#         self.assertEqual(1, len(category2))
 
-    # def test_article_update(self):
-    #     # Given  ##user1이 있음
-    #
-    #     user1 = 'user1'
-    #     category1 = 'category1'
-    #
-    #     # When   ##하나의 article 갱신 필요
-    #     article_update(user1)
-    #
-    #     # Then   ##title, category 맞는 하나의 article 갱신
-    #     article_update('title', user1, category1)
-    #
-    #     # expect ##갱신 전 Ccategory1의 길이와 같아짐
-    #     self.assertEqual(1, len(category1))
->>>>>>> b26e381e853fbc0d32cf7dd39a8701ceef8a8d13
 
-    # def test_article_delete(self):
-    #     # Given  ##user1이 있음
-    #
-    #     user1 = 'user1'
-    #
-    #     # When   ##user1이 게시글 삭제 필요
-    #     article_delete(user1)
-    #
-    #     # Then   ## title, category2 맞는 하나의 article 삭제
-    #     article_delete('title', user1, category2)
-    #
-    #     # expect ## category2 길이가 1이 됨
-    #     self.assertEqual(1, len(category2))
+
+

@@ -57,8 +57,11 @@ INSTALLED_APPS = [
     'likeapp',
     'bookmarkapp',
 
-
 ]
+
+TIME_ZONE = 'Asia/Seoul'
+
+USE_TZ = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
