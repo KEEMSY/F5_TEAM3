@@ -11,8 +11,6 @@ from commentapp.services.comment_service import (create_comment,
                                                  update_comment)
 
 
-def show_home(request):
-    return render(request, 'base.html')
 
 
 class CommentView(View):
@@ -39,3 +37,4 @@ class CommentView(View):
 
         except ObjectDoesNotExist:
             return JsonResponse({'msg': '댓글이 존재하지 않습니다.'}, status=400)
+
