@@ -1,5 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.db import IntegrityError
+from django.db.utils import IntegrityError
 from django.test import TestCase
 
 # Given
