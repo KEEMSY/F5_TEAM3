@@ -6,12 +6,6 @@ on:
 jobs:
   ci:
 
-    env:
-      DB_DATABASE: TEAM3
-      DB_USER: root
-      DB_PASSWORD: 2349
-
-
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codes
@@ -26,8 +20,8 @@ jobs:
       - name: Start MYSQL
         run: |
           sudo systemctl start mysql
-          mysql -e "use mysql; FLUSH PRIVILEGES; ALTER USER '${{ env.DB_USER }}'@'localhost' IDENTIFIED BY '${{ env.DB_PASSWORD }}';" -uroot -proot
-          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+          mysql -e "use mysql; FLUSH PRIVILEGES; ALTER USER '${{ secrets.AWS_SECRET_DB_USER }}'@'localhost' IDENTIFIED BY '${{ secrets.AWS_SECRET_DB_PASSWORD }}';" -uroot -proot
+          mysql -e 'CREATE DATABASE ${{ secrets.AWS_SECRET_DB_DATABASE }};' -u${{ secrets.AWS_SECRET_DB_USER }} -p${{ secrets.AWS_SECRET_DB_PASSWORD }}
 
       - name: Setup python environment
         id: setup-python
