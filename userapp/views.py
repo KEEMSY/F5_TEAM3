@@ -2,7 +2,9 @@ from django.contrib import auth
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+
 from django.views.generic import FormView
+
 
 # AWS json 가져오기 위한 장치
 # import os
