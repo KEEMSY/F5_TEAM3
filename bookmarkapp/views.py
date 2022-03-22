@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
 # Create your views here.
@@ -11,10 +12,10 @@ def click_bookmark(request, article_id):
     if user:
         if request.method == "POST":
             do_bookmark(user_id, article_id)
-            return render(request, "userapp/mypage.html")
+            return JsonResponse({'msg': '스크랩'}, status=200)
         elif request.method == "DELETE":
             undo_bookmark(user_id, article_id)
-            return render(request, "userapp/mypage.html")
+            return JsonResponse({'msg': '스크랩 취소'}, status=200)
 
     else:
         return redirect("/sign-in")

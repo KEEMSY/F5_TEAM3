@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 # Create your views here.
 from likeapp.models import ArticleLikes, Author, CommentLikes, Datcle
@@ -12,10 +13,10 @@ def click_article_like(request, article_id):
     if user:
         if request.method == "POST":
             do_article_like(user_id, article_id)
-            return render(request, "userapp/article.html")
+            return JsonResponse({'msg': '좋아요'}, status=200)
         elif request.method == "DELETE":
             undo_article_like(user_id, article_id)
-            return render(request, "userapp/article.html")
+            return JsonResponse({'msg': '좋아요 취소'}, status=200)
 
     else:
         return redirect("/sign-in")
@@ -27,11 +28,11 @@ def click_comment_like(request, comment_id):
     if user:
         if request.method == "POST":
             do_comment_like(user_id, comment_id)
-            return render(request, "userapp/article.html")
+            return JsonResponse({'msg': '좋아요'}, status=200)
         elif request.method == "DELETE":
             undo_comment_like(user_id, comment_id)
 
-            return render(request, "userapp/article.html")
+            return JsonResponse({'msg': '좋아요 취소'}, status=200)
 
     else:
         return redirect("/sign-in")
