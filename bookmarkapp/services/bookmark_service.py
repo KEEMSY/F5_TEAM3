@@ -3,7 +3,6 @@ from likeapp.models import Post
 
 
 def do_bookmark(user_id: int, article_id: int) -> Bookmark:
-    article = Post.objects.filter(pk=article_id).get()
     Scrap = Bookmark.objects.create(user_id=user_id, article_id=article_id)
     return Scrap
 
