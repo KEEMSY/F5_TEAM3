@@ -19,3 +19,4 @@ def click_bookmark(request, article_id):
 
     else:
         return redirect("/sign-in")
+

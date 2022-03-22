@@ -15,24 +15,24 @@
   <!--== End Header Wrapper ==-->
   <main class="main-content">
     <!--== Start Page Header Area Wrapper ==-->
-    <div class="page-header-area sec-overlay sec-overlay-black" data-bg-img="assets/img/photos/bg2.jpg">
-      <div class="container pt--0 pb--0">
-        <div class="row">
-          <div class="col-12">
-            <div class="page-header-content">
-              <h2 class="title">Register Page</h2>
-              <nav class="breadcrumb-area">
-                <ul class="breadcrumb justify-content-center">
-                  <li><a href="index.html">Home</a></li>
-                  <li class="breadcrumb-sep">//</li>
-                  <li>Pages</li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+{#    <div class="page-header-area sec-overlay sec-overlay-black" data-bg-img="assets/img/photos/bg2.jpg">#}
+{#      <div class="container pt--0 pb--0">#}
+{#        <div class="row">#}
+{#          <div class="col-12">#}
+{#            <div class="page-header-content">#}
+{#              <h2 class="title">Register Page</h2>#}
+{#              <nav class="breadcrumb-area">#}
+{#                <ul class="breadcrumb justify-content-center">#}
+{#                  <li><a href="index.html">Home</a></li>#}
+{#                  <li class="breadcrumb-sep">//</li>#}
+{#                  <li>Pages</li>#}
+{#                </ul>#}
+{#              </nav>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
     <!--== End Page Header Area Wrapper ==-->
 
     <!--== Start Login Area Wrapper ==-->
@@ -55,23 +55,45 @@
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                   <div class="tab-pane fade show active" id="candidate" role="tabpanel" aria-labelledby="candidate-tab">
-                    <form action="#">
+                    <form action="/users/sign_up/" method="post" id="signup-form">
+                        {% csrf_token %}
                       <div class="row">
+
                         <div class="col-12">
                           <div class="form-group">
-                            <input class="form-control" type="email" placeholder="Email">
+                              <label for="id_email"></label>
+                              <input class="form-control" type="email" placeholder="Email" id="id_email" name="email"
+                                     required>
+                              <ul class="errorlist">
+                                  {{ form.errors.email }}
+                              </ul>
                           </div>
                         </div>
                         <div class="col-12">
                           <div class="form-group">
-                            <input class="form-control" type="password" placeholder="Password">
+                            <label for="id_username"></label>
+                            <input class="form-control" type="text" placeholder="Name" id="id_username" name="username" required>
+                            <ul class="errorlist">
+                                {{ form.errors.username }}
+                            </ul>
                           </div>
                         </div>
                         <div class="col-12">
                           <div class="form-group">
-                            <input class="form-control" type="password" placeholder="Confirm Password">
+                            <label for="id_password"></label>
+                            <input class="form-control" type="password" placeholder="Password" id="id_password" name="password" required>
+                            <ul class="errorlist">
+                                {{ form.errors.password1 }}
+                            </ul>
                           </div>
                         </div>
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label for="id_password1"></label>
+                            <input class="form-control" type="password" placeholder="Confirm Password" id="id_password1" name="password1" required>
+                          </div>
+                        </div>
+
                         <div class="col-12">
                           <div class="form-group">
                             <div class="remember-forgot-info">
@@ -84,7 +106,7 @@
                         </div>
                         <div class="col-12">
                           <div class="form-group">
-                            <button type="button" class="btn-theme">Register Now</button>
+                            <button type="submit" class="btn-theme">Register Now</button>
                           </div>
                         </div>
                       </div>
@@ -128,7 +150,7 @@
                   </div>
                 </div>
                 <div class="login-register-form-info">
-                  <p>Already have an account? <a href="login.html">Login</a></p>
+                  <p>Already have an account? <a href="/users/login/">Login</a></p>
                 </div>
               </div>
             </div>
