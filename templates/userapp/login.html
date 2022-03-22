@@ -1,3 +1,5 @@
+{% load socialaccount %}
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -15,25 +17,25 @@
   <!--== End Header Wrapper ==-->
   <main class="main-content">
     <!--== Start Page Header Area Wrapper ==-->
-    <div class="page-header-area sec-overlay sec-overlay-black" data-bg-img="assets/img/photos/bg2.jpg">
-      <div class="container pt--0 pb--0">
-        <div class="row">
-          <div class="col-12">
-            <div class="page-header-content">
-              <h2 class="title">Login</h2>
-              <nav class="breadcrumb-area">
-                <ul class="breadcrumb justify-content-center">
-                  <li><a href="index.html">Home</a></li>
-                  <li class="breadcrumb-sep">//</li>
-                  <li>Pages</li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--== End Page Header Area Wrapper ==-->
+{#    <div class="page-header-area sec-overlay sec-overlay-black" data-bg-img="assets/img/photos/bg2.jpg">#}
+{#      <div class="container pt--0 pb--0">#}
+{#        <div class="row">#}
+{#          <div class="col-12">#}
+{#            <div class="page-header-content">#}
+{#              <h2 class="title">Login</h2>#}
+{#              <nav class="breadcrumb-area">#}
+{#                <ul class="breadcrumb justify-content-center">#}
+{#                  <li><a href="index.html">Home</a></li>#}
+{#                  <li class="breadcrumb-sep">//</li>#}
+{#                  <li>Pages</li>#}
+{#                </ul>#}
+{#              </nav>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+{#    <!--== End Page Header Area Wrapper ==-->#}
 
     <!--== Start Login Area Wrapper ==-->
     <section class="account-login-area">
@@ -45,18 +47,30 @@
                 <div class="form-title">
                   <h4 class="title">Sign In</h4>
                 </div>
-                <form action="#">
+
+                <form action="/users/login/" method="post" id="login-form">
+                    {% csrf_token %}
+{#                    {{form.as_p}}#}
                   <div class="row">
                     <div class="col-12">
                       <div class="form-group">
-                        <input class="form-control" type="email" placeholder="Email">
+                        <label for="id_email"></label>
+                        <input class="form-control" type="email" placeholder="Email" name="email" id="id_email" required>
+                        <ul class="errorlist">
+                            {{ form.errors.email }}
+                        </ul>
                       </div>
                     </div>
                     <div class="col-12">
                       <div class="form-group">
-                        <input class="form-control" type="password" placeholder="Password">
+                        <label for="id_password"></label>
+                        <input class="form-control" type="password" placeholder="Password" name="password" id="id_password" required>
+                        <ul class="errorlist">
+                            {{ form.errors.password }}
+                        </ul>
                       </div>
                     </div>
+
                     <div class="col-12">
                       <div class="form-group">
                         <div class="remember-forgot-info">
@@ -72,13 +86,14 @@
                     </div>
                     <div class="col-12">
                       <div class="form-group">
-                        <button type="button" class="btn-theme">Sign In</button>
+                        <button type="submit" class="btn-theme">Sign In</button>
                       </div>
                     </div>
                   </div>
                 </form>
+                <a href="{% provider_login_url 'google'%}">Google 계정으로 로그인</a>
                 <div class="login-register-form-info">
-                  <p>Don't you have an account? <a href="sign-up.html">Register</a></p>
+                  <p>Don't you have an account? <a href="/users/sign_up/">Register</a></p>
                 </div>
               </div>
             </div>
