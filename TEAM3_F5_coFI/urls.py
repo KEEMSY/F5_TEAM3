@@ -30,5 +30,4 @@ urlpatterns = [
     path('google/', include('allauth.urls')),
 
 
-
 ]
