@@ -39,35 +39,6 @@ from articleapp.models import Article
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #
 # class TestView(TestCase):
 #

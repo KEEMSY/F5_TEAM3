@@ -16,13 +16,15 @@
               <div class="header-navigation-area position-relative">
                 <ul class="main-menu nav">
                   <li><a href="/"><span>Home</span></a></li>
-                  <li class="has-submenu"><a href="{% url 'careerapp:job' %}"><span>Career</span></a>
+                  <li class="has-submenu"><a href="{% url 'articleapp:home' %}"><span>Community</span></a>
                     <ul class="submenu-nav">
-                      <li><a href="{% url 'careerapp:job' %}"><span>Jobs</span></a></li>
+{#                      <li><a href="{% url 'careerapp:job' %}"><span>자유게시판</span></a></li>#}
 {#                      <li><a href="{% url 'careerapp:detail' %}"><span>Job Details</span></a></li>#}
+                    <li><a href="{% url 'articleapp:home' %}"><span>자유게시판</span></a></li>
+
                     </ul>
                   </li>
-                  <li><a href="{% url 'articleapp:home' %}"><span>Community</span></a></li>
+                  <li><a href="{% url 'careerapp:job' %}"><span>Career</span></a></li>
 
                   <li class="has-submenu"><a href="{% url 'bookmarkapp:mypage' %}"><span>Mypage</span></a>
                   </li>
