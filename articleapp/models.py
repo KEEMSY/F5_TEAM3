@@ -12,7 +12,7 @@ class Article(models.Model):
     title = models.CharField(max_length=50)
     user = models.CharField(max_length=50, null=True)
     category = models.TextField(null=True)
-    content = models.TextField()
+    content = models.TextField(null=True)
     # author = models.ForeignKey(User, on_delete=models.CASCADE())
 
     objects = models.Manager()
