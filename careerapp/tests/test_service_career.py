@@ -1,4 +1,3 @@
-
 # Given
 # When
 # Then

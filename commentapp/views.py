@@ -30,6 +30,7 @@ class CommentView(View):
         except ObjectDoesNotExist:
             return JsonResponse({'msg': '댓글이 존재하지 않습니다.'}, status=400)
 
+
     def delete(self, request):
         try:
             delete_comment(comment_id=request.comment_id)
@@ -38,3 +39,6 @@ class CommentView(View):
         except ObjectDoesNotExist:
             return JsonResponse({'msg': '댓글이 존재하지 않습니다.'}, status=400)
 
+
+def show_home(request):
+    return render(request, "base.html")
