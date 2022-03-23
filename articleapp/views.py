@@ -32,16 +32,6 @@ def article_delete(request, article_id):
     article.delete()
     return redirect('articleapp:home')
 
-# #페이지네이터
-# def home(request):
-#     all_Articles = Article.objects.all().order_by("-created_at")   # 모든 데이터 조회, 내림차순(-표시) 조회
-#     paginator = Paginator(all_Articles, 5)
-#     page = int(request.GET.get('page', 1))    #1페이지 = 기본값
-#     article_list = paginator.get_page(page)
-#     return render(request, 'community.html', {'article_list':article_list, 'all_Articles':all_Articles})
-
-
-
 
 
 

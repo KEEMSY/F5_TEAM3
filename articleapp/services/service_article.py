@@ -1,25 +1,5 @@
 from articleapp.models import Article
 
+def create_article(title, user_id, content, category):
+    return Article.objects.create(title=title, user=user_id, content=content, category=category)
 
-def article_create(title, user, category):
-    return Article.objects.create(title=title, user=user, category=category)
-
-def article_update():
-    pass
-
-def article_update(user):
-    return Article.objects.filter(user=user)
-
-def article_category_read(category):
-    return Article.objects.filter(category=category)
-
-
-def article_user_search(user):
-    return Article.objects.filter(user=user)
-
-
-
-
-
-def article_delete(user):
-    return Article.objects.filter(user=user)

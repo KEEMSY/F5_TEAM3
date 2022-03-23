@@ -27,19 +27,8 @@ from articleapp.models import Article
 #
 
 
-#코멘트 등록
-# def create_reply(request, Article_id):
-#     b = Article.objects.get(id = Article_id)
-#     b.reply_set.create(comment=request.POST['comment'], rep_date=timezone.now())
-#     return HttpResponseRedirect(reverse('Article:detail', args=(Article_id,)))
+#together
 
-
-
-
-
-
-
-#
 # class TestView(TestCase):
 #
 #     def article_create(self):
@@ -100,6 +89,8 @@ from articleapp.models import Article
 #         self.assertEqual(2, len(category2_read))
 #         self.assertEqual(3, len(category3_read))
 
+
+    #alone
     # def article_update(self):
     #     # Given  ##user1이 있음
     #

@@ -1,17 +1,18 @@
 from django.db import models
 
 # Create your models here.
+
+class Author(models.Model):
+    name = models.TextField()
+
 class Article(models.Model):
     class Meta:
         db_table = "article"
 
     title = models.CharField(max_length=50)
-    user = models.CharField(max_length=50, null=True)
-    # author = models.ForeignKey(User, on_delete=models.CASCADE()) "유저권한 "
+    user = models.ForeignKey(Author, on_delete=models.CASCADE)
     category = models.TextField(null=True)
     content = models.TextField(null=True)
-    # like_count = models.PositiveIntegerField(default=0)  # 양수입력 필드, 북마크
-    # like_count = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
