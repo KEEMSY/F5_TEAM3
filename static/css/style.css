@@ -784,7 +784,7 @@ table p {
 .header-area {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding: 0;
-  
+
 }
 .header-area .container {
   padding: 0 15px;
@@ -1342,6 +1342,17 @@ table p {
     width: 100px;
   }
 }
+
+.abutton {
+          background-color: #03a84e;
+    border: 1px solid #03a84e;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    font-size: 15px;
+    padding: 1px 8px 1px;
+    text-align: center;
+        }
 
 .job-search-wrap {
   -webkit-box-align: center;
@@ -5274,6 +5285,10 @@ table p {
   background-color: #03a84e;
   border-color: #03a84e;
   color: #fff;
+}
+.chosen_page {
+  font-weight: bold;
+  font-size: 18px;
 }
 .pagination-area .page-numbers li .page-number i {
   color: #272a33;
