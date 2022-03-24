@@ -7,6 +7,10 @@ def create_article(title, user_id, content, category):
 def read_all_article():
     return Article.objects.all().order_by('-id')
 
+def read_category_article(category):
+    return Article.objects.filter(category)
+
+
 
 
 

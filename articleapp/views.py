@@ -33,10 +33,12 @@ def article_delete(request, article_id):
     return redirect('articleapp:home')
 
 
-
-
-
-
+def board_list(request, pk:str):
+    all_articles = Article.objects.filter(category=pk)
+    paginator = Paginator(all_articles, 10)
+    page = int(request.GET.get('page', 1))  # 1페이지 = 기본값
+    board_list = paginator.get_page(page)
+    return render(request, 'community.html', {'board_list':board_list, 'article_list':all_articles})
 
 
 
