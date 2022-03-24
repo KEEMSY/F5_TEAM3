@@ -21,11 +21,13 @@
                                 <li class="has-submenu"><a href="{% url 'articleapp:home' %}"><span>Community</span></a>
                                     <ul class="submenu-nav">
 
-                                        {% if article %}
-                                        <li><a href="{% url 'articleapp:home' %}"><span>자유게시판</span></a></li>
-                                        <li><a href="{% url 'articleapp:home' %}"><span>꿀팁게시판</span></a></li>
-                                        <li><a href="{% url 'articleapp:home' %}"><span>질문게시판</span></a></li>
-                                        {% endif %}
+{#                                        {% if article %}#}
+{#                                        <li><a href="{% url 'articleapp:board_list' free %}"><span>자유게시판</span></a></li>#}
+{#                                        {% elif %} #}
+{#                                        <li><a href="{% url 'articleapp:board_list' hack %}"><span>꿀팁게시판</span></a></li>#}
+{#                                        {% else %}#}
+{#                                        <li><a href="{% url 'articleapp:board_list' qna %}"><span>질문게시판</span></a></li>#}
+{#                                        {% endif %}#}
 
                                     </ul>
                                 </li>
