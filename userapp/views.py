@@ -1,7 +1,7 @@
 from django.contrib import auth
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 
 from django.urls import reverse, reverse_lazy
 from django.views.generic import FormView
@@ -52,6 +52,10 @@ def log_out(request):
     return redirect(reverse("home"))
 
 
-def my_page(request):
-
-    return render(request, "userapp/mypage.html")
+def my_page(request, pk):
+    User = get_user_model()
+    user = get_object_or_404(User, pk=pk)
+    context = {
+        'user': user
+    }
+    return render(request, "userapp/mypage.html", context)
