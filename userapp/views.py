@@ -8,6 +8,8 @@ from django.views.generic import FormView
 
 from . import forms
 
+from .models import User
+
 
 class SignUpView(FormView):
 
@@ -48,3 +50,8 @@ def login_view(request):
 def log_out(request):
     auth.logout(request)
     return redirect(reverse("home"))
+
+
+def my_page(request):
+
+    return render(request, "userapp/mypage.html")
