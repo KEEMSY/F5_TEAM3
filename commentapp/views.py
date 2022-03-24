@@ -11,8 +11,6 @@ from commentapp.services.comment_service import (create_comment,
                                                  update_comment)
 
 
-
-
 class CommentView(View):
     def post(self, request):
         try:

@@ -30,7 +30,7 @@
                     <li><a href="{% url 'user:login' %}"><span>login</span></a></li>
                     <li><a href="{% url 'user:sign-up' %}"><span>Registration</span></a></li>
                 {% else %}
-                    <li class="has-submenu"><a href="{% url 'user:mypage' user.pk %}"><span>Mypage</span></a>
+                    <li class="has-submenu"><a href="{% url 'user:profile' user.pk %}"><span>Mypage</span></a>
                     </li>
                     <li><a href="{% url 'user:logout' %}"><span>logout</span></a></li>
                 {% endif %}

@@ -2,9 +2,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-
 from articleapp.models import Article
-
 # Create your models here.
 from likeapp.models import Author, Post
 

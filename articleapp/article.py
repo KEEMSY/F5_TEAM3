@@ -1,7 +1,6 @@
 from django.test import TestCase
 
 from articleapp.models import Article
-
 from articleapp.services.service_article import (  # article_delete,
     article_category_read, article_create, article_update, article_user_search)
 
