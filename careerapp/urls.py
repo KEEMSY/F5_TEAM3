@@ -8,5 +8,5 @@ app_name = 'careerapp'
 
 urlpatterns = [
     path('', views.show_job, name='job'),
-
+]
 
