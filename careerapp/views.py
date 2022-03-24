@@ -12,10 +12,11 @@ def show_job(request):
         target_user = Author.objects.get(pk=target_user_id)
         skills = target_user.skill
 
-        if len(skills) >= 2:
+       if len(skills) >= 2:
+            careers = Career.objects.filter(id=-1) #careers 에 빈 쿼리셋값을 정의하고 싶은데 정의할 방법이 없어 도저히 가져올 수 없는 id=-1로 필터해서 빈값을 넣어줌.
             for skill in skills:
-
-                careers = Career.objects.filter(skills=skill).order_by("id")  # 모든 데이터 조회, id +순으로 해야 최신업데이트된게 위로 나옴.
+                career = Career.objects.filter(skills=skill).order_by("id")  # 모든 데이터 조회, id +순으로 해야 최신업데이트된게 위로 나옴.
+                careers = career | careers
                 # skills = Author.objects.get(skill=skill)
                 # context에 모든 취업 정보를 저장
 
