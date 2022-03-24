@@ -6,8 +6,7 @@ from django.core.paginator import Paginator
 
 
 def show_job(request):
-    login_user = auth.authenticate(request)
-    if login_user is not None:
+    if request.user.is_authenticated:
         target_user_id = request.user.id
         target_user = Author.objects.get(pk=target_user_id)
         skills = target_user.skill
