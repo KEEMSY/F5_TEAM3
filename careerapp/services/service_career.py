@@ -1,3 +1,4 @@
+
 # from django.shortcuts import render
 #
 # from careerapp.models import Career
@@ -11,3 +12,4 @@
 #
 #     context = {'careers': careers}
 #     return render(request, 'career.html', context)
+

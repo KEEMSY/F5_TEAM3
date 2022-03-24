@@ -19,13 +19,15 @@ from django.urls import include, path
 from TEAM3_F5_coFI import views
 
 urlpatterns = [
+
     path('admin/', admin.site.urls),
     path('users/', include("userapp.urls")),
+    path("", include("likeapp.urls")),
     path('', views.show_home, name='home'),
     path('communities/', include("articleapp.urls")),
     path('careers/', include("careerapp.urls")),
-    path('mypage/', include("bookmarkapp.urls")),
-
-
-
+    path("articles/", include("bookmarkapp.urls")),
+    path('accounts/', include('allauth.urls')),
+    path('google/', include('allauth.urls')),
+  
 ]

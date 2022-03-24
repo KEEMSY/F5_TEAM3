@@ -62,3 +62,4 @@ def delete(request, pk):
         return redirect('index')
     else:
         return redirect('detail', article.pk)
+

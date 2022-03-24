@@ -16,6 +16,3 @@ class Article(models.Model):
     # author = models.ForeignKey(User, on_delete=models.CASCADE())
 
     objects = models.Manager()
-
-
-

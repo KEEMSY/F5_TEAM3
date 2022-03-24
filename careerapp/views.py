@@ -42,5 +42,7 @@ def show_job(request):
         page = int(request.GET.get('page', 1))
         board_list = paginator.get_page(page)
 
+
         context = {'careers': careers, 'board_list': board_list}
         return render(request, 'career.html', context)
+
