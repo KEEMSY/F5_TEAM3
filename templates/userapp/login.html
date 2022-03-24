@@ -48,7 +48,7 @@
                   <h4 class="title">Sign In</h4>
                 </div>
 
-                <form action="/users/login/" method="post" id="login-form">
+                <form action="{% url 'user:login' %}" method="post" id="login-form">
                     {% csrf_token %}
 {#                    {{form.as_p}}#}
                   <div class="row">
@@ -93,7 +93,7 @@
                 </form>
                 <a href="{% provider_login_url 'google'%}">Google 계정으로 로그인</a>
                 <div class="login-register-form-info">
-                  <p>Don't you have an account? <a href="/users/sign_up/">Register</a></p>
+                  <p>Don't you have an account? <a href="{% url 'user:sign-up' %}">Register</a></p>
                 </div>
               </div>
             </div>
