@@ -7,7 +7,6 @@ from django.urls import reverse
 from . import forms
 
 
-
 def signup_view(request):
     if request.user.is_authenticated:
         return redirect('/')
