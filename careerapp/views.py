@@ -7,7 +7,6 @@ from django.core.paginator import Paginator
 
 def show_job(request):
     login_user = auth.authenticate(request)
-    # print(me_username)
     if login_user is not None:
         target_user_id = request.user.id
         target_user = Author.objects.get(pk=target_user_id)
@@ -45,11 +44,3 @@ def show_job(request):
 
         context = {'careers': careers, 'board_list': board_list}
         return render(request, 'career.html', context)
-
-
-
-
-
-# 수정해야하는 부분
-# def show_job_detail(request):
-#     return reverse(request, 'career-details.html')

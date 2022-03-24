@@ -9,7 +9,7 @@ class Author(models.Model):
     skill = models.CharField(max_length=40, default='Python')
 
 
-#
+
 class Career(models.Model):
     class Meta:
         db_table = "rocketpunch"
@@ -40,8 +40,8 @@ class News(models.Model):
     news_desc = models.TextField(null=True)
     news_link = models.CharField(max_length=600)
 
-    # w_desc = models.CharField(max_length=600)
+    # writer = models.CharField(max_length=30)
     # info = models.CharField(max_length=500)
     # date = models.CharField(max_length=40)
-    # recruit_site = models.CharField(max_length=40)
-    # skills = models.CharField(max_length=40)
+    # from_site = models.CharField(max_length=40)
+    # from_site_link = models.CharField(max_length=500)
