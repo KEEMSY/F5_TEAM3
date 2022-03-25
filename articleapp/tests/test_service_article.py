@@ -1,16 +1,17 @@
 # Given
 # When
 # Then
-# expect
-import self as self
+# Expect
+
 from django.test import TestCase
 from articleapp.models import Article, Author
-from articleapp.services.service_article import create_article, read_all_article, read_category_article, read_article ,update_article
+from articleapp.services.service_article import create_article, read_all_article, \
+    read_category_article, read_article_by_title
 
 
 class TestView(TestCase):
+    # create
     def test_create_article(self):
-
         # Given
         user=Author.objects.create(name='test')
         title='test_title'
@@ -18,12 +19,13 @@ class TestView(TestCase):
         category='test_category'
 
         # When
-        article=create_article(user,title,content,category)
+        article=create_article(title,user,content,category)
 
         # expect
         self.assertIsNotNone(Article.id)
         self.assertEqual(user.id,article.id)
 
+    # read
     def test_read_all_article(self):
         # Given
         user=Author.objects.create(name='test')
@@ -65,31 +67,14 @@ class TestView(TestCase):
         self.assertEqual(2, len(article_2_list))
         self.assertEqual(3, len(article_3_list))
 
-    def test_read_article(self):
+    def test_read_article_by_title(self):
         # Given
         user = Author.objects.create(name="test")
+        article1 = create_article("title", user, "content", "category1")
+        article2 = create_article("title", user, "content", "category2")
 
         # When
-        article = create_article("title", user, "content", "category")
-        read_article()
+        target_articles = read_article_by_title("title")
 
-        # expect
-        self.assertIsNotNone(article.id)
-        self.assertEqual(user.id, article.id)
-
-    # def test_update_article(self):
-    #     # Given
-    #     user = Author.objects.create(name="test")
-    #
-    #     # When
-    #     article = create_article("title", user, "content", "category")
-    #     edit = update_article("title", user, "content", "category")
-    #
-    #     # expect
-    #     self.assertIsNotNone(article, update_article)
-    #     self.assertNotEqual(article, update_article)
-    #
-    #
-
-
-
+        # Expect
+        self.assertEqual(2, len(target_articles))
