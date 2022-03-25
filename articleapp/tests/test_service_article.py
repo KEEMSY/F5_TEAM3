@@ -4,12 +4,16 @@
 # Expect
 
 from django.test import TestCase
+
 from articleapp.models import Article, Author
-from articleapp.services.service_article import create_article, read_all_article, \
-    read_category_article, read_article_by_title, read_article_by_user, read_article_containing_username
+from articleapp.services.service_article import (
+    create_article, read_all_article, read_article_by_title,
+    read_article_by_user, read_article_containing_username,
+    read_category_article, update_article)
 
 
 class TestView(TestCase):
+
     ''' C R E A T E '''
 
     def test_create_article(self):
@@ -106,7 +110,7 @@ class TestView(TestCase):
         article_by_user1 = read_article_by_user(user1.id)
 
         # Expect
-        expect_title = ["title_1", "title_2"]
+        expect_title = ["title_2","title_1"]
         for i in range(len(article_by_user1)):
             self.assertEqual(expect_title[i], article_by_user1[i].title)
 
@@ -124,3 +128,18 @@ class TestView(TestCase):
 
         # Expeect
         self.assertEqual(3, len(article_list))
+
+
+    ''' U P D A T E '''
+
+    def test_update_article(self):
+        # Given
+        user = Author.objects.create(name="test1")
+        article = create_article("title", user, "before_content", "category1")
+
+        # When
+        update_article(article.id,'after content')
+
+        # Expect
+        check_article = Article.objects.get(pk=article.id)
+        self.assertEqual(check_article.content, 'after content')

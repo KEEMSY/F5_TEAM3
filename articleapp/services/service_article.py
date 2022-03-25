@@ -1,18 +1,22 @@
 from articleapp.models import Article, Author
 
+''' C R E A T E '''
 
-# create
+
 def create_article(title, user_id, content, category):
     return Article.objects.create(title=title, user=user_id, content=content, category=category)
 
 
-# read : QuerySet
+''' R E A D : QuerySet '''
+
+
 def read_all_article():
     return Article.objects.all().order_by('-id')
 
 
 def read_category_article(category):
     return Article.objects.filter(category=category)
+
 
 # 입력한 타이틀을 포함하는 모든 게시글을 모두 보여주도록 수정해야함
 def read_article_by_title(title):
@@ -35,3 +39,12 @@ def read_article_containing_username(name):
         article_queryset = article_queryset | article_list[i]
 
     return article_queryset
+
+
+''' U P D A T E'''
+
+
+def update_article(article_id, content):
+    target_article = Article.objects.get(pk=article_id)
+    target_article.content = content
+    target_article.save()
