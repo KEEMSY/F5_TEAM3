@@ -18,6 +18,7 @@ from django.urls import include, path
 
 from TEAM3_F5_coFI import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include("userapp.urls")),
@@ -25,6 +26,8 @@ urlpatterns = [
     path('communities/', include("articleapp.urls")),
     path('careers/', include("careerapp.urls")),
     path('mypage/', include("bookmarkapp.urls")),
+
+    path('temp/', views.show_community, name='temp')
 
 
 ]

@@ -20,6 +20,7 @@ class TestView(TestCase):
         article = Post.objects.create(title="test_title")
         content = 'test'
 
+
         # When
         comment = create_comment(article.id, user.id, content)
 

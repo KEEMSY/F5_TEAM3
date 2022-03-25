@@ -4,3 +4,7 @@ from django.shortcuts import render
 
 def show_home(request):
     return render(request, 'base.html')
+
+
+def show_community(request):
+    return render(request, 'articleapp/temp_commnuity.html')
