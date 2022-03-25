@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
 from . import forms
-from .forms import ProfileForm, UserForm
+#from .forms import ProfileForm, UserForm
 
 
 def signup_view(request):
@@ -63,9 +63,10 @@ def get_profile(request, pk):
     User = get_user_model()
     user = get_object_or_404(User, pk=pk)
     context = {
-        'user': user
+        'user': user,
     }
     return render(request, "userapp/profile.html", context)
+
 
 # @login_required(login_url="/users/login/")
 # @transaction.atomic
