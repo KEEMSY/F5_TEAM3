@@ -6,7 +6,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
 from . import forms
-#from .forms import ProfileForm, UserForm
+
+from userapp.models import User, Profile
+from .forms import ProfileForm, UserForm
 
 
 def signup_view(request):
@@ -58,33 +60,49 @@ def log_out(request):
 
 
 
-@login_required(login_url="/users/login/")
 def get_profile(request, pk):
-    User = get_user_model()
-    user = get_object_or_404(User, pk=pk)
-    context = {
-        'user': user,
-    }
-    return render(request, "userapp/profile.html", context)
+    user = get_object_or_404(User, pk=pk)  # 로그인중인 사용자 객체를 얻어옴
+    user_form = UserForm(initial={
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+    })
+
+    if hasattr(user, 'profile'):  # user가 profile을 가지고 있으면 True, 없으면 False (회원가입을 한다고 profile을 가지고 있진 않으므로)
+        profile = user.profile
+        profile_form = ProfileForm(initial={
+            'img': profile.img,
+            'skill': profile.skill,
+            'github': profile.github,
+            'blog': profile.blog,
+        })
+    else:
+        profile_form = ProfileForm()
+
+    return render(request, 'userapp/profile.html', {"user_form": user_form, "profile_form": profile_form})
 
 
-# @login_required(login_url="/users/login/")
-# @transaction.atomic
-# def update_profile(request):
-#     if request.method == 'POST':
-#         user_form = UserForm(request.POST, instance=request.user)
-#         profile_form = ProfileForm(request.POST, instance=request.user.profile)
-#         if user_form.is_valid() and profile_form.is_valid():
-#             user_form.save()
-#             profile_form.save()
-#             messages.success(request, _('Your profile was successfully updated!'))
-#             return redirect('settings:profile')
-#         else:
-#             messages.error(request, _('Please correct the error below.'))
-#     else:
-#         user_form = UserForm(instance=request.user)
-#         profile_form = ProfileForm(instance=request.user.profile)
-#     return render(request, 'userapp/profile.html', {
-#         'user_form': user_form,
-#         'profile_form': profile_form
-#     })
+@login_required(login_url="/users/login/")
+def update_profile(request, pk):
+    u = User.objects.get(id=pk)  # 로그인중인 사용자 객체를 얻어옴
+    # user_form = UserForm(request.POST, instance=u)  # 기존의 것의 업데이트하는 것 이므로 기존의 인스턴스를 넘겨줘야한다. 기존의 것을 가져와 수정하는 것
+
+    # # User 폼
+    # if user_form.is_valid():
+    #     user_form.save()
+
+    if hasattr(u, 'profile'):
+        profile = u.profile
+        profile_form = ProfileForm(request.POST, request.FILES, instance=profile)  # 기존의 것 가져와 수정하는 것
+    else:
+        profile_form = ProfileForm(request.POST, request.FILES)  # 새로 만드는 것
+
+    # Profile 폼
+    if profile_form.is_valid():
+        profile = profile_form.save(commit=False)  # 기존의 것을 가져와 수정하는 경우가 아닌 새로 만든 경우 user를 지정해줘야 하므로
+        profile.user = u
+        profile.save()
+
+    return redirect(f'/users/profile/{int(pk)}/', pk=request.user.pk)  # 수정된 화면 보여주기
+
+
+

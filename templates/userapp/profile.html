@@ -31,7 +31,7 @@
                   </div>
                   <div class="content">
                     <div class="author">{{ user.profile.skill }} <a href="blog.html">{{ user.profile.github }}</a></div>
-                    <h4 class="title"><a href="blog-details.html">All of these amazing features <br>come at an affordable price!</a></h4>
+                    <h4 class="title"><a href="blog-details.html">{{ user.first_name }} <br>come at an affordable price!</a></h4>
                     <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them industry spa also the loep into type setting.</p>
                     <div class="meta">
                       <span class="post-date">03 April, 2022</span>
@@ -206,16 +206,21 @@
             <div class="blog-sidebar blog-sidebar-left">
               <div class="widget-item">
                 <div class="widget-body">
-{#                  <div class="widget-search-box">#}
-{#                    <form action="#" method="post">#}
-{#                      <div class="form-input-item">#}
-{#                        <input type="search" id="search2" placeholder="Search here">#}
-{#                        <button type="submit" class="btn-src">#}
-{#                          <i class="icofont-search"></i>#}
-{#                        </button>#}
-{#                      </div>#}
-{#                    </form>#}
-{#                  </div>#}
+                  <div class="widget-search-box">
+                    <form action="{% url 'user:update_profile' user.pk %}" method="post">
+                        {% csrf_token %}
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label for="id_password"></label>
+                            <input class="form-control" type="url" placeholder="github" id="id_github" name="github">
+                            <ul class="errorlist">
+                                {{ form.errors.password1 }}
+                            </ul>
+                          </div>
+                        </div>
+                        <button>제출</button>
+                    </form>
+                  </div>
                 </div>
               </div>
               <div class="widget-item">
