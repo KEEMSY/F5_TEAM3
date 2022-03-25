@@ -1,16 +1,3 @@
-from typing import Any
-
-from django.core.paginator import Paginator
-
-from careerapp.models import Career
-
-
-def get_context(skill: str, page: int = 1) -> dict[str, Any]:
-    careers = Career.objects.filter(skills=skill).order_by("id")
-    paginator = Paginator(careers, 9)  # 한페이지당 채용정보를 9개씩 담아서 보여줌.
-    return {'careers': careers, 'board_list': paginator.get_page(page)}
-
-
 # from django.shortcuts import render
 #
 # from careerapp.models import Career
