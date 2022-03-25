@@ -73,13 +73,14 @@ class TestView(TestCase):
         # Given
         user = Author.objects.create(name="test")
         article1 = create_article("title", user, "content", "category1")
-        article2 = create_article("title", user, "content", "category2")
+        article2 = create_article("title2", user, "content", "category2")
+        article2 = create_article("title2_2", user, "content", "category2")
 
         # When
         target_articles = read_article_by_title("title")
 
         # Expect
-        self.assertEqual(2, len(target_articles))
+        self.assertEqual(3, len(target_articles))
 
     def test_read_article_by_user(self):
         user1 = Author.objects.create(name="test1")
