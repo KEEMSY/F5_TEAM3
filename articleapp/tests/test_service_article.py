@@ -6,7 +6,7 @@
 from django.test import TestCase
 from articleapp.models import Article, Author
 from articleapp.services.service_article import create_article, read_all_article, \
-    read_category_article, read_article_by_title, read_article_by_user
+    read_category_article, read_article_by_title, read_article_by_user, read_article_containing_username
 
 
 class TestView(TestCase):
@@ -108,3 +108,18 @@ class TestView(TestCase):
         expect_title = ["title_1", "title_2"]
         for i in range(len(article_by_user1)):
             self.assertEqual(expect_title[i], article_by_user1[i].title)
+
+    def test_read_article_containing_username(self):
+        # Given
+        user1 = Author.objects.create(name="test1")
+        article1_1 = create_article("title_1", user1, "content", "category1")
+
+        user2 = Author.objects.create(name="test2")
+        article2_1 = create_article("title_2", user2, "content", "category2")
+        article2_2 = create_article("title_3", user2, "content", "category2")
+
+        # When
+        article_list = read_article_containing_username('test')
+
+        # Expeect
+        self.assertEqual(3, len(article_list))
