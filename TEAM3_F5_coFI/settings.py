@@ -108,12 +108,15 @@ WSGI_APPLICATION = 'TEAM3_F5_coFI.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
 # 로컬 db 연결
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': "TEAM3",
+        'USER': "root",
+        'PASSWORD': "2349",
+        'HOST' : "localhost",
+        'PORT' : "3306"
     }
 }
 
@@ -156,7 +159,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = "Asia/Seoul"
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 

@@ -2,7 +2,7 @@
 # When
 # Then
 # Expect
-
+from django.core.exceptions import ObjectDoesNotExist
 from django.test import TestCase
 
 from articleapp.models import Article, Author
@@ -143,3 +143,18 @@ class TestView(TestCase):
         # Expect
         check_article = Article.objects.get(pk=article.id)
         self.assertEqual(check_article.content, 'after content')
+
+    def test_when_article_does_not_exist(self):
+        # Given
+        user = Author.objects.create(name="test1")
+        article = create_article("title", user, "before_content", "category1")
+
+
+        # When
+        article = Article.objects.get(pk=article.id)
+        article.delete()
+
+        # Expect
+        with self.assertRaises(ObjectDoesNotExist):
+            update_article(article.id, 'after content')
+
