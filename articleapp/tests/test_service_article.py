@@ -88,8 +88,8 @@ class TestView(TestCase):
         article2 = create_article("title_2", user2, "content", "category2")
 
         # When
-        article_by_user1 = read_article_by_user(user1).get()
-        article_by_user2 = read_article_by_user(user2).get()
+        article_by_user1 = read_article_by_user(user1.id).get()
+        article_by_user2 = read_article_by_user(user2.id).get()
 
         # Expect
         self.assertEqual("title_1", article_by_user1.title)

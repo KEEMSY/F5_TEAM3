@@ -14,5 +14,5 @@ def read_category_article(category):
 def read_article_by_title(title):
     return Article.objects.filter(title=title)
 
-def read_article_by_user(user):
-    return Article.objects.filter(user=user)
+def read_article_by_user(user_id):
+    return Article.objects.filter(user=user_id)
