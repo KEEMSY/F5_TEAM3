@@ -96,4 +96,15 @@ class TestView(TestCase):
         self.assertEqual("title_2", article_by_user2.title)
 
 
+    def test_read_articles_by_user(self):
+        user1 = Author.objects.create(name="test1")
+        article1 = create_article("title_1", user1, "content", "category1")
+        article2 = create_article("title_2", user1, "content", "category1")
 
+        # When
+        article_by_user1 = read_article_by_user(user1.id)
+
+        # Expect
+        expect_title = ["title_1", "title_2"]
+        for i in range(len(article_by_user1)):
+            self.assertEqual(expect_title[i], article_by_user1[i].title)
