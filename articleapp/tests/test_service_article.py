@@ -6,29 +6,31 @@
 from django.test import TestCase
 from articleapp.models import Article, Author
 from articleapp.services.service_article import create_article, read_all_article, \
-    read_category_article, read_article_by_title
+    read_category_article, read_article_by_title, read_article_by_user
 
 
 class TestView(TestCase):
-    # create
+    ''' C R E A T E '''
+
     def test_create_article(self):
         # Given
-        user=Author.objects.create(name='test')
-        title='test_title'
-        content='test_content'
-        category='test_category'
+        user = Author.objects.create(name='test')
+        title = 'test_title'
+        content = 'test_content'
+        category = 'test_category'
 
         # When
-        article=create_article(title,user,content,category)
+        article = create_article(title, user, content, category)
 
         # expect
         self.assertIsNotNone(Article.id)
-        self.assertEqual(user.id,article.id)
+        self.assertEqual(user.id, article.id)
 
-    # read
+    ''' R E A D '''
+
     def test_read_all_article(self):
         # Given
-        user=Author.objects.create(name='test')
+        user = Author.objects.create(name='test')
 
         # When
         article1 = create_article('title', user, 'content', 'category1')
@@ -78,3 +80,20 @@ class TestView(TestCase):
 
         # Expect
         self.assertEqual(2, len(target_articles))
+
+    def test_read_article_by_user(self):
+        user1 = Author.objects.create(name="test1")
+        article1 = create_article("title_1", user1, "content", "category1")
+        user2 = Author.objects.create(name="test2")
+        article2 = create_article("title_2", user2, "content", "category2")
+
+        # When
+        article_by_user1 = read_article_by_user(user1).get()
+        article_by_user2 = read_article_by_user(user2).get()
+
+        # Expect
+        self.assertEqual("title_1", article_by_user1.title)
+        self.assertEqual("title_2", article_by_user2.title)
+
+
+
