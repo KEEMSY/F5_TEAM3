@@ -3,6 +3,7 @@ import re
 from django import forms
 
 from . import models
+from .models import User, Profile
 
 
 class SignUpForm(forms.Form):
@@ -65,3 +66,13 @@ class LoginForm(forms.Form):
                 self.add_error("password", forms.ValidationError("패스워드가 다릅니다"))
         except models.User.DoesNotExist:
             self.add_error("email", forms.ValidationError("유저가 존재하지 않습니다."))
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('img', 'skill', 'github', 'blog')

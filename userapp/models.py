@@ -10,20 +10,21 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
-class Skill(models.Model):
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    skill = models.CharField(max_length=100, blank=True)
-
-class Contact(models.Model):
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    github = models.CharField(max_length=100, blank=True)
-    linkedin = models.CharField(max_length=100, blank=True)
-    blog = models.CharField(max_length=100, blank=True)
-
 class Blog(models.Model):
     text = models.TextField()
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    img = models.ImageField(blank=True)
+    skill = models.CharField(max_length=100, blank=True)
+    github = models.URLField(max_length=250, blank=True)
+    blog = models.URLField(max_length=250, blank=True)
+
+
+
+
+
+
 
 
 

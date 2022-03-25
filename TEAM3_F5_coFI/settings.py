@@ -19,6 +19,8 @@ import environ
 import pymysql
 from django.core.exceptions import ImproperlyConfigured
 
+
+
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False),
@@ -212,3 +214,7 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL)
