@@ -7,7 +7,7 @@
             <div class="header-align-start">
               <div class="header-logo-area">
                 <a href="{% url 'home' %}">
-                  <img class="logo-main" src="../static/img/coFi.png" alt="Logo" />
+                  <img class="logo-main" src="../static/img/coFi1.png" alt="Logo" />
                   <img class="logo-light" src="../static/img/logo-light.png" alt="Logo" />
                 </a>
               </div>
@@ -30,7 +30,7 @@
                     <li><a href="{% url 'user:login' %}"><span>login</span></a></li>
                     <li><a href="{% url 'user:sign-up' %}"><span>Registration</span></a></li>
                 {% else %}
-                    <li class="has-submenu"><a href="{% url 'bookmarkapp:mypage' %}"><span>Mypage</span></a>
+                    <li class="has-submenu"><a href="#"><span>Mypage</span></a>
                     </li>
                     <li><a href="{% url 'user:logout' %}"><span>logout</span></a></li>
                 {% endif %}
