@@ -19,8 +19,6 @@ import environ
 import pymysql
 from django.core.exceptions import ImproperlyConfigured
 
-
-
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False),

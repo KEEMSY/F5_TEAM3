@@ -3,7 +3,7 @@ import re
 from django import forms
 
 from . import models
-from .models import User, Profile
+from .models import Profile, User
 
 
 class SignUpForm(forms.Form):
