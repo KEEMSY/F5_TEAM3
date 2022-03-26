@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'commentapp',
     'likeapp',
     'bookmarkapp',
+    'careerapp',
 
     'allauth',
     'allauth.account',
@@ -82,7 +83,7 @@ ROOT_URLCONF = 'TEAM3_F5_coFI.urls'
 # aws.json 가져와서 버킷,db 접근권한 주기
 # with open(os.path.join(BASE_DIR, 'aws.json')) as f:
 #     secrets = json.loads(f.read())
-
+#
 # AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
 # AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
 # AWS_STORAGE_BUCKET_NAME = secrets['AWS']['STORAGE_BUCKET_NAME']
@@ -148,6 +149,7 @@ DATABASES = {
 #         'HOST': secrets['default']['HOST'],
 #         'PORT': secrets['default']['PORT'],
 #         'OPTIONS': {
+#                 'charset': 'utf8mb4',
 #             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
 #         },
 #     }
