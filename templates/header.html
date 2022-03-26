@@ -22,7 +22,14 @@
 {#                      <li><a href="{% url 'careerapp:detail' %}"><span>Job Details</span></a></li>#}
                     </ul>
                   </li>
-                  <li><a href="{% url 'articleapp:home' %}"><span>Community</span></a></li>
+                  <li class="has-submenu"><a href="{% url 'articleapp:home' %}"><span>Community</span></a>
+                      <ul class="submenu-nav">
+                          <li><a href="{% url 'careerapp:job' %}"><span>자유게시판</span></a></li>
+                          <li><a href="{% url 'careerapp:job' %}"><span>꿀팁게시판</span></a></li>
+                          <li><a href="{% url 'careerapp:job' %}"><span>질문게시판</span></a></li>
+                      </ul>
+
+                  </li>
 
 
 
