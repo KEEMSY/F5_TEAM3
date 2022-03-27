@@ -97,7 +97,7 @@
         align-items: center;
         justify-content: center;
 
-        margin: 0 -15px;
+        margin: 0 -2px;
     }
 
     .participants-container ul li:first-child {
@@ -216,6 +216,10 @@
     }
 
 
+    .Career-row {
+        margin-top: 4vw;
+    }
+
         {#Career.html에도 필요한 부분#}
     .recent-job-item.recent-job-style2-item {
         height: 420px;
@@ -225,6 +229,10 @@
             height: 340px;
         }
     }
+
+    .row.align-items-center.post-home-style.row-gutter-40 {
+        margin-top: 4vw;
+}
 
     .news_content {
         padding: 1vw 1vw;
@@ -610,7 +618,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row Career-row">
                     {% if board_list %}
                         {% for career in board_list %}
                             <div class="col-md-6 col-lg-4">

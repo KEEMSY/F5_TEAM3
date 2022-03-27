@@ -5543,7 +5543,7 @@ table p {
   color: #929292;
   font-weight: 500;
   font-size: 16px;
-  line-height: 1;
+  line-height: 1.50;
   margin-bottom: 15px;
 }
 @media only screen and (max-width: 991px) {
