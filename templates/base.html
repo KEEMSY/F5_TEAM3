@@ -2,7 +2,249 @@
 <html lang="ko">
 
 {% include 'head.html' %}
+<style>
+    h1.title.Co-title {
+        margin-right: 15vw;
+    }
 
+    span.counter {
+        font-size: 3vw;
+        color: #03a84e;
+    }
+
+    #first-cofi {
+        color: #ffcd39;
+    }
+
+    #second-cofi {
+        color: #0dcaf0;
+    }
+
+    .home-slider-shape img.shape3 {
+        bottom: -3vw;
+    }
+
+    .user-contatiner {
+        max-width: 90vw;
+        margin-top: 0vw;
+    }
+
+    .participants-container {
+        padding-left: 2vw;
+        width: 600px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    @media only screen and (max-width: 1400px) {
+        .participants-container {
+            width: 400px;
+        }
+    }
+
+    @media only screen and (max-width: 992px) {
+        .user-contatiner {
+            display: none;
+        }
+
+        .participants-container {
+            display: none;
+        }
+    }
+
+    .participants-container ul::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+        background-color: #F5F5F5;
+        border-radius: 10px;
+        margin-bottom: 15vw;
+    }
+
+    .participants-container ul::-webkit-scrollbar {
+        width: 10px;
+        background-color: #F5F5F5;
+    }
+
+    .participants-container ul::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: #FFF;
+        background-image: -webkit-linear-gradient(top,
+        #e4f5fc 0%,
+        #bfe8f9 50%,
+        #9fd8ef 51%,
+        #2ab0ed 100%);
+    }
+
+
+    {#유튜브 보고 추가#}
+    img {
+        pointer-events: none;
+    }
+
+    .participants-container ul {
+        list-style: none;
+        user-select: none;
+        display: flex;
+        overflow-y: auto;
+        padding: 20px 0;
+    }
+
+    .participants-container ul li {
+        padding: 0 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        margin: 0 -15px;
+    }
+
+    .participants-container ul li:first-child {
+        padding-left: 20px;
+    }
+
+    .participants-container ul li:last-child {
+        padding-right: 20px;
+    }
+
+    {#스토리 오프#}
+    .participants-container ul li .story {
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, .75);
+        padding: 1px;
+        position: relative;
+    }
+
+    {#스토리 온#}
+
+    .participants-container ul li.has-story .story {
+        padding: 3px;
+        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+
+    .participants-container ul li .story img {
+        padding: 2px;
+    {#background: currentColor;#} background-image: linear-gradient(#f6f6f6, #f6f6f6), linear-gradient(to right, #ff7700, #ff3636aa, #ff00c3);
+        border-radius: 50%;
+        width: 100%;
+        height: 100%;
+    }
+
+
+    .participants-container ul li span {
+        color: rgba(255, 255, 255, .85);
+        font-weight: 300;
+        font-size: 15px;
+        max-width: 85px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-top: 5px;
+    }
+
+    .left-wrapper h3 {
+        margin-left: 3vw;
+    }
+
+    .current-participants {
+        margin-left: 3vw;
+    }
+
+    .story-wrapper img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+
+
+    .left-wrapper {
+        width: 45%;
+        float: left;
+
+        position: relative;
+        bottom: 2vw;
+    }
+    @media only screen and (max-width: 1400px) {
+        .left-wrapper {
+            bottom: 5vw;
+        }
+    }
+
+
+    .right-wrapper {
+        width: 45%;
+        height: 10vw;
+        float: right;
+        display: flex;
+        justify-content: center;
+    }
+
+    .badge-contatiner {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .badge {
+        margin: 0% 1.5%;
+    }
+
+    .badge img {
+        height: auto;
+        max-width: 80%;
+    }
+
+    .badge h3 {
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .story-wrapper p {
+        text-align: center;
+    }
+
+
+
+    .container.pt--0.pb--0.video-button {
+        margin-top: 13vw;
+}
+
+    .Top-posts {
+        margin-top: 2vw;
+    }
+
+
+        {#Career.html에도 필요한 부분#}
+    .recent-job-item.recent-job-style2-item {
+        height: 420px;
+}
+    @media only screen and (max-width: 1200px) {
+        .recent-job-item.recent-job-style2-item {
+            height: 340px;
+        }
+    }
+
+    .news_content {
+        padding: 1vw 1vw;
+        border-right: 3px solid aquamarine;
+        border-bottom: 3px solid cyan;
+        border-radius: 4%;
+    }
+
+    {#css 5526번째줄에 중복있음 이걸로 복붙하면 됨#}
+    .post-item .thumb img {
+        border-radius: 9px;
+        width: 100%;
+        transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+    }
+
+</style>
 <body>
 
 <!--wrapper start-->
@@ -25,11 +267,12 @@
                                 <div class="row justify-content-center align-items-center">
                                     <div class="col-12 col-lg-8">
                                         <div class="slider-content">
-                                            <h2 class="title"><span class="counter"
-                                                                    data-counterup-delay="80">2,568</span> are joining
-                                                us <br>Dream & Do what can you do</h2>
-                                            <p class="desc">Find great job for build your bright career. Have many job
-                                                in this plactform.</p>
+                                            <h1 class="title Co-title"><span id="first-cofi">Co</span> - <span
+                                                    id="second-cofi">Fi</span>nd</h1>
+                                            <h1 class="title">for our Success</h1>
+                                            <p class="desc"><span class="counter" data-counterup-delay="80">2,568</span>
+                                                are joining
+                                                us</p>
                                         </div>
                                     </div>
                                 </div>
@@ -38,7 +281,125 @@
                     </div>
                 </div>
             </div>
-            <div class="container pt--0 pb--0">
+
+
+            <div class="home-slider-shape">
+                <img class="shape1" data-aos="fade-down" data-aos-duration="1500" src="static/img/slider/home_01.png"
+                     width="900" height="700" alt="Image-HasTech">
+                <img class="shape2" data-aos="fade-left" data-aos-duration="2000" src="static/img/slider/vector2.png"
+                     width="201" height="346" alt="Image-HasTech">
+                <img class="shape3" data-aos="fade-right" data-aos-duration="2000" src="static/img/slider/vector3.png"
+                     width="276" height="432" alt="Image-HasTech">
+            </div>
+
+        </section>
+        <!--== End Hero Area Wrapper ==-->
+        <!--== Start participants,badge Wrapper ==-->
+
+            <div class="container user-contatiner">
+            <div class="left-wrapper">
+                <h3>현재 접속자</h3>
+                <div class="participants-container">
+                    <ul>
+                        <li class="has-story">
+                            <div class="story">
+                                <img src="https://media-exp1.licdn.com/dms/image/C4E03AQE_NPM9FSWdrA/profile-displayphoto-shrink_100_100/0/1644569891095?e=1653523200&v=beta&t=fZ3JJ_wgETVeWR9iIcFAN6Q28Na7enHhMzEkXRauWHg">
+                            </div>
+                            <span>박다희</span>
+                        </li>
+                        <li class="has-story">
+                            <div class="story">
+                                <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCSQRtvKDVbg/profile-displayphoto-shrink_100_100/0/1643975702098?e=1653523200&v=beta&t=cNxhLW1nOBVUnLIdnnFptahiMYlBpPfKnCaAyyrj3Og">
+                            </div>
+                            <span>강현준</span>
+                        </li>
+                        <li>
+                            <div class="story">
+                                <img src="https://media-exp1.licdn.com/dms/image/C4E03AQE_NPM9FSWdrA/profile-displayphoto-shrink_100_100/0/1644569891095?e=1653523200&v=beta&t=fZ3JJ_wgETVeWR9iIcFAN6Q28Na7enHhMzEkXRauWHg">
+                            </div>
+                            <span>박다희</span>
+                        </li>
+                        <li>
+                            <div class="story">
+                                <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCSQRtvKDVbg/profile-displayphoto-shrink_100_100/0/1643975702098?e=1653523200&v=beta&t=cNxhLW1nOBVUnLIdnnFptahiMYlBpPfKnCaAyyrj3Og">
+                            </div>
+                            <span>강현준</span>
+                        </li>
+                        <li>
+                            <div class="story">
+                                <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCSQRtvKDVbg/profile-displayphoto-shrink_100_100/0/1643975702098?e=1653523200&v=beta&t=cNxhLW1nOBVUnLIdnnFptahiMYlBpPfKnCaAyyrj3Og">
+                            </div>
+                            <span>강현준</span>
+                        </li>
+                        <li>
+                            <div class="story">
+                                <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCSQRtvKDVbg/profile-displayphoto-shrink_100_100/0/1643975702098?e=1653523200&v=beta&t=cNxhLW1nOBVUnLIdnnFptahiMYlBpPfKnCaAyyrj3Og">
+                            </div>
+                            <span>강현준</span>
+                        </li>
+                        <li>
+                            <div class="story">
+                                <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCSQRtvKDVbg/profile-displayphoto-shrink_100_100/0/1643975702098?e=1653523200&v=beta&t=cNxhLW1nOBVUnLIdnnFptahiMYlBpPfKnCaAyyrj3Og">
+                            </div>
+                            <span>강현준</span>
+                        </li>
+                        <li>
+                            <div class="story">
+                                <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCSQRtvKDVbg/profile-displayphoto-shrink_100_100/0/1643975702098?e=1653523200&v=beta&t=cNxhLW1nOBVUnLIdnnFptahiMYlBpPfKnCaAyyrj3Og">
+                            </div>
+                            <span>강현준</span>
+                        </li>
+                        <li>
+                            <div class="story">
+                                <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCSQRtvKDVbg/profile-displayphoto-shrink_100_100/0/1643975702098?e=1653523200&v=beta&t=cNxhLW1nOBVUnLIdnnFptahiMYlBpPfKnCaAyyrj3Og">
+                            </div>
+                            <span>강현준</span>
+                        </li>
+                        <li>
+                            <div class="story">
+                                <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCSQRtvKDVbg/profile-displayphoto-shrink_100_100/0/1643975702098?e=1653523200&v=beta&t=cNxhLW1nOBVUnLIdnnFptahiMYlBpPfKnCaAyyrj3Og">
+                            </div>
+                            <span>강현준</span>
+                        </li>
+                    </ul>
+
+                </div>
+                <p class="current-participants">현재 접속자 1111 명</p>
+            </div>
+
+            <div class="right-wrapper">
+                <div class="badge-contatiner">
+                    <a href="#TopPosts">
+                        <div class="badge">
+                        <img src="static/img/icons/TopPosts.png" alt="Image">
+                        <h3>Top posts</h3>
+                    </div>
+                    </a>
+                    <a href="#Career">
+                        <div class="badge">
+                        <img src="static/img/icons/Career.png" alt="Image">
+                        <h3>Career</h3>
+                    </div>
+                    </a>
+                    <a href="#News">
+                        <div class="badge">
+                        <img src="static/img/icons/News.png" alt="Image">
+                        <h3>News</h3>
+                    </div>
+                    </a>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <!--== End participants,badge Wrapper ==-->
+
+        <!--== Start Video button ==-->
+            <div class="container pt--0 pb--0 video-button">
                 <div class="row">
                     <div class="col-12">
                         <div class="play-video-btn">
@@ -49,27 +410,17 @@
                     </div>
                 </div>
             </div>
-            <div class="home-slider-shape">
-                <img class="shape1" data-aos="fade-down" data-aos-duration="1500" src="static/img/slider/home_01.png"
-                     width="900" height="700" alt="Image-HasTech">
-                <img class="shape2" data-aos="fade-left" data-aos-duration="2000" src="static/img/slider/vector2.png"
-                     width="201" height="346" alt="Image-HasTech">
-                <img class="shape3" data-aos="fade-right" data-aos-duration="2000" src="static/img/slider/vector3.png"
-                     width="276" height="432" alt="Image-HasTech">
-                <img class="shape4" data-aos="flip-left" data-aos-duration="1500" src="static/img/slider/vector4.png"
-                     width="127" height="121" alt="Image-HasTech">
-            </div>
-        </section>
-        <!--== End Hero Area Wrapper ==-->
+        <!--== End Video button ==-->
+
 
         <!--== Start Blog Post Item Wrapper ==-->
-        <div class="container" data-aos="fade-down">
+        <div id="TopPosts" class="container Top-posts" data-aos="fade-down">
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h3 class="title">Top Posts</h3>
+                        <h3 class="title">핫한 게시물</h3>
                         <div class="desc">
-                            <p>Many desktop publishing packages and web page editors</p>
+                            <p>좋은 게시글은 보고 좋아요 눌러주실거죠?</p>
                         </div>
                     </div>
                 </div>
@@ -244,17 +595,17 @@
         <!--== End Blog Area Wrapper ==-->
         <!--== End Blog Post Item Wrapper ==-->
 
-        <!--== Start Recent Job Area Wrapper ==-->
 
-        <section class="recent-job-area bg-color-gray">
+        <!--== Start Recent Job Area Wrapper ==-->
+        <section id="Career" class="recent-job-area bg-color-gray">
             <div class="container" data-aos="fade-down">
                 <div class="row">
 
                     <div class="col-12">
                         <div class="section-title text-center">
-                            <h3 class="title">Career</h3>
+                            <h3 class="title">개발자 채용정보</h3>
                             <div class="desc">
-                                <p>Many desktop publishing packages and web page editors</p>
+                                <p>본인 언어 스택에 맞는 채용정보들을 찾아보세요!</p>
                             </div>
                         </div>
                     </div>
@@ -297,75 +648,42 @@
             </div>
         </section>
         <!--== End Recent Job Area Wrapper ==-->
-        <!--== Start Blog Area Wrapper ==-->
-        <section class="blog-area blog-home-area">
+
+
+        <!--== Start News Area Wrapper ==-->
+
+        <section id="News" class="blog-area blog-home-area">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="section-title text-center">
-                            <h3 class="title">Recent News Articles</h3>
+                            <h3 class="title">it 관련 최신뉴스</h3>
                             <div class="desc">
-                                <p>Many desktop publishing packages and web page editors</p>
+                                <p>요즘 뜨는 it 정보가 궁금하다면? 잠깐!</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row align-items-center post-home-style row-gutter-40">
-                    <div class="col-md-6 col-lg-4" data-aos="fade-right">
-                        <!--== Start Blog Post Item ==-->
-                        <div class="post-item">
-                            <div class="thumb">
-                                <a href="blog-details.html"><img src="static/img/blog/1.jpg" alt="Image" width="370"
-                                                                 height="270"></a>
-                            </div>
-                            <div class="content">
-                                <div class="author">By <a href="blog.html">Walter Houston</a></div>
-                                <h4 class="title"><a href="blog-details.html">It long established fact that reader will
-                                    distracted the readable.</a></h4>
-                                <div class="meta">
-                                    <span class="post-date">03 April, 2022</span>
-                                    <span class="dots"></span>
-                                    <span class="post-time">10 min read</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!--== End Blog Post Item ==-->
-                    </div>
-                    <div class="col-md-6 col-lg-4" data-aos="fade-left">
-                        <!--== Start Blog Post Item ==-->
-                        <div class="post-item">
-                            <div class="thumb mb--0">
-                                <a href="blog-details.html"><img src="static/img/blog/h1.jpg" alt="Image" width="370"
-                                                                 height="440"></a>
-                            </div>
-                        </div>
-                        <!--== End Blog Post Item ==-->
-                    </div>
-                    <div class="col-lg-4" data-aos="fade-left">
-                        <div class="post-home-list-style">
-                            <!--== Start Blog Post Item ==-->
-                            <div class="post-item">
-                                <div class="content">
-                                    <div class="author">By <a href="blog.html">Walter Houston</a></div>
-                                    <h4 class="title"><a href="blog-details.html">Established fact and readeren will
-                                        distracted the readable content.</a></h4>
-                                    <div class="meta">
-                                        <span class="post-date">03 April, 2022</span>
-                                        <span class="dots"></span>
-                                        <span class="post-time">10 min read</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--== End Blog Post Item ==-->
 
+                {% if news %}
+                    {#                        {% for info in news_list %}#}
+                    <!--== Start first POST Wrapper ==-->
+                    <div class="row align-items-center post-home-style row-gutter-40">
+                        <div class="col-md-6 col-lg-4" data-aos="fade-right">
                             <!--== Start Blog Post Item ==-->
                             <div class="post-item">
-                                <div class="content">
-                                    <div class="author">By <a href="blog.html">Walter Houston</a></div>
-                                    <h4 class="title"><a href="blog-details.html">With WooLentor's drag-and drop
-                                        interface for creating...</a></h4>
+                                <div class="thumb">
+                                    <a href="{{ news.0.news_link }}"><img src="{{ news.0.news_pic }}" alt="Image"
+                                                                          width="370"
+                                                                          height="270"></a>
+                                </div>
+                                <div class="content news_content">
+                                    <h4 class="title"><a href="{{ news.0.news_link }}">{{ news.0.news_title }}</a></h4>
+                                    <div class="author"><a
+                                            href="{{ news.0.news_link }}">{{ news.0.news_desc|truncatewords:40 }}</a>
+                                    </div>
                                     <div class="meta">
-                                        <span class="post-date">03 April, 2022</span>
+                                        <span class="post-date">{{ new.0.news_date }}</span>
                                         <span class="dots"></span>
                                         <span class="post-time">10 min read</span>
                                     </div>
@@ -373,11 +691,66 @@
                             </div>
                             <!--== End Blog Post Item ==-->
                         </div>
+                        <div class="col-lg-4" data-aos="fade-left">
+                            <div class="post-home-list-style">
+                                <!--== Start Blog Post Item ==-->
+                                <div class="post-item">
+                                    <div class="thumb">
+                                        <a href="{{ news.1.news_link }}"><img src="{{ news.1.news_pic }}" alt="Image"
+                                                                              width="370"
+                                                                              height="270"></a>
+                                    </div>
+                                    <div class="content news_content">
+                                        <h4 class="title"><a href="{{ news.1.news_link }}">{{ news.1.news_title }}</a>
+                                        </h4>
+                                        <div class="author"><a
+                                                href="{{ news.1.news_link }}">{{ news.1.news_desc|truncatewords:40 }}</a>
+                                        </div>
+                                        <div class="meta">
+                                            <span class="post-date">{{ new.1.news_date }}</span>
+                                            <span class="dots"></span>
+                                            <span class="post-time">10 min read</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--== End Blog Post Item ==-->
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4" data-aos="fade-left">
+                            <!--== Start Blog Post Item ==-->
+                            <div class="post-item">
+                                <div class="thumb">
+                                    <a href="{{ news.2.news_link }}"><img src="{{ news.2.news_pic }}" alt="Image"
+                                                                          width="370"
+                                                                          height="270"></a>
+                                </div>
+                                <div class="content news_content">
+                                    <h4 class="title"><a href="{{ news.2.news_link }}">{{ news.2.news_title }}</a></h4>
+                                    <div class="author"><a
+                                            href="{{ news.2.news_link }}">{{ news.2.news_desc|truncatewords:40 }}</a>
+                                    </div>
+                                    <div class="meta">
+                                        <span class="post-date">{{ new.2.news_date }}</span>
+                                        <span class="dots"></span>
+                                        <span class="post-time">10 min read</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--== End Blog Post Item ==-->
+                        </div>
+
                     </div>
-                </div>
+                    {#    {% endfor %}#}    <!--== END first POST Wrapper ==-->
+
+                    <!--== Start second POST Wrapper ==-->
+
+                    <!--== END second POST Wrapper ==-->
+                {% endif %}
+
+
             </div>
         </section>
-        <!--== End Blog Area Wrapper ==-->
+        <!--== End News Area Wrapper ==-->
     </main>
 
 

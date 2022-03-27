@@ -2,7 +2,22 @@
 <html lang="ko">
 
 {% include 'head.html' %}
+<style>
+    .recent-job-item.recent-job-style2-item {
+        height: 440px;
+}
+    @media only screen and (max-width: 1200px) {
+        .recent-job-item.recent-job-style2-item {
+            height: 340px;
+        }
+    }
 
+    .recent-job-item .main-content h3.title {
+    overflow: hidden;
+    max-height: 85px;
+}
+
+</style>
 <body>
 
 <!--wrapper start-->
