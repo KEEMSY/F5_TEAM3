@@ -7,9 +7,9 @@ from django.test import TestCase
 
 from articleapp.models import Article, Author
 from articleapp.services.service_article import (
-    create_article, read_all_article, read_article_by_title,
+    create_article, delete_article, read_all_article, read_article_by_title,
     read_article_by_user, read_article_containing_username,
-    read_category_article, update_article, delete_article)
+    read_category_article, update_article)
 
 
 class TestView(TestCase):
@@ -169,3 +169,17 @@ class TestView(TestCase):
 
         # Expect
         self.assertEqual(0,len(Article.objects.all()))
+
+    def test_when_article_delete_twice(self):
+        # Given
+        user = Author.objects.create(name="test1")
+        article = create_article("title", user, "before_content", "category1")
+
+
+        # When
+        delete_article(article.id)
+
+
+        # Expect
+        with self.assertRaises(ObjectDoesNotExist):
+            delete_article(article.id)
