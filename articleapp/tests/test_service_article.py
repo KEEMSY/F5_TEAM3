@@ -9,7 +9,7 @@ from articleapp.models import Article, Author
 from articleapp.services.service_article import (
     create_article, read_all_article, read_article_by_title,
     read_article_by_user, read_article_containing_username,
-    read_category_article, update_article)
+    read_category_article, update_article, delete_article)
 
 
 class TestView(TestCase):
@@ -158,3 +158,14 @@ class TestView(TestCase):
         with self.assertRaises(ObjectDoesNotExist):
             update_article(article.id, 'after content')
 
+    ''' D E L E T E '''
+    def test_delete_article(self):
+        # Given
+        user = Author.objects.create(name="test1")
+        article = create_article("title", user, "before_content", "category1")
+
+        # When
+        delete_article(article.id)
+
+        # Expect
+        self.assertEqual(0,len(Article.objects.all()))

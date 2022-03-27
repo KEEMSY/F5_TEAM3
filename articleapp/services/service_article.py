@@ -18,7 +18,7 @@ def read_category_article(category):
     return Article.objects.filter(category=category)
 
 
-# 입력한 타이틀을 포함하는 모든 게시글을 모두 보여주도록 수정해야함
+
 def read_article_by_title(title):
     return Article.objects.filter(title__icontains=title).order_by('-id')
 
@@ -41,10 +41,18 @@ def read_article_containing_username(name):
     return article_queryset
 
 
-''' U P D A T E'''
+''' U P D A T E '''
 
 
 def update_article(article_id, content):
     target_article = Article.objects.get(pk=article_id)
     target_article.content = content
     target_article.save()
+
+
+''' D E L E T E '''
+
+
+def delete_article(article_id):
+    target_article = Article.objects.get(pk=article_id)
+    target_article.delete()
