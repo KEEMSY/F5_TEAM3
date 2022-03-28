@@ -12,7 +12,7 @@ from articleapp.services.service_article import (
     create_article, delete_article, read_all_article, read_article_by_title,
     read_article_by_user, read_article_containing_username,
     read_article_within_a_specific_period, read_category_article,
-    update_article)
+    update_article, read_target_article)
 
 
 class TestView(TestCase):
@@ -33,6 +33,18 @@ class TestView(TestCase):
         self.assertEqual(user.id, article.id)
 
     ''' R E A D '''
+
+    def test_when_article_does_not_exist(self):
+        # Given
+        user = Author.objects.create(name='test')
+        article1 = create_article('title', user, 'content', 'category1')
+        target_id = article1.id
+        article1.delete()
+
+        # Expect
+        with self.assertRaises(ObjectDoesNotExist):
+            target_article = read_target_article(target_id)
+
 
     def test_read_all_article(self):
         # Given
