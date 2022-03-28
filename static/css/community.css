@@ -10,6 +10,7 @@
 
 
 .left_wrapper{
+    padding:0.01vw;
     width: 85%;
     max-width: 400px;
     margin: 400px 30px;
@@ -17,7 +18,11 @@
 
 }
 
-
+@media only screen and (max-width: 1399.98px) {
+    .left_wrapper {
+        display: none;
+    }
+}
 .category_wrapper {
     width: 95%;
     max-width: 700px;
@@ -74,7 +79,7 @@
     width: 3rem;
     height: 3rem;
     background-color: #badbcc;
-    margin-right: 10px;
+    margin-right: 0.5rem;
     border-radius: 0.3rem;
 }
 
@@ -97,7 +102,7 @@
 .comment_wrapper{
     width: 95%;
     max-width: 700px;
-    margin: 10px auto;
+    margin: 20px auto;
     background-color: white;
     padding: 10px 0px;
 }
@@ -109,6 +114,7 @@
 
 /* START RIGHT_WRAPPER*/
 .right_wrapper{
+    padding: 0.1vw;
     margin: 400px 30px;
     background-color: #9abbac;
     width: 100%;
@@ -208,7 +214,7 @@
 }
 
 .content_botton{
-    margin:  4rem 0px;
+    margin:  4rem 0 0 0;
     padding: 2rem;
     border-radius: 1rem;
 }

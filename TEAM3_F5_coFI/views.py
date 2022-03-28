@@ -8,3 +8,6 @@ def show_home(request):
 
 def show_community(request):
     return render(request, 'articleapp/temp_commnuity.html')
+
+def show_article_list(request):
+    return render(request, 'articleapp/article_list.html')
