@@ -235,7 +235,3 @@ class TestView(TestCase):
             delete_article(article.id)
 
 
-    ''' ARTICLE HITS '''
-
-    def test_article_hits(self):
-        pass

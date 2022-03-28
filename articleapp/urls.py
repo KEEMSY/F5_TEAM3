@@ -1,17 +1,16 @@
 from django.urls import path
 
 from articleapp import views
+from articleapp.views import ArticleView
 
 app_name = 'articleapp'
 
 urlpatterns = [
 
-    # path('', views.home, name='home'), #페이지네이터
-    path('', views.article_read, name='home'),
-    path('<str:pk>', views.board_list, name='board_list'),
-    path('detail/<int:article_id>', views.detail_read, name='detail_read'),
-    path('write/', views.move_to_write, name='move_to_write'),
-    path('write/write_Article', views.write_Article, name='write_Article'),
-    path('article_delete/<int:article_id>', views.article_delete, name='article_delete'),
+    path('', views.show_all_article, name='home'),
+    path('<str:pk>', views.show_category_article, name='category_list'),
+
+    path('article/', ArticleView.as_view(), name='article_CRUD'),
+
 
 ]
