@@ -1,7 +1,6 @@
 import datetime
 
-
-from articleapp.models import Article, Author, ArticleHits
+from articleapp.models import Article, ArticleHits, Author
 
 """
 Service

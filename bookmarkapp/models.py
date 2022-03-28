@@ -2,10 +2,10 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+# Create your models here.
 from articleapp.models import Article
 
 
-# Create your models here.
 class Bookmark(models.Model):
     class Meta:
         db_table = "user_bookmark"
