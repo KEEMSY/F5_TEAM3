@@ -18,9 +18,21 @@
 
 }
 
-@media only screen and (max-width: 1399.98px) {
+@media only screen and (max-width: 1150px) {
     .left_wrapper {
         display: none;
+    }
+    .col-4{
+        width: 0%;
+    }
+    .col-8{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 557px) {
+    .content_botton > button {
+        margin-top: 2vw;
     }
 }
 .category_wrapper {
