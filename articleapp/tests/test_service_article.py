@@ -4,7 +4,6 @@
 # Expect
 import datetime
 
-
 from django.core.exceptions import ObjectDoesNotExist
 from django.test import TestCase
 
@@ -139,26 +138,20 @@ class TestView(TestCase):
         article1_4 = create_article("title_six_month", user1, "content", "category1")
         article1_5 = create_article("title_one_year", user1, "content", "category1")
 
-        print(type(article1_1.created_at))
-        print(article1_5.created_at)
-
         article1_1.created_at = datetime.date.today() - datetime.timedelta(days=1)
         article1_1.save()
 
         article1_2.created_at = datetime.date.today() - datetime.timedelta(days=7)
-        article1_1.save()
+        article1_2.save()
 
         article1_3.created_at = datetime.date.today() - datetime.timedelta(days=30)
-        article1_1.save()
+        article1_3.save()
 
         article1_4.created_at = datetime.date.today() - datetime.timedelta(days=180)
-        article1_1.save()
+        article1_4.save()
 
         article1_5.created_at = datetime.date.today() - datetime.timedelta(days=365)
-        article1_1.save()
-
-        print(article1_1.created_at)
-
+        article1_5.save()
 
         # When
         within_one_day = read_article_within_a_specific_period(1)
@@ -167,13 +160,14 @@ class TestView(TestCase):
         within_six_month = read_article_within_a_specific_period(180)
         within_one_year = read_article_within_a_specific_period(365)
 
-        print('within_one_day', within_one_day)
-        print('within_one_week', within_one_week)
-        print('within_one_month', within_one_month)
-
         # Expect
+        self.assertEqual(1, len(within_one_day))
+        self.assertEqual(2, len(within_one_week))
+        self.assertEqual(3, len(within_one_month))
+        self.assertEqual(4, len(within_six_month))
+        self.assertEqual(5, len(within_one_year))
 
-
+        self.assertEqual("title_one_day", within_one_day[0].title)
 
     ''' U P D A T E '''
 
@@ -226,4 +220,3 @@ class TestView(TestCase):
         # Expect
         with self.assertRaises(ObjectDoesNotExist):
             delete_article(article.id)
-
