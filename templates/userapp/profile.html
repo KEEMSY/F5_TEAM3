@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns="http://www.w3.org/1999/html">
+{% load static %}
 {% include 'head.html' %}
 
 <body>
@@ -26,16 +27,14 @@
                 <!--== Start Blog Post Item ==-->
                 <div class="post-item">
                   <div class="thumb">
-                    <a href="blog-details.html"></a>
+                    <img src="{% static 'img/icons/w1.png' %}" alt="Image" width="370" height="270">
                   </div>
                   <div class="content">
-                    <div class="author">{{ user.profile.skill }} <a href="blog.html">{{ user.profile.github }}</a></div>
-                    <h4 class="title"><a href="blog-details.html">{{ user.first_name }} <br>come at an affordable price!</a></h4>
-                    <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them industry spa also the loep into type setting.</p>
+                    <h4 class="title">{{ user.first_name }}</h4>
+                    <div class="author">{{ user.profile.skill }}</div>
+                      <p><a href="blog.html">{{ user.profile.github }}</a><br><a href="blog.html">{{ user.profile.blog }}</a></p>
                     <div class="meta">
-                      <span class="post-date">03 April, 2022</span>
-                      <span class="dots"></span>
-                      <span class="post-time">10 min read</span>
+                      <button id="btn-modal">수정</button>
                     </div>
                   </div>
                 </div>
@@ -207,7 +206,7 @@
 {#                        <h2>Lorem Ipsum</h2>#}
 {#                        <div id="lorem-ipsum"></div>#}
 {#                    </div>#}
-                    <button id="btn-modal">수정</button>
+
                     <div id="modal" class="modal-overlay">
                         <div class="modal-window">
                             <div class="title">
@@ -388,49 +387,7 @@
   <!--== End Aside Menu ==-->
 </div>
 
-<!--=======================Javascript============================-->
-{#                    <div id="container">#}
-{#                        <h2>Lorem Ipsum</h2>#}
-{#                        <div id="lorem-ipsum"></div>#}
-{#                    </div>#}
 {% include 'js.html' %}
-
-<script>
-    var modal = document.getElementById("modal");
-
-    function modalOn() {
-        modal.style.display = "flex";
-    }
-
-    function isModalOn() {
-        return modal.style.display === "flex";
-    }
-
-    function modalOff() {
-        modal.style.display = "none";
-    }
-
-    const btnModal = document.getElementById("btn-modal")
-    btnModal.addEventListener("click", e => {
-        modalOn();
-    })
-    const closeBtn = document.getElementById("close-area")
-    closeBtn.addEventListener("click", e => {
-        modalOff();
-    })
-    modal.addEventListener("click", e => {
-        const evTarget = e.target
-        if (evTarget.classList.contains("modal-overlay")) {
-            modalOff();
-        }
-    })
-    window.addEventListener("keyup", e => {
-        if (isModalOn() && e.key === "Escape") {
-            modalOff();
-        }
-    })
-</script>
-
 
 </body>
 
