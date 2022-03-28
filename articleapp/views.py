@@ -13,7 +13,7 @@ from articleapp.models import Article, Author
 # 게시글 목록
 from articleapp.services.service_article import read_target_article, get_client_ip, hit_article, create_article, \
     update_article, delete_article, read_all_article, read_category_article, read_article_by_title, \
-    read_article_by_user, read_article_within_a_specific_period
+    read_article_by_user, read_article_within_a_specific_period, read_article_containing_username
 
 
 def article_read(request):
@@ -112,8 +112,8 @@ def search_article_by_title(request):
     return render(request, 'community.html', {'result': target_articles}, status=200)
 
 
-def search_artocle_by_user(request):
-    target_articles = read_article_by_user(request.POST['name'])
+def search_artocle_by_username(request):
+    target_articles = read_article_containing_username(request.POST['name'])
     return render(request, 'community.html', {'result': target_articles}, status=200)
 
 

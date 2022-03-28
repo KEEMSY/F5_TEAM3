@@ -12,7 +12,7 @@ from articleapp.services.service_article import (
     create_article, delete_article, read_all_article, read_article_by_title,
     read_article_by_user, read_article_containing_username,
     read_article_within_a_specific_period, read_category_article,
-    read_target_article, update_article)
+    read_target_article, update_article, read_article_containing_username_within_a_specific_period)
 
 
 class TestView(TestCase):
@@ -120,7 +120,7 @@ class TestView(TestCase):
         article2 = create_article("title_2", user1, "content", "category1")
 
         # When
-        article_by_user1 = read_article_by_user(user1.name)
+        article_by_user1 = read_article_by_user(user1.id)
 
         # Expect
         expect_title = ["title_2", "title_1"]
@@ -180,7 +180,33 @@ class TestView(TestCase):
         self.assertEqual(4, len(within_six_month))
         self.assertEqual(5, len(within_one_year))
 
-        self.assertEqual("title_one_day", within_one_day_target[0].title)
+        self.assertEqual("title_one_day", within_one_day[0].title)
+
+    def test_read_article_containing_username_within_a_specific_period(self):
+        # Given
+        user1 = Author.objects.create(name="test1")
+        user2 = Author.objects.create(name="test2")
+        article1_1 = create_article("title_one_day", user1, "content", "category1")
+        article1_2 = create_article("title_one_week", user2, "content", "category1")
+
+        article1_1.created_at = datetime.date.today() - datetime.timedelta(days=1)
+        article1_1.save()
+
+        article1_2.created_at = datetime.date.today() - datetime.timedelta(days=7)
+        article1_2.save()
+
+        # When
+        within_one_day_username = read_article_containing_username_within_a_specific_period(1, 'test')
+        within_one_week_username = read_article_containing_username_within_a_specific_period(7, 'test')
+
+        # Expect
+        self.assertEqual('test1', within_one_day_username[0].user.name)
+        self.assertEqual('test2', within_one_week_username[0].user.name)
+        self.assertEqual('test1', within_one_week_username[1].user.name)
+
+
+
+
 
     ''' U P D A T E '''
 

@@ -34,12 +34,12 @@ def read_article_by_title(title):
     return Article.objects.filter(title__icontains=title).order_by('-id')
 
 
-def read_article_by_user(name):
-    return Article.objects.filter(user=name).order_by('-id')
+def read_article_by_user(user_id):
+    return Article.objects.filter(user=user_id).order_by('-id')
 
 
-def read_article_containing_username(name):
-    users = Author.objects.filter(name__icontains=name).order_by('-id')
+def read_article_containing_username(username):
+    users = Author.objects.filter(name__icontains=username).order_by('-id')
 
     article_list = []
     for user in users:
@@ -54,6 +54,16 @@ def read_article_containing_username(name):
 
 def read_article_within_a_specific_period(date):
     return Article.objects.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date))
+
+
+def read_article_containing_username_within_a_specific_period(date, name):
+    before_article = read_article_containing_username(name)
+    return before_article.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date))
+
+
+def read_article_by_title_within_a_specific_period(date, title):
+    return Article.objects.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date)).filter(
+        title=title)
 
 
 ''' 1-3. U P D A T E '''
@@ -92,6 +102,6 @@ def hit_article(ip, article_id):
         target_article.article_hits += 1
         target_article.save()
 
-        ArticleHits.objects.create(client_ip=ip,article_id=article_id)
+        ArticleHits.objects.create(client_ip=ip, article_id=article_id)
 
     return Article.objects.get(pk=article_id)
