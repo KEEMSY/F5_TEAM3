@@ -1,3 +1,6 @@
+import datetime
+from datetime import timezone
+
 from articleapp.models import Article, Author
 
 ''' C R E A T E '''
@@ -16,7 +19,6 @@ def read_all_article():
 
 def read_category_article(category):
     return Article.objects.filter(category=category)
-
 
 
 def read_article_by_title(title):
@@ -39,6 +41,10 @@ def read_article_containing_username(name):
         article_queryset = article_queryset | article_list[i]
 
     return article_queryset
+
+
+def read_article_within_a_specific_period(date):
+    return Article.objects.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date))
 
 
 ''' U P D A T E '''
