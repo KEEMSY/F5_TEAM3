@@ -44,13 +44,14 @@ def read_article_containing_username(username):
     article_list = []
     for user in users:
         article_list.append(read_article_by_user(user.id))
+    try:
+        article_queryset = article_list[0]
+        for i in range(1, len(article_list)):
+            article_queryset = article_queryset | article_list[i]
 
-    article_queryset = article_list[0]
-    for i in range(1, len(article_list)):
-        article_queryset = article_queryset | article_list[i]
-
-    return article_queryset
-
+        return article_queryset
+    except IndexError:
+        return 0
 
 def read_article_within_a_specific_period(date):
     return Article.objects.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date))
@@ -58,8 +59,10 @@ def read_article_within_a_specific_period(date):
 
 def read_article_containing_username_within_a_specific_period(date, name):
     before_article = read_article_containing_username(name)
-    return before_article.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date))
-
+    if before_article:
+        return before_article.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date))
+    else:
+        return 0
 
 def read_article_by_title_within_a_specific_period(date, title):
     return Article.objects.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date)).filter(

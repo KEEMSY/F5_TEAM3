@@ -13,7 +13,8 @@ from articleapp.models import Article, Author
 # 게시글 목록
 from articleapp.services.service_article import read_target_article, get_client_ip, hit_article, create_article, \
     update_article, delete_article, read_all_article, read_category_article, read_article_by_title, \
-    read_article_by_user, read_article_within_a_specific_period, read_article_containing_username
+    read_article_by_user, read_article_within_a_specific_period, read_article_containing_username, \
+    read_article_containing_username_within_a_specific_period, read_article_by_title_within_a_specific_period
 
 
 def article_read(request):
@@ -117,8 +118,16 @@ def search_artocle_by_username(request):
     return render(request, 'community.html', {'result': target_articles}, status=200)
 
 
-def search_article_within_a_specific_period(request):
-    target_articles = read_article_within_a_specific_period(request.POST['date'])
-    return render(request, 'community.html', {'result': target_articles}, status=200)
+def search_article_containing_usernamewithin_a_specific_period(request):
+    try:
+        target_articles = read_article_containing_username_within_a_specific_period(request.POST['date'],request.POST['name'])
+        return render(request, 'community.html', {'result': target_articles}, status=200)
+    except ObjectDoesNotExist:
+        return JsonResponse({'result': '게시글이 존재하지 않습니다.'}, status=404)
 
-
+def search_article_by_title_within_a_specific_period(request):
+    try:
+        target_articles = read_article_by_title_within_a_specific_period(request.POST['date'],request.POST['title'])
+        return render(request, 'community.html', {'result': target_articles}, status=200)
+    except ObjectDoesNotExist:
+        return JsonResponse({'result': '게시글이 존재하지 않습니다.'}, status=404)
