@@ -1,10 +1,10 @@
 from typing import Any, List
 
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from articleapp.models import Article
+from userapp.models import User
 
 
 # Create your models here.
@@ -13,10 +13,6 @@ class Post(models.Model):
     like_count = models.IntegerField(default=0)
 
     my_likes: List[Any]
-
-
-class Author(models.Model):
-    name = models.CharField(max_length=50)
 
 
 class Datcle(models.Model):
@@ -36,7 +32,7 @@ class ArticleLikes(models.Model):
         ]
 
     # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, db_column='user')
-    user = models.ForeignKey(Author, on_delete=models.CASCADE, db_column="user")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, db_column="user")
     article = models.ForeignKey(Post, on_delete=models.CASCADE, db_column="article")
 
 
@@ -50,5 +46,5 @@ class CommentLikes(models.Model):
         ]
 
     # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, db_column='user')
-    user = models.ForeignKey(Author, on_delete=models.CASCADE, db_column="user")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, db_column="user")
     comment = models.ForeignKey(Datcle, on_delete=models.CASCADE, db_column="comment")

@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 
 # Create your views here.
 from bookmarkapp.services.bookmark_service import do_bookmark, undo_bookmark
-from likeapp.models import Author
+
 
 
 def click_bookmark(request, article_id):

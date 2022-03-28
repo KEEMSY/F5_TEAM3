@@ -1,5 +1,6 @@
 from articleapp.models import Article
-from likeapp.models import ArticleLikes, Author, CommentLikes, Datcle, Post
+from likeapp.models import ArticleLikes, CommentLikes, Datcle, Post
+from userapp.models import User
 
 
 def do_article_like(user_id: int, article_id: int) -> ArticleLikes:

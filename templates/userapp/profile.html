@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/html">
 {% load static %}
+{% load crispy_forms_tags %}
 {% include 'head.html' %}
 
 <body>
@@ -31,7 +32,7 @@
                                         <img src="{% static 'img/icons/w1.png' %}" alt="Image" width="370" height="270">
                                     </div>
                                     <div class="content">
-                                        <h4 class="title">{{ user.first_name }}</h4>
+                                        <h4 class="title">{{ user.username }}</h4>
                                         <div class="author">{{ user.profile.skill }}</div>
                                         <div class="sns">
                                             <div class="github">
@@ -116,8 +117,14 @@
                             <div class="content">
                                 <form action="{% url 'user:update_profile' user.pk %}" method="post">
                                     {% csrf_token %}
+{#                                    {{ profile_form.img }}#}
+{#                                    {{ user_form.username }}#}
+{#                                    {{ profile_form.skill }}#}
+{#                                    {{ profile_form.github }}#}
+{#                                    {{ profile_form.blog }}#}
+                                    {{ user_form.as_p }}
                                     {{ profile_form.as_p }}
-                                    <button>제출</button>
+                                    <button type="submit" class="btn btn-success">Save</button>
                                 </form>
                             </div>
                         </div>
