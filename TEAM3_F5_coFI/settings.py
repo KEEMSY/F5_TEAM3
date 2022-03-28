@@ -120,16 +120,16 @@ WSGI_APPLICATION = 'TEAM3_F5_coFI.wsgi.application'
 
 pymysql.install_as_MySQLdb()  # 이것을 실행하면 pymysql을 사용하면서 mysql클라이언트를 실행하는 것처럼 됨
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': "TEAM3",
-#         'USER': "root",
-#         'PASSWORD': "2349",
-#         'HOST' : "localhost",
-#         'PORT' : "3306"
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': "TEAM3",
+        'USER': "root",
+        'PASSWORD': "2349",
+        'HOST' : "localhost",
+        'PORT' : "3306"
+    }
+}
 
 # # 로컬 db 연결
 # DATABASES = {
@@ -140,20 +140,20 @@ pymysql.install_as_MySQLdb()  # 이것을 실행하면 pymysql을 사용하면�
 # }
 
 # AWS db 연결
-DATABASES = {
-    'default': {
-        'ENGINE': secrets['default']['ENGINE'],
-        'NAME': secrets['default']['NAME'],
-        'USER': secrets['default']['USER'],
-        'PASSWORD': secrets['default']['PASSWORD'],
-        'HOST': secrets['default']['HOST'],
-        'PORT': secrets['default']['PORT'],
-        'OPTIONS': {
-                'charset': 'utf8mb4',
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        },
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': secrets['default']['ENGINE'],
+#         'NAME': secrets['default']['NAME'],
+#         'USER': secrets['default']['USER'],
+#         'PASSWORD': secrets['default']['PASSWORD'],
+#         'HOST': secrets['default']['HOST'],
+#         'PORT': secrets['default']['PORT'],
+#         'OPTIONS': {
+#                 'charset': 'utf8mb4',
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+#         },
+#     }
+# }
 
 
 # Password validation
@@ -200,10 +200,10 @@ AUTH_USER_MODEL = 'userapp.User'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-try:
-    from TEAM3_F5_coFI.local_settings import *
-except ImportError:
-    pass
+# try:
+#     from TEAM3_F5_coFI.local_settings import *
+# except ImportError:
+#     pass
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
