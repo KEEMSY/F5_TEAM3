@@ -1,24 +1,34 @@
 import datetime
-from datetime import timezone
 
-from articleapp.models import Article, Author
 
-''' C R E A T E '''
+from articleapp.models import Article, Author, ArticleHits
+
+"""
+Service
+1. article_CRUD
+2. article_Hits
+"""
+
+''' 1-1. C R E A T E '''
 
 
 def create_article(title, user_id, content, category):
     return Article.objects.create(title=title, user=user_id, content=content, category=category)
 
 
-''' R E A D : QuerySet '''
+''' 1-2. R E A D : QuerySet '''
 
 
 def read_all_article():
     return Article.objects.all().order_by('-id')
 
 
+def read_target_article(article_id):
+    return Article.objects.get(pk=article_id)
+
+
 def read_category_article(category):
-    return Article.objects.filter(category=category)
+    return Article.objects.filter(category=category).order_by('-id')
 
 
 def read_article_by_title(title):
@@ -30,7 +40,7 @@ def read_article_by_user(user_id):
 
 
 def read_article_containing_username(name):
-    users = Author.objects.filter(name__icontains=name)
+    users = Author.objects.filter(name__icontains=name).order_by('-id')
 
     article_list = []
     for user in users:
@@ -47,7 +57,7 @@ def read_article_within_a_specific_period(date):
     return Article.objects.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date))
 
 
-''' U P D A T E '''
+''' 1-3. U P D A T E '''
 
 
 def update_article(article_id, content):
@@ -56,9 +66,33 @@ def update_article(article_id, content):
     target_article.save()
 
 
-''' D E L E T E '''
+''' 1-4. D E L E T E '''
 
 
 def delete_article(article_id):
     target_article = Article.objects.get(pk=article_id)
     target_article.delete()
+
+
+''' 2. Hits '''
+
+
+def get_client_ip(request):
+    raw_ip = request.META.get('HTTP_X_FORWARDED_FOR')
+    if raw_ip:
+        target_ip = raw_ip.split(',')[0]
+    else:
+        target_ip = request.META.get('REMOTE_ADDR')
+    return target_ip
+
+
+def hit_article(ip, article_id):
+    target_article = Article.objects.get(pk=article_id)
+
+    if not ArticleHits.objects.filter(client_ip=ip, article=article_id):
+        target_article.article_hits += 1
+        target_article.save()
+
+        ArticleHits(client_ip=ip,article_id=article_id)
+
+    return Article.objects.get(pk=article_id)

@@ -3,6 +3,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.views import View
 
 from articleapp.models import Article, Author
 
@@ -54,7 +55,9 @@ def board_list(request, pk:str):
 
 
 
-
+class ArticleView(View):
+    def get(self,request,article_id):
+        pass
 
 
 

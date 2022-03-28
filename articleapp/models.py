@@ -16,7 +16,7 @@ class Article(models.Model):
     content = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    article_hits = models.IntegerField(default=0)
     objects = models.Manager()
 
     def __str__(self):
@@ -31,7 +31,7 @@ class ArticleHits(models.Model):
 
     client_ip = models.GenericIPAddressField(protocol='both', unpack_ipv4=False, null=True, verbose_name='사용자 iP주소')
     date = models.DateTimeField(auto_now_add=True, verbose_name='조회날짜')
-    article = models.ForeignKey(Article, on_delete=models.CASCADE(),verbose_name='게시글')
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, verbose_name='게시글')
 
     def __str__(self):
         return str(self.article.id)
