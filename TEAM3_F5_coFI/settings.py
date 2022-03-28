@@ -112,9 +112,9 @@ pymysql.install_as_MySQLdb()  # 이것을 실행하면 pymysql을 사용하면�
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "TEAM3",
+        'NAME': "spartadb",
         'USER': "root",
-        'PASSWORD': "2349",
+        'PASSWORD': "1234",
         'HOST' : "localhost",
         'PORT' : "3306"
     }
