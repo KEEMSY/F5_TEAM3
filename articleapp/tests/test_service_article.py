@@ -242,7 +242,18 @@ class TestView(TestCase):
         self.assertEqual('title_one_day', within_one_week_title[1].title)
 
 
+    def test_when_article_can_not_read_article_by_title_within_a_specific_period(self):
+        # Given
+        user1 = Author.objects.create(name="test1")
 
+        article1_1 = create_article("title_one_day", user1, "content", "category1")
+        article1_2 = create_article("title_one_week", user1, "content", "category1")
+
+        # When
+        within_one_week_title = read_article_by_title_within_a_specific_period(7, 'abc')
+
+        # Expect
+        self.assertEqual(False, within_one_week_title)
 
 
     ''' U P D A T E '''

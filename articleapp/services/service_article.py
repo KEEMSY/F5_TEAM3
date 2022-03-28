@@ -53,6 +53,7 @@ def read_article_containing_username(username):
     except IndexError:
         return 0
 
+
 def read_article_within_a_specific_period(date):
     return Article.objects.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date))
 
@@ -64,9 +65,14 @@ def read_article_containing_username_within_a_specific_period(date, name):
     else:
         return 0
 
+
 def read_article_by_title_within_a_specific_period(date, title):
-    return Article.objects.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date)).filter(
+    target_articles = Article.objects.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date)).filter(
         title__icontains=title).order_by('-id')
+    if len(target_articles):
+        return target_articles
+    else:
+        return 0
 
 
 ''' 1-3. U P D A T E '''
