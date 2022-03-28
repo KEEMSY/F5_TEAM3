@@ -93,6 +93,6 @@ def hit_article(ip, article_id):
         target_article.article_hits += 1
         target_article.save()
 
-        ArticleHits(client_ip=ip,article_id=article_id)
+        ArticleHits.objects.create(client_ip=ip,article_id=article_id)
 
     return Article.objects.get(pk=article_id)
