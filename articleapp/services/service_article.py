@@ -63,7 +63,7 @@ def read_article_containing_username_within_a_specific_period(date, name):
 
 def read_article_by_title_within_a_specific_period(date, title):
     return Article.objects.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date)).filter(
-        title=title)
+        title__icontains=title).order_by('-id')
 
 
 ''' 1-3. U P D A T E '''
