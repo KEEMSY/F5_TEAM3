@@ -55,7 +55,7 @@ def read_article_containing_username(username):
 
 
 def read_article_within_a_specific_period(date):
-    return Article.objects.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date))
+    return Article.objects.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date)).order_by('-created_at')
 
 
 def read_article_containing_username_within_a_specific_period(date, name):

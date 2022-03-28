@@ -10,10 +10,11 @@ from django.test import TestCase
 from articleapp.models import Article, Author
 from articleapp.services.service_article import (
     create_article, delete_article, read_all_article, read_article_by_title,
-    read_article_by_user, read_article_containing_username,
+    read_article_by_title_within_a_specific_period, read_article_by_user,
+    read_article_containing_username,
+    read_article_containing_username_within_a_specific_period,
     read_article_within_a_specific_period, read_category_article,
-    read_target_article, update_article, read_article_containing_username_within_a_specific_period,
-    read_article_by_title_within_a_specific_period)
+    read_target_article, update_article)
 
 
 class TestView(TestCase):
@@ -45,7 +46,6 @@ class TestView(TestCase):
         # Expect
         with self.assertRaises(ObjectDoesNotExist):
             target_article = read_target_article(target_id)
-
 
     def test_read_all_article(self):
         # Given
@@ -146,6 +146,7 @@ class TestView(TestCase):
     def test_read_article_within_a_specific_period(self):
         # Given
         user1 = Author.objects.create(name="test1")
+        article1 = create_article("title_day", user1, "content", "category1")
         article1_1 = create_article("title_one_day", user1, "content", "category1")
         article1_2 = create_article("title_one_week", user1, "content", "category1")
         article1_3 = create_article("title_one_month", user1, "content", "category1")
@@ -175,13 +176,13 @@ class TestView(TestCase):
         within_one_year = read_article_within_a_specific_period(365)
 
         # Expect
-        self.assertEqual(1, len(within_one_day))
-        self.assertEqual(2, len(within_one_week))
-        self.assertEqual(3, len(within_one_month))
-        self.assertEqual(4, len(within_six_month))
-        self.assertEqual(5, len(within_one_year))
+        self.assertEqual(2, len(within_one_day))
+        self.assertEqual(3, len(within_one_week))
+        self.assertEqual(4, len(within_one_month))
+        self.assertEqual(5, len(within_six_month))
+        self.assertEqual(6, len(within_one_year))
 
-        self.assertEqual("title_one_day", within_one_day[0].title)
+        self.assertEqual("title_day", within_one_day[0].title)
 
     def test_read_article_containing_username_within_a_specific_period(self):
         # Given
@@ -204,7 +205,6 @@ class TestView(TestCase):
         self.assertEqual('test1', within_one_day_username[0].user.name)
         self.assertEqual('test2', within_one_week_username[0].user.name)
         self.assertEqual('test1', within_one_week_username[1].user.name)
-
 
     def test_when_article_can_not_read_article_containing_username_within_a_specific_period(self):
         # Given
@@ -241,7 +241,6 @@ class TestView(TestCase):
         self.assertEqual('title_one_week', within_one_week_title[0].title)
         self.assertEqual('title_one_day', within_one_week_title[1].title)
 
-
     def test_when_article_can_not_read_article_by_title_within_a_specific_period(self):
         # Given
         user1 = Author.objects.create(name="test1")
@@ -254,7 +253,6 @@ class TestView(TestCase):
 
         # Expect
         self.assertEqual(False, within_one_week_title)
-
 
     ''' U P D A T E '''
 
@@ -307,5 +305,3 @@ class TestView(TestCase):
         # Expect
         with self.assertRaises(ObjectDoesNotExist):
             delete_article(article.id)
-
-
