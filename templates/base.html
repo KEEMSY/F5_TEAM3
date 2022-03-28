@@ -25,166 +25,22 @@
     }
 
     .user-contatiner {
-        max-width: 90vw;
+        max-width: 60vw;
         margin-top: 0vw;
-    }
-
-    .participants-container {
-        padding-left: 2vw;
-        width: 600px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        overflow: hidden;
-    }
-
-    @media only screen and (max-width: 1400px) {
-        .participants-container {
-            width: 400px;
-        }
     }
 
     @media only screen and (max-width: 992px) {
         .user-contatiner {
             display: none;
         }
-
-        .participants-container {
-            display: none;
-        }
     }
 
-    .participants-container ul::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-        background-color: #F5F5F5;
-        border-radius: 10px;
-        margin-bottom: 15vw;
-    }
-
-    .participants-container ul::-webkit-scrollbar {
-        width: 10px;
-        background-color: #F5F5F5;
-    }
-
-    .participants-container ul::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        background-color: #FFF;
-        background-image: -webkit-linear-gradient(top,
-        #e4f5fc 0%,
-        #bfe8f9 50%,
-        #9fd8ef 51%,
-        #2ab0ed 100%);
-    }
-
-
-    {#유튜브 보고 추가#}
-    img {
-        pointer-events: none;
-    }
-
-    .participants-container ul {
-        list-style: none;
-        user-select: none;
-        display: flex;
-        overflow-y: auto;
-        padding: 20px 0;
-    }
-
-    .participants-container ul li {
-        padding: 0 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        margin: 0 -2px;
-    }
-
-    .participants-container ul li:first-child {
-        padding-left: 20px;
-    }
-
-    .participants-container ul li:last-child {
-        padding-right: 20px;
-    }
-
-    {#스토리 오프#}
-    .participants-container ul li .story {
-        width: 75px;
-        height: 75px;
-        border-radius: 50%;
-        background-color: rgba(255, 255, 255, .75);
-        padding: 1px;
-        position: relative;
-    }
-
-    {#스토리 온#}
-
-    .participants-container ul li.has-story .story {
-        padding: 3px;
-        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    }
-
-    .participants-container ul li .story img {
-        padding: 2px;
-    {#background: currentColor;#} background-image: linear-gradient(#f6f6f6, #f6f6f6), linear-gradient(to right, #ff7700, #ff3636aa, #ff00c3);
-        border-radius: 50%;
-        width: 100%;
-        height: 100%;
-    }
-
-
-    .participants-container ul li span {
-        color: rgba(255, 255, 255, .85);
-        font-weight: 300;
-        font-size: 15px;
-        max-width: 85px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin-top: 5px;
-    }
-
-    .left-wrapper h3 {
-        margin-left: 3vw;
-    }
-
-    .current-participants {
-        margin-left: 3vw;
-    }
-
-    .story-wrapper img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-    }
-
-
-    .left-wrapper {
-        width: 45%;
-        float: left;
-
-        position: relative;
-        bottom: 2vw;
-    }
-    @media only screen and (max-width: 1400px) {
-        .left-wrapper {
-            bottom: 5vw;
-        }
-    }
-
-
-    .right-wrapper {
-        width: 45%;
-        height: 10vw;
-        float: right;
-        display: flex;
-        justify-content: center;
-    }
 
     .badge-contatiner {
         display: flex;
         align-items: center;
         justify-content: space-around;
+        text-align: center;
     }
 
     .badge {
@@ -193,12 +49,14 @@
 
     .badge img {
         height: auto;
-        max-width: 80%;
+        width: 60%;
     }
 
     .badge h3 {
         text-align: center;
         margin-top: 1rem;
+        line-height: 3.2;
+
     }
 
     .story-wrapper p {
@@ -208,8 +66,20 @@
 
 
     .container.pt--0.pb--0.video-button {
-        margin-top: 13vw;
+        margin-top: -7vw;
 }
+
+    .section-title.text-center .title {
+    font-size: 3vw;
+}
+
+    .section-title.text-center .desc {
+    font-size: 1vw;
+}
+
+    .section-title.text-center .desc p {
+        margin-top: 4vw;
+    }
 
     .Top-posts {
         margin-top: 2vw;
@@ -304,104 +174,31 @@
         <!--== End Hero Area Wrapper ==-->
         <!--== Start participants,badge Wrapper ==-->
 
-            <div class="container user-contatiner">
-            <div class="left-wrapper">
-                <h3>현재 접속자</h3>
-                <div class="participants-container">
-                    <ul>
-                        <li class="has-story">
-                            <div class="story">
-                                <img src="https://media-exp1.licdn.com/dms/image/C4E03AQE_NPM9FSWdrA/profile-displayphoto-shrink_100_100/0/1644569891095?e=1653523200&v=beta&t=fZ3JJ_wgETVeWR9iIcFAN6Q28Na7enHhMzEkXRauWHg">
-                            </div>
-                            <span>박다희</span>
-                        </li>
-                        <li class="has-story">
-                            <div class="story">
-                                <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCSQRtvKDVbg/profile-displayphoto-shrink_100_100/0/1643975702098?e=1653523200&v=beta&t=cNxhLW1nOBVUnLIdnnFptahiMYlBpPfKnCaAyyrj3Og">
-                            </div>
-                            <span>강현준</span>
-                        </li>
-                        <li>
-                            <div class="story">
-                                <img src="https://media-exp1.licdn.com/dms/image/C4E03AQE_NPM9FSWdrA/profile-displayphoto-shrink_100_100/0/1644569891095?e=1653523200&v=beta&t=fZ3JJ_wgETVeWR9iIcFAN6Q28Na7enHhMzEkXRauWHg">
-                            </div>
-                            <span>박다희</span>
-                        </li>
-                        <li>
-                            <div class="story">
-                                <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCSQRtvKDVbg/profile-displayphoto-shrink_100_100/0/1643975702098?e=1653523200&v=beta&t=cNxhLW1nOBVUnLIdnnFptahiMYlBpPfKnCaAyyrj3Og">
-                            </div>
-                            <span>강현준</span>
-                        </li>
-                        <li>
-                            <div class="story">
-                                <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCSQRtvKDVbg/profile-displayphoto-shrink_100_100/0/1643975702098?e=1653523200&v=beta&t=cNxhLW1nOBVUnLIdnnFptahiMYlBpPfKnCaAyyrj3Og">
-                            </div>
-                            <span>강현준</span>
-                        </li>
-                        <li>
-                            <div class="story">
-                                <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCSQRtvKDVbg/profile-displayphoto-shrink_100_100/0/1643975702098?e=1653523200&v=beta&t=cNxhLW1nOBVUnLIdnnFptahiMYlBpPfKnCaAyyrj3Og">
-                            </div>
-                            <span>강현준</span>
-                        </li>
-                        <li>
-                            <div class="story">
-                                <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCSQRtvKDVbg/profile-displayphoto-shrink_100_100/0/1643975702098?e=1653523200&v=beta&t=cNxhLW1nOBVUnLIdnnFptahiMYlBpPfKnCaAyyrj3Og">
-                            </div>
-                            <span>강현준</span>
-                        </li>
-                        <li>
-                            <div class="story">
-                                <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCSQRtvKDVbg/profile-displayphoto-shrink_100_100/0/1643975702098?e=1653523200&v=beta&t=cNxhLW1nOBVUnLIdnnFptahiMYlBpPfKnCaAyyrj3Og">
-                            </div>
-                            <span>강현준</span>
-                        </li>
-                        <li>
-                            <div class="story">
-                                <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCSQRtvKDVbg/profile-displayphoto-shrink_100_100/0/1643975702098?e=1653523200&v=beta&t=cNxhLW1nOBVUnLIdnnFptahiMYlBpPfKnCaAyyrj3Og">
-                            </div>
-                            <span>강현준</span>
-                        </li>
-                        <li>
-                            <div class="story">
-                                <img src="https://media-exp1.licdn.com/dms/image/C5603AQGCSQRtvKDVbg/profile-displayphoto-shrink_100_100/0/1643975702098?e=1653523200&v=beta&t=cNxhLW1nOBVUnLIdnnFptahiMYlBpPfKnCaAyyrj3Og">
-                            </div>
-                            <span>강현준</span>
-                        </li>
-                    </ul>
-
+        <div class="container user-contatiner">
+            <div class="badge-contatiner">
+                <a href="#TopPosts">
+                    <div class="badge">
+                    <img src="static/img/icons/TopPosts.png" alt="Image">
+                    <h3>Top posts</h3>
                 </div>
-                <p class="current-participants">현재 접속자 1111 명</p>
-            </div>
-
-            <div class="right-wrapper">
-                <div class="badge-contatiner">
-                    <a href="#TopPosts">
-                        <div class="badge">
-                        <img src="static/img/icons/TopPosts.png" alt="Image">
-                        <h3>Top posts</h3>
-                    </div>
-                    </a>
-                    <a href="#Career">
-                        <div class="badge">
-                        <img src="static/img/icons/Career.png" alt="Image">
-                        <h3>Career</h3>
-                    </div>
-                    </a>
-                    <a href="#News">
-                        <div class="badge">
-                        <img src="static/img/icons/News.png" alt="Image">
-                        <h3>News</h3>
-                    </div>
-                    </a>
-
-
-
-
+                </a>
+                <a href="#Career">
+                    <div class="badge">
+                    <img src="static/img/icons/Career.png" alt="Image">
+                    <h3>Career</h3>
                 </div>
-            </div>
+                </a>
+                <a href="#News">
+                    <div class="badge">
+                    <img src="static/img/icons/News.png" alt="Image">
+                    <h3>News</h3>
+                </div>
+                </a>
 
+
+
+
+            </div>
         </div>
 
         <!--== End participants,badge Wrapper ==-->
