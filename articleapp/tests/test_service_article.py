@@ -220,3 +220,9 @@ class TestView(TestCase):
         # Expect
         with self.assertRaises(ObjectDoesNotExist):
             delete_article(article.id)
+
+
+    ''' ARTICLE HITS '''
+
+    def test_article_hits(self):
+        pass
