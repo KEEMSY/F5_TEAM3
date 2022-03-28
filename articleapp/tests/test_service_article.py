@@ -12,7 +12,7 @@ from articleapp.services.service_article import (
     create_article, delete_article, read_all_article, read_article_by_title,
     read_article_by_user, read_article_containing_username,
     read_article_within_a_specific_period, read_category_article,
-    update_article, read_target_article)
+    read_target_article, update_article)
 
 
 class TestView(TestCase):
