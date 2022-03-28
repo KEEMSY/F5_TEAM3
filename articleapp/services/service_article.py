@@ -34,8 +34,8 @@ def read_article_by_title(title):
     return Article.objects.filter(title__icontains=title).order_by('-id')
 
 
-def read_article_by_user(user_id):
-    return Article.objects.filter(user=user_id).order_by('-id')
+def read_article_by_user(name):
+    return Article.objects.filter(user=name).order_by('-id')
 
 
 def read_article_containing_username(name):

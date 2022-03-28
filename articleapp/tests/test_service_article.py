@@ -120,7 +120,7 @@ class TestView(TestCase):
         article2 = create_article("title_2", user1, "content", "category1")
 
         # When
-        article_by_user1 = read_article_by_user(user1.id)
+        article_by_user1 = read_article_by_user(user1.name)
 
         # Expect
         expect_title = ["title_2", "title_1"]
@@ -180,7 +180,7 @@ class TestView(TestCase):
         self.assertEqual(4, len(within_six_month))
         self.assertEqual(5, len(within_one_year))
 
-        self.assertEqual("title_one_day", within_one_day[0].title)
+        self.assertEqual("title_one_day", within_one_day_target[0].title)
 
     ''' U P D A T E '''
 

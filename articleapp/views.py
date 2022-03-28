@@ -12,7 +12,8 @@ from articleapp.models import Article, Author
 
 # 게시글 목록
 from articleapp.services.service_article import read_target_article, get_client_ip, hit_article, create_article, \
-    update_article, delete_article, read_all_article, read_category_article, read_article_by_title
+    update_article, delete_article, read_all_article, read_category_article, read_article_by_title, \
+    read_article_by_user, read_article_within_a_specific_period
 
 
 def article_read(request):
@@ -59,6 +60,8 @@ def board_list(request, pk: str):
     page = int(request.GET.get('page', 1))  # 1페이지 = 기본값
     board_list = paginator.get_page(page)
     return render(request, 'community.html', {'board_list': board_list, 'article_list': all_articles})
+
+
 #####################
 
 class ArticleView(View):
@@ -75,35 +78,47 @@ class ArticleView(View):
         create_article(title=request.POST.get('title'),
                        user_id=request.user,
                        content=request.POST.get('content'))
-        return JsonResponse({'result': '게시글이 생성 되었습니다.'})
+        return JsonResponse({'result': '게시글이 생성 되었습니다.'}, status=200)
 
     def patch(self, request, article_id):
         target_article = read_target_article(article_id)
         if request.user == target_article.user:
             try:
                 update_article(request.PATCH.get('content'))
-                return JsonResponse({'result': '게시글이 수정 되었습니다.'})
+                return JsonResponse({'result': '게시글이 수정 되었습니다.'}, status=200)
             except ObjectDoesNotExist:
-                return JsonResponse({'result': '게시글이 존재하지 않습니다.'})
+                return JsonResponse({'result': '게시글이 존재하지 않습니다.'}, status=404)
 
     def delete(self, request, article_id):
         try:
             delete_article(article_id)
-            return redirect()
+            return JsonResponse({'result': '게시글이 삭제되었습니다.'}, status=200)
         except ObjectDoesNotExist:
-            return JsonResponse({'result': '게시글이 존재하지 않습니다.'})
+            return JsonResponse({'result': '게시글이 존재하지 않습니다.'}, status=404)
 
 
 def show_all_article(request):
     articles = Article.objects.all()
-    return render(request, 'community.html', {'articles': articles})
+    return render(request, 'community.html', {'articles': articles}, status=200)
 
 
-def show_category_article(request, category):
-    target_articles = read_category_article(category)
-    return render(request, {'articles': target_articles}, 'community.html')
+def show_category_article(request):
+    target_articles = read_category_article(request.POST['category'])
+    return render(request, 'community.html', {'articles': target_articles}, status=200)
 
 
-def search_article_by_title(request, title):
-    target_articles = read_article_by_title(title)
-    return render(request,{'result':target_articles})
+def search_article_by_title(request):
+    target_articles = read_article_by_title(request.POST['title'])
+    return render(request, 'community.html', {'result': target_articles}, status=200)
+
+
+def search_artocle_by_user(request):
+    target_articles = read_article_by_user(request.POST['name'])
+    return render(request, 'community.html', {'result': target_articles}, status=200)
+
+
+def search_article_within_a_specific_period(request):
+    target_articles = read_article_within_a_specific_period(request.POST['date'])
+    return render(request, 'community.html', {'result': target_articles}, status=200)
+
+
