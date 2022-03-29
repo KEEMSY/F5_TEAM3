@@ -13,6 +13,7 @@ class Article(models.Model):
     user = models.ForeignKey(Author, on_delete=models.CASCADE)
     category = models.TextField(null=True)
     content = models.TextField(null=True)
+    img = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     article_hits = models.IntegerField(default=0)
