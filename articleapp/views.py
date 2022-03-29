@@ -1,11 +1,9 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.paginator import Paginator
-from django.http import HttpResponseRedirect, JsonResponse
-from django.shortcuts import redirect, render
-from django.urls import reverse
+from django.http import  JsonResponse
+from django.shortcuts import  render
 from django.views import View
 
-from articleapp.models import Article
+
 # 게시글 목록
 from articleapp.services.service_article import (
     create_article, delete_article, get_client_ip, get_page, hit_article,
@@ -16,29 +14,7 @@ from articleapp.services.service_article import (
     read_category_article, read_target_article, update_article)
 
 
-# @login_required() 해피패스를 위해 임시로 if else문 첨부
-def write_Article(request):
-    if request.user.is_authenticated:
-        user = request.user.id
-        b = Article(title=request.POST['title'], content=request.POST['detail'], user_id=user)
-        b.save()
-        return HttpResponseRedirect(reverse('articleapp:home'))
-    else:
-        b = Article(title=request.POST['title'], content=request.POST['detail'], user_id=1)
-        b.save()
-        return HttpResponseRedirect(reverse('articleapp:home'))
 
-
-
-def board_list(request, pk: str):
-    all_articles = Article.objects.filter(category=pk)
-    paginator = Paginator(all_articles, 10)
-    page = int(request.GET.get('page', 1))  # 1페이지 = 기본값
-    board_list = paginator.get_page(page)
-    return render(request, 'community.html', {'board_list': board_list, 'article_list': all_articles})
-
-
-#####################
 
 # 단일 게시글 CRUD
 class ArticleView(View):
@@ -76,7 +52,7 @@ class ArticleView(View):
 
 # 게시글 작성
 def write_article(request):
-    return render(request, 'community.html',status=200)q
+    return render(request, 'community.html', status=200)
 
 # 홈
 def show_all_article(request):
@@ -93,13 +69,12 @@ def show_category_article(request):
     return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list}, status=200)
 
 
-# 게시글 검색
+# 게시글 검색: 기간, 키워드(유저이름, 제목)
 def search_article(request):
     standard = request.POST['standard']
     period = request.POST['period']
     keyword = request.POST['keyword']
 
-    # 전체 기간 조건
     if period == 'all':
         if standard == 'title':
             target_articles = read_article_by_title(keyword)
@@ -113,7 +88,6 @@ def search_article(request):
             board_list = get_page(target_articles, page)
             return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list}, status=200)
 
-    # 기간이 있을 때
     else:
         if standard == 'title':
             try:
