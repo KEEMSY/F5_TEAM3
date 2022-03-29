@@ -29,6 +29,7 @@ urlpatterns = [
 
     path('temp/', views.show_community, name='temp'),
     path('temp1/', views.show_article_list, name='temp1'),
+    path('temp2/', views.show_article_write, name='temp2'),
 
 
 ]

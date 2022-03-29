@@ -11,3 +11,6 @@ def show_community(request):
 
 def show_article_list(request):
     return render(request, 'articleapp/article_list.html')
+
+def show_article_write(request):
+    return render(request, 'articleapp/article_write.html')
