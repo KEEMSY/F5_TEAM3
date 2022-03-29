@@ -107,9 +107,20 @@ def update_profile(request, pk):
     return redirect(f'/users/profile/{int(pk)}/', pk=request.user.pk)  # 수정된 화면 보여주기
 
 
-#def bookmark_ajax_get(request)  profile/<int:pk>/bookmarks/
-#bookmark  Bookmark 모델에서 filter request.user.id
+#### 모델 합치면 import 해서 ajax 형식으로 마이페이지에 데이터 뿌려주는 get 형식 view
+### 아티클, 북마크 겟 함수 // 현재는 모델이 꼬일까바 주석 처리로 해놓았음!
+## form 데이터도 같이 뿌려줘야하나...? user_form, profile_form... ajax 형식이라 그부분에 대한 데이터만 필요한거 아닐까..??
 
-#def article_ajax_get(request)  profile/<int:pk>/artilce/
-#articles  Article 모델에서 filter request.user.id
+#@login_required(login_url="/users/login/")
+# def get_profile_article(request, pk):
+#     if request.is_ajax:
+#         all_articles = Article.objects.filter(user_id=pk)
+#         return render(request, 'userapp/profile.html', {"all_articles": all_articles})
+
+
+# @login_required(login_url="/users/login/")
+# def get_profile_bookmark(request, pk):
+#     if request.is_ajax:
+#         all_bookmarks = Bookmark.objects.filter(user_id=pk)
+#         return render(request, 'userapp/profile.html', {"all_bookmarks": all_bookmarks})
 
