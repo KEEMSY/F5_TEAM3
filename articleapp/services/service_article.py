@@ -1,11 +1,14 @@
 import datetime
 
+from django.core.paginator import Paginator
+
 from articleapp.models import Article, ArticleHits, Author
 
 """
 Service
 1. article_CRUD
 2. article_Hits
+3. etc
 """
 
 ''' 1-1. C R E A T E '''
@@ -55,7 +58,8 @@ def read_article_containing_username(username):
 
 
 def read_article_within_a_specific_period(date):
-    return Article.objects.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date)).order_by('-created_at')
+    return Article.objects.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date)).order_by(
+        '-created_at')
 
 
 def read_article_containing_username_within_a_specific_period(date, name):
@@ -67,7 +71,8 @@ def read_article_containing_username_within_a_specific_period(date, name):
 
 
 def read_article_by_title_within_a_specific_period(date, title):
-    target_articles = Article.objects.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date)).filter(
+    target_articles = Article.objects.filter(
+        created_at__gte=datetime.date.today() - datetime.timedelta(days=date)).filter(
         title__icontains=title).order_by('-id')
     if len(target_articles):
         return target_articles
@@ -114,3 +119,15 @@ def hit_article(ip, article_id):
         ArticleHits.objects.create(client_ip=ip, article_id=article_id)
 
     return Article.objects.get(pk=article_id)
+
+
+''' 3. etc '''
+
+
+def get_page(articles, page):
+    paginator = Paginator(articles, 10)
+    board_list = paginator.get_page(page)
+    return board_list
+
+
+
