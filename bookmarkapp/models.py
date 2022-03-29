@@ -4,8 +4,7 @@ from django.db import models
 
 from articleapp.models import Article
 # Create your models here.
-from likeapp.models import Post
-from userapp.models import User
+from likeapp.models import Author, Post
 
 
 class Bookmark(models.Model):
@@ -15,6 +14,6 @@ class Bookmark(models.Model):
             models.UniqueConstraint(fields=["user", "article"], name="unique_bookmark"),
         ]
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, db_column="user")
+    user = models.ForeignKey(Author, on_delete=models.CASCADE, db_column="user")
     article = models.ForeignKey(Post, on_delete=models.CASCADE, db_column="article")
     created_at = models.DateTimeField(auto_now_add=True)

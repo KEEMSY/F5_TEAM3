@@ -6,7 +6,6 @@ from django.shortcuts import redirect, render
 from bookmarkapp.services.bookmark_service import do_bookmark, undo_bookmark
 
 
-
 def click_bookmark(request, article_id):
     user = request.user.is_authenticated
     if user:
