@@ -18,7 +18,8 @@ from articleapp.services.service_article import (
 
 
 class TestView(TestCase):
-    ''' C R E A T E '''
+
+    """ C R E A T E """
 
     def test_create_article(self):
         # Given
@@ -26,20 +27,33 @@ class TestView(TestCase):
         title = 'test_title'
         content = 'test_content'
         category = 'test_category'
+        img = ''
+
 
         # When
-        article = create_article(title, user, content, category)
+        article = create_article(title, user, content, category, img)
 
         # expect
         self.assertIsNotNone(Article.id)
         self.assertEqual(user.id, article.id)
+
+    def test_when_there_is_not_enough_argument(self):
+        # Given
+        user = Author.objects.create(name='test')
+        title = 'test_title'
+        content = 'test_content'
+        category = 'test_category'
+
+        # Expect
+        with self.assertRaises(TypeError):
+            article = create_article(title, user, content, category)
 
     ''' R E A D '''
 
     def test_when_article_does_not_exist(self):
         # Given
         user = Author.objects.create(name='test')
-        article1 = create_article('title', user, 'content', 'category1')
+        article1 = create_article('title', user, 'content', 'category1', '')
         target_id = article1.id
         article1.delete()
 
@@ -52,9 +66,9 @@ class TestView(TestCase):
         user = Author.objects.create(name='test')
 
         # When
-        article1 = create_article('title', user, 'content', 'category1')
-        article2 = create_article('title', user, 'content', 'category2')
-        article3 = create_article('title', user, 'content', 'category3')
+        article1 = create_article('title', user, 'content', 'category1', '')
+        article2 = create_article('title', user, 'content', 'category2', '')
+        article3 = create_article('title', user, 'content', 'category3', '')
 
         # Then
         article_list = read_all_article().values()
@@ -69,14 +83,14 @@ class TestView(TestCase):
         # Given
         user = Author.objects.create(name="test")
 
-        article1 = create_article("title", user, "content", "category1")
+        article1 = create_article("title", user, "content", "category1", '')
 
-        article2 = create_article("title", user, "content", "category2")
-        article3 = create_article("title", user, "content", "category2")
+        article2 = create_article("title", user, "content", "category2", '')
+        article3 = create_article("title", user, "content", "category2", '')
 
-        article4 = create_article("title", user, "content", "category3")
-        article5 = create_article("title", user, "content", "category3")
-        article6 = create_article("title", user, "content", "category3")
+        article4 = create_article("title", user, "content", "category3", '')
+        article5 = create_article("title", user, "content", "category3", '')
+        article6 = create_article("title", user, "content", "category3", '')
 
         # When
         article_1_list = read_category_article('category1')
@@ -91,9 +105,9 @@ class TestView(TestCase):
     def test_read_article_by_title(self):
         # Given
         user = Author.objects.create(name="test")
-        article1 = create_article("title", user, "content", "category1")
-        article2 = create_article("title2", user, "content", "category2")
-        article2 = create_article("title2_2", user, "content", "category2")
+        article1 = create_article("title", user, "content", "category1", '')
+        article2 = create_article("title2", user, "content", "category2", '')
+        article2 = create_article("title2_2", user, "content", "category2", '')
 
         # When
         target_articles = read_article_by_title("title")
@@ -103,9 +117,9 @@ class TestView(TestCase):
 
     def test_read_article_by_user(self):
         user1 = Author.objects.create(name="test1")
-        article1 = create_article("title_1", user1, "content", "category1")
+        article1 = create_article("title_1", user1, "content", "category1", '')
         user2 = Author.objects.create(name="test2")
-        article2 = create_article("title_2", user2, "content", "category2")
+        article2 = create_article("title_2", user2, "content", "category2", '')
 
         # When
         article_by_user1 = read_article_by_user(user1.id).get()
@@ -117,8 +131,8 @@ class TestView(TestCase):
 
     def test_read_articles_by_user(self):
         user1 = Author.objects.create(name="test1")
-        article1 = create_article("title_1", user1, "content", "category1")
-        article2 = create_article("title_2", user1, "content", "category1")
+        article1 = create_article("title_1", user1, "content", "category1", '')
+        article2 = create_article("title_2", user1, "content", "category1", '')
 
         # When
         article_by_user1 = read_article_by_user(user1.id)
@@ -131,11 +145,11 @@ class TestView(TestCase):
     def test_read_article_containing_username(self):
         # Given
         user1 = Author.objects.create(name="test1")
-        article1_1 = create_article("title_1", user1, "content", "category1")
+        article1_1 = create_article("title_1", user1, "content", "category1", '')
 
         user2 = Author.objects.create(name="test2")
-        article2_1 = create_article("title_2", user2, "content", "category2")
-        article2_2 = create_article("title_3", user2, "content", "category2")
+        article2_1 = create_article("title_2", user2, "content", "category2", '')
+        article2_2 = create_article("title_3", user2, "content", "category2", '')
 
         # When
         article_list = read_article_containing_username('test')
@@ -146,12 +160,12 @@ class TestView(TestCase):
     def test_read_article_within_a_specific_period(self):
         # Given
         user1 = Author.objects.create(name="test1")
-        article1 = create_article("title_day", user1, "content", "category1")
-        article1_1 = create_article("title_one_day", user1, "content", "category1")
-        article1_2 = create_article("title_one_week", user1, "content", "category1")
-        article1_3 = create_article("title_one_month", user1, "content", "category1")
-        article1_4 = create_article("title_six_month", user1, "content", "category1")
-        article1_5 = create_article("title_one_year", user1, "content", "category1")
+        article1 = create_article("title_day", user1, "content", "category1", '')
+        article1_1 = create_article("title_one_day", user1, "content", "category1", '')
+        article1_2 = create_article("title_one_week", user1, "content", "category1", '')
+        article1_3 = create_article("title_one_month", user1, "content", "category1", '')
+        article1_4 = create_article("title_six_month", user1, "content", "category1", '')
+        article1_5 = create_article("title_one_year", user1, "content", "category1", '')
 
         article1_1.created_at = datetime.date.today() - datetime.timedelta(days=1)
         article1_1.save()
@@ -188,8 +202,8 @@ class TestView(TestCase):
         # Given
         user1 = Author.objects.create(name="test1")
         user2 = Author.objects.create(name="test2")
-        article1_1 = create_article("title_one_day", user1, "content", "category1")
-        article1_2 = create_article("title_one_week", user2, "content", "category1")
+        article1_1 = create_article("title_one_day", user1, "content", "category1", '')
+        article1_2 = create_article("title_one_week", user2, "content", "category1", '')
 
         article1_1.created_at = datetime.date.today() - datetime.timedelta(days=1)
         article1_1.save()
@@ -210,8 +224,8 @@ class TestView(TestCase):
         # Given
         user1 = Author.objects.create(name="test1")
         user2 = Author.objects.create(name="test2")
-        article1_1 = create_article("title_one_day", user1, "content", "category1")
-        article1_2 = create_article("title_one_week", user2, "content", "category1")
+        article1_1 = create_article("title_one_day", user1, "content", "category1", '')
+        article1_2 = create_article("title_one_week", user2, "content", "category1", '')
 
         # When
         within_one_week_username = read_article_containing_username_within_a_specific_period(7, 'abc')
@@ -223,8 +237,8 @@ class TestView(TestCase):
         # Given
         user1 = Author.objects.create(name="test1")
         user2 = Author.objects.create(name="test2")
-        article1_1 = create_article("title_one_day", user1, "content", "category1")
-        article1_2 = create_article("title_one_week", user2, "content", "category1")
+        article1_1 = create_article("title_one_day", user1, "content", "category1", '')
+        article1_2 = create_article("title_one_week", user2, "content", "category1", '')
 
         article1_1.created_at = datetime.date.today() - datetime.timedelta(days=1)
         article1_1.save()
@@ -245,8 +259,8 @@ class TestView(TestCase):
         # Given
         user1 = Author.objects.create(name="test1")
 
-        article1_1 = create_article("title_one_day", user1, "content", "category1")
-        article1_2 = create_article("title_one_week", user1, "content", "category1")
+        article1_1 = create_article("title_one_day", user1, "content", "category1", '')
+        article1_2 = create_article("title_one_week", user1, "content", "category1", '')
 
         # When
         within_one_week_title = read_article_by_title_within_a_specific_period(7, 'abc')
@@ -259,7 +273,7 @@ class TestView(TestCase):
     def test_update_article(self):
         # Given
         user = Author.objects.create(name="test1")
-        article = create_article("title", user, "before_content", "category1")
+        article = create_article("title", user, "before_content", "category1", '')
 
         # When
         update_article(article.id, 'after content')
@@ -271,7 +285,7 @@ class TestView(TestCase):
     def test_when_article_does_not_exist(self):
         # Given
         user = Author.objects.create(name="test1")
-        article = create_article("title", user, "before_content", "category1")
+        article = create_article("title", user, "before_content", "category1", '')
 
         # When
         article = Article.objects.get(pk=article.id)
@@ -286,7 +300,7 @@ class TestView(TestCase):
     def test_delete_article(self):
         # Given
         user = Author.objects.create(name="test1")
-        article = create_article("title", user, "before_content", "category1")
+        article = create_article("title", user, "before_content", "category1", '')
 
         # When
         delete_article(article.id)
@@ -297,7 +311,7 @@ class TestView(TestCase):
     def test_when_article_delete_twice(self):
         # Given
         user = Author.objects.create(name="test1")
-        article = create_article("title", user, "before_content", "category1")
+        article = create_article("title", user, "before_content", "category1", '')
 
         # When
         delete_article(article.id)

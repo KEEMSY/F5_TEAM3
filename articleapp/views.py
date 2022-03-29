@@ -1,8 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import  JsonResponse
-from django.shortcuts import  render
+from django.http import JsonResponse
+from django.shortcuts import render
 from django.views import View
-
 
 # 게시글 목록
 from articleapp.services.service_article import (
@@ -12,8 +11,6 @@ from articleapp.services.service_article import (
     read_article_containing_username,
     read_article_containing_username_within_a_specific_period,
     read_category_article, read_target_article, update_article)
-
-
 
 
 # 단일 게시글 CRUD
@@ -28,10 +25,17 @@ class ArticleView(View):
             return JsonResponse({'msg': "게시글이 존재하지 않습니다."}, status=404)
 
     def post(self, request):
-        create_article(title=request.POST.get('title'),
-                       user_id=request.user,
-                       content=request.POST.get('content'))
-        return JsonResponse({'result': '게시글이 생성 되었습니다.'}, status=200)
+        try:
+            create_article(title=request.POST.get('title'),
+                           user_id=request.user,
+                           content=request.POST.get('content'),
+                           category=request.POST.get('category'),
+                           img=request.POST.get('img'))
+            return JsonResponse({'result': '게시글이 생성 되었습니다.'}, status=200)
+
+        except TypeError:
+            return JsonResponse({'msg': "항목을 다시 확인 해 주세요."}, status=404)
+
 
     def patch(self, request, article_id):
         target_article = read_target_article(article_id)

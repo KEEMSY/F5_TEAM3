@@ -14,8 +14,8 @@ Service
 ''' 1-1. C R E A T E '''
 
 
-def create_article(title, user_id, content, category):
-    return Article.objects.create(title=title, user=user_id, content=content, category=category)
+def create_article(title, user_id, content, category, img):
+    return Article.objects.create(title=title, user=user_id, content=content, category=category,img=img)
 
 
 ''' 1-2. R E A D : QuerySet '''
