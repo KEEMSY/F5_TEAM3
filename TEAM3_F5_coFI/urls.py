@@ -28,7 +28,9 @@ urlpatterns = [
     path('mypage/', include("bookmarkapp.urls")),
 
     path('temp/', views.show_community, name='temp'),
-    path('temp1/', views.show_article_list, name='temp1'),
+    path('temp1/question/', views.show_article_list_question, name='temp1_question'),
+    path('temp1/tip/', views.show_article_list_tip, name='temp1_tip'),
+    path('temp1/free/', views.show_article_list_free, name='temp1_free'),
     path('temp2/', views.show_article_write, name='temp2'),
 
 
