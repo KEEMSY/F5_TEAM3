@@ -5,13 +5,17 @@ class Author(models.Model):
     name = models.TextField()
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+
+
 class Article(models.Model):
     class Meta:
         db_table = "article"
 
     title = models.CharField(max_length=50)
     user = models.ForeignKey(Author, on_delete=models.CASCADE)
-    category = models.TextField(null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     content = models.TextField(null=True)
     img = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)

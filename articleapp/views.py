@@ -36,7 +36,6 @@ class ArticleView(View):
         except TypeError:
             return JsonResponse({'msg': "항목을 다시 확인 해 주세요."}, status=404)
 
-
     def patch(self, request, article_id):
         target_article = read_target_article(article_id)
         if request.user == target_article.user:
@@ -58,12 +57,14 @@ class ArticleView(View):
 def write_article(request):
     return render(request, 'community.html', status=200)
 
+
 # 홈
 def show_all_article(request):
     all_articles = read_all_article()
     page = int(request.GET.get('page', 1))
     board_list = get_page(all_articles, page)
     return render(request, 'community.html', {'articles': all_articles, 'board_list': board_list}, status=200)
+
 
 # 카테고리 별 게시판 불러오기
 def show_category_article(request):
@@ -84,13 +85,15 @@ def search_article(request):
             target_articles = read_article_by_title(keyword)
             page = int(request.GET.get('page', 1))
             board_list = get_page(target_articles, page)
-            return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list}, status=200)
+            return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list},
+                          status=200)
 
         else:
             target_articles = read_article_containing_username(keyword)
             page = int(request.GET.get('page', 1))
             board_list = get_page(target_articles, page)
-            return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list}, status=200)
+            return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list},
+                          status=200)
 
     else:
         if standard == 'title':
@@ -112,5 +115,3 @@ def search_article(request):
                               status=200)
             except ObjectDoesNotExist:
                 return JsonResponse({'result': '게시글이 존재하지 않습니다.'}, status=404)
-
-
