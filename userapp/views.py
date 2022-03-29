@@ -111,7 +111,7 @@ def update_profile(request, pk):
 ### 아티클, 북마크 겟 함수 // 현재는 모델이 꼬일까바 주석 처리로 해놓았음!
 ## form 데이터도 같이 뿌려줘야하나...? user_form, profile_form... ajax 형식이라 그부분에 대한 데이터만 필요한거 아닐까..??
 
-#@login_required(login_url="/users/login/")
+# @login_required(login_url="/users/login/")
 # def get_profile_article(request, pk):
 #     if request.is_ajax:
 #         all_articles = Article.objects.filter(user_id=pk)
