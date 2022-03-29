@@ -39,6 +39,7 @@ class News(models.Model):
     # tabom = models.CharField(max_length=100)
     news_desc = models.TextField(null=True)
     news_link = models.CharField(max_length=600)
+    news_date = models.CharField(max_length=30, blank=True)
 
     # writer = models.CharField(max_length=30)
     # info = models.CharField(max_length=500)

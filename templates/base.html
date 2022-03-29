@@ -2,7 +2,127 @@
 <html lang="ko">
 
 {% include 'head.html' %}
+<style>
+    h1.title.Co-title {
+        margin-right: 15vw;
+    }
 
+    span.counter {
+        font-size: 3vw;
+        color: #03a84e;
+    }
+
+    #first-cofi {
+        color: #ffcd39;
+    }
+
+    #second-cofi {
+        color: #0dcaf0;
+    }
+
+    .home-slider-shape img.shape3 {
+        bottom: -3vw;
+    }
+
+    .user-contatiner {
+        max-width: 60vw;
+        margin-top: 0vw;
+    }
+
+    @media only screen and (max-width: 992px) {
+        .user-contatiner {
+            display: none;
+        }
+    }
+
+
+    .badge-contatiner {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        text-align: center;
+    }
+
+    .badge {
+        margin: 0% 1.5%;
+    }
+
+    .badge img {
+        height: auto;
+        width: 60%;
+    }
+
+    .badge h3 {
+        text-align: center;
+        margin-top: 1rem;
+        line-height: 3.2;
+
+    }
+
+    .story-wrapper p {
+        text-align: center;
+    }
+
+
+
+    .container.pt--0.pb--0.video-button {
+        margin-top: -7vw;
+}
+
+    .section-title.text-center .title {
+    font-size: 3vw;
+}
+
+    .section-title.text-center .desc {
+    font-size: 1vw;
+}
+
+    .section-title.text-center .desc p {
+        margin-top: 4vw;
+    }
+
+    .Top-posts {
+        margin-top: 2vw;
+    }
+
+
+    .Career-row {
+        margin-top: 4vw;
+    }
+
+        {#Career.html에도 필요한 부분#}
+    .recent-job-item.recent-job-style2-item {
+        height: 420px;
+}
+    @media only screen and (max-width: 1200px) {
+        .recent-job-item.recent-job-style2-item {
+            height: 340px;
+        }
+    }
+
+    .row.align-items-center.post-home-style.row-gutter-40 {
+        margin-top: 4vw;
+}
+
+    .news_content {
+        padding: 1vw 1vw;
+        border-right: 3px solid aquamarine;
+        border-bottom: 3px solid cyan;
+        border-radius: 4%;
+    }
+
+    {#css 5526번째줄에 중복있음 이걸로 복붙하면 됨#}
+    .post-item .thumb img {
+        border-radius: 9px;
+        width: 100%;
+        transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+    }
+
+</style>
 <body>
 
 <!--wrapper start-->
@@ -25,11 +145,12 @@
                                 <div class="row justify-content-center align-items-center">
                                     <div class="col-12 col-lg-8">
                                         <div class="slider-content">
-                                            <h2 class="title"><span class="counter"
-                                                                    data-counterup-delay="80">2,568</span> are joining
-                                                us <br>Dream & Do what can you do</h2>
-                                            <p class="desc">Find great job for build your bright career. Have many job
-                                                in this plactform.</p>
+                                            <h1 class="title Co-title"><span id="first-cofi">Co</span> - <span
+                                                    id="second-cofi">Fi</span>nd</h1>
+                                            <h1 class="title">for our Success</h1>
+                                            <p class="desc"><span class="counter" data-counterup-delay="80">2,568</span>
+                                                are joining
+                                                us</p>
                                         </div>
                                     </div>
                                 </div>
@@ -38,7 +159,52 @@
                     </div>
                 </div>
             </div>
-            <div class="container pt--0 pb--0">
+
+
+            <div class="home-slider-shape">
+                <img class="shape1" data-aos="fade-down" data-aos-duration="1500" src="static/img/slider/home_01.png"
+                     width="900" height="700" alt="Image-HasTech">
+                <img class="shape2" data-aos="fade-left" data-aos-duration="2000" src="static/img/slider/vector2.png"
+                     width="201" height="346" alt="Image-HasTech">
+                <img class="shape3" data-aos="fade-right" data-aos-duration="2000" src="static/img/slider/vector3.png"
+                     width="276" height="432" alt="Image-HasTech">
+            </div>
+
+        </section>
+        <!--== End Hero Area Wrapper ==-->
+        <!--== Start participants,badge Wrapper ==-->
+
+        <div class="container user-contatiner">
+            <div class="badge-contatiner">
+                <a href="#TopPosts">
+                    <div class="badge">
+                    <img src="static/img/icons/TopPosts.png" alt="Image">
+                    <h3>Top posts</h3>
+                </div>
+                </a>
+                <a href="#Career">
+                    <div class="badge">
+                    <img src="static/img/icons/Career.png" alt="Image">
+                    <h3>Career</h3>
+                </div>
+                </a>
+                <a href="#News">
+                    <div class="badge">
+                    <img src="static/img/icons/News.png" alt="Image">
+                    <h3>News</h3>
+                </div>
+                </a>
+
+
+
+
+            </div>
+        </div>
+
+        <!--== End participants,badge Wrapper ==-->
+
+        <!--== Start Video button ==-->
+            <div class="container pt--0 pb--0 video-button">
                 <div class="row">
                     <div class="col-12">
                         <div class="play-video-btn">
@@ -49,27 +215,17 @@
                     </div>
                 </div>
             </div>
-            <div class="home-slider-shape">
-                <img class="shape1" data-aos="fade-down" data-aos-duration="1500" src="static/img/slider/home_01.png"
-                     width="900" height="700" alt="Image-HasTech">
-                <img class="shape2" data-aos="fade-left" data-aos-duration="2000" src="static/img/slider/vector2.png"
-                     width="201" height="346" alt="Image-HasTech">
-                <img class="shape3" data-aos="fade-right" data-aos-duration="2000" src="static/img/slider/vector3.png"
-                     width="276" height="432" alt="Image-HasTech">
-                <img class="shape4" data-aos="flip-left" data-aos-duration="1500" src="static/img/slider/vector4.png"
-                     width="127" height="121" alt="Image-HasTech">
-            </div>
-        </section>
-        <!--== End Hero Area Wrapper ==-->
+        <!--== End Video button ==-->
+
 
         <!--== Start Blog Post Item Wrapper ==-->
-        <div class="container" data-aos="fade-down">
+        <div id="TopPosts" class="container Top-posts" data-aos="fade-down">
             <div class="row">
                 <div class="col-12">
                     <div class="section-title text-center">
-                        <h3 class="title">Top Posts</h3>
+                        <h3 class="title">핫한 게시물</h3>
                         <div class="desc">
-                            <p>Many desktop publishing packages and web page editors</p>
+                            <p>좋은 게시글은 보고 좋아요 눌러주실거죠?</p>
                         </div>
                     </div>
                 </div>
@@ -244,22 +400,22 @@
         <!--== End Blog Area Wrapper ==-->
         <!--== End Blog Post Item Wrapper ==-->
 
-        <!--== Start Recent Job Area Wrapper ==-->
 
-        <section class="recent-job-area bg-color-gray">
+        <!--== Start Recent Job Area Wrapper ==-->
+        <section id="Career" class="recent-job-area bg-color-gray">
             <div class="container" data-aos="fade-down">
                 <div class="row">
 
                     <div class="col-12">
                         <div class="section-title text-center">
-                            <h3 class="title">Career</h3>
+                            <h3 class="title">개발자 채용정보</h3>
                             <div class="desc">
-                                <p>Many desktop publishing packages and web page editors</p>
+                                <p>본인 언어 스택에 맞는 채용정보들을 찾아보세요!</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row Career-row">
                     {% if board_list %}
                         {% for career in board_list %}
                             <div class="col-md-6 col-lg-4">
@@ -297,75 +453,42 @@
             </div>
         </section>
         <!--== End Recent Job Area Wrapper ==-->
-        <!--== Start Blog Area Wrapper ==-->
-        <section class="blog-area blog-home-area">
+
+
+        <!--== Start News Area Wrapper ==-->
+
+        <section id="News" class="blog-area blog-home-area">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
                         <div class="section-title text-center">
-                            <h3 class="title">Recent News Articles</h3>
+                            <h3 class="title">it 관련 최신뉴스</h3>
                             <div class="desc">
-                                <p>Many desktop publishing packages and web page editors</p>
+                                <p>요즘 뜨는 it 정보가 궁금하다면? 잠깐!</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row align-items-center post-home-style row-gutter-40">
-                    <div class="col-md-6 col-lg-4" data-aos="fade-right">
-                        <!--== Start Blog Post Item ==-->
-                        <div class="post-item">
-                            <div class="thumb">
-                                <a href="blog-details.html"><img src="static/img/blog/1.jpg" alt="Image" width="370"
-                                                                 height="270"></a>
-                            </div>
-                            <div class="content">
-                                <div class="author">By <a href="blog.html">Walter Houston</a></div>
-                                <h4 class="title"><a href="blog-details.html">It long established fact that reader will
-                                    distracted the readable.</a></h4>
-                                <div class="meta">
-                                    <span class="post-date">03 April, 2022</span>
-                                    <span class="dots"></span>
-                                    <span class="post-time">10 min read</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!--== End Blog Post Item ==-->
-                    </div>
-                    <div class="col-md-6 col-lg-4" data-aos="fade-left">
-                        <!--== Start Blog Post Item ==-->
-                        <div class="post-item">
-                            <div class="thumb mb--0">
-                                <a href="blog-details.html"><img src="static/img/blog/h1.jpg" alt="Image" width="370"
-                                                                 height="440"></a>
-                            </div>
-                        </div>
-                        <!--== End Blog Post Item ==-->
-                    </div>
-                    <div class="col-lg-4" data-aos="fade-left">
-                        <div class="post-home-list-style">
-                            <!--== Start Blog Post Item ==-->
-                            <div class="post-item">
-                                <div class="content">
-                                    <div class="author">By <a href="blog.html">Walter Houston</a></div>
-                                    <h4 class="title"><a href="blog-details.html">Established fact and readeren will
-                                        distracted the readable content.</a></h4>
-                                    <div class="meta">
-                                        <span class="post-date">03 April, 2022</span>
-                                        <span class="dots"></span>
-                                        <span class="post-time">10 min read</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--== End Blog Post Item ==-->
 
+                {% if news %}
+                    {#                        {% for info in news_list %}#}
+                    <!--== Start first POST Wrapper ==-->
+                    <div class="row align-items-center post-home-style row-gutter-40">
+                        <div class="col-md-6 col-lg-4" data-aos="fade-right">
                             <!--== Start Blog Post Item ==-->
                             <div class="post-item">
-                                <div class="content">
-                                    <div class="author">By <a href="blog.html">Walter Houston</a></div>
-                                    <h4 class="title"><a href="blog-details.html">With WooLentor's drag-and drop
-                                        interface for creating...</a></h4>
+                                <div class="thumb">
+                                    <a href="{{ news.0.news_link }}"><img src="{{ news.0.news_pic }}" alt="Image"
+                                                                          width="370"
+                                                                          height="270"></a>
+                                </div>
+                                <div class="content news_content">
+                                    <h4 class="title"><a href="{{ news.0.news_link }}">{{ news.0.news_title }}</a></h4>
+                                    <div class="author"><a
+                                            href="{{ news.0.news_link }}">{{ news.0.news_desc|truncatewords:40 }}</a>
+                                    </div>
                                     <div class="meta">
-                                        <span class="post-date">03 April, 2022</span>
+                                        <span class="post-date">{{ new.0.news_date }}</span>
                                         <span class="dots"></span>
                                         <span class="post-time">10 min read</span>
                                     </div>
@@ -373,11 +496,66 @@
                             </div>
                             <!--== End Blog Post Item ==-->
                         </div>
+                        <div class="col-lg-4" data-aos="fade-left">
+                            <div class="post-home-list-style">
+                                <!--== Start Blog Post Item ==-->
+                                <div class="post-item">
+                                    <div class="thumb">
+                                        <a href="{{ news.1.news_link }}"><img src="{{ news.1.news_pic }}" alt="Image"
+                                                                              width="370"
+                                                                              height="270"></a>
+                                    </div>
+                                    <div class="content news_content">
+                                        <h4 class="title"><a href="{{ news.1.news_link }}">{{ news.1.news_title }}</a>
+                                        </h4>
+                                        <div class="author"><a
+                                                href="{{ news.1.news_link }}">{{ news.1.news_desc|truncatewords:40 }}</a>
+                                        </div>
+                                        <div class="meta">
+                                            <span class="post-date">{{ new.1.news_date }}</span>
+                                            <span class="dots"></span>
+                                            <span class="post-time">10 min read</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--== End Blog Post Item ==-->
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4" data-aos="fade-left">
+                            <!--== Start Blog Post Item ==-->
+                            <div class="post-item">
+                                <div class="thumb">
+                                    <a href="{{ news.2.news_link }}"><img src="{{ news.2.news_pic }}" alt="Image"
+                                                                          width="370"
+                                                                          height="270"></a>
+                                </div>
+                                <div class="content news_content">
+                                    <h4 class="title"><a href="{{ news.2.news_link }}">{{ news.2.news_title }}</a></h4>
+                                    <div class="author"><a
+                                            href="{{ news.2.news_link }}">{{ news.2.news_desc|truncatewords:40 }}</a>
+                                    </div>
+                                    <div class="meta">
+                                        <span class="post-date">{{ new.2.news_date }}</span>
+                                        <span class="dots"></span>
+                                        <span class="post-time">10 min read</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--== End Blog Post Item ==-->
+                        </div>
+
                     </div>
-                </div>
+                    {#    {% endfor %}#}    <!--== END first POST Wrapper ==-->
+
+                    <!--== Start second POST Wrapper ==-->
+
+                    <!--== END second POST Wrapper ==-->
+                {% endif %}
+
+
             </div>
         </section>
-        <!--== End Blog Area Wrapper ==-->
+        <!--== End News Area Wrapper ==-->
     </main>
 
 
