@@ -2,616 +2,618 @@
 <html lang="ko">
 
 {% include 'head.html' %}
+<style>
+    h1.title.Co-title {
+        margin-right: 15vw;
+    }
 
+    span.counter {
+        font-size: 3vw;
+        color: #03a84e;
+    }
+
+    #first-cofi {
+        color: #ffcd39;
+    }
+
+    #second-cofi {
+        color: #0dcaf0;
+    }
+
+    .home-slider-shape img.shape3 {
+        bottom: -3vw;
+    }
+
+    .user-contatiner {
+        max-width: 60vw;
+        margin-top: 0vw;
+    }
+
+    @media only screen and (max-width: 992px) {
+        .user-contatiner {
+            display: none;
+        }
+    }
+
+
+    .badge-contatiner {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        text-align: center;
+    }
+
+    .badge {
+        margin: 0% 1.5%;
+    }
+
+    .badge img {
+        height: auto;
+        width: 60%;
+    }
+
+    .badge h3 {
+        text-align: center;
+        margin-top: 1rem;
+        line-height: 3.2;
+
+    }
+
+    .story-wrapper p {
+        text-align: center;
+    }
+
+
+
+    .container.pt--0.pb--0.video-button {
+        margin-top: -7vw;
+}
+
+    .section-title.text-center .title {
+    font-size: 3vw;
+}
+
+    .section-title.text-center .desc {
+    font-size: 1vw;
+}
+
+    .section-title.text-center .desc p {
+        margin-top: 4vw;
+    }
+
+    .Top-posts {
+        margin-top: 2vw;
+    }
+
+
+    .Career-row {
+        margin-top: 4vw;
+    }
+
+        {#Career.html에도 필요한 부분#}
+    .recent-job-item.recent-job-style2-item {
+        height: 420px;
+}
+    @media only screen and (max-width: 1200px) {
+        .recent-job-item.recent-job-style2-item {
+            height: 340px;
+        }
+    }
+
+    .row.align-items-center.post-home-style.row-gutter-40 {
+        margin-top: 4vw;
+}
+
+    .news_content {
+        padding: 1vw 1vw;
+        border-right: 3px solid aquamarine;
+        border-bottom: 3px solid cyan;
+        border-radius: 4%;
+    }
+
+    {#css 5526번째줄에 중복있음 이걸로 복붙하면 됨#}
+    .post-item .thumb img {
+        border-radius: 9px;
+        width: 100%;
+        transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+    }
+
+</style>
 <body>
 
 <!--wrapper start-->
 <div class="wrapper">
 
-  <!--== Start Header Wrapper ==-->
+    <!--== Start Header Wrapper ==-->
 
-  {% include 'header.html' %}
+    {% include 'header.html' %}
 
-  <!--== End Header Wrapper ==-->
+    <!--== End Header Wrapper ==-->
 
-  <main class="main-content">
-    <!--== Start Hero Area Wrapper ==-->
-    <section class="home-slider-area">
-      <div class="home-slider-container default-slider-container">
-        <div class="home-slider-wrapper slider-default">
-          <div class="slider-content-area" data-bg-img="static/img/slider/slider-bg.jpg">
-            <div class="container pt--0 pb--0">
-              <div class="slider-container">
-                <div class="row justify-content-center align-items-center">
-                  <div class="col-12 col-lg-8">
-                    <div class="slider-content">
-                      <h2 class="title"><span class="counter" data-counterup-delay="80">2,568</span> are joining us <br>Dream & Do what can you do</h2>
-                      <p class="desc">Find great job for build your bright career. Have many job in this plactform.</p>
+    <main class="main-content">
+        <!--== Start Hero Area Wrapper ==-->
+        <section class="home-slider-area">
+            <div class="home-slider-container default-slider-container">
+                <div class="home-slider-wrapper slider-default">
+                    <div class="slider-content-area" data-bg-img="static/img/slider/slider-bg.jpg">
+                        <div class="container pt--0 pb--0">
+                            <div class="slider-container">
+                                <div class="row justify-content-center align-items-center">
+                                    <div class="col-12 col-lg-8">
+                                        <div class="slider-content">
+                                            <h1 class="title Co-title"><span id="first-cofi">Co</span> - <span
+                                                    id="second-cofi">Fi</span>nd</h1>
+                                            <h1 class="title">for our Success</h1>
+                                            <p class="desc"><span class="counter" data-counterup-delay="80">2,568</span>
+                                                are joining
+                                                us</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="container pt--0 pb--0">
-        <div class="row">
-          <div class="col-12">
-            <div class="play-video-btn">
-              <a href="https://www.youtube.com/watch?v=yS1A2ELIwgg" class="video-popup">
-                <img src="static/img/icons/play.png" alt="Image-HasTech">
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="home-slider-shape">
-        <img class="shape1" data-aos="fade-down" data-aos-duration="1500" src="static/img/slider/home_01.png" width="900" height="700" alt="Image-HasTech">
-        <img class="shape2" data-aos="fade-left" data-aos-duration="2000" src="static/img/slider/vector2.png" width="201" height="346" alt="Image-HasTech">
-        <img class="shape3" data-aos="fade-right" data-aos-duration="2000" src="static/img/slider/vector3.png" width="276" height="432" alt="Image-HasTech">
-        <img class="shape4" data-aos="flip-left" data-aos-duration="1500" src="static/img/slider/vector4.png" width="127" height="121" alt="Image-HasTech">
-      </div>
-    </section>
-    <!--== End Hero Area Wrapper ==-->
 
-    <!--== Start Blog Post Item Wrapper ==-->
-<div class="container" data-aos="fade-down">
-    <div class="row">
-      <div class="col-12">
-        <div class="section-title text-center">
-          <h3 class="title">Top Posts</h3>
-          <div class="desc">
-            <p>Many desktop publishing packages and web page editors</p>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
-<!--== Start Blog Area Wrapper ==-->
-<section class="blog-area blog-grid-area">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6 col-lg-4">
-        <!--== Start Blog Post Item ==-->
-        <div class="post-item">
-          <div class="thumb">
-            <a href="blog-details.html"><img src="static/img/blog/2.jpg" alt="Image" width="370" height="270"></a>
-          </div>
-          <div class="content">
-            <div class="author">By <a href="blog.html">Walter Houston</a></div>
-            <h4 class="title"><a href="blog-details.html">All of these amazing features <br>come at an affordable price!</a></h4>
-            <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them industry spa also the loep into type setting.</p>
-            <div class="meta">
-              <span class="post-date">03 April, 2022</span>
-              <span class="dots"></span>
-              <span class="post-time">10 min read</span>
+
+            <div class="home-slider-shape">
+                <img class="shape1" data-aos="fade-down" data-aos-duration="1500" src="static/img/slider/home_01.png"
+                     width="900" height="700" alt="Image-HasTech">
+                <img class="shape2" data-aos="fade-left" data-aos-duration="2000" src="static/img/slider/vector2.png"
+                     width="201" height="346" alt="Image-HasTech">
+                <img class="shape3" data-aos="fade-right" data-aos-duration="2000" src="static/img/slider/vector3.png"
+                     width="276" height="432" alt="Image-HasTech">
             </div>
-          </div>
-        </div>
-        <!--== End Blog Post Item ==-->
-      </div>
-      <div class="col-sm-6 col-lg-4">
-        <!--== Start Blog Post Item ==-->
-        <div class="post-item">
-          <div class="thumb">
-            <a href="blog-details.html"><img src="static/img/blog/3.jpg" alt="Image" width="370" height="270"></a>
-          </div>
-          <div class="content">
-            <div class="author">By <a href="blog.html">Walter Houston</a></div>
-            <h4 class="title"><a href="blog-details.html">With WooLentor's drag-and <br>drop interface for creating...</a></h4>
-            <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them industry spa also the loep into type setting.</p>
-            <div class="meta">
-              <span class="post-date">03 April, 2022</span>
-              <span class="dots"></span>
-              <span class="post-time">10 min read</span>
-            </div>
-          </div>
-        </div>
-        <!--== End Blog Post Item ==-->
-      </div>
-      <div class="col-sm-6 col-lg-4">
-        <!--== Start Blog Post Item ==-->
-        <div class="post-item">
-          <div class="thumb">
-            <a href="blog-details.html"><img src="static/img/blog/4.jpg" alt="Image" width="370" height="270"></a>
-          </div>
-          <div class="content">
-            <div class="author">By <a href="blog.html">Walter Houston</a></div>
-            <h4 class="title"><a href="blog-details.html">With WooLentor's drag-and <br>drop interface for creating...</a></h4>
-            <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them industry spa also the loep into type setting.</p>
-            <div class="meta">
-              <span class="post-date">03 April, 2022</span>
-              <span class="dots"></span>
-              <span class="post-time">10 min read</span>
-            </div>
-          </div>
-        </div>
-        <!--== End Blog Post Item ==-->
-      </div>
-      <div class="col-sm-6 col-lg-4">
-        <!--== Start Blog Post Item ==-->
-        <div class="post-item">
-          <div class="thumb">
-            <a href="blog-details.html"><img src="static/img/blog/5.jpg" alt="Image" width="370" height="270"></a>
-          </div>
-          <div class="content">
-            <div class="author">By <a href="blog.html">Walter Houston</a></div>
-            <h4 class="title"><a href="blog-details.html">Make your store stand out <br>from the others by converting</a></h4>
-            <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them industry spa also the loep into type setting.</p>
-            <div class="meta">
-              <span class="post-date">03 April, 2021</span>
-              <span class="dots"></span>
-              <span class="post-time">10 min read</span>
-            </div>
-          </div>
-        </div>
-        <!--== End Blog Post Item ==-->
-      </div>
-      <div class="col-sm-6 col-lg-4">
-        <!--== Start Blog Post Item ==-->
-        <div class="post-item">
-          <div class="thumb">
-            <a href="blog-details.html"><img src="static/img/blog/6.jpg" alt="Image" width="370" height="270"></a>
-          </div>
-          <div class="content">
-            <div class="author">By <a href="blog.html">Walter Houston</a></div>
-            <h4 class="title"><a href="blog-details.html">All of these amazing features <br>come at an affordable price!</a></h4>
-            <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them industry spa also the loep into type setting.</p>
-            <div class="meta">
-              <span class="post-date">03 April, 2022</span>
-              <span class="dots"></span>
-              <span class="post-time">10 min read</span>
-            </div>
-          </div>
-        </div>
-        <!--== End Blog Post Item ==-->
-      </div>
-      <div class="col-sm-6 col-lg-4">
-        <!--== Start Blog Post Item ==-->
-        <div class="post-item">
-          <div class="thumb">
-            <a href="blog-details.html"><img src="static/img/blog/7.jpg" alt="Image" width="370" height="270"></a>
-          </div>
-          <div class="content">
-            <div class="author">By <a href="blog.html">Walter Houston</a></div>
-            <h4 class="title"><a href="blog-details.html">With WooLentor's drag-and <br>drop interface for creating...</a></h4>
-            <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them industry spa also the loep into type setting.</p>
-            <div class="meta">
-              <span class="post-date">03 April, 2022</span>
-              <span class="dots"></span>
-              <span class="post-time">10 min read</span>
-            </div>
-          </div>
-        </div>
-        <!--== End Blog Post Item ==-->
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <div class="pagination-area">
-          <nav>
-            <ul class="page-numbers d-inline-flex">
-              <li>
-                <a class="page-number active" href="blog.html">1</a>
-              </li>
-              <li>
-                <a class="page-number" href="blog.html">2</a>
-              </li>
-              <li>
-                <a class="page-number" href="blog.html">3</a>
-              </li>
-              <li>
-                <a class="page-number" href="blog.html">4</a>
-              </li>
-              <li>
-                <a class="page-number next" href="blog.html">
-                  <i class="icofont-long-arrow-right"></i>
+
+        </section>
+        <!--== End Hero Area Wrapper ==-->
+        <!--== Start participants,badge Wrapper ==-->
+
+        <div class="container user-contatiner">
+            <div class="badge-contatiner">
+                <a href="#TopPosts">
+                    <div class="badge">
+                    <img src="static/img/icons/TopPosts.png" alt="Image">
+                    <h3>Top posts</h3>
+                </div>
                 </a>
-              </li>
-            </ul>
-          </nav>
+                <a href="#Career">
+                    <div class="badge">
+                    <img src="static/img/icons/Career.png" alt="Image">
+                    <h3>Career</h3>
+                </div>
+                </a>
+                <a href="#News">
+                    <div class="badge">
+                    <img src="static/img/icons/News.png" alt="Image">
+                    <h3>News</h3>
+                </div>
+                </a>
+
+
+
+
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!--== End Blog Area Wrapper ==-->
-    <!--== End Blog Post Item Wrapper ==-->
 
-    <!--== Start Recent Job Area Wrapper ==-->
-    <section class="recent-job-area bg-color-gray">
-      <div class="container" data-aos="fade-down">
-        <div class="row">
-          <div class="col-12">
-            <div class="section-title text-center">
-              <h3 class="title">Career</h3>
-              <div class="desc">
-                <p>Many desktop publishing packages and web page editors</p>
-              </div>
+        <!--== End participants,badge Wrapper ==-->
+
+        <!--== Start Video button ==-->
+            <div class="container pt--0 pb--0 video-button">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="play-video-btn">
+                            <a href="https://www.youtube.com/watch?v=yS1A2ELIwgg" class="video-popup">
+                                <img src="static/img/icons/play.png" alt="Image-HasTech">
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+        <!--== End Video button ==-->
+
+
+        <!--== Start Blog Post Item Wrapper ==-->
+        <div id="TopPosts" class="container Top-posts" data-aos="fade-down">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-title text-center">
+                        <h3 class="title">핫한 게시물</h3>
+                        <div class="desc">
+                            <p>좋은 게시글은 보고 좋아요 눌러주실거죠?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-4">
-            <!--== Start Recent Job Item ==-->
-            <div class="recent-job-item">
-              <div class="company-info">
-                <div class="logo">
-                  <a href="company-details.html"><img src="static/img/companies/1.jpg" width="75" height="75" alt="Image-HasTech"></a>
+        <!--== Start Blog Area Wrapper ==-->
+        <section class="blog-area blog-grid-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-lg-4">
+                        <!--== Start Blog Post Item ==-->
+                        <div class="post-item">
+                            <div class="thumb">
+                                <a href="blog-details.html"><img src="static/img/blog/2.jpg" alt="Image" width="370"
+                                                                 height="270"></a>
+                            </div>
+                            <div class="content">
+                                <div class="author">By <a href="blog.html">Walter Houston</a></div>
+                                <h4 class="title"><a href="blog-details.html">All of these amazing features <br>come at
+                                    an affordable price!</a></h4>
+                                <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them
+                                    industry spa also the loep into type setting.</p>
+                                <div class="meta">
+                                    <span class="post-date">03 April, 2022</span>
+                                    <span class="dots"></span>
+                                    <span class="post-time">10 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--== End Blog Post Item ==-->
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <!--== Start Blog Post Item ==-->
+                        <div class="post-item">
+                            <div class="thumb">
+                                <a href="blog-details.html"><img src="static/img/blog/3.jpg" alt="Image" width="370"
+                                                                 height="270"></a>
+                            </div>
+                            <div class="content">
+                                <div class="author">By <a href="blog.html">Walter Houston</a></div>
+                                <h4 class="title"><a href="blog-details.html">With WooLentor's drag-and <br>drop
+                                    interface for creating...</a></h4>
+                                <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them
+                                    industry spa also the loep into type setting.</p>
+                                <div class="meta">
+                                    <span class="post-date">03 April, 2022</span>
+                                    <span class="dots"></span>
+                                    <span class="post-time">10 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--== End Blog Post Item ==-->
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <!--== Start Blog Post Item ==-->
+                        <div class="post-item">
+                            <div class="thumb">
+                                <a href="blog-details.html"><img src="static/img/blog/4.jpg" alt="Image" width="370"
+                                                                 height="270"></a>
+                            </div>
+                            <div class="content">
+                                <div class="author">By <a href="blog.html">Walter Houston</a></div>
+                                <h4 class="title"><a href="blog-details.html">With WooLentor's drag-and <br>drop
+                                    interface for creating...</a></h4>
+                                <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them
+                                    industry spa also the loep into type setting.</p>
+                                <div class="meta">
+                                    <span class="post-date">03 April, 2022</span>
+                                    <span class="dots"></span>
+                                    <span class="post-time">10 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--== End Blog Post Item ==-->
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <!--== Start Blog Post Item ==-->
+                        <div class="post-item">
+                            <div class="thumb">
+                                <a href="blog-details.html"><img src="static/img/blog/5.jpg" alt="Image" width="370"
+                                                                 height="270"></a>
+                            </div>
+                            <div class="content">
+                                <div class="author">By <a href="blog.html">Walter Houston</a></div>
+                                <h4 class="title"><a href="blog-details.html">Make your store stand out <br>from the
+                                    others by converting</a></h4>
+                                <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them
+                                    industry spa also the loep into type setting.</p>
+                                <div class="meta">
+                                    <span class="post-date">03 April, 2021</span>
+                                    <span class="dots"></span>
+                                    <span class="post-time">10 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--== End Blog Post Item ==-->
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <!--== Start Blog Post Item ==-->
+                        <div class="post-item">
+                            <div class="thumb">
+                                <a href="blog-details.html"><img src="static/img/blog/6.jpg" alt="Image" width="370"
+                                                                 height="270"></a>
+                            </div>
+                            <div class="content">
+                                <div class="author">By <a href="blog.html">Walter Houston</a></div>
+                                <h4 class="title"><a href="blog-details.html">All of these amazing features <br>come at
+                                    an affordable price!</a></h4>
+                                <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them
+                                    industry spa also the loep into type setting.</p>
+                                <div class="meta">
+                                    <span class="post-date">03 April, 2022</span>
+                                    <span class="dots"></span>
+                                    <span class="post-time">10 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--== End Blog Post Item ==-->
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <!--== Start Blog Post Item ==-->
+                        <div class="post-item">
+                            <div class="thumb">
+                                <a href="blog-details.html"><img src="static/img/blog/7.jpg" alt="Image" width="370"
+                                                                 height="270"></a>
+                            </div>
+                            <div class="content">
+                                <div class="author">By <a href="blog.html">Walter Houston</a></div>
+                                <h4 class="title"><a href="blog-details.html">With WooLentor's drag-and <br>drop
+                                    interface for creating...</a></h4>
+                                <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them
+                                    industry spa also the loep into type setting.</p>
+                                <div class="meta">
+                                    <span class="post-date">03 April, 2022</span>
+                                    <span class="dots"></span>
+                                    <span class="post-time">10 min read</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--== End Blog Post Item ==-->
+                    </div>
                 </div>
-                <div class="content">
-                  <h4 class="name"><a href="company-details.html">Darkento Ltd.</a></h4>
-                  <p class="address">New York, USA</p>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <div class="pagination-area">
+                            <nav>
+                                <ul class="page-numbers d-inline-flex">
+                                    <li>
+                                        <a class="page-number active" href="blog.html">1</a>
+                                    </li>
+                                    <li>
+                                        <a class="page-number" href="blog.html">2</a>
+                                    </li>
+                                    <li>
+                                        <a class="page-number" href="blog.html">3</a>
+                                    </li>
+                                    <li>
+                                        <a class="page-number" href="blog.html">4</a>
+                                    </li>
+                                    <li>
+                                        <a class="page-number next" href="blog.html">
+                                            <i class="icofont-long-arrow-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="main-content">
-                <h3 class="title"><a href="job-details.html">Front-end Developer</a></h3>
-                <h5 class="work-type">Full-time</h5>
-                <p class="desc">CSS3, HTML5, Javascript, Bootstrap, Jquery</p>
-              </div>
-              <div class="recent-job-info">
-                <div class="salary">
-                  <h4>$5000</h4>
-                  <p>/monthly</p>
-                </div>
-                <a class="btn-theme btn-sm" href="job-details.html">Apply Now</a>
-              </div>
             </div>
-            <!--== End Recent Job Item ==-->
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <!--== Start Recent Job Item ==-->
-            <div class="recent-job-item">
-              <div class="company-info">
-                <div class="logo">
-                  <a href="company-details.html"><img src="static/img/companies/2.jpg" width="75" height="75" alt="Image-HasTech"></a>
+        </section>
+        <!--== End Blog Area Wrapper ==-->
+        <!--== End Blog Post Item Wrapper ==-->
+
+
+        <!--== Start Recent Job Area Wrapper ==-->
+        <section id="Career" class="recent-job-area bg-color-gray">
+            <div class="container" data-aos="fade-down">
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="section-title text-center">
+                            <h3 class="title">개발자 채용정보</h3>
+                            <div class="desc">
+                                <p>본인 언어 스택에 맞는 채용정보들을 찾아보세요!</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="content">
-                  <h4 class="name"><a href="company-details.html">Inspire Fitness Co.</a></h4>
-                  <p class="address">New York, USA</p>
+                <div class="row Career-row">
+                    {% if board_list %}
+                        {% for career in board_list %}
+                            <div class="col-md-6 col-lg-4">
+                                <!--== Start Recent Job Item ==-->
+                                <div class="recent-job-item recent-job-style2-item">
+                                    <div class="company-info">
+                                        <div class="logo">
+                                            <a href="{{ career.link }}"><img src="{{ career.logo }}" width="75"
+                                                                             height="75" alt="Image-HasTech"></a>
+                                        </div>
+                                        <div class="content">
+                                            <h4 class="name"><a href="{{ career.link }}">{{ career.name }}</a></h4>
+                                            <a href="https://www.rocketpunch.com/"><p class="address">로켓펀치</p></a>
+                                        </div>
+                                    </div>
+                                    <div class="main-content">
+                                        <h3 class="title"><a href="#">{{ career.w_desc }}</a></h3>
+                                        <h5 class="work-type">{{ career.desc }}</h5>
+                                        <p class="desc">{{ career.info }}</p>
+                                    </div>
+                                    <div class="recent-job-info">
+                                        <div class="salary">
+                                            <h4>{{ career.date }}</h4>
+                                            {#                  <p></p>#}
+                                        </div>
+
+                                        <a class="btn-theme btn-sm" href="{{ career.link }}">바로 지원</a>
+                                    </div>
+                                </div>
+                                <!--== End Recent Job Item ==-->
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
-              </div>
-              <div class="main-content">
-                <h3 class="title"><a href="job-details.html">Senior UI Designer</a></h3>
-                <h5 class="work-type" data-text-color="#ff7e00">Part-time</h5>
-                <p class="desc">CSS3, HTML5, Javascript, Bootstrap, Jquery</p>
-              </div>
-              <div class="recent-job-info">
-                <div class="salary">
-                  <h4>$5000</h4>
-                  <p>/monthly</p>
-                </div>
-                <a class="btn-theme btn-sm" href="job-details.html">Apply Now</a>
-              </div>
             </div>
-            <!--== End Recent Job Item ==-->
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <!--== Start Recent Job Item ==-->
-            <div class="recent-job-item">
-              <div class="company-info">
-                <div class="logo">
-                  <a href="company-details.html"><img src="static/img/companies/3.jpg" width="75" height="75" alt="Image-HasTech"></a>
+        </section>
+        <!--== End Recent Job Area Wrapper ==-->
+
+
+        <!--== Start News Area Wrapper ==-->
+
+        <section id="News" class="blog-area blog-home-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-title text-center">
+                            <h3 class="title">it 관련 최신뉴스</h3>
+                            <div class="desc">
+                                <p>요즘 뜨는 it 정보가 궁금하다면? 잠깐!</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="content">
-                  <h4 class="name"><a href="company-details.html">Cogent Data</a></h4>
-                  <p class="address">New York, USA</p>
-                </div>
-              </div>
-              <div class="main-content">
-                <h3 class="title"><a href="job-details.html">Graphic Designer</a></h3>
-                <h5 class="work-type" data-text-color="#0054ff">Remote</h5>
-                <p class="desc">CSS3, HTML5, Javascript, Bootstrap, Jquery</p>
-              </div>
-              <div class="recent-job-info">
-                <div class="salary">
-                  <h4>$5000</h4>
-                  <p>/monthly</p>
-                </div>
-                <a class="btn-theme btn-sm" href="job-details.html">Apply Now</a>
-              </div>
+
+                {% if news %}
+                    {#                        {% for info in news_list %}#}
+                    <!--== Start first POST Wrapper ==-->
+                    <div class="row align-items-center post-home-style row-gutter-40">
+                        <div class="col-md-6 col-lg-4" data-aos="fade-right">
+                            <!--== Start Blog Post Item ==-->
+                            <div class="post-item">
+                                <div class="thumb">
+                                    <a href="{{ news.0.news_link }}"><img src="{{ news.0.news_pic }}" alt="Image"
+                                                                          width="370"
+                                                                          height="270"></a>
+                                </div>
+                                <div class="content news_content">
+                                    <h4 class="title"><a href="{{ news.0.news_link }}">{{ news.0.news_title }}</a></h4>
+                                    <div class="author"><a
+                                            href="{{ news.0.news_link }}">{{ news.0.news_desc|truncatewords:40 }}</a>
+                                    </div>
+                                    <div class="meta">
+                                        <span class="post-date">{{ new.0.news_date }}</span>
+                                        <span class="dots"></span>
+                                        <span class="post-time">10 min read</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--== End Blog Post Item ==-->
+                        </div>
+                        <div class="col-lg-4" data-aos="fade-left">
+                            <div class="post-home-list-style">
+                                <!--== Start Blog Post Item ==-->
+                                <div class="post-item">
+                                    <div class="thumb">
+                                        <a href="{{ news.1.news_link }}"><img src="{{ news.1.news_pic }}" alt="Image"
+                                                                              width="370"
+                                                                              height="270"></a>
+                                    </div>
+                                    <div class="content news_content">
+                                        <h4 class="title"><a href="{{ news.1.news_link }}">{{ news.1.news_title }}</a>
+                                        </h4>
+                                        <div class="author"><a
+                                                href="{{ news.1.news_link }}">{{ news.1.news_desc|truncatewords:40 }}</a>
+                                        </div>
+                                        <div class="meta">
+                                            <span class="post-date">{{ new.1.news_date }}</span>
+                                            <span class="dots"></span>
+                                            <span class="post-time">10 min read</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--== End Blog Post Item ==-->
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4" data-aos="fade-left">
+                            <!--== Start Blog Post Item ==-->
+                            <div class="post-item">
+                                <div class="thumb">
+                                    <a href="{{ news.2.news_link }}"><img src="{{ news.2.news_pic }}" alt="Image"
+                                                                          width="370"
+                                                                          height="270"></a>
+                                </div>
+                                <div class="content news_content">
+                                    <h4 class="title"><a href="{{ news.2.news_link }}">{{ news.2.news_title }}</a></h4>
+                                    <div class="author"><a
+                                            href="{{ news.2.news_link }}">{{ news.2.news_desc|truncatewords:40 }}</a>
+                                    </div>
+                                    <div class="meta">
+                                        <span class="post-date">{{ new.2.news_date }}</span>
+                                        <span class="dots"></span>
+                                        <span class="post-time">10 min read</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--== End Blog Post Item ==-->
+                        </div>
+
+                    </div>
+                    {#    {% endfor %}#}    <!--== END first POST Wrapper ==-->
+
+                    <!--== Start second POST Wrapper ==-->
+
+                    <!--== END second POST Wrapper ==-->
+                {% endif %}
+
+
             </div>
-            <!--== End Recent Job Item ==-->
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <!--== Start Recent Job Item ==-->
-            <div class="recent-job-item">
-              <div class="company-info">
-                <div class="logo">
-                  <a href="company-details.html"><img src="static/img/companies/4.jpg" width="75" height="75" alt="Image-HasTech"></a>
-                </div>
-                <div class="content">
-                  <h4 class="name"><a href="company-details.html">Obelus Concepts</a></h4>
-                  <p class="address">New York, USA</p>
-                </div>
-              </div>
-              <div class="main-content">
-                <h3 class="title"><a href="job-details.html">UX Researcher</a></h3>
-                <h5 class="work-type">Full-time</h5>
-                <p class="desc">CSS3, HTML5, Javascript, Bootstrap, Jquery</p>
-              </div>
-              <div class="recent-job-info">
-                <div class="salary">
-                  <h4>$5000</h4>
-                  <p>/monthly</p>
-                </div>
-                <a class="btn-theme btn-sm" href="job-details.html">Apply Now</a>
-              </div>
-            </div>
-            <!--== End Recent Job Item ==-->
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <!--== Start Recent Job Item ==-->
-            <div class="recent-job-item">
-              <div class="company-info">
-                <div class="logo">
-                  <a href="company-details.html"><img src="static/img/companies/5.jpg" width="75" height="75" alt="Image-HasTech"></a>
-                </div>
-                <div class="content">
-                  <h4 class="name"><a href="company-details.html">Sanguine Skincare</a></h4>
-                  <p class="address">New York, USA</p>
-                </div>
-              </div>
-              <div class="main-content">
-                <h3 class="title"><a href="job-details.html">Android App Developer</a></h3>
-                <h5 class="work-type" data-text-color="#0054ff">Remote</h5>
-                <p class="desc">CSS3, HTML5, Javascript, Bootstrap, Jquery</p>
-              </div>
-              <div class="recent-job-info">
-                <div class="salary">
-                  <h4>$5000</h4>
-                  <p>/monthly</p>
-                </div>
-                <a class="btn-theme btn-sm" href="job-details.html">Apply Now</a>
-              </div>
-            </div>
-            <!--== End Recent Job Item ==-->
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <!--== Start Recent Job Item ==-->
-            <div class="recent-job-item">
-              <div class="company-info">
-                <div class="logo">
-                  <a href="company-details.html"><img src="static/img/companies/6.jpg" width="75" height="75" alt="Image-HasTech"></a>
-                </div>
-                <div class="content">
-                  <h4 class="name"><a href="company-details.html">Flux Water Gear</a></h4>
-                  <p class="address">New York, USA</p>
-                </div>
-              </div>
-              <div class="main-content">
-                <h3 class="title"><a href="job-details.html">Product Designer</a></h3>
-                <h5 class="work-type">Full-time</h5>
-                <p class="desc">CSS3, HTML5, Javascript, Bootstrap, Jquery</p>
-              </div>
-              <div class="recent-job-info">
-                <div class="salary">
-                  <h4>$5000</h4>
-                  <p>/monthly</p>
-                </div>
-                <a class="btn-theme btn-sm" href="job-details.html">Apply Now</a>
-              </div>
-            </div>
-            <!--== End Recent Job Item ==-->
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <!--== Start Recent Job Item ==-->
-            <div class="recent-job-item">
-              <div class="company-info">
-                <div class="logo">
-                  <a href="company-details.html"><img src="static/img/companies/7.jpg" width="75" height="75" alt="Image-HasTech"></a>
-                </div>
-                <div class="content">
-                  <h4 class="name"><a href="company-details.html">Darkento Ltd.</a></h4>
-                  <p class="address">New York, USA</p>
-                </div>
-              </div>
-              <div class="main-content">
-                <h3 class="title"><a href="job-details.html">Front-end Developer</a></h3>
-                <h5 class="work-type">Full-time</h5>
-                <p class="desc">CSS3, HTML5, Javascript, Bootstrap, Jquery</p>
-              </div>
-              <div class="recent-job-info">
-                <div class="salary">
-                  <h4>$5000</h4>
-                  <p>/monthly</p>
-                </div>
-                <a class="btn-theme btn-sm" href="job-details.html">Apply Now</a>
-              </div>
-            </div>
-            <!--== End Recent Job Item ==-->
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <!--== Start Recent Job Item ==-->
-            <div class="recent-job-item">
-              <div class="company-info">
-                <div class="logo">
-                  <a href="company-details.html"><img src="static/img/companies/8.jpg" width="75" height="75" alt="Image-HasTech"></a>
-                </div>
-                <div class="content">
-                  <h4 class="name"><a href="company-details.html">Inspire Fitness Co.</a></h4>
-                  <p class="address">New York, USA</p>
-                </div>
-              </div>
-              <div class="main-content">
-                <h3 class="title"><a href="job-details.html">Senior UI Designer</a></h3>
-                <h5 class="work-type" data-text-color="#ff7e00">Part-time</h5>
-                <p class="desc">CSS3, HTML5, Javascript, Bootstrap, Jquery</p>
-              </div>
-              <div class="recent-job-info">
-                <div class="salary">
-                  <h4>$5000</h4>
-                  <p>/monthly</p>
-                </div>
-                <a class="btn-theme btn-sm" href="job-details.html">Apply Now</a>
-              </div>
-            </div>
-            <!--== End Recent Job Item ==-->
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <!--== Start Recent Job Item ==-->
-            <div class="recent-job-item">
-              <div class="company-info">
-                <div class="logo">
-                  <a href="company-details.html"><img src="static/img/companies/9.jpg" width="75" height="75" alt="Image-HasTech"></a>
-                </div>
-                <div class="content">
-                  <h4 class="name"><a href="company-details.html">Cogent Data</a></h4>
-                  <p class="address">New York, USA</p>
-                </div>
-              </div>
-              <div class="main-content">
-                <h3 class="title"><a href="job-details.html">Graphic Designer</a></h3>
-                <h5 class="work-type" data-text-color="#0054ff">Part-time</h5>
-                <p class="desc">CSS3, HTML5, Javascript, Bootstrap, Jquery</p>
-              </div>
-              <div class="recent-job-info">
-                <div class="salary">
-                  <h4>$5000</h4>
-                  <p>/monthly</p>
-                </div>
-                <a class="btn-theme btn-sm" href="job-details.html">Apply Now</a>
-              </div>
-            </div>
-            <!--== End Recent Job Item ==-->
-          </div>
+        </section>
+        <!--== End News Area Wrapper ==-->
+    </main>
+
+
+    {% include 'footer.html' %}
+    <!--== End Footer Area Wrapper ==-->
+
+    <!--== Scroll Top Button ==-->
+    <div id="scroll-to-top" class="scroll-to-top"><span class="icofont-rounded-up"></span></div>
+
+    <!--== Start Aside Menu ==-->
+    <aside class="off-canvas-wrapper offcanvas offcanvas-start" tabindex="-1" id="AsideOffcanvasMenu"
+           aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h1 class="d-none" id="offcanvasExampleLabel">Aside Menu</h1>
+            <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">menu <i
+                    class="icofont-simple-left"></i></button>
         </div>
-      </div>
-    </section>
-    <!--== End Recent Job Area Wrapper ==-->
-    <!--== Start Blog Area Wrapper ==-->
-    <section class="blog-area blog-home-area">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="section-title text-center">
-              <h3 class="title">Recent News Articles</h3>
-              <div class="desc">
-                <p>Many desktop publishing packages and web page editors</p>
-              </div>
+        <div class="offcanvas-body">
+            <!-- Mobile Menu Start -->
+            <div class="mobile-menu-items">
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Find Jobs</a>
+                        <ul class="sub-menu">
+                            <li><a href="job.html">Jobs</a></li>
+                            <li><a href="job-details.html">Job Details</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="employers-details.html">Employers Details</a></li>
+                    <li><a href="#">Candidates</a>
+                        <ul class="sub-menu">
+                            <li><a href="candidate.html">Candidates</a></li>
+                            <li><a href="candidate-details.html">Candidate Details</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Blog</a>
+                        <ul class="sub-menu">
+                            <li><a href="blog-grid.html">Blog Grid</a></li>
+                            <li><a href="blog.html">Blog Left Sidebar</a></li>
+                            <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+                            <li><a href="blog-details.html">Blog Details</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Pages</a>
+                        <ul class="sub-menu">
+                            <li><a href="about-us.html">About us</a></li>
+                            <li><a href="login.html">Login</a></li>
+                            <li><a href="registration.html">Registration</a></li>
+                            <li><a href="page-not-found.html">Page Not Found</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
             </div>
-          </div>
+            <!-- Mobile Menu End -->
         </div>
-        <div class="row align-items-center post-home-style row-gutter-40">
-          <div class="col-md-6 col-lg-4" data-aos="fade-right">
-            <!--== Start Blog Post Item ==-->
-            <div class="post-item">
-              <div class="thumb">
-                <a href="blog-details.html"><img src="static/img/blog/1.jpg" alt="Image" width="370" height="270"></a>
-              </div>
-              <div class="content">
-                <div class="author">By <a href="blog.html">Walter Houston</a></div>
-                <h4 class="title"><a href="blog-details.html">It long established fact that reader will distracted the readable.</a></h4>
-                <div class="meta">
-                  <span class="post-date">03 April, 2022</span>
-                  <span class="dots"></span>
-                  <span class="post-time">10 min read</span>
-                </div>
-              </div>
-            </div>
-            <!--== End Blog Post Item ==-->
-          </div>
-          <div class="col-md-6 col-lg-4" data-aos="fade-left">
-            <!--== Start Blog Post Item ==-->
-            <div class="post-item">
-              <div class="thumb mb--0">
-                <a href="blog-details.html"><img src="static/img/blog/h1.jpg" alt="Image" width="370" height="440"></a>
-              </div>
-            </div>
-            <!--== End Blog Post Item ==-->
-          </div>
-          <div class="col-lg-4" data-aos="fade-left">
-            <div class="post-home-list-style">
-              <!--== Start Blog Post Item ==-->
-              <div class="post-item">
-                <div class="content">
-                  <div class="author">By <a href="blog.html">Walter Houston</a></div>
-                  <h4 class="title"><a href="blog-details.html">Established fact and readeren will distracted the readable content.</a></h4>
-                  <div class="meta">
-                    <span class="post-date">03 April, 2022</span>
-                    <span class="dots"></span>
-                    <span class="post-time">10 min read</span>
-                  </div>
-                </div>
-              </div>
-              <!--== End Blog Post Item ==-->
-
-              <!--== Start Blog Post Item ==-->
-              <div class="post-item">
-                <div class="content">
-                  <div class="author">By <a href="blog.html">Walter Houston</a></div>
-                  <h4 class="title"><a href="blog-details.html">With WooLentor's drag-and drop interface for creating...</a></h4>
-                  <div class="meta">
-                    <span class="post-date">03 April, 2022</span>
-                    <span class="dots"></span>
-                    <span class="post-time">10 min read</span>
-                  </div>
-                </div>
-              </div>
-              <!--== End Blog Post Item ==-->
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--== End Blog Area Wrapper ==-->
-  </main>
-
-
-{% include 'footer.html' %}
-  <!--== End Footer Area Wrapper ==-->
-
-  <!--== Scroll Top Button ==-->
-  <div id="scroll-to-top" class="scroll-to-top"><span class="icofont-rounded-up"></span></div>
-
-  <!--== Start Aside Menu ==-->
-  <aside class="off-canvas-wrapper offcanvas offcanvas-start" tabindex="-1" id="AsideOffcanvasMenu" aria-labelledby="offcanvasExampleLabel">
-    <div class="offcanvas-header">
-      <h1 class="d-none" id="offcanvasExampleLabel">Aside Menu</h1>
-      <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">menu <i class="icofont-simple-left"></i></button>
-    </div>
-    <div class="offcanvas-body">
-      <!-- Mobile Menu Start -->
-      <div class="mobile-menu-items">
-        <ul class="nav-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="#">Find Jobs</a>
-            <ul class="sub-menu">
-              <li><a href="job.html">Jobs</a></li>
-              <li><a href="job-details.html">Job Details</a></li>
-            </ul>
-          </li>
-          <li><a href="employers-details.html">Employers Details</a></li>
-          <li><a href="#">Candidates</a>
-            <ul class="sub-menu">
-              <li><a href="candidate.html">Candidates</a></li>
-              <li><a href="candidate-details.html">Candidate Details</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Blog</a>
-            <ul class="sub-menu">
-              <li><a href="blog-grid.html">Blog Grid</a></li>
-              <li><a href="blog.html">Blog Left Sidebar</a></li>
-              <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-              <li><a href="blog-details.html">Blog Details</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Pages</a>
-            <ul class="sub-menu">
-              <li><a href="about-us.html">About us</a></li>
-              <li><a href="login.html">Login</a></li>
-              <li><a href="registration.html">Registration</a></li>
-              <li><a href="page-not-found.html">Page Not Found</a></li>
-            </ul>
-          </li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <!-- Mobile Menu End -->
-    </div>
-  </aside>
-  <!--== End Aside Menu ==-->
+    </aside>
+    <!--== End Aside Menu ==-->
 </div>
 
 <!--=======================Javascript============================-->

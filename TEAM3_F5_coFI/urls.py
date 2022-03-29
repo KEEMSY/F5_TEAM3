@@ -20,11 +20,14 @@ from TEAM3_F5_coFI import views
 
 
 urlpatterns = [
+
     path('admin/', admin.site.urls),
     path('users/', include("userapp.urls")),
+    path("", include("likeapp.urls")),
     path('', views.show_home, name='home'),
     path('communities/', include("articleapp.urls")),
     path('careers/', include("careerapp.urls")),
+
     path('mypage/', include("bookmarkapp.urls")),
 
     path('temp/', views.show_community, name='temp'),
@@ -32,6 +35,9 @@ urlpatterns = [
     path('temp1/tip/', views.show_article_list_tip, name='temp1_tip'),
     path('temp1/free/', views.show_article_list_free, name='temp1_free'),
     path('temp2/', views.show_article_write, name='temp2'),
-
-
+  
+    path("articles/", include("bookmarkapp.urls")),
+    path('accounts/', include('allauth.urls')),
+    path('google/', include('allauth.urls')),
+ 
 ]

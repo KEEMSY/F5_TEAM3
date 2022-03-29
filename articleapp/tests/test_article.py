@@ -1,4 +1,4 @@
-# Given
+ # Given
 # When
 # Then
 # expect
@@ -9,6 +9,7 @@
 #                                                  article_create,
 #                                                  article_update,
 #                                                  article_user_search)
+
 #
 #
 # class TestView(TestCase):
@@ -71,6 +72,7 @@
 #         self.assertEqual(2, len(category2_read))
 #         self.assertEqual(3, len(category3_read))
 
+
     # def test_article_update(self):
     #     # Given  ##user1이 있음
     #
@@ -99,3 +101,4 @@
     #
     #     # expect ## category2 길이가 1이 됨
     #     self.assertEqual(1, len(category2))
+
