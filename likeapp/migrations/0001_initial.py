@@ -66,3 +66,4 @@ class Migration(migrations.Migration):
             constraint=models.UniqueConstraint(fields=('user', 'article'), name='unique_user_article'),
         ),
     ]
+
