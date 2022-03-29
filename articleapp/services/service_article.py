@@ -29,8 +29,8 @@ def read_target_article(article_id):
     return Article.objects.get(pk=article_id)
 
 
-def read_category_article(category):
-    return Article.objects.filter(category=category).order_by('-id')
+def read_category_article(category_id):
+    return Article.objects.filter(category=category_id).order_by('-id')
 
 
 def read_article_by_title(title):

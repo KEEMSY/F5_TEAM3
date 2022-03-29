@@ -7,7 +7,7 @@ import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from django.test import TestCase
 
-from articleapp.models import Article, Author
+from articleapp.models import Article, Author, Category
 from articleapp.services.service_article import (
     create_article, delete_article, read_all_article, read_article_by_title,
     read_article_by_title_within_a_specific_period, read_article_by_user,
@@ -18,17 +18,15 @@ from articleapp.services.service_article import (
 
 
 class TestView(TestCase):
-
     """ C R E A T E """
 
     def test_create_article(self):
         # Given
         user = Author.objects.create(name='test')
         title = 'test_title'
-        content = 'test_content'
-        category = 'test_category'
+        content = 'content'
+        category = Category.objects.create(name='test_category')
         img = ''
-
 
         # When
         article = create_article(title, user, content, category, img)
@@ -37,23 +35,28 @@ class TestView(TestCase):
         self.assertIsNotNone(Article.id)
         self.assertEqual(user.id, article.id)
 
+
+
     def test_when_there_is_not_enough_argument(self):
         # Given
         user = Author.objects.create(name='test')
         title = 'test_title'
-        content = 'test_content'
-        category = 'test_category'
+        content = 'content'
+        category = Category.objects.create(name='test_category')
 
         # Expect
         with self.assertRaises(TypeError):
             article = create_article(title, user, content, category)
+
+        category.delete()
 
     ''' R E A D '''
 
     def test_when_article_does_not_exist(self):
         # Given
         user = Author.objects.create(name='test')
-        article1 = create_article('title', user, 'content', 'category1', '')
+        category = Category.objects.create(name='test_category')
+        article1 = create_article('title', user, 'content', category, '')
         target_id = article1.id
         article1.delete()
 
@@ -61,14 +64,17 @@ class TestView(TestCase):
         with self.assertRaises(ObjectDoesNotExist):
             target_article = read_target_article(target_id)
 
+        category.delete()
+
     def test_read_all_article(self):
         # Given
         user = Author.objects.create(name='test')
+        category = Category.objects.create(name='test_category')
 
         # When
-        article1 = create_article('title', user, 'content', 'category1', '')
-        article2 = create_article('title', user, 'content', 'category2', '')
-        article3 = create_article('title', user, 'content', 'category3', '')
+        article1 = create_article('title', user, 'content', category, '')
+        article2 = create_article('title', user, 'content', category, '')
+        article3 = create_article('title', user, 'content', category, '')
 
         # Then
         article_list = read_all_article().values()
@@ -77,37 +83,52 @@ class TestView(TestCase):
         # expect
         self.assertEqual(len(article_list), 3)
         for idx in range(len(article_list)):
-            self.assertEqual(article_list[idx]['category'], latest_article_list[idx].category)
+            self.assertEqual(article_list[idx]['content'], latest_article_list[idx].content)
+
+        category.refresh_from_db()
 
     def test_read_category_article(self):
         # Given
         user = Author.objects.create(name="test")
+        category_1 = Category.objects.create(name='test_categoryt1')
+        category_2 = Category.objects.create(name='test_category2')
+        category_3 = Category.objects.create(name='test_category3')
 
-        article1 = create_article("title", user, "content", "category1", '')
+        article1 = create_article("title", user, "content", category_1, '')
 
-        article2 = create_article("title", user, "content", "category2", '')
-        article3 = create_article("title", user, "content", "category2", '')
+        article2 = create_article("title", user, "content", category_2, '')
+        article3 = create_article("title", user, "content", category_2, '')
 
-        article4 = create_article("title", user, "content", "category3", '')
-        article5 = create_article("title", user, "content", "category3", '')
-        article6 = create_article("title", user, "content", "category3", '')
+        article4 = create_article("title", user, "content", category_3, '')
+        article5 = create_article("title", user, "content", category_3, '')
+        article6 = create_article("title", user, "content", category_3, '')
+
+        print(article1.category)
+        print(article2.category)
+        print(article4.category)
 
         # When
-        article_1_list = read_category_article('category1')
-        article_2_list = read_category_article('category2')
-        article_3_list = read_category_article('category3')
+        article_1_list = read_category_article(1)
+        article_2_list = read_category_article(2)
+        article_3_list = read_category_article(3)
 
         # expect
         self.assertEqual(1, len(article_1_list))
         self.assertEqual(2, len(article_2_list))
         self.assertEqual(3, len(article_3_list))
 
+        category_1.delete()
+        category_2.delete()
+        category_3.delete()
+
     def test_read_article_by_title(self):
         # Given
         user = Author.objects.create(name="test")
-        article1 = create_article("title", user, "content", "category1", '')
-        article2 = create_article("title2", user, "content", "category2", '')
-        article2 = create_article("title2_2", user, "content", "category2", '')
+        category = Category.objects.create(name='test_category')
+
+        article1 = create_article("title", user, "content", category, '')
+        article2 = create_article("title2", user, "content", category, '')
+        article2 = create_article("title2_2", user, "content", category, '')
 
         # When
         target_articles = read_article_by_title("title")
@@ -115,11 +136,15 @@ class TestView(TestCase):
         # Expect
         self.assertEqual(3, len(target_articles))
 
+        category.delete()
+
     def test_read_article_by_user(self):
         user1 = Author.objects.create(name="test1")
-        article1 = create_article("title_1", user1, "content", "category1", '')
+        category = Category.objects.create(name='test_category')
+
+        article1 = create_article("title_1", user1, "content", category, '')
         user2 = Author.objects.create(name="test2")
-        article2 = create_article("title_2", user2, "content", "category2", '')
+        article2 = create_article("title_2", user2, "content", category, '')
 
         # When
         article_by_user1 = read_article_by_user(user1.id).get()
@@ -129,10 +154,14 @@ class TestView(TestCase):
         self.assertEqual("title_1", article_by_user1.title)
         self.assertEqual("title_2", article_by_user2.title)
 
+        category.delete()
+
     def test_read_articles_by_user(self):
         user1 = Author.objects.create(name="test1")
-        article1 = create_article("title_1", user1, "content", "category1", '')
-        article2 = create_article("title_2", user1, "content", "category1", '')
+        category = Category.objects.create(name='test_category')
+
+        article1 = create_article("title_1", user1, "content", category, '')
+        article2 = create_article("title_2", user1, "content", category, '')
 
         # When
         article_by_user1 = read_article_by_user(user1.id)
@@ -142,14 +171,19 @@ class TestView(TestCase):
         for i in range(len(article_by_user1)):
             self.assertEqual(expect_title[i], article_by_user1[i].title)
 
+        category.delete()
+
+
     def test_read_article_containing_username(self):
         # Given
         user1 = Author.objects.create(name="test1")
-        article1_1 = create_article("title_1", user1, "content", "category1", '')
+        category = Category.objects.create(name='test_category')
+
+        article1_1 = create_article("title_1", user1, "content", category, '')
 
         user2 = Author.objects.create(name="test2")
-        article2_1 = create_article("title_2", user2, "content", "category2", '')
-        article2_2 = create_article("title_3", user2, "content", "category2", '')
+        article2_1 = create_article("title_2", user2, "content", category, '')
+        article2_2 = create_article("title_3", user2, "content", category, '')
 
         # When
         article_list = read_article_containing_username('test')
@@ -157,15 +191,19 @@ class TestView(TestCase):
         # Expeect
         self.assertEqual(3, len(article_list))
 
+        category.delete()
+
     def test_read_article_within_a_specific_period(self):
         # Given
         user1 = Author.objects.create(name="test1")
-        article1 = create_article("title_day", user1, "content", "category1", '')
-        article1_1 = create_article("title_one_day", user1, "content", "category1", '')
-        article1_2 = create_article("title_one_week", user1, "content", "category1", '')
-        article1_3 = create_article("title_one_month", user1, "content", "category1", '')
-        article1_4 = create_article("title_six_month", user1, "content", "category1", '')
-        article1_5 = create_article("title_one_year", user1, "content", "category1", '')
+        category = Category.objects.create(name='test_category')
+
+        article1 = create_article("title_day", user1, "content", category, '')
+        article1_1 = create_article("title_one_day", user1, "content", category, '')
+        article1_2 = create_article("title_one_week", user1, "content", category, '')
+        article1_3 = create_article("title_one_month", user1, "content", category, '')
+        article1_4 = create_article("title_six_month", user1, "content", category, '')
+        article1_5 = create_article("title_one_year", user1, "content", category, '')
 
         article1_1.created_at = datetime.date.today() - datetime.timedelta(days=1)
         article1_1.save()
@@ -198,12 +236,17 @@ class TestView(TestCase):
 
         self.assertEqual("title_day", within_one_day[0].title)
 
+        category.delete()
+
+
     def test_read_article_containing_username_within_a_specific_period(self):
         # Given
         user1 = Author.objects.create(name="test1")
         user2 = Author.objects.create(name="test2")
-        article1_1 = create_article("title_one_day", user1, "content", "category1", '')
-        article1_2 = create_article("title_one_week", user2, "content", "category1", '')
+        category = Category.objects.create(name='test_category')
+
+        article1_1 = create_article("title_one_day", user1, "content", category, '')
+        article1_2 = create_article("title_one_week", user2, "content", category, '')
 
         article1_1.created_at = datetime.date.today() - datetime.timedelta(days=1)
         article1_1.save()
@@ -220,12 +263,17 @@ class TestView(TestCase):
         self.assertEqual('test2', within_one_week_username[0].user.name)
         self.assertEqual('test1', within_one_week_username[1].user.name)
 
+        category.delete()
+
+
     def test_when_article_can_not_read_article_containing_username_within_a_specific_period(self):
         # Given
         user1 = Author.objects.create(name="test1")
         user2 = Author.objects.create(name="test2")
-        article1_1 = create_article("title_one_day", user1, "content", "category1", '')
-        article1_2 = create_article("title_one_week", user2, "content", "category1", '')
+        category = Category.objects.create(name='test_category')
+
+        article1_1 = create_article("title_one_day", user1, "content", category, '')
+        article1_2 = create_article("title_one_week", user2, "content", category, '')
 
         # When
         within_one_week_username = read_article_containing_username_within_a_specific_period(7, 'abc')
@@ -233,12 +281,17 @@ class TestView(TestCase):
         # Expect
         self.assertEqual(False, within_one_week_username)
 
+        category.delete()
+
+
     def test_read_article_containing_title_within_a_specific_period(self):
         # Given
         user1 = Author.objects.create(name="test1")
         user2 = Author.objects.create(name="test2")
-        article1_1 = create_article("title_one_day", user1, "content", "category1", '')
-        article1_2 = create_article("title_one_week", user2, "content", "category1", '')
+        category = Category.objects.create(name='test_category')
+
+        article1_1 = create_article("title_one_day", user1, "content", category, '')
+        article1_2 = create_article("title_one_week", user2, "content", category, '')
 
         article1_1.created_at = datetime.date.today() - datetime.timedelta(days=1)
         article1_1.save()
@@ -255,12 +308,16 @@ class TestView(TestCase):
         self.assertEqual('title_one_week', within_one_week_title[0].title)
         self.assertEqual('title_one_day', within_one_week_title[1].title)
 
+        category.delete()
+
+
     def test_when_article_can_not_read_article_by_title_within_a_specific_period(self):
         # Given
         user1 = Author.objects.create(name="test1")
+        category = Category.objects.create(name='test_category')
 
-        article1_1 = create_article("title_one_day", user1, "content", "category1", '')
-        article1_2 = create_article("title_one_week", user1, "content", "category1", '')
+        article1_1 = create_article("title_one_day", user1, "content", category, '')
+        article1_2 = create_article("title_one_week", user1, "content", category, '')
 
         # When
         within_one_week_title = read_article_by_title_within_a_specific_period(7, 'abc')
@@ -268,12 +325,16 @@ class TestView(TestCase):
         # Expect
         self.assertEqual(False, within_one_week_title)
 
+        category.delete()
+
+
     ''' U P D A T E '''
 
     def test_update_article(self):
         # Given
         user = Author.objects.create(name="test1")
-        article = create_article("title", user, "before_content", "category1", '')
+        category = Category.objects.create(name='test_category')
+        article = create_article("title", user, "before_content", category, '')
 
         # When
         update_article(article.id, 'after content')
@@ -282,10 +343,15 @@ class TestView(TestCase):
         check_article = Article.objects.get(pk=article.id)
         self.assertEqual(check_article.content, 'after content')
 
+        category.delete()
+
+
     def test_when_article_does_not_exist(self):
         # Given
         user = Author.objects.create(name="test1")
-        article = create_article("title", user, "before_content", "category1", '')
+        category = Category.objects.create(name='test_category')
+
+        article = create_article("title", user, "before_content", category, '')
 
         # When
         article = Article.objects.get(pk=article.id)
@@ -295,12 +361,17 @@ class TestView(TestCase):
         with self.assertRaises(ObjectDoesNotExist):
             update_article(article.id, 'after content')
 
+        category.delete()
+
+
     ''' D E L E T E '''
 
     def test_delete_article(self):
         # Given
         user = Author.objects.create(name="test1")
-        article = create_article("title", user, "before_content", "category1", '')
+        category = Category.objects.create(name='test_category')
+
+        article = create_article("title", user, "before_content", category, '')
 
         # When
         delete_article(article.id)
@@ -311,7 +382,9 @@ class TestView(TestCase):
     def test_when_article_delete_twice(self):
         # Given
         user = Author.objects.create(name="test1")
-        article = create_article("title", user, "before_content", "category1", '')
+        category = Category.objects.create(name='test_category')
+
+        article = create_article("title", user, "before_content", category, '')
 
         # When
         delete_article(article.id)
@@ -319,3 +392,5 @@ class TestView(TestCase):
         # Expect
         with self.assertRaises(ObjectDoesNotExist):
             delete_article(article.id)
+
+        category.delete()
