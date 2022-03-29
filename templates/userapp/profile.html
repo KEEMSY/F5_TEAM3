@@ -118,26 +118,11 @@
                                 <form action="{% url 'user:update_profile' user.pk %}" method="post" class="modal-form-groups">
                                     {% csrf_token %}
                                     <div class="modal-form-group">
-                                        <div>
-                                            <label for="img">이미지</label>
-                                            {{ profile_form.img }}
-                                        </div>
-                                        <div>
-                                            <label for="username">이름</label>
-                                            {{ user_form.username }}
-                                        </div>
-                                        <div>
-                                            <label for="skill">프로그래밍 언어</label>
-                                            {{ profile_form.skill }}
-                                        </div>
-                                        <div>
-                                            <label for="github">github 주소</label>
-                                            {{ profile_form.github }}
-                                        </div>
-                                        <div>
-                                            <label for="blog">blog 주소</label>
-                                            {{ profile_form.blog }}
-                                        </div>
+                                        {{ profile_form.img | as_crispy_field }}
+                                        {{ user_form.username | as_crispy_field }}
+                                        {{ profile_form.skill | as_crispy_field }}
+                                        {{ profile_form.github | as_crispy_field }}
+                                        {{ profile_form.blog | as_crispy_field }}
                                     </div>
                                     <button type="submit" class="btn btn-success">Save</button>
                                 </form>
