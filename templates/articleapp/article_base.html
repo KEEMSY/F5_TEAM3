@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+{% include 'head.html' %}
+<style>
+
+</style>
+<body>
+<div class="wrapper">
+
+
+    {% include 'header.html' %}
+
+    {% include 'articleapp/article_left_content.html' %}
+
+
+        {% block content %}
+        {% endblock %}
+
+
+    {% include 'footer.html' %}
+
+    <!--=======================Javascript============================-->
+
+    {% include 'js.html' %}
+
+</div>
+</body>
+
+</html>

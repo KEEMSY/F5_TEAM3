@@ -69,7 +69,7 @@ def show_all_article(request):
     page = int(request.GET.get('page', 1))
     board_list = get_page(all_articles, page)
 
-    return render(request, 'articleapp/article_list_all.html', {'articles': all_articles, 'board_list': board_list, 'recent_comments': recent_comments}, status=200)
+    return render(request, 'articleapp/article_all.html', {'articles': all_articles, 'board_list': board_list, 'recent_comments': recent_comments}, status=200)
 
 
 # 카테고리 별 게시판 불러오기

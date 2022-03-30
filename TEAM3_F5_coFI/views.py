@@ -72,7 +72,7 @@ def show_article_list_tip(request):
     return render(request, 'articleapp/article_list_tip.html')
 
 def show_article_write(request):
-    return render(request, 'articleapp/article_write.html')
+    return render(request, 'articleapp/origin_article_write.html')
 
 
 
