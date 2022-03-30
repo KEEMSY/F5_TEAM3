@@ -47,6 +47,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -56,6 +57,13 @@ INSTALLED_APPS = [
     'commentapp',
     'likeapp',
     'bookmarkapp',
+    'careerapp',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    'allauth.socialaccount.providers.google'
 
 ]
 
@@ -78,7 +86,7 @@ ROOT_URLCONF = 'TEAM3_F5_coFI.urls'
 # aws.json 가져와서 버킷,db 접근권한 주기
 # with open(os.path.join(BASE_DIR, 'aws.json')) as f:
 #     secrets = json.loads(f.read())
-
+#
 # AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
 # AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
 # AWS_STORAGE_BUCKET_NAME = secrets['AWS']['STORAGE_BUCKET_NAME']
@@ -96,6 +104,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
             ],
         },
     },
@@ -108,7 +117,11 @@ WSGI_APPLICATION = 'TEAM3_F5_coFI.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
+
 # 로컬 db 연결
+
+pymysql.install_as_MySQLdb()  # 이것을 실행하면 pymysql을 사용하면서 mysql클라이언트를 실행하는 것처럼 됨
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -120,6 +133,14 @@ DATABASES = {
     }
 }
 
+# # 로컬 db 연결
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 # AWS db 연결
 # DATABASES = {
 #     'default': {
@@ -130,6 +151,7 @@ DATABASES = {
 #         'HOST': secrets['default']['HOST'],
 #         'PORT': secrets['default']['PORT'],
 #         'OPTIONS': {
+#                 'charset': 'utf8mb4',
 #             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
 #         },
 #     }
@@ -173,7 +195,7 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 
-# AUTH_USER_MODEL = 'user.UserModel'
+AUTH_USER_MODEL = 'userapp.User'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -181,3 +203,13 @@ try:
     from TEAM3_F5_coFI.local_settings import *
 except ImportError:
     pass
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+
+    'allauth.account.auth_backends.AuthenticationBackend',
+
+)
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'

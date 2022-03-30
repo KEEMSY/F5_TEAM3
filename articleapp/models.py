@@ -39,3 +39,4 @@ class ArticleHits(models.Model):
 
     def __str__(self):
         return str(self.article.id)
+

@@ -16,6 +16,7 @@
                         <div class="header-navigation-area position-relative">
                             <ul class="main-menu nav">
 
+
                                 <li><a href="/"><span>Home</span></a></li>
 
                                 <li class="has-submenu"><a href="{% url 'articleapp:home' %}"><span>Community</span></a>
@@ -28,6 +29,18 @@
                                     </ul>
                                 </li>
                                 <li><a href="{% url 'careerapp:job' %}"><span>Career</span></a></li>
+
+
+
+                {% if not user.is_authenticated %}
+                    <li><a href="{% url 'user:login' %}"><span>login</span></a></li>
+                    <li><a href="{% url 'user:sign-up' %}"><span>Registration</span></a></li>
+                {% else %}
+                    <li class="has-submenu"><a href="{% url 'bookmarkapp:mypage' %}"><span>Mypage</span></a>
+                    </li>
+                    <li><a href="{% url 'user:logout' %}"><span>logout</span></a></li>
+                {% endif %}
+
 
                                 <li class="has-submenu"><a href="{% url 'bookmarkapp:mypage' %}"><span>Mypage</span></a>
                                 </li>

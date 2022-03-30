@@ -1,9 +1,10 @@
 from django.urls import path
 
-from bookmarkapp import views
+from . import views
 
-app_name = 'bookmarkapp'
+app_name = "bookmarkapp"
 
 urlpatterns = [
-    path('', views.show_mypage, name='mypage'),
+    path("articles/scrap/<int:article_id>", views.click_bookmark, name="bookmark"),
 ]
+

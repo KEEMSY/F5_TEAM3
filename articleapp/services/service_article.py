@@ -15,7 +15,7 @@ Service
 
 
 def create_article(title, user_id, content, category, img):
-    return Article.objects.create(title=title, user=user_id, content=content, category=category,img=img)
+    return Article.objects.create(title=title, user=user_id, content=content, category=category, img=img)
 
 
 ''' 1-2. R E A D : QuerySet '''
@@ -32,7 +32,6 @@ def read_target_article(article_id):
 def read_category_article(category):
     catetgory_id = Category.objects.get(name=category).id
     return Article.objects.filter(category=catetgory_id).order_by('-id')
-
 
 
 def read_article_by_title(title):
@@ -130,6 +129,3 @@ def get_page(articles, page):
     paginator = Paginator(articles, 10)
     board_list = paginator.get_page(page)
     return board_list
-
-
-
