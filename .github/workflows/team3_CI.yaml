@@ -36,4 +36,6 @@ jobs:
           python-python: 3.9.9
 
       - run: pip install -r requirements.txt
+      - run: python manage.py makemigrations
+      - run: python manage.py migrate
       - run: python manage.py test
