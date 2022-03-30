@@ -1,60 +1,62 @@
-  <!--== Start Header Wrapper ==-->
-<img src="../static/img/home_02.png">
-  <header class="header-area transparent">
+<!--== Start Header Wrapper ==-->
+{% load static %}
+<img src="{% static 'img/home_02.png' %}">
+<header class="header-area transparent">
     <div class="container">
-      <div class="row no-gutter align-items-center position-relative">
-        <div class="col-12">
-          <div class="header-align">
-            <div class="header-align-start">
-              <div class="header-logo-area">
-                <a href="{% url 'home' %}">
-                  <img class="logo-main" src="../static/img/coFi1.png" alt="Logo" />
-                  <img class="logo-light" src="../static/img/logo-light.png" alt="Logo" />
-                </a>
-              </div>
+        <div class="row no-gutter align-items-center position-relative">
+            <div class="col-12">
+                <div class="header-align">
+                    <div class="header-align-start">
+                        <div class="header-logo-area">
+                            <a href="{% url 'home' %}">
+                                <img class="logo-main" src="{% static 'img/coFi1.png' %}" alt="Logo"/>
+                                <img class="logo-light" src="../static/img/logo-light.png" alt="Logo"/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="header-align-center">
+                        <div class="header-navigation-area position-relative">
+                            <ul class="main-menu nav">
+                                <li><a href="/"><span>Home</span></a></li>
+                                <li class="has-submenu"><a href="{% url 'careerapp:job' %}"><span>Career</span></a>
+                                    <ul class="submenu-nav">
+                                        <li><a href="{% url 'careerapp:job' %}"><span>Jobs</span></a></li>
+                                        {#                      <li><a href="{% url 'careerapp:detail' %}"><span>Job Details</span></a></li>#}
+                                    </ul>
+                                </li>
+                                <li class="has-submenu"><a href="{% url 'articleapp:home' %}"><span>Community</span></a>
+                                    <ul class="submenu-nav">
+                                        <li><a href="{% url 'temp1_free' %}"><span>자유게시판</span></a></li>
+                                        <li><a href="{% url 'temp1_tip' %}"><span>꿀팁게시판</span></a></li>
+                                        <li><a href="{% url 'temp1_question' %}"><span>질문게시판</span></a></li>
+                                    </ul>
+                                </li>
+
+
+                                {% if not user.is_authenticated %}
+                                    <li><a href="{% url 'user:login' %}"><span>login</span></a></li>
+                                    <li><a href="{% url 'user:sign-up' %}"><span>Registration</span></a></li>
+                                {% else %}
+                                    <li class="has-submenu"><a href="{% url 'user:profile' user.pk %}"><span>Mypage</span></a>
+                                    </li>
+                                    <li><a href="{% url 'user:logout' %}"><span>logout</span></a></li>
+                                {% endif %}
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="header-align-end">
+                        <div class="header-action-area">
+
+                            <button class="btn-menu" type="button" data-bs-toggle="offcanvas"
+                                    data-bs-target="#AsideOffcanvasMenu" aria-controls="AsideOffcanvasMenu">
+                                <i class="icofont-navigation-menu"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="header-align-center">
-              <div class="header-navigation-area position-relative">
-                <ul class="main-menu nav">
-                  <li><a href="/"><span>Home</span></a></li>
-                  <li class="has-submenu"><a href="{% url 'careerapp:job' %}"><span>Career</span></a>
-                    <ul class="submenu-nav">
-                      <li><a href="{% url 'careerapp:job' %}"><span>Jobs</span></a></li>
-{#                      <li><a href="{% url 'careerapp:detail' %}"><span>Job Details</span></a></li>#}
-                    </ul>
-                  </li>
-                    <li class="has-submenu"><a href="{% url 'articleapp:home' %}"><span>Community</span></a>
-                      <ul class="submenu-nav">
-                          <li><a href="{% url 'careerapp:job' %}"><span>자유게시판</span></a></li>
-                          <li><a href="{% url 'careerapp:job' %}"><span>꿀팁게시판</span></a></li>
-                          <li><a href="{% url 'careerapp:job' %}"><span>질문게시판</span></a></li>
-                      </ul>
-                    </li>
-
-
-                {% if not user.is_authenticated %}
-                    <li><a href="{% url 'user:login' %}"><span>login</span></a></li>
-                    <li><a href="{% url 'user:sign-up' %}"><span>Registration</span></a></li>
-                {% else %}
-                    <li class="has-submenu"><a href="#"><span>Mypage</span></a>
-                    </li>
-                    <li><a href="{% url 'user:logout' %}"><span>logout</span></a></li>
-                {% endif %}
-
-                </ul>
-              </div>
-            </div>
-            <div class="header-align-end">
-              <div class="header-action-area">
-
-                <button class="btn-menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#AsideOffcanvasMenu" aria-controls="AsideOffcanvasMenu">
-                  <i class="icofont-navigation-menu"></i>
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </header>
-  <!--== End Header Wrapper ==-->
+</header>
+<!--== End Header Wrapper ==-->
