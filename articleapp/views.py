@@ -11,8 +11,6 @@ from articleapp.services.service_article import (
     read_article_containing_username,
     read_article_containing_username_within_a_specific_period,
     read_category_article, read_target_article, update_article)
-
-
 # 단일 게시글 CRUD
 from commentapp.models import Comment
 from commentapp.services.comment_service import read_all_comment
@@ -61,17 +59,17 @@ class ArticleView(View):
 
 # 게시글 작성
 def write_article(request):
-    return render(request, 'community.html', status=200)
+    return render(request, 'articleapp/article_write.html', status=200)
 
 
 # 홈
 def show_all_article(request):
     all_articles = read_all_article()
-    recent_comment = read_all_comment()
+    recent_comments = read_all_comment()
     page = int(request.GET.get('page', 1))
     board_list = get_page(all_articles, page)
 
-    return render(request, 'articleapp/article_list_all.html', {'articles': all_articles, 'board_list': board_list, 'recent_comment': recent_comment}, status=200)
+    return render(request, 'articleapp/article_list_all.html', {'articles': all_articles, 'board_list': board_list, 'recent_comments': recent_comments}, status=200)
 
 
 # 카테고리 별 게시판 불러오기
