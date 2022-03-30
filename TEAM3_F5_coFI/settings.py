@@ -17,6 +17,7 @@ from pathlib import Path
 
 import environ
 import pymysql
+import storages.backends.s3boto3
 from django.core.exceptions import ImproperlyConfigured
 
 env = environ.Env(
@@ -91,9 +92,9 @@ with open(os.path.join(BASE_DIR, 'aws.json')) as f:
 
 # 정적파일 업로드를 위한 S3 연결 세팅
 # https://kangraemin.github.io/django/2020/09/29/elasticbeanstalk-s3/    <<-- 블로그에 잘 정리되어있음.
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3StorageFile'
 # 임시 주석 이부분 살리면 static 경로가 안먹힘.
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3ManifestStaticStorage'
 AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
@@ -196,7 +197,7 @@ USE_I18N = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 # 배포용
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # STATICFILES_DIRS = [
 #    os.path.join(BASE_DIR, "static"),
