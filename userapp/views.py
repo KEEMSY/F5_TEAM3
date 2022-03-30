@@ -1,5 +1,5 @@
 from django.contrib import auth
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -80,6 +80,7 @@ def get_profile(request, pk):
     else:
         profile_form = ProfileForm()
 
+    #게시글 모델 머지 후 추가 예정
     #articles = Artilce.objects.filter(user_id=request.user.pk).order_by('-created_at') #-는 역순으로 정렬해서 준다는 의미
             #{'articles': articles} 를 아래 추가
 
@@ -106,10 +107,9 @@ def update_profile(request, pk):
     # Profile 폼
     if profile_form.is_valid():
         profile = profile_form.save(commit=False)  # 기존의 것을 가져와 수정하는 경우가 아닌 새로 만든 경우 user를 지정해줘야 하므로 commit=False를 통해 우선 디비 저장을 바로 안하고 유저를 지정 후에 디비에 저장
-        #form.save()를 사용 시 자동적으로 DB에 내용이 저장되고 반영됩니다.
-        #여기서 DB 저장 여부를 commit=True, False와 같은 flag를 통해 지정해줄 수 있습니다.
-        #commit=False는 DB에 반영하지 않는 것을 의미합니다.
-
+        # form.save()를 사용 시 자동적으로 DB에 내용이 저장되고 반영됩니다.
+        # 여기서 DB 저장 여부를 commit=True, False와 같은 flag를 통해 지정해줄 수 있습니다.
+        # commit=False는 DB에 반영하지 않는 것을 의미합니다.
         profile.user = u
         profile.save()
 

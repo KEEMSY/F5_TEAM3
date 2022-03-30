@@ -19,17 +19,35 @@ class Profile(models.Model):
     github = models.URLField(max_length=250, blank=True)
     blog = models.URLField(max_length=250, blank=True)
 
-    SKILL_A = 'Python'
-    SKILL_B = 'Django'
-    SKILL_C = 'Java'
-    SKILL_D = 'Flask'
-    SKILL_E = None
+    SKILL_A = 'Android'
+    SKILL_B = 'IOS'
+    SKILL_C = 'C++'
+    SKILL_D = 'C#'
+    SKILL_E = 'Java'
+    SKILL_F = 'PHP'
+    SKILL_G = 'Python'
+    SKILL_H = 'Ruby'
+    SKILL_I = 'JSP'
+    SKILL_J = 'Node.js'
+    SKILL_K = 'AngularJS'
+    SKILL_L = 'jQuery'
+    SKILL_M = 'ASP.NET'
+    SKILL_N = None
     SKILL_CHOICES = [
-        (SKILL_A, 'Python'),
-        (SKILL_B, 'Django'),
-        (SKILL_C, 'Java'),
-        (SKILL_D, 'Flask'),
-        (SKILL_E, '없음'),
+        (SKILL_A, 'Android'),
+        (SKILL_B, 'IOS'),
+        (SKILL_C, 'C++'),
+        (SKILL_D, 'C#'),
+        (SKILL_E, 'Java'),
+        (SKILL_F, 'PHP'),
+        (SKILL_G, 'Python'),
+        (SKILL_H, 'Ruby'),
+        (SKILL_I, 'JSP'),
+        (SKILL_J, 'Node.js'),
+        (SKILL_K, 'AngularJS'),
+        (SKILL_L, 'jQuery'),
+        (SKILL_M, 'ASP.NET'),
+        (SKILL_N, '없음'),
     ]
 
     skill = models.CharField(max_length=100, blank=True, choices=SKILL_CHOICES)
