@@ -649,7 +649,7 @@ table p {
           transform: translate(0%, -50%);
 }
 .off-canvas-wrapper .btn-menu-close:hover {
-  color: #fff;
+  color: #000000;
   background-color: #2f2f2f;
 }
 
@@ -1288,12 +1288,12 @@ table p {
 }
 @media only screen and (max-width: 1699px) {
   .home-slider-shape .shape1 {
-    width: 200px;
+    width: 650px;
   }
 }
 @media only screen and (max-width: 1399.98px) {
   .home-slider-shape .shape1 {
-    width: 170px;
+    width: 600px;
   }
 }
 .home-slider-shape .shape2 {
@@ -6575,8 +6575,8 @@ table p {
   }
 }
 .footer-area .widget-title {
-  font-size: 28px;
-  color: #fff;
+  font-size: 25px;
+  color: #000000;
   text-transform: capitalize;
   margin-bottom: 40px;
 }
@@ -6693,7 +6693,7 @@ table p {
   line-height: 50px;
 }
 .footer-area .nav-menu li a {
-  color: #d8dadf;
+  color: #484b52;
   font-size: 18px;
   line-height: 50px;
   padding: 0 0;
@@ -6851,7 +6851,7 @@ table p {
 }
 
 .footer-main {
-  background-color: #272a33;
+  background-color: #f4f7f7;
   position: relative;
   padding: 126px 0 86px;
 }
