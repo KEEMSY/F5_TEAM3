@@ -3,8 +3,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from articleapp.models import Article
+from userapp.models import User
 # Create your models here.
-from likeapp.models import Author, Post
 
 
 class Bookmark(models.Model):
@@ -14,6 +14,6 @@ class Bookmark(models.Model):
             models.UniqueConstraint(fields=["user", "article"], name="unique_bookmark"),
         ]
 
-    user = models.ForeignKey(Author, on_delete=models.CASCADE, db_column="user")
-    article = models.ForeignKey(Post, on_delete=models.CASCADE, db_column="article")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, db_column="user")
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, db_column="article")
     created_at = models.DateTimeField(auto_now_add=True)

@@ -1,6 +1,6 @@
 from typing import Any, List
 
-from django.contrib.auth.models import AbstractUser, User
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Create your models here.
@@ -8,6 +8,7 @@ from articleapp.models import Article
 
 # Create your models here.
 from commentapp.models import Comment
+from userapp.models import User
 
 
 class ArticleLikes(models.Model):
