@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # Create your models here.
 
 # 테스트를 위해 유저모델 작성 머지하고 위에 임포트해서 가져와야합니다.

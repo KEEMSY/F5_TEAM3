@@ -1,6 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
+
 # Create your views here.
 from likeapp.models import ArticleLikes, Author, CommentLikes, Datcle
 from likeapp.services.like_service import (do_article_like, do_comment_like,

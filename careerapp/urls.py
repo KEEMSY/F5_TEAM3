@@ -3,7 +3,6 @@ from django.urls import path
 
 from careerapp import views
 
-
 app_name = 'careerapp'
 
 urlpatterns = [

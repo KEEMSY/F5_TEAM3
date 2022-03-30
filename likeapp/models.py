@@ -1,8 +1,9 @@
 from typing import Any, List
-from django.conf import settings
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+# Create your models here.
 from articleapp.models import Article
 
 
@@ -23,6 +24,7 @@ class Datcle(models.Model):
     like_count = models.IntegerField(default=0)
 
     my_likes: List[Any]
+
 
 
 class ArticleLikes(models.Model):

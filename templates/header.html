@@ -1,6 +1,7 @@
-  <!--== Start Header Wrapper ==-->
-  <header class="header-area transparent">
+<!--== Start Header Wrapper ==-->
+<header class="header-area transparent">
     <div class="container">
+
       <div class="row no-gutter align-items-center position-relative">
         <div class="col-12">
           <div class="header-align">
@@ -42,20 +43,29 @@
                     <li><a href="{% url 'user:logout' %}"><span>logout</span></a></li>
                 {% endif %}
 
-                </ul>
-              </div>
-            </div>
-            <div class="header-align-end">
-              <div class="header-action-area">
 
-                <button class="btn-menu" type="button" data-bs-toggle="offcanvas" data-bs-target="#AsideOffcanvasMenu" aria-controls="AsideOffcanvasMenu">
-                  <i class="icofont-navigation-menu"></i>
-                </button>
-              </div>
+                                <li class="has-submenu"><a href="{% url 'bookmarkapp:mypage' %}"><span>Mypage</span></a>
+                                </li>
+
+                                <li><a href="{% url 'user:login' %}"><span>log in</span></a></li>
+                                <li><a href="{% url 'user:sign-up' %}"><span>Registration</span></a></li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="header-align-end">
+                        <div class="header-action-area">
+
+                            <button class="btn-menu" type="button" data-bs-toggle="offcanvas"
+                                    data-bs-target="#AsideOffcanvasMenu" aria-controls="AsideOffcanvasMenu">
+                                <i class="icofont-navigation-menu"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </header>
-  <!--== End Header Wrapper ==-->
+</header>
+<!--== End Header Wrapper ==-->

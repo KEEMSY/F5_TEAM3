@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 
 # Create your views here.
-from careerapp.models import Career, Author, News
+from careerapp.models import Author, Career, News
 
 
 def show_home(request):

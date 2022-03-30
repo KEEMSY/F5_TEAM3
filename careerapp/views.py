@@ -1,6 +1,8 @@
-from django.shortcuts import render
-from careerapp.models import Career, Author
 from django.core.paginator import Paginator
+from django.shortcuts import render
+
+from careerapp.models import Author, Career
+
 # Create your views here.
 
 

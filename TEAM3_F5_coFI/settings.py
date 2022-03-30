@@ -65,8 +65,11 @@ INSTALLED_APPS = [
 
     'allauth.socialaccount.providers.google'
 
-
 ]
+
+TIME_ZONE = 'Asia/Seoul'
+
+USE_TZ = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -114,7 +117,6 @@ WSGI_APPLICATION = 'TEAM3_F5_coFI.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
 
 # 로컬 db 연결
 
@@ -179,11 +181,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = "Asia/Seoul"
 
 USE_I18N = True
-
-USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
