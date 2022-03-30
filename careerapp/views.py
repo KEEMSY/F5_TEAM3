@@ -1,7 +1,8 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render
 
-from careerapp.models import Author, Career
+from careerapp.models import Career
+from userapp.models import User
 
 # Create your views here.
 
@@ -10,7 +11,7 @@ def show_job(request):
 
     if request.user.is_authenticated:
         target_user_id = request.user.id
-        target_user = Author.objects.get(pk=target_user_id)
+        target_user = User.objects.get(pk=target_user_id)
         skills = target_user.skill
 
         if len(skills) >= 2:

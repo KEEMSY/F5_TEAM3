@@ -1,8 +1,8 @@
 from django.db import models
 
+from articleapp.models import Article
 # Create your models here.
 from TEAM3_F5_coFI.models import BaseModel
-from articleapp.models import Article
 from userapp.models import User
 
 

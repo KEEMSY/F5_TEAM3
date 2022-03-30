@@ -1,7 +1,6 @@
 from django.urls import path
 
 from articleapp import views
-
 from articleapp.views import ArticleView
 
 app_name = 'articleapp'

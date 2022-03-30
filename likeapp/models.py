@@ -5,7 +5,6 @@ from django.db import models
 
 # Create your models here.
 from articleapp.models import Article
-
 # Create your models here.
 from commentapp.models import Comment
 from userapp.models import User

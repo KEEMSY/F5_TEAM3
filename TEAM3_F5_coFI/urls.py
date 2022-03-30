@@ -20,7 +20,6 @@ from django.urls import include, path
 
 from TEAM3_F5_coFI import views
 
-
 urlpatterns = [
 
     path('admin/', admin.site.urls),

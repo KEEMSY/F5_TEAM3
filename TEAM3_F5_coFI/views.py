@@ -2,7 +2,8 @@ from django.core.paginator import Paginator
 from django.shortcuts import render
 
 # Create your views here.
-from careerapp.models import Author, Career, News
+from careerapp.models import Career, News
+from userapp.models import User
 
 
 def show_home(request):
@@ -10,7 +11,7 @@ def show_home(request):
   # -------------------------------------------------------  채용정보 예외처리 시작 -------------------------------------------------------
     if request.user.is_authenticated:
         target_user_id = request.user.id
-        target_user = Author.objects.get(pk=target_user_id)
+        target_user = User.objects.get(pk=target_user_id)
         skills = target_user.skill
 
         if len(skills) >= 2:
@@ -19,7 +20,7 @@ def show_home(request):
             for skill in skills:
                 career = Career.objects.filter(skills=skill).order_by("id")  # 모든 데이터 조회, id +순으로 해야 최신업데이트된게 위로 나옴.
                 careers = career | careers
-                # skills = Author.objects.get(skill=skill)
+                # skills = User.objects.get(skill=skill)
                 # context에 모든 취업 정보를 저장
 
             paginator = Paginator(careers, 9)

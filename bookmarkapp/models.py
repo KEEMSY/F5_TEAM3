@@ -4,6 +4,7 @@ from django.db import models
 
 from articleapp.models import Article
 from userapp.models import User
+
 # Create your models here.
 
 
