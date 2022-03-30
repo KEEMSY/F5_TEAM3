@@ -213,3 +213,8 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
+
+try:
+    from TEAM3_F5_coFI.local_settings import *
+except ImportError:
+    pass
