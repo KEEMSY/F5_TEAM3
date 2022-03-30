@@ -99,7 +99,8 @@ AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = secrets['AWS']['STORAGE_BUCKET_NAME']
 AWS_DEFAULT_ACL = 'public-read' # 저같은 경우는 public-read로 지정 해 주었습니다. 공식문서를 반드시 참조 해주세요.
-# STATIC_URL = "static" # django 프로젝트에서 사용할 static 파일을 경로를 지정 해주세요. 저같은 경우는 f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"을 사용 하였습니다.
+AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com" # 공식 문서를 참조해주세요. ( cdn 사용이냐, s3 사용이냐에 갈리지만, 여기선 s3 이므로 저는 f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"를 사용 하였습니다.)
+STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/" # django 프로젝트에서 사용할 static 파일을 경로를 지정 해주세요. 저같은 경우는 f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"을 사용 하였습니다.
 
 TEMPLATES = [
     {
