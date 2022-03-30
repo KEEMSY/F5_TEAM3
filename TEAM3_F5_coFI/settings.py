@@ -38,7 +38,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -66,7 +66,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'crispy_forms',
-    # 'storages',
+    'storages',
 ]
 
 TIME_ZONE = 'Asia/Seoul'
@@ -89,16 +89,17 @@ ROOT_URLCONF = 'TEAM3_F5_coFI.urls'
 with open(os.path.join(BASE_DIR, 'aws.json')) as f:
     secrets = json.loads(f.read())
 
-# # 정적파일 업로드를 위한 S3 연결 세팅
-# # https://kangraemin.github.io/django/2020/09/29/elasticbeanstalk-s3/    <<-- 블로그에 잘 정리되어있음.
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# 정적파일 업로드를 위한 S3 연결 세팅
+# https://kangraemin.github.io/django/2020/09/29/elasticbeanstalk-s3/    <<-- 블로그에 잘 정리되어있음.
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# 임시 주석 이부분 살리면 static 경로가 안먹힘.
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3ManifestStaticStorage'
-# AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
-# AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
-# AWS_STORAGE_BUCKET_NAME = secrets['AWS']['STORAGE_BUCKET_NAME']
-# # AWS_DEFAULT_ACL = 'public-read' # 저같은 경우는 public-read로 지정 해 주었습니다. 공식문서를 반드시 참조 해주세요.
-# # STATIC_URL = "static" # django 프로젝트에서 사용할 static 파일을 경로를 지정 해주세요. 저같은 경우는 f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"을 사용 하였습니다.
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3ManifestStaticStorage'
+AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = secrets['AWS']['STORAGE_BUCKET_NAME']
+AWS_DEFAULT_ACL = 'public-read' # 저같은 경우는 public-read로 지정 해 주었습니다. 공식문서를 반드시 참조 해주세요.
+# STATIC_URL = "static" # django 프로젝트에서 사용할 static 파일을 경로를 지정 해주세요. 저같은 경우는 f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"을 사용 하였습니다.
 
 TEMPLATES = [
     {
@@ -194,15 +195,15 @@ USE_I18N = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 # 배포용
-# STATIC_URL = '/static/'
-# # STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-# STATICFILES_DIRS = [
-#    os.path.join(BASE_DIR, "static"),
-# ]
+STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = [
+   os.path.join(BASE_DIR, "static"),
+]
 
 # 로컬용 (스태틱올릴때는 요거)
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [ os.path.join(BASE_DIR, "static"), ]
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
