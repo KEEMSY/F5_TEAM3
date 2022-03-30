@@ -14,6 +14,10 @@ from articleapp.services.service_article import (
 
 
 # 단일 게시글 CRUD
+from commentapp.models import Comment
+from commentapp.services.comment_service import read_all_comment
+
+
 class ArticleView(View):
     def get(self, request, article_id):
         try:
@@ -63,7 +67,8 @@ def show_all_article(request):
     all_articles = read_all_article()
     page = int(request.GET.get('page', 1))
     board_list = get_page(all_articles, page)
-    return render(request, 'articleapp/article_list_all.html', {'articles': all_articles, 'board_list': board_list}, status=200)
+    recent_comment = read_all_comment()
+    return render(request, 'articleapp/article_list_all.html', {'articles': all_articles, 'board_list': board_list, 'recent_comment': recent_comment}, status=200)
 
 
 # 카테고리 별 게시판 불러오기
