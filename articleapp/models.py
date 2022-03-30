@@ -1,3 +1,4 @@
+
 from django.db import models
 
 
@@ -27,6 +28,7 @@ class Article(models.Model):
         return self.title
 
 
+
 class ArticleHits(models.Model):
     class Meta:
         db_table = 'article_hits'
@@ -39,4 +41,5 @@ class ArticleHits(models.Model):
 
     def __str__(self):
         return str(self.article.id)
+
 

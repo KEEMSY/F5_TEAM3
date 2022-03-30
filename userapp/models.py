@@ -4,26 +4,61 @@ from django.db import models
 
 # Create your models here.
 class User(AbstractUser):
-    username = models.CharField(max_length=50, default='')
+    username = models.CharField(max_length=50, null=True, default='')
     email = models.EmailField(max_length=255, unique=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
-class Skill(models.Model):
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    skill = models.CharField(max_length=100, blank=True)
-
-class Contact(models.Model):
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    github = models.CharField(max_length=100, blank=True)
-    linkedin = models.CharField(max_length=100, blank=True)
-    blog = models.CharField(max_length=100, blank=True)
-
 class Blog(models.Model):
     text = models.TextField()
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    #img = models.ImageField(blank=True) *추후 파일 업로드 형태로 변경 시 사용
+    img = models.URLField(max_length=250, blank=True)
+    github = models.URLField(max_length=250, blank=True)
+    blog = models.URLField(max_length=250, blank=True)
+
+    SKILL_A = 'Android'
+    SKILL_B = 'IOS'
+    SKILL_C = 'C++'
+    SKILL_D = 'C#'
+    SKILL_E = 'Java'
+    SKILL_F = 'PHP'
+    SKILL_G = 'Python'
+    SKILL_H = 'Ruby'
+    SKILL_I = 'JSP'
+    SKILL_J = 'Node.js'
+    SKILL_K = 'AngularJS'
+    SKILL_L = 'jQuery'
+    SKILL_M = 'ASP.NET'
+    SKILL_N = None
+    SKILL_CHOICES = [
+        (SKILL_A, 'Android'),
+        (SKILL_B, 'IOS'),
+        (SKILL_C, 'C++'),
+        (SKILL_D, 'C#'),
+        (SKILL_E, 'Java'),
+        (SKILL_F, 'PHP'),
+        (SKILL_G, 'Python'),
+        (SKILL_H, 'Ruby'),
+        (SKILL_I, 'JSP'),
+        (SKILL_J, 'Node.js'),
+        (SKILL_K, 'AngularJS'),
+        (SKILL_L, 'jQuery'),
+        (SKILL_M, 'ASP.NET'),
+        (SKILL_N, '없음'),
+    ]
+
+    skill = models.CharField(max_length=100, blank=True, choices=SKILL_CHOICES)
+
+
+
+
+
+
+
 
 
 

@@ -1,3 +1,4 @@
+
 import datetime
 
 from django.core.paginator import Paginator
@@ -129,3 +130,4 @@ def get_page(articles, page):
     paginator = Paginator(articles, 10)
     board_list = paginator.get_page(page)
     return board_list
+

@@ -63,7 +63,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
-    'allauth.socialaccount.providers.google'
+    'allauth.socialaccount.providers.google',
+
+    'crispy_forms',
 
 ]
 
@@ -187,13 +189,12 @@ USE_I18N = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
-
 
 AUTH_USER_MODEL = 'userapp.User'
 
@@ -213,8 +214,11 @@ AUTHENTICATION_BACKENDS = (
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 try:
     from TEAM3_F5_coFI.local_settings import *
 except ImportError:
     pass
+
