@@ -38,9 +38,9 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -66,7 +66,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'crispy_forms',
-
+    # 'storages',
 ]
 
 TIME_ZONE = 'Asia/Seoul'
@@ -86,13 +86,19 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'TEAM3_F5_coFI.urls'
 
 # aws.json 가져와서 버킷,db 접근권한 주기
-# with open(os.path.join(BASE_DIR, 'aws.json')) as f:
-#     secrets = json.loads(f.read())
-#
+with open(os.path.join(BASE_DIR, 'aws.json')) as f:
+    secrets = json.loads(f.read())
+
+# # 정적파일 업로드를 위한 S3 연결 세팅
+# # https://kangraemin.github.io/django/2020/09/29/elasticbeanstalk-s3/    <<-- 블로그에 잘 정리되어있음.
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3ManifestStaticStorage'
 # AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
 # AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
 # AWS_STORAGE_BUCKET_NAME = secrets['AWS']['STORAGE_BUCKET_NAME']
-# AWS_DEFAULT_ACL = 'public-read'
+# # AWS_DEFAULT_ACL = 'public-read' # 저같은 경우는 public-read로 지정 해 주었습니다. 공식문서를 반드시 참조 해주세요.
+# # STATIC_URL = "static" # django 프로젝트에서 사용할 static 파일을 경로를 지정 해주세요. 저같은 경우는 f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"을 사용 하였습니다.
 
 TEMPLATES = [
     {
@@ -122,18 +128,17 @@ WSGI_APPLICATION = 'TEAM3_F5_coFI.wsgi.application'
 
 # 로컬 db 연결
 
-pymysql.install_as_MySQLdb()  # 이것을 실행하면 pymysql을 사용하면서 mysql클라이언트를 실행하는 것처럼 됨
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': "TEAM3",
-        'USER': "root",
-        'PASSWORD': "2349",
-        'HOST' : "localhost",
-        'PORT' : "3306"
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': "TEAM3",
+#         'USER': "root",
+#         'PASSWORD': "2349",
+#         'HOST' : "localhost",
+#         'PORT' : "3306"
+#     }
+# }
 
 # # 로컬 db 연결
 # DATABASES = {
@@ -144,20 +149,20 @@ DATABASES = {
 # }
 
 # AWS db 연결
-# DATABASES = {
-#     'default': {
-#         'ENGINE': secrets['default']['ENGINE'],
-#         'NAME': secrets['default']['NAME'],
-#         'USER': secrets['default']['USER'],
-#         'PASSWORD': secrets['default']['PASSWORD'],
-#         'HOST': secrets['default']['HOST'],
-#         'PORT': secrets['default']['PORT'],
-#         'OPTIONS': {
-#                 'charset': 'utf8mb4',
-#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-#         },
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': secrets['default']['ENGINE'],
+        'NAME': secrets['default']['NAME'],
+        'USER': secrets['default']['USER'],
+        'PASSWORD': secrets['default']['PASSWORD'],
+        'HOST': secrets['default']['HOST'],
+        'PORT': secrets['default']['PORT'],
+        'OPTIONS': {
+                'charset': 'utf8mb4',
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        },
+    }
+}
 
 
 # Password validation
@@ -188,13 +193,24 @@ USE_I18N = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
+# 배포용
+# STATIC_URL = '/static/'
+# # STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, "static"),
+# ]
 
+# 로컬용 (스태틱올릴때는 요거)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+STATICFILES_DIRS = [ os.path.join(BASE_DIR, "static"), ]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
+
+
+# MEDIA_URL = '/media/'
+# # 배포용
+# MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 
 AUTH_USER_MODEL = 'userapp.User'
 
@@ -217,8 +233,8 @@ LOGIN_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
-try:
-    from TEAM3_F5_coFI.local_settings import *
-except ImportError:
-    pass
+# try:
+#     from TEAM3_F5_coFI.local_settings import *
+# except ImportError:
+#     pass
 
