@@ -93,15 +93,15 @@ with open(os.path.join(BASE_DIR, 'aws.json')) as f:
 # https://kangraemin.github.io/django/2020/09/29/elasticbeanstalk-s3/    <<-- 블로그에 잘 정리되어있음.
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # 임시 주석 이부분 살리면 static 경로가 안먹힘.
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3ManifestStaticStorage'
 AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = secrets['AWS']['STORAGE_BUCKET_NAME']
-AWS_DEFAULT_ACL = 'public-read' # 저같은 경우는 public-read로 지정 해 주었습니다. 공식문서를 반드시 참조 해주세요.
-AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com" # 공식 문서를 참조해주세요. ( cdn 사용이냐, s3 사용이냐에 갈리지만, 여기선 s3 이므로 저는 f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"를 사용 하였습니다.)
-STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/" # django 프로젝트에서 사용할 static 파일을 경로를 지정 해주세요. 저같은 경우는 f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"을 사용 하였습니다.
-
+# AWS_DEFAULT_ACL = 'public-read' # 저같은 경우는 public-read로 지정 해 주었습니다. 공식문서를 반드시 참조 해주세요.
+# AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com" # 공식 문서를 참조해주세요. ( cdn 사용이냐, s3 사용이냐에 갈리지만, 여기선 s3 이므로 저는 f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"를 사용 하였습니다.)
+# STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/" # django 프로젝트에서 사용할 static 파일을 경로를 지정 해주세요. 저같은 경우는 f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"을 사용 하였습니다.
+# AWS_S3_REGION_NAME = 'ap-northeast-2'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -198,9 +198,13 @@ USE_I18N = True
 # 배포용
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATICFILES_DIRS = [
-   os.path.join(BASE_DIR, "static"),
-]
+# STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, "static"),
+
+
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
+
 
 # 로컬용 (스태틱올릴때는 요거)
 # STATIC_URL = '/static/'
@@ -210,9 +214,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 
-# MEDIA_URL = '/media/'
-# # 배포용
-# MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 
 AUTH_USER_MODEL = 'userapp.User'
 
