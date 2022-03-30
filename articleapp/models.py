@@ -18,6 +18,7 @@ class Article(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     content = models.TextField(null=True)
     img = models.TextField(null=True)
+    like_cnt = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     article_hits = models.IntegerField(default=0)
