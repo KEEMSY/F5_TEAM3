@@ -1522,41 +1522,44 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="avatar clearfix avatar-big col-sm-3 text-center">
-                            {% if not user.profile.img %}
+                            {% if not u.profile.img %}
                                 <a class="avatar-photo"><img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg"></a>
                             {% else %}
-                                <a class="avatar-photo"><img src="{{ user.profile.img }}"></a>
+                                <a class="avatar-photo"><img src="{{ u.profile.img }}"></a>
                             {% endif %}
 
                         </div>
 
                         <div class="user-name-skill">
                             <h2 class="pull-left"><strong
-                                    class="strong">{{ user.username }}</strong></br>{{ user.profile.skill }}</h2>
+                                    class="strong">{{ u.username }}</strong></br>{{ u.profile.skill }}</h2>
                         </div>
 
                         <div class="user-info col-sm-9">
-                            {% if user.profile.github %}
+                            {% if u.profile.github %}
                                 <div class="user-point">
                                     <div class="github">
-                                        <a href="{{ user.profile.github }}"><img
+                                        <a href="{{ u.profile.github }}"><img
                                                 src="{% static 'img/github_icon.png' %}"></a>
                                     </div>
                                 </div>
                             {% endif %}
-                            {% if user.profile.blog %}
+                            {% if u.profile.blog %}
                             <div class="user-point">
                                 <div class="blog">
-                                    <a href="{{ user.profile.blog }}"><img src="{% static 'img/blog_icon.png' %}"></a>
+                                    <a href="{{ u.profile.blog }}"><img src="{% static 'img/blog_icon.png' %}"></a>
                                 </div>
                             </div>
                             {% endif %}
                         </div>
 
+
                         <div class="modal-button-wraper">
-                            <div class="fix-button">
-                                <button class="btn btn-success pull-right btn-wide" id="btn-modal">수정</button>
-                            </div>
+                            {% if u.pk == user.id %}
+                                <div class="fix-button">
+                                    <button class="btn btn-success pull-right btn-wide" id="btn-modal">수정</button>
+                                </div>
+                            {% endif %}
                         </div>
 
                     </div>
@@ -1619,7 +1622,7 @@
                                                     src="https://lh3.googleusercontent.com/a/AATXAJxjI7wCwDgDjXO0DtzYshudP1oA4gGTF-DpdEME=s96-c"></a>
                                             <div class="avatar-info">
                                                 <a class="nickname" href="/user/info/139377" title="김지용">김지용</a>
-                                                <div class="activity "><span class="fa fa-flash"></span> 14</div>
+                                                <div class="activity "> 14</div>
                                             </div>
                                         </div>
                                     </div>
@@ -1647,7 +1650,7 @@
                                                     src="https://lh3.googleusercontent.com/a/AATXAJxjI7wCwDgDjXO0DtzYshudP1oA4gGTF-DpdEME=s96-c"></a>
                                             <div class="avatar-info">
                                                 <a class="nickname" href="/user/info/139377" title="김지용">김지용</a>
-                                                <div class="activity "><span class="fa fa-flash"></span> 14</div>
+                                                <div class="activity "> 14</div>
                                             </div>
                                         </div>
                                     </div>

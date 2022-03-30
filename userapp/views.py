@@ -64,13 +64,13 @@ def log_out(request):
 
 
 def get_profile(request, pk):
-    user = get_object_or_404(User, pk=pk)  # 로그인중인 사용자 객체를 얻어옴
+    u = get_object_or_404(User, pk=pk)  # 로그인중인 사용자 객체를 얻어옴
     user_form = UserForm(initial={
-        'username': user.username,
+        'username': u.username,
     })
 
-    if hasattr(user, 'profile'):  # user가 profile을 가지고 있으면 True, 없으면 False (회원가입을 한다고 profile을 가지고 있진 않으므로)
-        profile = user.profile
+    if hasattr(u, 'profile'):  # user가 profile을 가지고 있으면 True, 없으면 False (회원가입을 한다고 profile을 가지고 있진 않으므로)
+        profile = u.profile
         profile_form = ProfileForm(initial={
             'img': profile.img,
             'skill': profile.skill,
@@ -85,7 +85,7 @@ def get_profile(request, pk):
             #{'articles': articles} 를 아래 추가
 
 
-    return render(request, 'userapp/profile.html', {"user_form": user_form, "profile_form": profile_form})
+    return render(request, 'userapp/profile.html', {"user_form": user_form, "profile_form": profile_form, 'u':u})
 
 
 @login_required(login_url="/users/login/")
