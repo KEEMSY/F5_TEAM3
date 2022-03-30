@@ -20,10 +20,12 @@ from commentapp.services.comment_service import read_all_comment
 
 class ArticleView(View):
     def get(self, request, article_id):
+        all_articles = read_all_article()
+        recent_comments = read_all_comment()
         try:
             ip = get_client_ip(request)
             target_article = hit_article(ip, article_id)
-            return render(request, 'article_detail.html', {'result': target_article}, status=200)
+            return render(request, 'article_detail.html', {'result': target_article, 'all_articles':all_articles, 'recent_comments':recent_comments}, status=200)
 
         except ObjectDoesNotExist:
             return JsonResponse({'msg': "게시글이 존재하지 않습니다."}, status=404)
@@ -65,22 +67,29 @@ def write_article(request):
 # 홈
 def show_all_article(request):
     all_articles = read_all_article()
+    recent_comment = read_all_comment()
     page = int(request.GET.get('page', 1))
     board_list = get_page(all_articles, page)
-    recent_comment = read_all_comment()
+
     return render(request, 'articleapp/article_list_all.html', {'articles': all_articles, 'board_list': board_list, 'recent_comment': recent_comment}, status=200)
 
 
 # 카테고리 별 게시판 불러오기
 def show_category_article(request):
+    all_articles = read_all_article()
+    recent_comments = read_all_comment()
+
     target_articles = read_category_article(request.POST['category'])
     page = int(request.GET.get('page', 1))
     board_list = get_page(target_articles, page)
-    return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list}, status=200)
+    return render(request, 'community.html', {'target_articles': target_articles, 'board_list': board_list, 'all_articles':all_articles, 'recent_comments':recent_comments}, status=200)
 
 
 # 게시글 검색: 기간, 키워드(유저이름, 제목)
 def search_article(request):
+    all_articles = read_all_article()
+    recent_comments = read_all_comment()
+
     standard = request.POST['standard']
     period = request.POST['period']
     keyword = request.POST['keyword']
@@ -90,14 +99,14 @@ def search_article(request):
             target_articles = read_article_by_title(keyword)
             page = int(request.GET.get('page', 1))
             board_list = get_page(target_articles, page)
-            return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list},
+            return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list,'all_articles':all_articles, 'recent_comments':recent_comments},
                           status=200)
 
         else:
             target_articles = read_article_containing_username(keyword)
             page = int(request.GET.get('page', 1))
             board_list = get_page(target_articles, page)
-            return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list},
+            return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list, 'all_articles':all_articles, 'recent_comments':recent_comments},
                           status=200)
 
     else:
@@ -106,7 +115,7 @@ def search_article(request):
                 target_articles = read_article_by_title_within_a_specific_period(period, keyword)
                 page = int(request.GET.get('page', 1))
                 board_list = get_page(target_articles, page)
-                return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list},
+                return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list, 'all_articles':all_articles, 'recent_comments':recent_comments},
                               status=200)
             except ObjectDoesNotExist:
                 return JsonResponse({'result': '게시글이 존재하지 않습니다.'}, status=404)
@@ -116,7 +125,7 @@ def search_article(request):
                 target_articles = read_article_containing_username_within_a_specific_period(period, keyword)
                 page = int(request.GET.get('page', 1))
                 board_list = get_page(target_articles, page)
-                return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list},
+                return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list, 'all_articles':all_articles, 'recent_comments':recent_comments},
                               status=200)
             except ObjectDoesNotExist:
                 return JsonResponse({'result': '게시글이 존재하지 않습니다.'}, status=404)
