@@ -6,10 +6,8 @@ from careerapp.models import Author, Career, News
 
 
 def show_home(request):
-
-
-
-# -------------------------------------------------------  채용정보 예외처리 시작 -------------------------------------------------------
+  
+  # -------------------------------------------------------  채용정보 예외처리 시작 -------------------------------------------------------
     if request.user.is_authenticated:
         target_user_id = request.user.id
         target_user = Author.objects.get(pk=target_user_id)
@@ -56,5 +54,28 @@ def show_home(request):
 
         context = {'careers': careers, 'board_list': board_list, "news": news}
         return render(request, 'base.html', context)
+
+
+    
+
+
+def show_community(request):
+    return render(request, 'articleapp/temp_commnuity.html')
+
+def show_article_list_question(request):
+    return render(request, 'articleapp/article_list_question.html')
+
+def show_article_list_free(request):
+    return render(request, 'articleapp/article_list_free.html')
+
+def show_article_list_tip(request):
+    return render(request, 'articleapp/article_list_tip.html')
+
+def show_article_write(request):
+    return render(request, 'articleapp/article_write.html')
+
+
+
+
 
 

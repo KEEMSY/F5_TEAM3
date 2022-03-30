@@ -199,10 +199,10 @@ AUTH_USER_MODEL = 'userapp.User'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-try:
-    from TEAM3_F5_coFI.local_settings import *
-except ImportError:
-    pass
+# try:
+#     from TEAM3_F5_coFI.local_settings import *
+# except ImportError:
+#     pass
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
