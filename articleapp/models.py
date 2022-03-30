@@ -1,28 +1,24 @@
 
 from django.db import models
 
-
-class Author(models.Model):
-    name = models.TextField()
+from TEAM3_F5_coFI.models import BaseModel
+from userapp.models import User
 
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
 
 
-class Article(models.Model):
+class Article(BaseModel):
     class Meta:
         db_table = "article"
 
     title = models.CharField(max_length=50)
-    user = models.ForeignKey(Author, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     content = models.TextField(null=True)
     img = models.TextField(null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
     article_hits = models.IntegerField(default=0)
-    objects = models.Manager()
 
     def __str__(self):
         return self.title
