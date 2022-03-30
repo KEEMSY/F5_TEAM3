@@ -1,6 +1,6 @@
 {% load static %}
 <head>
-    {% block extrahead %}
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,12 +30,18 @@
     <link href="{% static 'css/fancybox.min.css' %}" rel="stylesheet" />
     <!--== Aos Min CSS ==-->
     <link href="{% static 'css/aos.min.css' %}" rel="stylesheet" />
+{#    community CSS#}
+    <link href="{% static 'css/community.css' %}" rel="stylesheet" />
 
     <!--== Main Style CSS ==-->
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
 
+
     <!--== Profile Update CSS ==-->
     <link href="{% static 'css/profile_update_modal.css' %}" rel="stylesheet" />
 
-    {% endblock %}
+
+    <!--== header CSS ==-->
+    <link href="{% static 'css/header.css' %}" rel="stylesheet" />
+
 </head>

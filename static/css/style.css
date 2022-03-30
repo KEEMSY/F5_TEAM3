@@ -342,7 +342,7 @@ table p {
 
 /*-------- Custom Color Style Css --------*/
 .bg-color-gray {
-  background-color: #f4f7f7;
+  background-color: #ffcd39;
 }
 
 /*-------- Margin & Padding Custom Style Css --------*/
@@ -649,7 +649,7 @@ table p {
           transform: translate(0%, -50%);
 }
 .off-canvas-wrapper .btn-menu-close:hover {
-  color: #fff;
+  color: #000000;
   background-color: #2f2f2f;
 }
 
@@ -782,9 +782,9 @@ table p {
 -----------------------------------------------------------------------
 */
 .header-area {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  /*border-bottom: 1px solid rgba(255, 255, 255, 0.08);*/
   padding: 0;
-  
+
 }
 .header-area .container {
   padding: 0 15px;
@@ -1228,24 +1228,27 @@ table p {
 }
 .home-slider-container .slider-content-area .slider-content .title {
   color: #343A36;
-  font-size: 50px;
+  font-size: 100px;
   line-height: 1.3;
   margin-bottom: 21px;
 }
 @media only screen and (max-width: 1199px) {
   .home-slider-container .slider-content-area .slider-content .title {
-    font-size: 40px;
+    font-size: 65px;
     margin-bottom: 10px;
+    justify-content: center;
   }
 }
 @media only screen and (max-width: 767px) {
   .home-slider-container .slider-content-area .slider-content .title {
-    font-size: 32px;
+    font-size: 55px;
+    justify-content: center;
   }
 }
 @media only screen and (max-width: 575px) {
   .home-slider-container .slider-content-area .slider-content .title {
-    font-size: 26px;
+    font-size: 46px;
+    justify-content: center;
   }
 }
 .home-slider-container .slider-content-area .slider-content .title span {
@@ -1253,8 +1256,9 @@ table p {
 }
 .home-slider-container .slider-content-area .slider-content .desc {
   color: #343A36;
-  font-size: 18px;
+  font-size: 30px;
   margin-bottom: 0;
+      margin-right: 19vw;
 }
 @media only screen and (max-width: 1199px) {
   .home-slider-container .slider-content-area .slider-content .desc {
@@ -1274,7 +1278,7 @@ table p {
 }
 .home-slider-shape .shape1 {
   position: absolute;
-  top: -3px;
+  top: -5px;
   right: 0;
   animation: movebounce 4s linear infinite;
   -webkit-animation: movebounce 4s linear infinite;
@@ -1284,12 +1288,12 @@ table p {
 }
 @media only screen and (max-width: 1699px) {
   .home-slider-shape .shape1 {
-    width: 200px;
+    width: 650px;
   }
 }
 @media only screen and (max-width: 1399.98px) {
   .home-slider-shape .shape1 {
-    width: 170px;
+    width: 600px;
   }
 }
 .home-slider-shape .shape2 {
@@ -1342,6 +1346,17 @@ table p {
     width: 100px;
   }
 }
+
+.abutton {
+          background-color: #03a84e;
+    border: 1px solid #03a84e;
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    font-size: 15px;
+    padding: 1px 8px 1px;
+    text-align: center;
+        }
 
 .job-search-wrap {
   -webkit-box-align: center;
@@ -1648,10 +1663,13 @@ table p {
   color: #03a84e;
 }
 .recent-job-item .main-content .work-type {
-  color: #03a84e;
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 15px;
+    color: #03a84e;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    max-height: 90px;
+    overflow: hidden;
+    /*overflow: auto;*/
 }
 @media only screen and (max-width: 1199px) {
   .recent-job-item .main-content .work-type {
@@ -2381,7 +2399,7 @@ table p {
 }
 
 .play-video-btn {
-  margin-top: 15vw;
+  margin-top: 10vw;
 }
 
 .play-video-btn .video-popup {
@@ -5275,6 +5293,10 @@ table p {
   border-color: #03a84e;
   color: #fff;
 }
+.chosen_page {
+  font-weight: bold;
+  font-size: 18px;
+}
 .pagination-area .page-numbers li .page-number i {
   color: #272a33;
   font-size: 20px;
@@ -5530,7 +5552,7 @@ table p {
   color: #929292;
   font-weight: 500;
   font-size: 16px;
-  line-height: 1;
+  line-height: 1.50;
   margin-bottom: 15px;
 }
 @media only screen and (max-width: 991px) {
@@ -6563,8 +6585,8 @@ table p {
   }
 }
 .footer-area .widget-title {
-  font-size: 28px;
-  color: #fff;
+  font-size: 25px;
+  color: #000000;
   text-transform: capitalize;
   margin-bottom: 40px;
 }
@@ -6681,7 +6703,7 @@ table p {
   line-height: 50px;
 }
 .footer-area .nav-menu li a {
-  color: #d8dadf;
+  color: #484b52;
   font-size: 18px;
   line-height: 50px;
   padding: 0 0;
@@ -6839,7 +6861,7 @@ table p {
 }
 
 .footer-main {
-  background-color: #272a33;
+  background-color: #f4f7f7;
   position: relative;
   padding: 126px 0 86px;
 }

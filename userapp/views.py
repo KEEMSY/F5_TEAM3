@@ -1,10 +1,12 @@
 from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
 from userapp.models import User
+
 
 from . import forms
 from .forms import ProfileForm, UserForm

@@ -6,3 +6,4 @@ from .models import Blog, Profile, User
 admin.site.register(User)
 admin.site.register(Blog)
 admin.site.register(Profile)
+

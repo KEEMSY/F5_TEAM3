@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style type="text/css">
+        thead {
+            background-color:#cecece;
+        }
+
+        .content {
+            max-width:500px;
+            margin: auto;
+            padding:10px;
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .board {
+            width: 100%
+        }
+
+        .even_bgcolor {
+            background-color:#e8efff;
+        }
+    </style>
+<body>
+    <div class="content">
+        <div class="header">
+            <h2>{{ title }}</h2>
+        </div>
+        <div style="text-align:right">
+            <a href="{% url 'board:write' %}">글쓰기</a>
+        </div>
+
+        <table class="board">
+            <thead>
+                <tr class="header">
+                    <th style="width:10%;">순번</th>
+                    <th style="width:60%">제목</th>
+                    <th style="width:30%">작성일자</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if board_list %}
+                {% for data in board_list %}
+                <tr class="{% if forloop.counter|divisibleby:2 %}even_bgcolor{% endif %}">
+                    <td style="text-align:center;">{{ forloop.counter }}</td>
+                    <td>
+                        <a href="{% url 'board:detail' data.id %}">
+                            {{ data.title }}
+                        </a>
+                    </td>
+                    <td>{{ data.pub_date|date:'Y-m-d' }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td>작성된 게시글이 없습니다.</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

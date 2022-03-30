@@ -20,10 +20,12 @@ class CommentView(View):
         except IntegrityError:
             return JsonResponse({'msg': '게시글이 존재하지 않습니다.'}, status=400)
 
+
     def patch(self, request):
         try:
             update_comment(comment_id=request.comment_id, content=request.content)
             return JsonResponse({'msg': '댓글이 수정되었습니다.'}, status=200)
+
 
         except ObjectDoesNotExist:
             return JsonResponse({'msg': '댓글이 존재하지 않습니다.'}, status=400)
@@ -40,3 +42,4 @@ class CommentView(View):
 
 def show_home(request):
     return render(request, "base.html")
+

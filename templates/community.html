@@ -1,70 +1,216 @@
 <!DOCTYPE html>
 <html lang="ko">
 
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+
 {% include 'head.html' %}
 
-<body>
 
+<style type="text/css">
+    thead {
+        background-color: #cecece;
+    }
+
+    .content {
+        max-width: 500px;
+        margin: 20vw 0;
+        padding: 10px;
+    }
+
+    .header {
+        text-align: center;
+    }
+
+    .board {
+        width: 100%
+    }
+
+    .even_bgcolor {
+        background-color: #e8efff;
+    }
+
+    .pagination {
+        display: flex;
+    }
+
+    .current {
+        font-weight: bold;
+    }
+
+    a {
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .abutton {
+        background-color: #03a84e;
+        border: 1px solid #03a84e;
+        border-radius: 5px;
+        color: #fff;
+        display: inline-block;
+        font-size: 15px;
+        padding: 1px 8px 1px;
+        text-align: center;
+    }
+
+    .chosen_page {
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+</style>
+<body>
 <!--wrapper start-->
 <div class="wrapper">
 
-  <!--== Start Header Wrapper ==-->
+    <!--== Start Header Wrapper ==-->
 
-  {% include 'header.html' %}
+    {% include 'header.html' %}
+
+    <div class="content">
+        <div class="header">
+            <h2>{{ title }}</h2>
+        </div>
+        <div style="text-align:right">
+            <a href="{% url 'articleapp:move_to_write' %}">글쓰기</a>
+        </div>
+        <table class="board">
+            <thead>
+            <tr class="header">
+                <th style="width:10%;">순번</th>
+                <th style="width:60%">제목</th>
+                <th style="width:30%">작성일자</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if board_list %}
+                {% for data in board_list %}
+                    <tr class="{% if forloop.counter|divisibleby:2 %}even_bgcolor{% endif %}">
+                        <td style="text-align:center;">{{ forloop.counter }}</td>
+                        <td>
+                            <a href="{% url 'articleapp:detail_read' data.id %}">
+                                {{ data.title }}
+                            </a>
+                        </td>
+                        <td>{{ data.created_at|date:'Y-m-d' }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td>작성된 게시글이 없습니다.</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <div class="pagination-area">
+              <nav>
+                <ul class="page-numbers d-inline-flex">
+
+                    <div style="width:12vw; margin: 0 5px;">
+                {% if board_list.has_previous %}
+                    <a class="abutton" href="?page=1">맨 앞으로</a>
+                    <a class="abutton" href="?page={{ board_list.previous_page_number }}">이전</a>
+                {% endif %}
+                </div>
+
+
+                    {% for page in board_list.paginator.page_range %}
+{#                    {% if page == |add:4 %}{%elif page == 2 |add:3 %}#}
+                    {% if page >= board_list.number|add:-2 and page <= board_list.number|add:2 %}
+                    <li class="page-number {% if page == board_list.number %}active chosen_page{% endif %}">
+                        <a href="?page={{ page }}">{{ page }}</a>
+                    </li>
+                    {% elif page >= board_list.number|add:-3 and page <= board_list.number|add:3 %}
+
+                    {% endif %}
+
+                    {% endfor %}
+
+                    <div style="width:12vw; margin: 0 5px;">
+                    {% if board_list.has_next %}
+                        <a class="abutton" href="?page={{ board_list.next_page_number }}">다음</a>
+                        <a class="abutton" href="?page={{ board_list.paginator.num_pages }}">맨 뒤로</a>
+                    {% endif %}
+                    </div>
+
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+  {% include 'header_ver2.html' %}
+
 
 {% include 'footer.html' %}
-  <!--== End Footer Area Wrapper ==-->
+<!--== End Footer Area Wrapper ==-->
 
-  <!--== Scroll Top Button ==-->
-  <div id="scroll-to-top" class="scroll-to-top"><span class="icofont-rounded-up"></span></div>
+<!--== Scroll Top Button ==-->
+<div id="scroll-to-top" class="scroll-to-top"><span class="icofont-rounded-up"></span></div>
 
-  <!--== Start Aside Menu ==-->
-  <aside class="off-canvas-wrapper offcanvas offcanvas-start" tabindex="-1" id="AsideOffcanvasMenu" aria-labelledby="offcanvasExampleLabel">
+<!--== Start Aside Menu ==-->
+<aside class="off-canvas-wrapper offcanvas offcanvas-start" tabindex="-1" id="AsideOffcanvasMenu"
+       aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
-      <h1 class="d-none" id="offcanvasExampleLabel">Aside Menu</h1>
-      <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">menu <i class="icofont-simple-left"></i></button>
+        <h1 class="d-none" id="offcanvasExampleLabel">Aside Menu</h1>
+        <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">menu <i
+                class="icofont-simple-left"></i></button>
     </div>
     <div class="offcanvas-body">
-      <!-- Mobile Menu Start -->
-      <div class="mobile-menu-items">
-        <ul class="nav-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="#">Find Jobs</a>
-            <ul class="sub-menu">
-              <li><a href="job.html">Jobs</a></li>
-              <li><a href="job-details.html">Job Details</a></li>
+        <!-- Mobile Menu Start -->
+        <div class="mobile-menu-items">
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">Find Jobs</a>
+                    <ul class="sub-menu">
+                        <li><a href="job.html">Jobs</a></li>
+                        <li><a href="job-details.html">Job Details</a></li>
+                    </ul>
+                </li>
+                <li><a href="employers-details.html">Employers Details</a></li>
+                <li><a href="#">Candidates</a>
+                    <ul class="sub-menu">
+                        <li><a href="candidate.html">Candidates</a></li>
+                        <li><a href="candidate-details.html">Candidate Details</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Blog</a>
+                    <ul class="sub-menu">
+                        <li><a href="blog-grid.html">Blog Grid</a></li>
+                        <li><a href="blog.html">Blog Left Sidebar</a></li>
+                        <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+                        <li><a href="blog-details.html">Blog Details</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Pages</a>
+                    <ul class="sub-menu">
+                        <li><a href="about-us.html">About us</a></li>
+                        <li><a href="login.html">Login</a></li>
+                        <li><a href="registration.html">Registration</a></li>
+                        <li><a href="page-not-found.html">Page Not Found</a></li>
+                    </ul>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
-          </li>
-          <li><a href="employers-details.html">Employers Details</a></li>
-          <li><a href="#">Candidates</a>
-            <ul class="sub-menu">
-              <li><a href="candidate.html">Candidates</a></li>
-              <li><a href="candidate-details.html">Candidate Details</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Blog</a>
-            <ul class="sub-menu">
-              <li><a href="blog-grid.html">Blog Grid</a></li>
-              <li><a href="blog.html">Blog Left Sidebar</a></li>
-              <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-              <li><a href="blog-details.html">Blog Details</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Pages</a>
-            <ul class="sub-menu">
-              <li><a href="about-us.html">About us</a></li>
-              <li><a href="login.html">Login</a></li>
-              <li><a href="registration.html">Registration</a></li>
-              <li><a href="page-not-found.html">Page Not Found</a></li>
-            </ul>
-          </li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <!-- Mobile Menu End -->
+        </div>
+        <!-- Mobile Menu End -->
     </div>
-  </aside>
-  <!--== End Aside Menu ==-->
+</aside>
+<!--== End Aside Menu ==-->
 </div>
 
 <!--=======================Javascript============================-->

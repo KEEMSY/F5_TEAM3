@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'commentapp',
     'likeapp',
     'bookmarkapp',
+    'careerapp',
 
     'allauth',
     'allauth.account',
@@ -66,8 +67,11 @@ INSTALLED_APPS = [
 
     'crispy_forms',
 
-
 ]
+
+TIME_ZONE = 'Asia/Seoul'
+
+USE_TZ = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -84,7 +88,7 @@ ROOT_URLCONF = 'TEAM3_F5_coFI.urls'
 # aws.json 가져와서 버킷,db 접근권한 주기
 # with open(os.path.join(BASE_DIR, 'aws.json')) as f:
 #     secrets = json.loads(f.read())
-
+#
 # AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
 # AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
 # AWS_STORAGE_BUCKET_NAME = secrets['AWS']['STORAGE_BUCKET_NAME']
@@ -115,7 +119,6 @@ WSGI_APPLICATION = 'TEAM3_F5_coFI.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
 
 # 로컬 db 연결
 
@@ -150,6 +153,7 @@ DATABASES = {
 #         'HOST': secrets['default']['HOST'],
 #         'PORT': secrets['default']['PORT'],
 #         'OPTIONS': {
+#                 'charset': 'utf8mb4',
 #             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
 #         },
 #     }
@@ -179,11 +183,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = "Asia/Seoul"
 
 USE_I18N = True
-
-USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -199,10 +200,10 @@ AUTH_USER_MODEL = 'userapp.User'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-try:
-    from TEAM3_F5_coFI.local_settings import *
-except ImportError:
-    pass
+# try:
+#     from TEAM3_F5_coFI.local_settings import *
+# except ImportError:
+#     pass
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -214,3 +215,10 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+try:
+    from TEAM3_F5_coFI.local_settings import *
+except ImportError:
+    pass
+
