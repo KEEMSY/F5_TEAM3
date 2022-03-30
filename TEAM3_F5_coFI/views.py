@@ -15,7 +15,7 @@ def show_home(request):
     board_list = paginator.get_page(page)
     news = News.objects.all().order_by("id")  # 모든 데이터 조회, id +순으로 해야 최신업데이트된게 위로 나옴.
 
-    ##로그인 했을 때 화면##
+
     if request.user.is_authenticated: # 로그인 했다면,
         u = get_object_or_404(User, pk=request.user.pk) #로그인한 유저의 객체를 가져오고
         try:
