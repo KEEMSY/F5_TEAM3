@@ -94,7 +94,7 @@ with open(os.path.join(BASE_DIR, 'aws.json')) as f:
 # https://kangraemin.github.io/django/2020/09/29/elasticbeanstalk-s3/    <<-- 블로그에 잘 정리되어있음.
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # 임시 주석 이부분 살리면 static 경로가 안먹힘.
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3ManifestStaticStorage'
 AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
@@ -198,8 +198,8 @@ USE_I18N = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 # 배포용
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "/staticfiles/")
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "/static/")]
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, "/static/")]
 
 
 # MEDIA_URL = '/media/'
