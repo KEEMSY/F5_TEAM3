@@ -23,7 +23,9 @@ class ArticleView(View):
         try:
             ip = get_client_ip(request)
             target_article = hit_article(ip, article_id)
-            return render(request, 'article_detail.html', {'result': target_article, 'all_articles':all_articles, 'recent_comments':recent_comments}, status=200)
+            return render(request, 'article_detail.html',
+                          {'result': target_article, 'all_articles': all_articles, 'recent_comments': recent_comments},
+                          status=200)
 
         except ObjectDoesNotExist:
             return JsonResponse({'msg': "게시글이 존재하지 않습니다."}, status=404)
@@ -69,10 +71,47 @@ def show_all_article(request):
     page = int(request.GET.get('page', 1))
     board_list = get_page(all_articles, page)
 
-    return render(request, 'articleapp/article_all.html', {'articles': all_articles, 'board_list': board_list, 'recent_comments': recent_comments}, status=200)
+    return render(request, 'articleapp/article_all.html',
+                  {'articles': all_articles, 'board_list': board_list, 'recent_comments': recent_comments}, status=200)
 
 
 # 카테고리 별 게시판 불러오기
+def show_question_article(request):
+    all_articles = read_all_article()
+    recent_comments = read_all_comment()
+
+    target_articles = read_category_article(1)
+    page = int(request.GET.get('page', 1))
+    board_list = get_page(target_articles, page)
+    return render(request, 'articleapp/article_question.html',
+                  {'target_articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
+                   'recent_comments': recent_comments}, status=200)
+
+
+def show_free_article(request):
+    all_articles = read_all_article()
+    recent_comments = read_all_comment()
+
+    target_articles = read_category_article(2)
+    page = int(request.GET.get('page', 1))
+    board_list = get_page(target_articles, page)
+    return render(request, 'articleapp/article_free.html',
+                  {'target_articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
+                   'recent_comments': recent_comments}, status=200)
+
+
+def show_tip_article(request):
+    all_articles = read_all_article()
+    recent_comments = read_all_comment()
+
+    target_articles = read_category_article(3)
+    page = int(request.GET.get('page', 1))
+    board_list = get_page(target_articles, page)
+    return render(request, 'articleapp/article_tip.html',
+                  {'target_articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
+                   'recent_comments': recent_comments}, status=200)
+
+
 def show_category_article(request):
     all_articles = read_all_article()
     recent_comments = read_all_comment()
@@ -80,7 +119,9 @@ def show_category_article(request):
     target_articles = read_category_article(request.POST['category'])
     page = int(request.GET.get('page', 1))
     board_list = get_page(target_articles, page)
-    return render(request, 'community.html', {'target_articles': target_articles, 'board_list': board_list, 'all_articles':all_articles, 'recent_comments':recent_comments}, status=200)
+    return render(request, 'community.html',
+                  {'target_articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
+                   'recent_comments': recent_comments}, status=200)
 
 
 # 게시글 검색: 기간, 키워드(유저이름, 제목)
@@ -97,14 +138,18 @@ def search_article(request):
             target_articles = read_article_by_title(keyword)
             page = int(request.GET.get('page', 1))
             board_list = get_page(target_articles, page)
-            return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list,'all_articles':all_articles, 'recent_comments':recent_comments},
+            return render(request, 'community.html',
+                          {'articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
+                           'recent_comments': recent_comments},
                           status=200)
 
         else:
             target_articles = read_article_containing_username(keyword)
             page = int(request.GET.get('page', 1))
             board_list = get_page(target_articles, page)
-            return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list, 'all_articles':all_articles, 'recent_comments':recent_comments},
+            return render(request, 'community.html',
+                          {'articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
+                           'recent_comments': recent_comments},
                           status=200)
 
     else:
@@ -113,7 +158,9 @@ def search_article(request):
                 target_articles = read_article_by_title_within_a_specific_period(period, keyword)
                 page = int(request.GET.get('page', 1))
                 board_list = get_page(target_articles, page)
-                return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list, 'all_articles':all_articles, 'recent_comments':recent_comments},
+                return render(request, 'community.html',
+                              {'articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
+                               'recent_comments': recent_comments},
                               status=200)
             except ObjectDoesNotExist:
                 return JsonResponse({'result': '게시글이 존재하지 않습니다.'}, status=404)
@@ -123,8 +170,9 @@ def search_article(request):
                 target_articles = read_article_containing_username_within_a_specific_period(period, keyword)
                 page = int(request.GET.get('page', 1))
                 board_list = get_page(target_articles, page)
-                return render(request, 'community.html', {'articles': target_articles, 'board_list': board_list, 'all_articles':all_articles, 'recent_comments':recent_comments},
+                return render(request, 'community.html',
+                              {'articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
+                               'recent_comments': recent_comments},
                               status=200)
             except ObjectDoesNotExist:
                 return JsonResponse({'result': '게시글이 존재하지 않습니다.'}, status=404)
-

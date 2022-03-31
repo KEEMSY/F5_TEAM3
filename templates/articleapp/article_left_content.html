@@ -8,14 +8,14 @@
                 </div>
                 <div class="category_list_wrapper">
                     <ul>
-                        <li class="category_list">
-                            <a href="">질문게시판</a>
+                        <li class="category_list" id="question">
+                            <a href="{% url 'articleapp:question' %}" onclick="get_title(question)">질문게시판</a>
                         </li>
                         <li class="category_list">
-                            <a href="">자유게시판</a>
+                            <a href="{% url 'articleapp:free' %}">자유게시판</a>
                         </li>
                         <li class="category_list">
-                            <a href="">팁게시판</a>
+                            <a href="{% url 'articleapp:tip' %}">팁게시판</a>
                         </li>
                     </ul>
                 </div>

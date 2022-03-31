@@ -6,6 +6,9 @@ class Author(models.Model):
 
 
 class Category(models.Model):
+    class Meta:
+        db_table = "category"
+
     name = models.CharField(max_length=50)
 
 
