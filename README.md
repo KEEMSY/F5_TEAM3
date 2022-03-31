@@ -36,8 +36,11 @@ pic
 #### 지속가능한(유지보수가 가능한) 서비스 구축
 #### 성능 최적화
 - 서버 성능 Stress test : 성능 테스트 시나리오 작성 및 세부사항 기재, 테스트 결과 도출 및 분석
+<br>
 
-![](../../Downloads/005.png)
+![005](https://user-images.githubusercontent.com/96563134/160978494-7493e7f1-bac3-4ef5-b709-8e8daeb4a6d0.png)
+
+
 
 ## 사이트의 특장점
 - 사용자들에게 유익한 소스 제공 (채용공고,최신IT정보, Q&A 등)
@@ -72,7 +75,8 @@ pic
 대상 : 일반회원 매장 카테고리별로 원하는 카테고리 선택후 매장 검색 가능 no pic no pic
 
 ## 기대효과
-![](../../Downloads/007.png)
+![007](https://user-images.githubusercontent.com/96563134/160978382-2e6f652a-3f2d-4e83-aba8-450ef91b789e.png)
+
 
 ## 💻👩‍💻 팀구성 및 역할 👨‍💻🧑‍💻
 
@@ -105,6 +109,8 @@ pic
 * 웹크롤링
 * 환경구축
 
+<br>
+<br>
 
 ### 📌 끈기와 집념! 문제해결!
 ##### 개선방안 - <a href="https://github.com/KEEMSY/F5_TEAM3/wiki/%EA%B0%9C%EC%84%A0%EB%B0%A9%EC%95%88" >상세보기 - WIKI 이동</a>
