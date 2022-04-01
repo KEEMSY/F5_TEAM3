@@ -1271,7 +1271,7 @@ table p {
   }
 }
 
-@media only screen and (max-width: 1199px) {
+@media only screen and (max-width: 992px) {
   .home-slider-shape {
     display: none;
   }
@@ -1288,14 +1288,21 @@ table p {
 }
 @media only screen and (max-width: 1699px) {
   .home-slider-shape .shape1 {
-    width: 200px;
+    width: 650px;
   }
 }
 @media only screen and (max-width: 1399.98px) {
   .home-slider-shape .shape1 {
-    width: 170px;
+    width: 600px;
   }
 }
+
+@media only screen and (max-width: 1100px) {
+  .home-slider-shape .shape1 {
+    width: 470px;
+  }
+}
+
 .home-slider-shape .shape2 {
   position: absolute;
   top: 0;
@@ -1650,6 +1657,8 @@ table p {
   color: #272a33;
   font-size: 24px;
   margin-bottom: 12px;
+  max-height: 87px;
+  overflow: hidden;
 }
 @media only screen and (max-width: 1199px) {
   .recent-job-item .main-content .title {

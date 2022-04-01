@@ -417,6 +417,7 @@
                     </div>
                 </div>
                 <div class="row Career-row">
+                {% for board_list in board_lists %}
                     {% if board_list %}
                         {% for career in board_list %}
                             <div class="col-md-6 col-lg-4">
@@ -450,6 +451,7 @@
                             </div>
                         {% endfor %}
                     {% endif %}
+                {% endfor %}
                 </div>
             </div>
         </section>
