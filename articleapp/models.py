@@ -1,4 +1,3 @@
-
 from django.db import models
 
 from TEAM3_F5_coFI.models import BaseModel
@@ -22,14 +21,11 @@ class Article(BaseModel):
     content = models.TextField(null=True)
     img = models.TextField(null=True)
     like_cnt = models.IntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     article_hits = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
-
 
 
 class ArticleHits(models.Model):
@@ -44,5 +40,3 @@ class ArticleHits(models.Model):
 
     def __str__(self):
         return str(self.article.id)
-
-

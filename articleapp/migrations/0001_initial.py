@@ -19,8 +19,6 @@ class Migration(migrations.Migration):
             name='Article',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('title', models.CharField(max_length=50)),
                 ('content', models.TextField(null=True)),
                 ('img', models.TextField(null=True)),
