@@ -135,32 +135,32 @@ WSGI_APPLICATION = 'TEAM3_F5_coFI.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 # 로컬 db 연결
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': "TEAM3",
-#         'USER': "root",
-#         'PASSWORD': "2349",
-#         'HOST' : "localhost",
-#         'PORT' : "3306"
-#     }
-# }
-
-# AWS db 연결
 DATABASES = {
     'default': {
-        'ENGINE': secrets['default']['ENGINE'],
-        'NAME': secrets['default']['NAME'],
-        'USER': secrets['default']['USER'],
-        'PASSWORD': secrets['default']['PASSWORD'],
-        'HOST': secrets['default']['HOST'],
-        'PORT': secrets['default']['PORT'],
-        'OPTIONS': {
-                'charset': 'utf8mb4',
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        },
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': "TEAM3",
+        'USER': "root",
+        'PASSWORD': "2349",
+        'HOST' : "localhost",
+        'PORT' : "3306"
     }
 }
+
+# AWS db 연결
+# DATABASES = {
+#     'default': {
+#         'ENGINE': secrets['default']['ENGINE'],
+#         'NAME': secrets['default']['NAME'],
+#         'USER': secrets['default']['USER'],
+#         'PASSWORD': secrets['default']['PASSWORD'],
+#         'HOST': secrets['default']['HOST'],
+#         'PORT': secrets['default']['PORT'],
+#         'OPTIONS': {
+#                 'charset': 'utf8mb4',
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+#         },
+#     }
+# }
 
 
 # Password validation
