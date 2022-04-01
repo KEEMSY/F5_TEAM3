@@ -5,12 +5,12 @@ from django.views import View
 
 # 게시글 목록
 from articleapp.services.service_article import (
-    create_article, delete_article, get_client_ip, get_page, hit_article,
+    create_article, delete_article, get_client_ip, hit_article,
     read_all_article, read_article_by_title,
     read_article_by_title_within_a_specific_period,
     read_article_containing_username,
     read_article_containing_username_within_a_specific_period,
-    read_category_article, read_target_article, update_article)
+    read_category_article, read_target_article, update_article, get_page_context)
 # 단일 게시글 CRUD
 from commentapp.models import Comment
 from commentapp.services.comment_service import read_all_comment
@@ -80,7 +80,7 @@ def show_question_article(request):
     all_articles = read_all_article()
     recent_comments = read_all_comment()
 
-    target_articles = read_category_article(1)
+    target_articles = read_category_article('question')
     page = int(request.GET.get('page', 1))
     board_list = get_page(target_articles, page)
     return render(request, 'articleapp/article_question.html',
@@ -92,9 +92,9 @@ def show_free_article(request):
     all_articles = read_all_article()
     recent_comments = read_all_comment()
 
-    target_articles = read_category_article(2)
+    target_articles = read_category_article('free')
     page = int(request.GET.get('page', 1))
-    board_list = get_page(target_articles, page)
+    board_list = get_page_context(target_articles, page)
     return render(request, 'articleapp/article_free.html',
                   {'target_articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
                    'recent_comments': recent_comments}, status=200)
@@ -104,7 +104,7 @@ def show_tip_article(request):
     all_articles = read_all_article()
     recent_comments = read_all_comment()
 
-    target_articles = read_category_article(3)
+    target_articles = read_category_article('tip')
     page = int(request.GET.get('page', 1))
     board_list = get_page(target_articles, page)
     return render(request, 'articleapp/article_tip.html',

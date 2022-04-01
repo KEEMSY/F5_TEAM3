@@ -125,7 +125,7 @@ def hit_article(ip, article_id):
 ''' 3. etc '''
 
 
-def get_page(articles, page):
+def get_page_context(articles, page):
     paginator = Paginator(articles, 10)
     board_list = paginator.get_page(page)
     return board_list
