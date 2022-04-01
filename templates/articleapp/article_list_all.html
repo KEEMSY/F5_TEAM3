@@ -8,7 +8,7 @@
     position: relative;
         width: 95%;
     padding: 40px 0 0 0;
-    margin: 0px 30px;
+    margin: 400px 30px;
     /* min-height: 700px; */
     -webkit-transition: opacity ease 0.3s;
     -moz-transition: opacity ease 0.3s;
@@ -199,13 +199,11 @@ textarea, input[type="text"], input[type="number"], input[type="email"], input[t
     box-sizing: border-box;
 }
 
-
 #bbpress-forums #bbp-search-form #bbp_search_submit {
     box-shadow: none;
     padding: 10px 16px;
     margin: 0;
 }
-
 
 input[type="submit"] {
     border: none;
@@ -889,7 +887,7 @@ img.avatar-14 {
 <div class="wrapper">
 
     <!--== Start Header Wrapper ==-->
-    {% include 'header_ver2.html' %}
+    {% include 'header.html' %}
 
     {# End Header Wrpper#}
     <div class="wraper_wraper">
@@ -903,10 +901,13 @@ img.avatar-14 {
                     <div class="category_list_wrapper">
                         <ul>
                             <li class="category_list">
-                                <a href="">게시판1</a>
+                                <a href="">질문게시판</a>
                             </li>
                             <li class="category_list">
-                                <a href="">게시판2</a>
+                                <a href="">자유게시판</a>
+                            </li>
+                            <li class="category_list">
+                                <a href="">팁게시판</a>
                             </li>
                         </ul>
                     </div>
@@ -918,6 +919,30 @@ img.avatar-14 {
                     <div class="title_wrapper">
                         <h5>Latest POST</h5>
                     </div>
+                    {% for article in all_articles %}
+                        <div class="post">
+                        <span>
+                            <a href="">
+                                <div class="post_area" id="post_area_{{ article.id }}">
+                                    <div class="post_img"></div>
+                                    <div class="post_details">
+                                        <div class="post_title">
+                                            <span class="post_user_title">
+                                                {{ article.title }}
+                                            </span>
+                                        </div>
+                                            <div class="post_detail">
+                                                <span class="post_user_detail">
+                                                    {{ article.created_at }}
+                                                </span>
+                                            </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </span>
+                    </div>
+                    {% endfor %}
+
                     <div class="post">
                         <span>
                             <a href="">
@@ -981,69 +1006,7 @@ img.avatar-14 {
                             </a>
                         </span>
                     </div>
-                    <div class="post">
-                        <span>
-                            <a href="">
-                                <div class="post_area">
-                                    <div class="post_img"></div>
-                                    <div class="post_details">
-                                        <div class="post_title">
-                                            <span class="post_user_title">
-                                                아 운동하고싶다
-                                            </span>
-                                        </div>
-                                            <div class="post_detail">
-                                                <span class="post_user_detail">
-                                                    march 23, 2022
-                                                </span>
-                                            </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </span>
-                    </div>
-                    <div class="post">
-                        <span>
-                            <a href="">
-                                <div class="post_area">
-                                    <div class="post_img"></div>
-                                    <div class="post_details">
-                                        <div class="post_title">
-                                            <span class="post_user_title">
-                                                안자는사람?
-                                            </span>
-                                        </div>
-                                            <div class="post_detail">
-                                                <span class="post_user_detail">
-                                                    march 23, 2022
-                                                </span>
-                                            </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </span>
-                    </div>
-                    <div class="post">
-                        <span>
-                            <a href="">
-                                <div class="post_area">
-                                    <div class="post_img"></div>
-                                    <div class="post_details">
-                                        <div class="post_title">
-                                            <span class="post_user_title">
-                                                나 지금 치킨시켰다 질문받는다
-                                            </span>
-                                        </div>
-                                            <div class="post_detail">
-                                                <span class="post_user_detail">
-                                                    march 23, 2022
-                                                </span>
-                                            </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </span>
-                    </div>
+
                 </div>
             </div>
             <div class="comment_wrapper">
@@ -1051,16 +1014,20 @@ img.avatar-14 {
                     <div class="title_wrapper">
                         <h5>Recent Comments</h5>
                     </div>
+
+                    {% for comment in recent_comments %}
+                        <div class="comment">
+                        <span>
+                           ✍ <a href="">{{ comment.article.title }}</a> 에
+                            <a href="">{{ comment.user.name }}</a> 님께서 댓글을 남기셨습니다.
+                        </span>
+                    </div>
+                    {% endfor %}
+
                     <div class="comment">
                         <span>
                            ✍ <a href="">아 운동같이 갈사람</a> 에
                             <a href="">익명의회원1</a> 님께서 댓글을 남기셨습니다.
-                        </span>
-                    </div>
-                    <div class="comment">
-                        <span>
-                           ✍ <a href="">아 운동같이 갈사람</a> 에
-                            <a href="">익명의회원2</a> 님께서 댓글을 남기셨습니다.
                         </span>
                     </div>
 
@@ -1079,7 +1046,7 @@ img.avatar-14 {
             <div class="content_wrap">
                 <div class="content">
                     <article class="post_item post_item_single post_featured_left post_format_standard forum type-forum hentry">
-                        <h2 class="post_title entry-title">자유게시판</h2>
+                        <h2 class="post_title entry-title">모든 게시글</h2>
                         <section class="post_content">
                             <div id="bbpress-forums">
                                 <div class="bbp-search-form">
@@ -1087,23 +1054,18 @@ img.avatar-14 {
                                         <div>
                                             <label class="screen-reader-text hidden" for="bbp_search">Search for:</label>
                                             <input type="hidden" name="action" value="bbp-search-request">
-                                            <div class="search_bar">
-                                                <select class="form-select" aria-label="Default select example">
-                                                  <option selected>검색조건</option>
-                                                  <option value="title">제목</option>
-                                                  <option value="user">작성자</option>
-                                                </select>
-                                                <input tabindex="101" type="text" value="" name="bbp_search" id="bbp_search">
-                                                <input tabindex="102" class="button" type="submit" id="bbp_search_submit" value="Search">
-                                            </div>
+                                            <input tabindex="101" type="text" value="" name="bbp_search" id="bbp_search">
+                                            <input tabindex="102" class="button" type="submit" id="bbp_search_submit" value="Search">
                                         </div>
                                     </form>
                                 </div>
                                 <div class="bbp-breadcrumb">
                                     <p>
-                                        <a href="index.html" class="bbp-breadcrumb-home">카테고리</a>
+                                        <a href="" class="bbp-breadcrumb-home">카테고리</a>
                                         <span class="bbp-breadcrumb-sep"> › </span>
-                                        <span class="bbp-breadcrumb-current">자유게시판</span>
+                                        <span class="bbp-breadcrumb-current">모든 게시글</span>
+                                        <span class="bbp-breadcrumb-sep"> › </span>
+                                        <span><a href="{% url 'articleapp:aritcle_write' %}">게시글 작성</a></span>
                                     </p>
                                 </div>
                                 <ul id="forums-list-0" class="bbp-forums">
@@ -1115,6 +1077,34 @@ img.avatar-14 {
                                             <li class="bbp-forum-freshness">작성자</li>
                                         </ul>
                                     </li>
+
+                                    {% for article in articles %}
+
+                                        <li class="bbp-body">
+                                        <ul id="{{ article.id }}" class="loop-item-0 bbp-forum-status-open bbp-forum-visibility-publish forum type-forum hentry">
+                                            <li class="bbp-forum-info">
+                                                <a class="bbp-forum-title" href="single-topic.html">{{ article.title }}</a>
+                                                <div class="bbp-forum-content">
+                                                    {{ article.content }}
+                                                </div>
+                                            </li>
+                                            <li class="bbp-forum-topic-count">{{ article.article_hits }}</li>
+                                            <li class="bbp-forum-reply-count">0</li>
+                                            <li class="bbp-forum-freshness">
+                                                {{ article.user.name }}
+                                                <p class="bbp-topic-meta">
+                                                    <span class="bbp-topic-freshness-author">
+                                                        <img alt="" src="http://1.gravatar.com/avatar/?s=14&amp;d=mm&amp;r=g" class="avatar avatar-14 photo avatar-default" height="14" width="14">&nbsp;{{ article.created_at }}
+                                                    </span>
+                                                </p>
+                                            </li>
+                                        </ul>
+                                        </li>
+
+                                    {% endfor %}
+
+
+
                                     <li class="bbp-body">
                                         <ul id="bbp-forum-1725" class="loop-item-0 bbp-forum-status-open bbp-forum-visibility-publish forum type-forum hentry">
                                             <li class="bbp-forum-info">
