@@ -3,6 +3,7 @@ import re
 from django import forms
 
 from . import models
+from .models import Profile, User
 
 
 class SignUpForm(forms.Form):
@@ -34,7 +35,7 @@ class SignUpForm(forms.Form):
         if password != password1:
             raise forms.ValidationError("패스워드가 서로 맞지 않습니다.")
         else:
-            if not re.match(r"^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}", password):
+            if not re.match(r"^(?=.*[a-zA-Z])(?=.*\d)(?=.*[#@$!%*?&])[A-Za-z\d#@$!%*?&]{8,}", password):
                 raise forms.ValidationError('8자 이상 문자와 숫자 및 특수문자를 조합하시오.')
 
             return password
@@ -65,3 +66,13 @@ class LoginForm(forms.Form):
                 self.add_error("password", forms.ValidationError("패스워드가 다릅니다"))
         except models.User.DoesNotExist:
             self.add_error("email", forms.ValidationError("유저가 존재하지 않습니다."))
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username']
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['img', 'skill', 'github', 'blog']

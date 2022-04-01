@@ -2322,7 +2322,7 @@ table p {
 .login-register-form-wrap {
   background-color: #f4f7f7;
   border-radius: 8px;
-  padding: 48px 70px 51px;
+  padding: 100px 70px 51px;
 }
 @media only screen and (max-width: 1199px) {
   .login-register-form-wrap {
@@ -5448,6 +5448,7 @@ table p {
 
 .post-home-style .post-item {
   margin-bottom: 0;
+
 }
 @media only screen and (max-width: 767px) {
   .post-home-style .post-item {
@@ -5513,6 +5514,7 @@ table p {
 
 .post-item {
   margin-bottom: 70px;
+  display: flex;
 }
 @media only screen and (max-width: 1199px) {
   .post-item {
@@ -5520,10 +5522,12 @@ table p {
   }
 }
 .post-item .thumb {
-  border-radius: 5px;
   margin-bottom: 39px;
   overflow: hidden;
   position: relative;
+  width: 152px;
+  height: 152px;
+  border-radius: 50%;
 }
 @media only screen and (max-width: 1199px) {
   .post-item .thumb {
@@ -5539,6 +5543,11 @@ table p {
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
 }
+.post-item .content .sns {
+  display: flex;
+  margin-right: 10px;
+}
+
 .post-item .content .author {
   color: #929292;
   font-weight: 500;
@@ -5558,6 +5567,7 @@ table p {
 .post-item .content .author a:hover {
   color: #03a84e;
 }
+
 .post-item .content .title {
   font-size: 23px;
   line-height: 1.522;
@@ -6971,4 +6981,22 @@ table p {
   font-size: 16px;
   vertical-align: 0px;
   margin: 0;
+}
+
+
+.flex-container{
+  width: 800px;
+  min-height: 200px;
+  border: 1px solid #323332;
+  background-color: white;
+
+}
+
+.article-container{
+  width: 600px;
+  min-height: 200px;
+  border: 1px solid #323332;
+  background-color: white;
+
+
 }

@@ -2,17 +2,22 @@
 # from django.test import TestCase
 #
 # from articleapp.models import Article
-# from likeapp.models import ArticleLikes, Author, CommentLikes, Datcle, Post
+
+# from likeapp.models import ArticleLikes, CommentLikes
 # from likeapp.services.like_service import (do_article_like, do_comment_like,
 #                                            undo_article_like,
 #                                            undo_comment_like)
+# from userapp.models import User
+# from articleapp.models import Article
+# from commentapp.models import Comment
 #
 #
 # class TestLikeService(TestCase):
 #     def test_a_user_can_like_an_article(self) -> None:
 #         # Given
-#         user = Author.objects.create(name="test")
-#         article = Post.objects.create(title="test_title")
+
+#         user = User.objects.create(email="test")
+#         article = Article.objects.create(title="test_title")
 #         # When
 #         like = do_article_like(user.id, article.id)
 #
@@ -23,8 +28,9 @@
 #
 #     def test_a_user_can_like_an_article_only_once(self) -> None:
 #         # Given
-#         user = Author.objects.create(name="test")
-#         article = Post.objects.create(title="test_title")
+
+#         user = User.objects.create(email="test")
+#         article = Article.objects.create(title="test_title")
 #
 #         # Expect
 #         do_article_like(user.id, article.id)
@@ -42,7 +48,8 @@
 #     #
 #     # def test_it_should_raise_exception_when_like_an_article_does_not_exist(self) -> None:
 #     #     # Given
-#     #     user = Author.objects.create(name="test")
+
+#     #     user = Author.objects.create(email="test")
 #     #     invalid_article_id = 9988
 #     #
 #     #     # Expect
@@ -51,20 +58,23 @@
 #
 #     def test_like_count_should_increase(self) -> None:
 #         # Given
-#         user = Author.objects.create(name="test")
-#         article = Post.objects.create(title="test_title")
+
+#         user = User.objects.create(email="test")
+#         article = Article.objects.create(title="test_title")
 #
 #         # When
 #         do_article_like(user.id, article.id)
 #
 #         # Then
-#         article = Post.objects.get(id=article.id)
+
+#         article = Article.objects.get(id=article.id)
 #         self.assertEqual(article.like_count, 1)
 #
 #     def test_a_user_can_undo_like(self) -> None:
 #         # Given
-#         user = Author.objects.create(name="test")
-#         article = Post.objects.create(title="test_title")
+
+#         user = User.objects.create(email="test")
+#         article = Article.objects.create(title="test_title")
 #         like = do_article_like(user_id=user.id, article_id=article.id)
 #
 #         # When
@@ -76,7 +86,8 @@
 #
 #     # def test_it_should_raise_exception_when_undo_like_which_does_not_exist(self) -> None:
 #     #     # Given
-#     #     user = Author.objects.create(name="test")
+
+#     #     user = Author.objects.create(email="test")
 #     #     article = Post.objects.create(title="test_title")
 #     #
 #     #     # Expect
@@ -90,8 +101,9 @@
 # class TestCommentLikeService(TestCase):
 #     def test_a_user_can_like_an_comment(self) -> None:
 #         # Given
-#         user = Author.objects.create(name="test")
-#         comment = Datcle.objects.create(comment="comment")
+
+#         user = User.objects.create(email="test")
+#         comment = Comment.objects.create(comment="comment")
 #         # When
 #         like = do_comment_like(user.id, comment.id)
 #
@@ -102,8 +114,9 @@
 #
 #     def test_a_user_can_like_an_comment_only_once(self) -> None:
 #         # Given
-#         user = Author.objects.create(name="test")
-#         comment = Datcle.objects.create(comment="comment")
+
+#         user = User.objects.create(email="test")
+#         comment = Comment.objects.create(comment="comment")
 #
 #         # Expect
 #         do_comment_like(user.id, comment.id)
@@ -121,7 +134,8 @@
 #     #
 #     # def test_it_should_raise_exception_when_like_an_article_does_not_exist(self) -> None:
 #     #     # Given
-#     #     user = Author.objects.create(name="test")
+
+#     #     user = Author.objects.create(email="test")
 #     #     invalid_article_id = 9988
 #     #
 #     #     # Expect
@@ -130,20 +144,22 @@
 #
 #     def test_comment_like_count_should_increase(self) -> None:
 #         # Given
-#         user = Author.objects.create(name="test")
-#         comment = Datcle.objects.create(comment="comment")
+#         user = User.objects.create(email="test")
+#         comment = Comment.objects.create(comment="comment")
 #
 #         # When
 #         do_comment_like(user.id, comment.id)
 #
 #         # Then
-#         comment = Datcle.objects.get(id=comment.id)
+
+#         comment = Comment.objects.get(id=comment.id)
 #         self.assertEqual(comment.like_count, 1)
 #
 #     def test_a_user_can_undo_commentlike(self) -> None:
 #         # Given
-#         user = Author.objects.create(name="test")
-#         comment = Datcle.objects.create(comment="comment")
+
+#         user = User.objects.create(email="test")
+#         comment = Comment.objects.create(comment="comment")
 #         like = do_comment_like(user_id=user.id, comment_id=comment.id)
 #
 #         # When
@@ -151,4 +167,5 @@
 #
 #         # Then
 #         with self.assertRaises(CommentLikes.DoesNotExist):
+
 #             CommentLikes.objects.get(id=like.id)

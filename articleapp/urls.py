@@ -17,4 +17,5 @@ urlpatterns = [
 
     path('search/', views.search_article, name='article_search'),
 
+
 ]

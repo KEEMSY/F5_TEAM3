@@ -16,28 +16,6 @@
 
   <!--== End Header Wrapper ==-->
   <main class="main-content">
-    <!--== Start Page Header Area Wrapper ==-->
-{#    <div class="page-header-area sec-overlay sec-overlay-black" data-bg-img="assets/img/photos/bg2.jpg">#}
-{#      <div class="container pt--0 pb--0">#}
-{#        <div class="row">#}
-{#          <div class="col-12">#}
-{#            <div class="page-header-content">#}
-{#              <h2 class="title">Login</h2>#}
-{#              <nav class="breadcrumb-area">#}
-{#                <ul class="breadcrumb justify-content-center">#}
-{#                  <li><a href="index.html">Home</a></li>#}
-{#                  <li class="breadcrumb-sep">//</li>#}
-{#                  <li>Pages</li>#}
-{#                </ul>#}
-{#              </nav>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
-{#    </div>#}
-{#    <!--== End Page Header Area Wrapper ==-->#}
-
-    <!--== Start Login Area Wrapper ==-->
     <section class="account-login-area">
       <div class="container">
         <div class="row justify-content-center">
@@ -48,9 +26,8 @@
                   <h4 class="title">Sign In</h4>
                 </div>
 
-                <form action="/users/login/" method="post" id="login-form">
+                <form action="{% url 'user:login' %}" method="post" id="login-form">
                     {% csrf_token %}
-{#                    {{form.as_p}}#}
                   <div class="row">
                     <div class="col-12">
                       <div class="form-group">
@@ -93,7 +70,7 @@
                 </form>
                 <a href="{% provider_login_url 'google'%}">Google 계정으로 로그인</a>
                 <div class="login-register-form-info">
-                  <p>Don't you have an account? <a href="/users/sign_up/">Register</a></p>
+                  <p>Don't you have an account? <a href="{% url 'user:sign-up' %}">Register</a></p>
                 </div>
               </div>
             </div>

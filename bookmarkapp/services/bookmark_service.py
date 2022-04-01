@@ -1,5 +1,4 @@
 from bookmarkapp.models import Bookmark
-from likeapp.models import Post
 
 
 def do_bookmark(user_id: int, article_id: int) -> Bookmark:

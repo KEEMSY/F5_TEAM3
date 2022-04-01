@@ -14,28 +14,6 @@
 
   <!--== End Header Wrapper ==-->
   <main class="main-content">
-    <!--== Start Page Header Area Wrapper ==-->
-{#    <div class="page-header-area sec-overlay sec-overlay-black" data-bg-img="assets/img/photos/bg2.jpg">#}
-{#      <div class="container pt--0 pb--0">#}
-{#        <div class="row">#}
-{#          <div class="col-12">#}
-{#            <div class="page-header-content">#}
-{#              <h2 class="title">Register Page</h2>#}
-{#              <nav class="breadcrumb-area">#}
-{#                <ul class="breadcrumb justify-content-center">#}
-{#                  <li><a href="index.html">Home</a></li>#}
-{#                  <li class="breadcrumb-sep">//</li>#}
-{#                  <li>Pages</li>#}
-{#                </ul>#}
-{#              </nav>#}
-{#            </div>#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
-{#    </div>#}
-    <!--== End Page Header Area Wrapper ==-->
-
-    <!--== Start Login Area Wrapper ==-->
     <section class="account-login-area">
       <div class="container">
         <div class="row justify-content-center">
@@ -45,53 +23,46 @@
                 <div class="form-title">
                   <h4 class="title">Register Now</h4>
                 </div>
-                <ul class="nav nav-pills" id="pills-tab" role="tablist">
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="candidate-tab" data-bs-toggle="pill" data-bs-target="#candidate" type="button" role="tab" aria-controls="candidate" aria-selected="true"><i class="icofont-businessman"></i> Candidate</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="employer-tab" data-bs-toggle="pill" data-bs-target="#employer" type="button" role="tab" aria-controls="employer" aria-selected="false"><i class="icofont-bag-alt"></i> Employer</button>
-                  </li>
-                </ul>
                 <div class="tab-content" id="pills-tabContent">
                   <div class="tab-pane fade show active" id="candidate" role="tabpanel" aria-labelledby="candidate-tab">
-                    <form action="/users/sign_up/" method="post" id="signup-form">
+                    <form action="{% url 'user:sign-up' %}" method="post" id="signup-form">
                         {% csrf_token %}
+{#                        {{ form.as_p }}#}
                       <div class="row">
 
                         <div class="col-12">
-                          <div class="form-group">
+                          <p class="form-group">
                               <label for="id_email"></label>
                               <input class="form-control" type="email" placeholder="Email" id="id_email" name="email"
                                      required>
                               <ul class="errorlist">
                                   {{ form.errors.email }}
                               </ul>
-                          </div>
+                          </p>
                         </div>
                         <div class="col-12">
-                          <div class="form-group">
+                          <p class="form-group">
                             <label for="id_username"></label>
                             <input class="form-control" type="text" placeholder="Name" id="id_username" name="username" required>
                             <ul class="errorlist">
                                 {{ form.errors.username }}
                             </ul>
-                          </div>
+                          </p>
                         </div>
                         <div class="col-12">
-                          <div class="form-group">
+                          <p class="form-group">
                             <label for="id_password"></label>
                             <input class="form-control" type="password" placeholder="Password" id="id_password" name="password" required>
                             <ul class="errorlist">
                                 {{ form.errors.password1 }}
                             </ul>
-                          </div>
+                          </p>
                         </div>
                         <div class="col-12">
-                          <div class="form-group">
+                          <p class="form-group">
                             <label for="id_password1"></label>
                             <input class="form-control" type="password" placeholder="Confirm Password" id="id_password1" name="password1" required>
-                          </div>
+                          </p>
                         </div>
 
                         <div class="col-12">
@@ -150,7 +121,7 @@
                   </div>
                 </div>
                 <div class="login-register-form-info">
-                  <p>Already have an account? <a href="/users/login/">Login</a></p>
+                  <p>Already have an account? <a href="{% url 'user:login' %}">Login</a></p>
                 </div>
               </div>
             </div>
