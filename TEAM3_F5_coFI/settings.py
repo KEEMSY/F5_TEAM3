@@ -39,10 +39,14 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
+# 로컬용 서버
+# DEBUG = True
+# ALLOWED_HOSTS = []
+
+# 도메인용 서버
 ALLOWED_HOSTS = ['cofi-f5.com']
-
+DEBUG = False
 # Application definition
 
 INSTALLED_APPS = [
