@@ -1,9 +1,12 @@
 from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
+from articleapp.models import Article
+from bookmarkapp.models import Bookmark
 from userapp.models import User
 
 from . import forms
@@ -68,6 +71,7 @@ def get_profile(request, pk):
     user_form = UserForm(initial={
         'username': u.username,
     })
+    articles = Article.objects.filter(user_id=pk).order_by('-created_at')
 
     if hasattr(u, 'profile'):  # user가 profile을 가지고 있으면 True, 없으면 False (회원가입을 한다고 profile을 가지고 있진 않으므로)
         profile = u.profile
@@ -80,12 +84,7 @@ def get_profile(request, pk):
     else:
         profile_form = ProfileForm()
 
-    #게시글 모델 머지 후 추가 예정
-    #articles = Artilce.objects.filter(user_id=request.user.pk).order_by('-created_at') #-는 역순으로 정렬해서 준다는 의미
-            #{'articles': articles} 를 아래 추가
-
-
-    return render(request, 'userapp/profile.html', {"user_form": user_form, "profile_form": profile_form, 'u':u})
+    return render(request, 'userapp/profile.html', {"user_form": user_form, "profile_form": profile_form, 'u':u, 'articles':articles})
 
 
 @login_required(login_url="/users/login/")
@@ -120,16 +119,51 @@ def update_profile(request, pk):
 ### 아티클, 북마크 겟 함수 // 현재는 모델이 꼬일까바 주석 처리로 해놓았음!
 ## form 데이터도 같이 뿌려줘야하나...? user_form, profile_form... ajax 형식이라 그부분에 대한 데이터만 필요한거 아닐까..??
 
-# @login_required(login_url="/users/login/")
-# def get_profile_article(request, pk):
-#     if request.is_ajax:
-#         all_articles = Article.objects.filter(user_id=pk)
-#         return render(request, 'userapp/profile.html', {"all_articles": all_articles})
+@login_required(login_url="/users/login/")
+def get_profile_article(request, pk):
+    if request.method == 'GET':
+        articles = Article.objects.filter(user_id=pk).order_by('-created_at')
+
+        articles_list = []
+        for article in articles:
+            q={}
+            #게시글 정보
+            q['id'] = article.id
+            q['title'] = article.title
+            q['content'] = article.content
+            q['created_date'] = article.created_at
+            q['hits'] = article.article_hits
+            #게시글 카테고리
+            q['category_name'] = article.category.name
+            #게시글 작성자 정보
+            q['author_img'] = article.user.profile.img
+            q['author_name'] = article.user.username
+
+            articles_list.append(q)
+
+        return JsonResponse(articles_list, safe=False)
 
 
-# @login_required(login_url="/users/login/")
-# def get_profile_bookmark(request, pk):
-#     if request.is_ajax:
-#         all_bookmarks = Bookmark.objects.filter(user_id=pk)
-#         return render(request, 'userapp/profile.html', {"all_bookmarks": all_bookmarks})
+@login_required(login_url="/users/login/")
+def get_profile_bookmark(request, pk):
+    if request.method == 'GET':
+        bookmarks = Bookmark.objects.filter(user_id=pk).order_by('-created_at')
 
+        bookmarks_list = []
+        for bookmark in bookmarks:
+            q = {}
+            # 게시글 정보
+            q['id'] = bookmark.article.id
+            q['title'] = bookmark.article.title
+            q['content'] = bookmark.article.content
+            q['created_date'] = bookmark.article.created_at
+            q['hits'] = bookmark.article.article_hits
+            # 게시글 카테고리
+            q['category_name'] = bookmark.article.category.name
+            # 게시글 작성자 정보
+            q['author_img'] = bookmark.article.user.profile.img
+            q['author_name'] = bookmark.article.user.username
+
+            bookmarks_list.append(q)
+
+        return JsonResponse(bookmarks_list, safe=False)

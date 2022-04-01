@@ -3,7 +3,6 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% include 'head.html' %}
-
 <link href="{% static 'css/community.css' %}" rel="stylesheet"/>
 
 <style>
@@ -1336,7 +1335,114 @@
 
 </style>
 
+<script>
+    function test() {
+    alert('test');
+    }
+
+
+    $.ajaxSetup({
+        headers: {"X-CSRFToken": '{{csrf_token}}'}
+    });
+
+    function show_articles() {
+        $('.list-group').empty()
+        $.ajax({
+            type: "GET",
+            url:"{% url 'user:profile_article' user.pk %}",
+            data:{},
+            dataType: 'json',
+            success: function (response) {
+                let articles = response
+                for (let i = 0; i < articles.length; i++) {
+
+                    let temp_html = `<li class="list-group-item list-group-item-small list-group-no-note clearfix">
+                                        <div class="list-icon-wrapper pull-left">
+                                            <img src="https://w7.pngwing.com/pngs/296/768/png-transparent-emoji-memorandum-computer-icons-text-messaging-writing-writing-pencil-emoticon-word-thumbnail.png">
+                                        </div>
+                                        <div class="list-title-wrapper list-activity">
+                                            <div class="list-activity-desc">
+                                                <span class="list-activity-desc-text">
+                                                    <a href="/articles/life" class="list-group-item-text item-tag label label-info">${articles[i]['category_name']}</a>
+                                                    에 #${articles[i]['id']} 게시물을 작성하였습니다.
+                                                </span>
+                                                <span class="timeago" title="2022-03-27T15:56:24">${articles[i]['created_date']}</span>
+                                            </div>
+                                            <h5 class="list-group-item-heading">
+                                                <a href="/article/1188123">${articles[i]['title']}</a>
+                                                <div class="list-group-item-author pull-right clearfix">
+                                                    <div class="avatar clearfix avatar-x-small ">
+                                                        <a href="/user/info/139377" class="avatar-photo">
+                                                            <img src="${articles[i]['author_img']}">
+                                                        </a>
+                                                        <div class="avatar-info">
+                                                            <a class="nickname" title="${articles[i]['author_name']}">${articles[i]['author_name']}</a>
+                                                            <div class="activity "> ${articles[i]['hits']}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </h5>
+                                        </div>
+                                    </li>`
+
+                    $('.list-group').append(temp_html)
+                }
+            }
+        });
+    }
+
+    function show_bookmarks() {
+        $('.list-group').empty()
+        $.ajax({
+            type: "GET",
+            url:"{% url 'user:profile_bookmark' user.pk %}",
+            data:{},
+            dataType: 'json',
+            success: function (response) {
+                let articles = response
+                for (let i = 0; i < articles.length; i++) {
+
+                    let temp_html = `<li class="list-group-item list-group-item-small list-group-no-note clearfix">
+                                        <div class="list-icon-wrapper pull-left">
+                                            <img src="https://w7.pngwing.com/pngs/296/768/png-transparent-emoji-memorandum-computer-icons-text-messaging-writing-writing-pencil-emoticon-word-thumbnail.png">
+                                        </div>
+                                        <div class="list-title-wrapper list-activity">
+                                            <div class="list-activity-desc">
+                                                <span class="list-activity-desc-text">
+                                                    <a href="/articles/life" class="list-group-item-text item-tag label label-info">${articles[i]['category_name']}</a>
+                                                    에 #${articles[i]['id']} 게시물을 작성하였습니다.
+                                                </span>
+                                                <span class="timeago" title="2022-03-27T15:56:24">${articles[i]['created_date']}</span>
+                                            </div>
+                                            <h5 class="list-group-item-heading">
+                                                <a href="/article/1188123">${articles[i]['title']}</a>
+                                                <div class="list-group-item-author pull-right clearfix">
+                                                    <div class="avatar clearfix avatar-x-small ">
+                                                        <a href="/user/info/139377" class="avatar-photo">
+                                                            <img src="${articles[i]['author_img']}">
+                                                        </a>
+                                                        <div class="avatar-info">
+                                                            <a class="nickname" title="${articles[i]['author_name']}">${articles[i]['author_name']}</a>
+                                                            <div class="activity "> ${articles[i]['hits']}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </h5>
+                                        </div>
+                                    </li>`
+
+                    $('.list-group').append(temp_html)
+                }
+            }
+        });
+    }
+
+</script>
+
+
 <body>
+
+
 
 <!--wrapper start-->
 <div class="wrapper">
@@ -1356,7 +1462,8 @@
                     <div class="panel-body">
                         <div class="avatar clearfix avatar-big col-sm-3 text-center">
                             {% if not u.profile.img %}
-                                <a class="avatar-photo"><img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg"></a>
+                                <a class="avatar-photo"><img
+                                        src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg"></a>
                             {% else %}
                                 <a class="avatar-photo"><img src="{{ u.profile.img }}"></a>
                             {% endif %}
@@ -1377,11 +1484,11 @@
                                 </div>
                             {% endif %}
                             {% if u.profile.blog %}
-                            <div class="user-point">
-                                <div class="blog">
-                                    <a href="{{ u.profile.blog }}"><img src="{% static 'img/blog_icon.png' %}"></a>
+                                <div class="user-point">
+                                    <div class="blog">
+                                        <a href="{{ u.profile.blog }}"><img src="{% static 'img/blog_icon.png' %}"></a>
+                                    </div>
                                 </div>
-                            </div>
                             {% endif %}
                         </div>
 
@@ -1425,288 +1532,261 @@
                 <div class="col-sm-2 user-info-nav pull-right">
                     <ul class="nav">
                         <div class="widget-categories">
-                            <li><a href="job.html">게시물<span>(16)</span></a></li>
-                            <li><a href="job.html">스크랩<span>(03)</span></a></li>
+                            <li><a onclick="show_articles()">게시물<span>(16)</span></a></li>
+                            <li><a onclick="show_bookmarks()">스크랩<span>(03)</span></a></li>
                         </div>
                     </ul>
                 </div>
                 {# 게시글 또는 북마크 디브 #}
+
                 <div class="col-sm-10 main-block-left pull-left">
                     <ul class="list-group">
                         {#                        게시글#}
-                        <li class="list-group-item list-group-item-small list-group-no-note clearfix">
-                            <div class="list-icon-wrapper pull-left">
-                                <img src="https://w7.pngwing.com/pngs/296/768/png-transparent-emoji-memorandum-computer-icons-text-messaging-writing-writing-pencil-emoticon-word-thumbnail.png">
-                            </div>
-                            <div class="list-title-wrapper list-activity">
-                                <div class="list-activity-desc">
-                                    <span class="list-activity-desc-text">
-                                        <a href="/articles/life" class="list-group-item-text item-tag label label-info">게시판 카테고리</a>
-                                        에 #1188123 게시물을 작성하였습니다.
-                                    </span>
-                                    <span class="timeago" title="2022-03-27T15:56:24">2022-03-27 15:56:24</span>
+                        {% for article in articles %}
+                            <li class="list-group-item list-group-item-small list-group-no-note clearfix">
+                                <div class="list-icon-wrapper pull-left">
+                                    <img src="https://w7.pngwing.com/pngs/296/768/png-transparent-emoji-memorandum-computer-icons-text-messaging-writing-writing-pencil-emoticon-word-thumbnail.png">
                                 </div>
-                                <h5 class="list-group-item-heading">
-                                    <a href="/article/1188123">안녕하세요 새로 가입했습니다 잘 부탁드립니다.</a>
-                                    <div class="list-group-item-author pull-right clearfix">
-                                        <div class="avatar clearfix avatar-x-small ">
-                                            <a href="/user/info/139377" class="avatar-photo">
-                                                {% if u.profile.img %}
-                                                    <img src="{{ u.profile.img }}">
-                                                {% else %}
-                                                    <img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg">
-                                                {% endif %}
-                                            </a>
-                                            <div class="avatar-info">
-                                                <a class="nickname" href="/user/info/139377" title="김지용">{{ u.username }}</a>
-                                                <div class="activity "> 14</div>
+                                <div class="list-title-wrapper list-activity">
+                                    <div class="list-activity-desc">
+                                    <span class="list-activity-desc-text">
+                                        <a href="/articles/life"
+                                           class="list-group-item-text item-tag label label-info">{{ article.category.name }}</a>
+                                        에 #{{ article.id }} 게시물을 작성하였습니다.
+                                    </span>
+                                        <span class="timeago"
+                                              title="2022-03-27T15:56:24">{{ article.created_at }}</span>
+                                    </div>
+                                    <h5 class="list-group-item-heading">
+                                        <a href="/article/1188123">{{ article.title }}</a>
+                                        <div class="list-group-item-author pull-right clearfix">
+                                            <div class="avatar clearfix avatar-x-small ">
+                                                <a href="/user/info/139377" class="avatar-photo">
+                                                    {% if article.user.profile.img %}
+                                                        <img src="{{ article.user.profile.img }}">
+                                                    {% else %}
+                                                        <img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg">
+                                                    {% endif %}
+                                                </a>
+                                                <div class="avatar-info">
+                                                    <a class="nickname" href="{% url 'user:profile' article.user.id %}"
+                                                       title="{{ article.user.username }}">{{ article.user.username }}</a>
+                                                    <div class="activity "> {{ article.article_hits }}</div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </h5>
-                            </div>
-                        </li>
-
-                        <li class="list-group-item list-group-item-small list-group-no-note clearfix">
-                            <div class="list-icon-wrapper pull-left">
-                                <img src="https://w7.pngwing.com/pngs/296/768/png-transparent-emoji-memorandum-computer-icons-text-messaging-writing-writing-pencil-emoticon-word-thumbnail.png">
-                            </div>
-                            <div class="list-title-wrapper list-activity">
-                                <div class="list-activity-desc">
-                                    <span class="list-activity-desc-text">
-                                        <a href="/articles/life" class="list-group-item-text item-tag label label-info">게시판 카테고리</a>
-                                        에 #1188123 게시물을 작성하였습니다.
-                                    </span>
-                                    <span class="timeago" title="2022-03-27T15:56:24">2022-03-27 15:56:24</span>
+                                    </h5>
                                 </div>
-                                <h5 class="list-group-item-heading">
-                                    <a href="/article/1188123">안녕하세요 새로 가입했습니다 잘 부탁드립니다.</a>
-                                    <div class="list-group-item-author pull-right clearfix">
-                                        <div class="avatar clearfix avatar-x-small ">
-                                            <a href="/user/info/139377" class="avatar-photo">
-                                                {% if u.profile.img %}
-                                                    <img src="{{ u.profile.img }}">
-                                                {% else %}
-                                                    <img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg">
-                                                {% endif %}
-                                            </a>
-                                            <div class="avatar-info">
-                                                <a class="nickname" href="/user/info/139377" title="김지용">{{ u.username }}</a>
-                                                <div class="activity "> 14</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </h5>
-                            </div>
-                        </li>
-
-
+                            </li>
+                        {% endfor %}
                         {#                        게시글#}
 
                         {#                        북마크#}
-                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">
-                            <div class="list-icon-wrapper pull-left">
-                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">
-                            </div>
-                            <div class="list-title-wrapper list-activity">
-                                <div class="list-activity-desc">
-                                    <span class="list-activity-desc-text">
-                                        #1183419 게시물을 스크랩 하였습니다.
-                                    </span>
-                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>
-                                </div>
-                                <h5 class="list-group-item-heading">
-                                    <a href="/article/1183419">사망한 개발팀 살리기</a>
-                                    <div class="list-group-item-author pull-right clearfix">
-                                        <div class="avatar clearfix avatar-x-small ">
-                                            <a href="/user/info/24311" class="avatar-photo"><img
-                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>
-                                            <div class="avatar-info">
-                                                <a class="nickname" href="/user/info/24311">jjavaman</a>
-                                                <div class="activity ">10k</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </h5>
-                            </div>
-                        </li>
-
-                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">
-                            <div class="list-icon-wrapper pull-left">
-                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">
-                            </div>
-                            <div class="list-title-wrapper list-activity">
-                                <div class="list-activity-desc">
-                                    <span class="list-activity-desc-text">
-                                        #1183419 게시물을 스크랩 하였습니다.
-                                    </span>
-                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>
-                                </div>
-                                <h5 class="list-group-item-heading">
-                                    <a href="/article/1183419">사망한 개발팀 살리기</a>
-                                    <div class="list-group-item-author pull-right clearfix">
-                                        <div class="avatar clearfix avatar-x-small ">
-                                            <a href="/user/info/24311" class="avatar-photo"><img
-                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>
-                                            <div class="avatar-info">
-                                                <a class="nickname" href="/user/info/24311">jjavaman</a>
-                                                <div class="activity ">10k</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </h5>
-                            </div>
-                        </li>
-
-                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">
-                            <div class="list-icon-wrapper pull-left">
-                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">
-                            </div>
-                            <div class="list-title-wrapper list-activity">
-                                <div class="list-activity-desc">
-                                    <span class="list-activity-desc-text">
-                                        #1183419 게시물을 스크랩 하였습니다.
-                                    </span>
-                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>
-                                </div>
-                                <h5 class="list-group-item-heading">
-                                    <a href="/article/1183419">사망한 개발팀 살리기</a>
-                                    <div class="list-group-item-author pull-right clearfix">
-                                        <div class="avatar clearfix avatar-x-small ">
-                                            <a href="/user/info/24311" class="avatar-photo"><img
-                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>
-                                            <div class="avatar-info">
-                                                <a class="nickname" href="/user/info/24311">jjavaman</a>
-                                                <div class="activity ">10k</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </h5>
-                            </div>
-                        </li>
-
-                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">
-                            <div class="list-icon-wrapper pull-left">
-                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">
-                            </div>
-                            <div class="list-title-wrapper list-activity">
-                                <div class="list-activity-desc">
-                                    <span class="list-activity-desc-text">
-                                        #1183419 게시물을 스크랩 하였습니다.
-                                    </span>
-                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>
-                                </div>
-                                <h5 class="list-group-item-heading">
-                                    <a href="/article/1183419">사망한 개발팀 살리기</a>
-                                    <div class="list-group-item-author pull-right clearfix">
-                                        <div class="avatar clearfix avatar-x-small ">
-                                            <a href="/user/info/24311" class="avatar-photo"><img
-                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>
-                                            <div class="avatar-info">
-                                                <a class="nickname" href="/user/info/24311">jjavaman</a>
-                                                <div class="activity ">10k</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </h5>
-                            </div>
-                        </li>
-
-                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">
-                            <div class="list-icon-wrapper pull-left">
-                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">
-                            </div>
-                            <div class="list-title-wrapper list-activity">
-                                <div class="list-activity-desc">
-                                    <span class="list-activity-desc-text">
-                                        #1183419 게시물을 스크랩 하였습니다.
-                                    </span>
-                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>
-                                </div>
-                                <h5 class="list-group-item-heading">
-                                    <a href="/article/1183419">사망한 개발팀 살리기</a>
-                                    <div class="list-group-item-author pull-right clearfix">
-                                        <div class="avatar clearfix avatar-x-small ">
-                                            <a href="/user/info/24311" class="avatar-photo"><img
-                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>
-                                            <div class="avatar-info">
-                                                <a class="nickname" href="/user/info/24311">jjavaman</a>
-                                                <div class="activity ">10k</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </h5>
-                            </div>
-                        </li>
-
-                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">
-                            <div class="list-icon-wrapper pull-left">
-                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">
-                            </div>
-                            <div class="list-title-wrapper list-activity">
-                                <div class="list-activity-desc">
-                                    <span class="list-activity-desc-text">
-                                        #1183419 게시물을 스크랩 하였습니다.
-                                    </span>
-                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>
-                                </div>
-                                <h5 class="list-group-item-heading">
-                                    <a href="/article/1183419">사망한 개발팀 살리기</a>
-                                    <div class="list-group-item-author pull-right clearfix">
-                                        <div class="avatar clearfix avatar-x-small ">
-                                            <a href="/user/info/24311" class="avatar-photo"><img
-                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>
-                                            <div class="avatar-info">
-                                                <a class="nickname" href="/user/info/24311">jjavaman</a>
-                                                <div class="activity ">10k</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </h5>
-                            </div>
-                        </li>
-
-                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">
-                            <div class="list-icon-wrapper pull-left">
-                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">
-                            </div>
-                            <div class="list-title-wrapper list-activity">
-                                <div class="list-activity-desc">
-                                    <span class="list-activity-desc-text">
-                                        #1183419 게시물을 스크랩 하였습니다.
-                                    </span>
-                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>
-                                </div>
-                                <h5 class="list-group-item-heading">
-                                    <a href="/article/1183419">사망한 개발팀 살리기</a>
-                                    <div class="list-group-item-author pull-right clearfix">
-                                        <div class="avatar clearfix avatar-x-small ">
-                                            <a href="/user/info/24311" class="avatar-photo"><img
-                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>
-                                            <div class="avatar-info">
-                                                <a class="nickname" href="/user/info/24311">jjavaman</a>
-                                                <div class="activity ">10k</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </h5>
-                            </div>
-                        </li>
+                        {#                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">#}
+                        {#                            <div class="list-icon-wrapper pull-left">#}
+                        {#                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">#}
+                        {#                            </div>#}
+                        {#                            <div class="list-title-wrapper list-activity">#}
+                        {#                                <div class="list-activity-desc">#}
+                        {#                                    <span class="list-activity-desc-text">#}
+                        {#                                        #1183419 게시물을 스크랩 하였습니다.#}
+                        {#                                    </span>#}
+                        {#                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>#}
+                        {#                                </div>#}
+                        {#                                <h5 class="list-group-item-heading">#}
+                        {#                                    <a href="/article/1183419">사망한 개발팀 살리기</a>#}
+                        {#                                    <div class="list-group-item-author pull-right clearfix">#}
+                        {#                                        <div class="avatar clearfix avatar-x-small ">#}
+                        {#                                            <a href="/user/info/24311" class="avatar-photo"><img#}
+                        {#                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>#}
+                        {#                                            <div class="avatar-info">#}
+                        {#                                                <a class="nickname" href="/user/info/24311">jjavaman</a>#}
+                        {#                                                <div class="activity ">10k</div>#}
+                        {#                                            </div>#}
+                        {#                                        </div>#}
+                        {#                                    </div>#}
+                        {#                                </h5>#}
+                        {#                            </div>#}
+                        {#                        </li>#}
+                        {##}
+                        {#                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">#}
+                        {#                            <div class="list-icon-wrapper pull-left">#}
+                        {#                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">#}
+                        {#                            </div>#}
+                        {#                            <div class="list-title-wrapper list-activity">#}
+                        {#                                <div class="list-activity-desc">#}
+                        {#                                    <span class="list-activity-desc-text">#}
+                        {#                                        #1183419 게시물을 스크랩 하였습니다.#}
+                        {#                                    </span>#}
+                        {#                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>#}
+                        {#                                </div>#}
+                        {#                                <h5 class="list-group-item-heading">#}
+                        {#                                    <a href="/article/1183419">사망한 개발팀 살리기</a>#}
+                        {#                                    <div class="list-group-item-author pull-right clearfix">#}
+                        {#                                        <div class="avatar clearfix avatar-x-small ">#}
+                        {#                                            <a href="/user/info/24311" class="avatar-photo"><img#}
+                        {#                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>#}
+                        {#                                            <div class="avatar-info">#}
+                        {#                                                <a class="nickname" href="/user/info/24311">jjavaman</a>#}
+                        {#                                                <div class="activity ">10k</div>#}
+                        {#                                            </div>#}
+                        {#                                        </div>#}
+                        {#                                    </div>#}
+                        {#                                </h5>#}
+                        {#                            </div>#}
+                        {#                        </li>#}
+                        {##}
+                        {#                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">#}
+                        {#                            <div class="list-icon-wrapper pull-left">#}
+                        {#                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">#}
+                        {#                            </div>#}
+                        {#                            <div class="list-title-wrapper list-activity">#}
+                        {#                                <div class="list-activity-desc">#}
+                        {#                                    <span class="list-activity-desc-text">#}
+                        {#                                        #1183419 게시물을 스크랩 하였습니다.#}
+                        {#                                    </span>#}
+                        {#                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>#}
+                        {#                                </div>#}
+                        {#                                <h5 class="list-group-item-heading">#}
+                        {#                                    <a href="/article/1183419">사망한 개발팀 살리기</a>#}
+                        {#                                    <div class="list-group-item-author pull-right clearfix">#}
+                        {#                                        <div class="avatar clearfix avatar-x-small ">#}
+                        {#                                            <a href="/user/info/24311" class="avatar-photo"><img#}
+                        {#                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>#}
+                        {#                                            <div class="avatar-info">#}
+                        {#                                                <a class="nickname" href="/user/info/24311">jjavaman</a>#}
+                        {#                                                <div class="activity ">10k</div>#}
+                        {#                                            </div>#}
+                        {#                                        </div>#}
+                        {#                                    </div>#}
+                        {#                                </h5>#}
+                        {#                            </div>#}
+                        {#                        </li>#}
+                        {##}
+                        {#                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">#}
+                        {#                            <div class="list-icon-wrapper pull-left">#}
+                        {#                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">#}
+                        {#                            </div>#}
+                        {#                            <div class="list-title-wrapper list-activity">#}
+                        {#                                <div class="list-activity-desc">#}
+                        {#                                    <span class="list-activity-desc-text">#}
+                        {#                                        #1183419 게시물을 스크랩 하였습니다.#}
+                        {#                                    </span>#}
+                        {#                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>#}
+                        {#                                </div>#}
+                        {#                                <h5 class="list-group-item-heading">#}
+                        {#                                    <a href="/article/1183419">사망한 개발팀 살리기</a>#}
+                        {#                                    <div class="list-group-item-author pull-right clearfix">#}
+                        {#                                        <div class="avatar clearfix avatar-x-small ">#}
+                        {#                                            <a href="/user/info/24311" class="avatar-photo"><img#}
+                        {#                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>#}
+                        {#                                            <div class="avatar-info">#}
+                        {#                                                <a class="nickname" href="/user/info/24311">jjavaman</a>#}
+                        {#                                                <div class="activity ">10k</div>#}
+                        {#                                            </div>#}
+                        {#                                        </div>#}
+                        {#                                    </div>#}
+                        {#                                </h5>#}
+                        {#                            </div>#}
+                        {#                        </li>#}
+                        {##}
+                        {#                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">#}
+                        {#                            <div class="list-icon-wrapper pull-left">#}
+                        {#                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">#}
+                        {#                            </div>#}
+                        {#                            <div class="list-title-wrapper list-activity">#}
+                        {#                                <div class="list-activity-desc">#}
+                        {#                                    <span class="list-activity-desc-text">#}
+                        {#                                        #1183419 게시물을 스크랩 하였습니다.#}
+                        {#                                    </span>#}
+                        {#                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>#}
+                        {#                                </div>#}
+                        {#                                <h5 class="list-group-item-heading">#}
+                        {#                                    <a href="/article/1183419">사망한 개발팀 살리기</a>#}
+                        {#                                    <div class="list-group-item-author pull-right clearfix">#}
+                        {#                                        <div class="avatar clearfix avatar-x-small ">#}
+                        {#                                            <a href="/user/info/24311" class="avatar-photo"><img#}
+                        {#                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>#}
+                        {#                                            <div class="avatar-info">#}
+                        {#                                                <a class="nickname" href="/user/info/24311">jjavaman</a>#}
+                        {#                                                <div class="activity ">10k</div>#}
+                        {#                                            </div>#}
+                        {#                                        </div>#}
+                        {#                                    </div>#}
+                        {#                                </h5>#}
+                        {#                            </div>#}
+                        {#                        </li>#}
+                        {##}
+                        {#                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">#}
+                        {#                            <div class="list-icon-wrapper pull-left">#}
+                        {#                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">#}
+                        {#                            </div>#}
+                        {#                            <div class="list-title-wrapper list-activity">#}
+                        {#                                <div class="list-activity-desc">#}
+                        {#                                    <span class="list-activity-desc-text">#}
+                        {#                                        #1183419 게시물을 스크랩 하였습니다.#}
+                        {#                                    </span>#}
+                        {#                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>#}
+                        {#                                </div>#}
+                        {#                                <h5 class="list-group-item-heading">#}
+                        {#                                    <a href="/article/1183419">사망한 개발팀 살리기</a>#}
+                        {#                                    <div class="list-group-item-author pull-right clearfix">#}
+                        {#                                        <div class="avatar clearfix avatar-x-small ">#}
+                        {#                                            <a href="/user/info/24311" class="avatar-photo"><img#}
+                        {#                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>#}
+                        {#                                            <div class="avatar-info">#}
+                        {#                                                <a class="nickname" href="/user/info/24311">jjavaman</a>#}
+                        {#                                                <div class="activity ">10k</div>#}
+                        {#                                            </div>#}
+                        {#                                        </div>#}
+                        {#                                    </div>#}
+                        {#                                </h5>#}
+                        {#                            </div>#}
+                        {#                        </li>#}
+                        {##}
+                        {#                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">#}
+                        {#                            <div class="list-icon-wrapper pull-left">#}
+                        {#                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">#}
+                        {#                            </div>#}
+                        {#                            <div class="list-title-wrapper list-activity">#}
+                        {#                                <div class="list-activity-desc">#}
+                        {#                                    <span class="list-activity-desc-text">#}
+                        {#                                        #1183419 게시물을 스크랩 하였습니다.#}
+                        {#                                    </span>#}
+                        {#                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>#}
+                        {#                                </div>#}
+                        {#                                <h5 class="list-group-item-heading">#}
+                        {#                                    <a href="/article/1183419">사망한 개발팀 살리기</a>#}
+                        {#                                    <div class="list-group-item-author pull-right clearfix">#}
+                        {#                                        <div class="avatar clearfix avatar-x-small ">#}
+                        {#                                            <a href="/user/info/24311" class="avatar-photo"><img#}
+                        {#                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>#}
+                        {#                                            <div class="avatar-info">#}
+                        {#                                                <a class="nickname" href="/user/info/24311">jjavaman</a>#}
+                        {#                                                <div class="activity ">10k</div>#}
+                        {#                                            </div>#}
+                        {#                                        </div>#}
+                        {#                                    </div>#}
+                        {#                                </h5>#}
+                        {#                            </div>#}
+                        {#                        </li>#}
                         {#                        북마크#}
 
                     </ul>
+
                     <div class="text-center">
                         <ul class="pagination pagination-sm">
                             <li class="prev disabled">
-				                <span>«</span>
+                                <span>«</span>
                             </li>
                             <li class="disabled">
-				                <span>»</span>
+                                <span>»</span>
                             </li>
 
                         </ul>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -1772,6 +1852,7 @@
 </div>
 
 {% include 'js.html' %}
+
 
 </body>
 
