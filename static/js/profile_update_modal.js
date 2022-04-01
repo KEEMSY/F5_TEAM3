@@ -33,3 +33,8 @@ window.addEventListener("keyup", e => {
 })
 
 
+$.ajaxSetup({
+    headers: {"X-CSRFToken": '{{csrf_token}}'}
+});
+
+

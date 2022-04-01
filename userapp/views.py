@@ -125,6 +125,7 @@ def get_profile_article(request, pk):
         articles = Article.objects.filter(user_id=pk).order_by('-created_at')
 
         articles_list = []
+        #제이슨은 쿼리문을 번역을 못한다 그래서 dict 형태로 키, 벨류로 데이터를 넣고 다시 객체들을 리스트에 어펜드 하여 리스폰스 해준다
         for article in articles:
             q={}
             #게시글 정보
@@ -161,6 +162,7 @@ def get_profile_bookmark(request, pk):
             # 게시글 카테고리
             q['category_name'] = bookmark.article.category.name
             # 게시글 작성자 정보
+            q['author_id'] = bookmark.article.user.id
             q['author_img'] = bookmark.article.user.profile.img
             q['author_name'] = bookmark.article.user.username
 
