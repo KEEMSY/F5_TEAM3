@@ -1,76 +1,84 @@
-  <!--== Start Footer Area Wrapper ==-->
-  <footer class="footer-area">
+{% load static %}
+<!--== Start Footer Area Wrapper ==-->
+<footer class="footer-area">
 
     <!--== Start Footer Main ==-->
     <div class="footer-main">
-      <div class="container pt--0 pb--0">
-        <div class="row">
-          <div class="col-md-6 col-lg-3">
-            <div class="widget-item widget-about">
-              <div class="widget-logo-area">
-                <a href="index.html">
-                  <img class="logo-main" src="../static/img/coFi1.png" alt="Logo" />
-                </a>
-              </div>
-              <p class="desc">Sparta Coding Club Web+AI 1st <br> community for Developers</p>
-            </div>
-          </div>
-          <div class="col-lg-9">
+        <div class="container pt--0 pb--0">
             <div class="row">
-              <div class="col-md-3 col-lg-3">
-                <div class="widget-item nav-menu-item1">
-                    <a href="#"><h4 class="widget-title">Home</h4></a>
-                </div>
-              </div>
-              <div class="col-md-3 col-lg-3">
-                <div class="widget-item nav-menu-item2">
-                    <a href="#"><h4 class="widget-title">Career</h4></a>
-                </div>
-              </div>
-              <div class="col-md-3 col-lg-3">
-                <div class="widget-item nav-menu-item3">
-                  <h4 class="widget-title">Community</h4>
-                  <h4 class="widget-collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#widgetId-3">Legal</h4>
-                  <div id="widgetId-3" class="collapse widget-collapse-body">
-                    <div class="collapse-body">
-                      <div class="widget-menu-wrap">
-                        <ul class="nav-menu">
-                          <li><a href="account-login.html">자유게시판</a></li>
-                          <li><a href="blog.html">꿀팁게시판</a></li>
-                          <li><a href="account-login.html">질문게시판</a></li>
-                        </ul>
-                      </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="widget-item widget-about">
+                        <div class="widget-logo-area">
+                            <a href="index.html">
+                                <img class="logo-main" src="{% static 'img/coFi1.png' %}" alt="Logo"/>
+                            </a>
+                        </div>
+                        <p class="desc">Sparta Coding Club Web+AI 1st <br> community for Developers</p>
                     </div>
-                  </div>
                 </div>
-              </div>
-              <div class="col-md-3 col-lg-3">
-                <div class="widget-item nav-menu-item3">
-                  <a href="#"><h4 class="widget-title">Mypage</h4></a>
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-md-3 col-lg-3">
+                            <div class="widget-item nav-menu-item1">
+                                <a href="/"><h4 class="widget-title">Home</h4></a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-lg-3">
+                            <div class="widget-item nav-menu-item2">
+                                <a href="{% url 'careerapp:job' %}"><h4 class="widget-title">Career</h4></a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-lg-3">
+                            <div class="widget-item nav-menu-item3">
+                                <a href="{% url 'articleapp:home' %}"><h4 class="widget-title">Community</h4></a>
+                                <h4 class="widget-collapsed-title collapsed" data-bs-toggle="collapse"
+                                    data-bs-target="#widgetId-3">Legal</h4>
+                                <div id="widgetId-3" class="collapse widget-collapse-body">
+                                    <div class="collapse-body">
+                                        <div class="widget-menu-wrap">
+                                            <ul class="nav-menu">
+                                                <li><a href="{% url 'temp1_free' %}">자유게시판</a></li>
+                                                <li><a href="{% url 'temp1_tip' %}">꿀팁게시판</a></li>
+                                                <li><a href="{% url 'temp1_question' %}">질문게시판</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if not user.is_authenticated %}
+                            <div class="col-md-3 col-lg-3">
+                                <div class="widget-item nav-menu-item3">
+                                    <a href="{% url 'user:login' %}"><h4 class="widget-title">login</h4></a>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="col-md-3 col-lg-3">
+                                <div class="widget-item nav-menu-item3">
+                                    <a href="{% url 'user:profile' user.pk %}"><h4 class="widget-title">Mypage</h4></a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
     <!--== End Footer Main ==-->
 
     <!--== Start Footer Bottom ==-->
     <div class="footer-bottom">
-      <div class="container pt--0 pb--0">
-        <div class="row">
-          <div class="col-12">
-            <div class="footer-bottom-content">
-              <p class="copyright">© 2021 Finate. Made with <i class="icofont-heart"></i> by <a target="_blank" href="https://themeforest.net/user/codecarnival">Codecarnival.</a></p>
+        <div class="container pt--0 pb--0">
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-bottom-content">
+                        <p class="copyright">© 2021 Finate. Made with <i class="icofont-heart"></i> by <a
+                                target="_blank" href="https://themeforest.net/user/codecarnival">Codecarnival.</a></p>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
     <!--== End Footer Bottom ==-->
-  </footer>
-  <!--== End Footer Area Wrapper ==-->
-
-
-
+</footer>
+<!--== End Footer Area Wrapper ==-->

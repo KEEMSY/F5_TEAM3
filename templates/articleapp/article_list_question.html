@@ -8,7 +8,7 @@
     position: relative;
         width: 95%;
     padding: 40px 0 0 0;
-    margin: 400px 30px;
+    margin: 0px 30px;
     /* min-height: 700px; */
     -webkit-transition: opacity ease 0.3s;
     -moz-transition: opacity ease 0.3s;
@@ -887,7 +887,7 @@ img.avatar-14 {
 <div class="wrapper">
 
     <!--== Start Header Wrapper ==-->
-    {% include 'header.html' %}
+    {% include 'header_ver2.html' %}
 
     {# End Header Wrpper#}
     <div class="wraper_wraper">
@@ -1085,8 +1085,15 @@ img.avatar-14 {
                                         <div>
                                             <label class="screen-reader-text hidden" for="bbp_search">Search for:</label>
                                             <input type="hidden" name="action" value="bbp-search-request">
-                                            <input tabindex="101" type="text" value="" name="bbp_search" id="bbp_search">
-                                            <input tabindex="102" class="button" type="submit" id="bbp_search_submit" value="Search">
+                                            <div class="search_bar">
+                                                <select class="form-select" aria-label="Default select example">
+                                                  <option selected>검색조건</option>
+                                                  <option value="title">제목</option>
+                                                  <option value="user">작성자</option>
+                                                </select>
+                                                <input tabindex="101" type="text" value="" name="bbp_search" id="bbp_search">
+                                                <input tabindex="102" class="button" type="submit" id="bbp_search_submit" value="Search">
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

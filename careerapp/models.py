@@ -2,11 +2,6 @@ from django.db import models
 
 # Create your models here.
 
-# 테스트를 위해 유저모델 작성 머지하고 위에 임포트해서 가져와야합니다.
-class Author(models.Model):
-    name = models.CharField(max_length=40)
-    skill = models.CharField(max_length=40, default='Python')
-
 
 
 class Career(models.Model):

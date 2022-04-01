@@ -1,8 +1,10 @@
+
 import datetime
 
 from django.core.paginator import Paginator
 
-from articleapp.models import Article, ArticleHits, Author, Category
+from articleapp.models import Article, ArticleHits, Category
+from userapp.models import User
 
 """
 Service
@@ -43,7 +45,7 @@ def read_article_by_user(user_id):
 
 
 def read_article_containing_username(username):
-    users = Author.objects.filter(name__icontains=username).order_by('-id')
+    users = User.objects.filter(name__icontains=username).order_by('-id')
 
     article_list = []
     for user in users:
@@ -129,3 +131,4 @@ def get_page_context(articles, page):
     paginator = Paginator(articles, 10)
     board_list = paginator.get_page(page)
     return board_list
+
