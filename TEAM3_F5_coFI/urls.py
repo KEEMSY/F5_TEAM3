@@ -29,7 +29,6 @@ urlpatterns = [
     path('communities/', include("articleapp.urls")),
     path('careers/', include("careerapp.urls")),
 
-    path('mypage/', include("bookmarkapp.urls")),
 
     path('temp/', views.show_community, name='temp'),
     path('temp1/question/', views.show_article_list_question, name='temp1_question'),
