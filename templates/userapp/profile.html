@@ -558,7 +558,7 @@
     }
 
     .content {
-        width: 70%;
+        width: 800px;
         min-height: 847px;
         margin: 4vw 0 0 2vw;
         float: left;
@@ -578,7 +578,7 @@
     }
 
     .panel {
-        width: 780px;
+        width: 750px;
         height: 215px;
         margin-bottom: 20px;
         background-color: #fff;
@@ -603,7 +603,7 @@
     .modal-button-wraper {
         width: 15%;
         display: flex;
-        justify-content: right;
+        justify-content: center;
         height: 115px;
         margin-bottom: 30px
 
@@ -778,7 +778,7 @@
     }
 
     .user-info .user-point {
-        margin-left: 2vw;
+        margin-left: 5%;
         float: left;
         width: 15%;
         text-align: center;
@@ -1531,8 +1531,8 @@
                 <div class="col-sm-2 user-info-nav pull-right">
                     <ul class="nav">
                         <div class="widget-categories">
-                            <li><a onclick="show_articles()">게시물<span>(16)</span></a></li>
-                            <li><a onclick="show_bookmarks()">스크랩<span>(03)</span></a></li>
+                            <li><a onclick="show_articles()">게시물</a></li>
+                            <li><a onclick="show_bookmarks()">스크랩</a></li>
                         </div>
                     </ul>
                 </div>
@@ -1579,198 +1579,6 @@
                             </li>
                         {% endfor %}
                         {#                        게시글#}
-
-                        {#                        북마크#}
-{#                                                <li class="list-group-item list-group-item-small list-group-has-note clearfix">#}
-{#                                                    <div class="list-icon-wrapper pull-left">#}
-{#                                                        <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">#}
-{#                                                    </div>#}
-{#                                                    <div class="list-title-wrapper list-activity">#}
-{#                                                        <div class="list-activity-desc">#}
-{#                                                            <span class="list-activity-desc-text">#}
-{#                                                                #1183419 게시물을 스크랩 하였습니다.#}
-{#                                                            </span>#}
-{#                                                            <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>#}
-{#                                                        </div>#}
-{#                                                        <h5 class="list-group-item-heading">#}
-{#                                                            <a href="/article/1183419">사망한 개발팀 살리기</a>#}
-{#                                                            <div class="list-group-item-author pull-right clearfix">#}
-{#                                                                <div class="avatar clearfix avatar-x-small ">#}
-{#                                                                    <a href="/user/info/24311" class="avatar-photo"><img#}
-{#                                                                            src="//file.okky.kr/profile/2021/1627520420297.png"></a>#}
-{#                                                                    <div class="avatar-info">#}
-{#                                                                        <a class="nickname" href="/user/info/24311">jjavaman</a>#}
-{#                                                                        <div class="activity ">10k</div>#}
-{#                                                                    </div>#}
-{#                                                                </div>#}
-{#                                                            </div>#}
-{#                                                        </h5>#}
-{#                                                    </div>#}
-{#                                                </li>#}
-                        {##}
-                        {#                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">#}
-                        {#                            <div class="list-icon-wrapper pull-left">#}
-                        {#                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">#}
-                        {#                            </div>#}
-                        {#                            <div class="list-title-wrapper list-activity">#}
-                        {#                                <div class="list-activity-desc">#}
-                        {#                                    <span class="list-activity-desc-text">#}
-                        {#                                        #1183419 게시물을 스크랩 하였습니다.#}
-                        {#                                    </span>#}
-                        {#                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>#}
-                        {#                                </div>#}
-                        {#                                <h5 class="list-group-item-heading">#}
-                        {#                                    <a href="/article/1183419">사망한 개발팀 살리기</a>#}
-                        {#                                    <div class="list-group-item-author pull-right clearfix">#}
-                        {#                                        <div class="avatar clearfix avatar-x-small ">#}
-                        {#                                            <a href="/user/info/24311" class="avatar-photo"><img#}
-                        {#                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>#}
-                        {#                                            <div class="avatar-info">#}
-                        {#                                                <a class="nickname" href="/user/info/24311">jjavaman</a>#}
-                        {#                                                <div class="activity ">10k</div>#}
-                        {#                                            </div>#}
-                        {#                                        </div>#}
-                        {#                                    </div>#}
-                        {#                                </h5>#}
-                        {#                            </div>#}
-                        {#                        </li>#}
-                        {##}
-                        {#                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">#}
-                        {#                            <div class="list-icon-wrapper pull-left">#}
-                        {#                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">#}
-                        {#                            </div>#}
-                        {#                            <div class="list-title-wrapper list-activity">#}
-                        {#                                <div class="list-activity-desc">#}
-                        {#                                    <span class="list-activity-desc-text">#}
-                        {#                                        #1183419 게시물을 스크랩 하였습니다.#}
-                        {#                                    </span>#}
-                        {#                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>#}
-                        {#                                </div>#}
-                        {#                                <h5 class="list-group-item-heading">#}
-                        {#                                    <a href="/article/1183419">사망한 개발팀 살리기</a>#}
-                        {#                                    <div class="list-group-item-author pull-right clearfix">#}
-                        {#                                        <div class="avatar clearfix avatar-x-small ">#}
-                        {#                                            <a href="/user/info/24311" class="avatar-photo"><img#}
-                        {#                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>#}
-                        {#                                            <div class="avatar-info">#}
-                        {#                                                <a class="nickname" href="/user/info/24311">jjavaman</a>#}
-                        {#                                                <div class="activity ">10k</div>#}
-                        {#                                            </div>#}
-                        {#                                        </div>#}
-                        {#                                    </div>#}
-                        {#                                </h5>#}
-                        {#                            </div>#}
-                        {#                        </li>#}
-                        {##}
-                        {#                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">#}
-                        {#                            <div class="list-icon-wrapper pull-left">#}
-                        {#                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">#}
-                        {#                            </div>#}
-                        {#                            <div class="list-title-wrapper list-activity">#}
-                        {#                                <div class="list-activity-desc">#}
-                        {#                                    <span class="list-activity-desc-text">#}
-                        {#                                        #1183419 게시물을 스크랩 하였습니다.#}
-                        {#                                    </span>#}
-                        {#                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>#}
-                        {#                                </div>#}
-                        {#                                <h5 class="list-group-item-heading">#}
-                        {#                                    <a href="/article/1183419">사망한 개발팀 살리기</a>#}
-                        {#                                    <div class="list-group-item-author pull-right clearfix">#}
-                        {#                                        <div class="avatar clearfix avatar-x-small ">#}
-                        {#                                            <a href="/user/info/24311" class="avatar-photo"><img#}
-                        {#                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>#}
-                        {#                                            <div class="avatar-info">#}
-                        {#                                                <a class="nickname" href="/user/info/24311">jjavaman</a>#}
-                        {#                                                <div class="activity ">10k</div>#}
-                        {#                                            </div>#}
-                        {#                                        </div>#}
-                        {#                                    </div>#}
-                        {#                                </h5>#}
-                        {#                            </div>#}
-                        {#                        </li>#}
-                        {##}
-                        {#                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">#}
-                        {#                            <div class="list-icon-wrapper pull-left">#}
-                        {#                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">#}
-                        {#                            </div>#}
-                        {#                            <div class="list-title-wrapper list-activity">#}
-                        {#                                <div class="list-activity-desc">#}
-                        {#                                    <span class="list-activity-desc-text">#}
-                        {#                                        #1183419 게시물을 스크랩 하였습니다.#}
-                        {#                                    </span>#}
-                        {#                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>#}
-                        {#                                </div>#}
-                        {#                                <h5 class="list-group-item-heading">#}
-                        {#                                    <a href="/article/1183419">사망한 개발팀 살리기</a>#}
-                        {#                                    <div class="list-group-item-author pull-right clearfix">#}
-                        {#                                        <div class="avatar clearfix avatar-x-small ">#}
-                        {#                                            <a href="/user/info/24311" class="avatar-photo"><img#}
-                        {#                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>#}
-                        {#                                            <div class="avatar-info">#}
-                        {#                                                <a class="nickname" href="/user/info/24311">jjavaman</a>#}
-                        {#                                                <div class="activity ">10k</div>#}
-                        {#                                            </div>#}
-                        {#                                        </div>#}
-                        {#                                    </div>#}
-                        {#                                </h5>#}
-                        {#                            </div>#}
-                        {#                        </li>#}
-                        {##}
-                        {#                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">#}
-                        {#                            <div class="list-icon-wrapper pull-left">#}
-                        {#                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">#}
-                        {#                            </div>#}
-                        {#                            <div class="list-title-wrapper list-activity">#}
-                        {#                                <div class="list-activity-desc">#}
-                        {#                                    <span class="list-activity-desc-text">#}
-                        {#                                        #1183419 게시물을 스크랩 하였습니다.#}
-                        {#                                    </span>#}
-                        {#                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>#}
-                        {#                                </div>#}
-                        {#                                <h5 class="list-group-item-heading">#}
-                        {#                                    <a href="/article/1183419">사망한 개발팀 살리기</a>#}
-                        {#                                    <div class="list-group-item-author pull-right clearfix">#}
-                        {#                                        <div class="avatar clearfix avatar-x-small ">#}
-                        {#                                            <a href="/user/info/24311" class="avatar-photo"><img#}
-                        {#                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>#}
-                        {#                                            <div class="avatar-info">#}
-                        {#                                                <a class="nickname" href="/user/info/24311">jjavaman</a>#}
-                        {#                                                <div class="activity ">10k</div>#}
-                        {#                                            </div>#}
-                        {#                                        </div>#}
-                        {#                                    </div>#}
-                        {#                                </h5>#}
-                        {#                            </div>#}
-                        {#                        </li>#}
-                        {##}
-                        {#                        <li class="list-group-item list-group-item-small list-group-has-note clearfix">#}
-                        {#                            <div class="list-icon-wrapper pull-left">#}
-                        {#                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">#}
-                        {#                            </div>#}
-                        {#                            <div class="list-title-wrapper list-activity">#}
-                        {#                                <div class="list-activity-desc">#}
-                        {#                                    <span class="list-activity-desc-text">#}
-                        {#                                        #1183419 게시물을 스크랩 하였습니다.#}
-                        {#                                    </span>#}
-                        {#                                    <span class="timeago" title="2022-03-27T15:55:15">2022-03-27 15:55:15</span>#}
-                        {#                                </div>#}
-                        {#                                <h5 class="list-group-item-heading">#}
-                        {#                                    <a href="/article/1183419">사망한 개발팀 살리기</a>#}
-                        {#                                    <div class="list-group-item-author pull-right clearfix">#}
-                        {#                                        <div class="avatar clearfix avatar-x-small ">#}
-                        {#                                            <a href="/user/info/24311" class="avatar-photo"><img#}
-                        {#                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>#}
-                        {#                                            <div class="avatar-info">#}
-                        {#                                                <a class="nickname" href="/user/info/24311">jjavaman</a>#}
-                        {#                                                <div class="activity ">10k</div>#}
-                        {#                                            </div>#}
-                        {#                                        </div>#}
-                        {#                                    </div>#}
-                        {#                                </h5>#}
-                        {#                            </div>#}
-                        {#                        </li>#}
-                        {#                        북마크#}
-
                     </ul>
 
                     <div class="text-center">
