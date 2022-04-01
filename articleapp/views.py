@@ -69,7 +69,7 @@ def show_all_article(request):
     all_articles = read_all_article()
     recent_comments = read_all_comment()
     page = int(request.GET.get('page', 1))
-    board_list = get_page(all_articles, page)
+    board_list = get_page_context(all_articles, page)
 
     return render(request, 'articleapp/article_all.html',
                   {'articles': all_articles, 'board_list': board_list, 'recent_comments': recent_comments}, status=200)
@@ -82,7 +82,7 @@ def show_question_article(request):
 
     target_articles = read_category_article('question')
     page = int(request.GET.get('page', 1))
-    board_list = get_page(target_articles, page)
+    board_list = get_page_context(target_articles, page)
     return render(request, 'articleapp/article_question.html',
                   {'target_articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
                    'recent_comments': recent_comments}, status=200)
@@ -94,7 +94,7 @@ def show_free_article(request):
 
     target_articles = read_category_article('free')
     page = int(request.GET.get('page', 1))
-    board_list = get_page_context(target_articles, page)
+    board_list = get_page_context_context(target_articles, page)
     return render(request, 'articleapp/article_free.html',
                   {'target_articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
                    'recent_comments': recent_comments}, status=200)
@@ -106,7 +106,7 @@ def show_tip_article(request):
 
     target_articles = read_category_article('tip')
     page = int(request.GET.get('page', 1))
-    board_list = get_page(target_articles, page)
+    board_list = get_page_context(target_articles, page)
     return render(request, 'articleapp/article_tip.html',
                   {'target_articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
                    'recent_comments': recent_comments}, status=200)
@@ -118,7 +118,7 @@ def show_category_article(request):
 
     target_articles = read_category_article(request.POST['category'])
     page = int(request.GET.get('page', 1))
-    board_list = get_page(target_articles, page)
+    board_list = get_page_context(target_articles, page)
     return render(request, 'community.html',
                   {'target_articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
                    'recent_comments': recent_comments}, status=200)
@@ -137,7 +137,7 @@ def search_article(request):
         if standard == 'title':
             target_articles = read_article_by_title(keyword)
             page = int(request.GET.get('page', 1))
-            board_list = get_page(target_articles, page)
+            board_list = get_page_context(target_articles, page)
             return render(request, 'community.html',
                           {'articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
                            'recent_comments': recent_comments},
@@ -146,7 +146,7 @@ def search_article(request):
         else:
             target_articles = read_article_containing_username(keyword)
             page = int(request.GET.get('page', 1))
-            board_list = get_page(target_articles, page)
+            board_list = get_page_context(target_articles, page)
             return render(request, 'community.html',
                           {'articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
                            'recent_comments': recent_comments},
@@ -157,7 +157,7 @@ def search_article(request):
             try:
                 target_articles = read_article_by_title_within_a_specific_period(period, keyword)
                 page = int(request.GET.get('page', 1))
-                board_list = get_page(target_articles, page)
+                board_list = get_page_context(target_articles, page)
                 return render(request, 'community.html',
                               {'articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
                                'recent_comments': recent_comments},
@@ -169,7 +169,7 @@ def search_article(request):
             try:
                 target_articles = read_article_containing_username_within_a_specific_period(period, keyword)
                 page = int(request.GET.get('page', 1))
-                board_list = get_page(target_articles, page)
+                board_list = get_page_context(target_articles, page)
                 return render(request, 'community.html',
                               {'articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
                                'recent_comments': recent_comments},
