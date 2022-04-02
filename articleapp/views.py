@@ -94,7 +94,7 @@ def show_free_article(request):
 
     target_articles = read_category_article('free')
     page = int(request.GET.get('page', 1))
-    board_list = get_page_context_context(target_articles, page)
+    board_list = get_page_context(target_articles, page)
     return render(request, 'articleapp/article_free.html',
                   {'target_articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
                    'recent_comments': recent_comments}, status=200)
