@@ -63,6 +63,24 @@ class TestView(TestCase):
         comment = Comment.objects.get(id=comment_id)
         self.assertEqual(update_content, comment.content)
 
+    def test_it_can_not_update_when_article_does_not_exist(self):
+        # Given
+        user = User.objects.create(username='test_name', email='test@test.com')
+        category = Category.objects.create(name='test_category')
+        content = 'test'
+        article = create_article('title', user, content, category, '')
+
+        comment = create_comment(article.id, user.id, content)
+        comment_id = comment.id
+
+        # When
+        article.delete()
+
+        # Expect
+        update_content = 'update_Content!'
+        update_comment(comment_id, update_content)
+        self.assertEqual(False, update_comment(comment_id, update_content))
+
 #     # comment 삭제 시
 #     def test_comment_can_delete_by_deleting_article(self):
 #         # Given
