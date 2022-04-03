@@ -11,6 +11,7 @@ urlpatterns = [
     path('question/', views.show_question_article, name='question'),
     path('question/<int:pk>', ArticleView.as_view(), name='question_RUD'),
 
+
     path('free/', views.show_free_article, name='free'),
     path('free/<int:pk>', ArticleView.as_view(), name='free_RUD'),
 
