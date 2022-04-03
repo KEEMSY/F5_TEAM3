@@ -137,23 +137,23 @@ class TestView(TestCase):
 
         # Expect
         self.assertEqual(3, len(target_articles))
-#
-#     def test_read_article_by_user(self):
-#         user1 = Author.objects.create(name="test1")
-#         category = Category.objects.create(name='test_category')
-#
-#         article1 = create_article("title_1", user1, "content", category, '')
-#         user2 = Author.objects.create(name="test2")
-#         article2 = create_article("title_2", user2, "content", category, '')
-#
-#         # When
-#         article_by_user1 = read_article_by_user(user1.id).get()
-#         article_by_user2 = read_article_by_user(user2.id).get()
-#
-#         # Expect
-#         self.assertEqual("title_1", article_by_user1.title)
-#         self.assertEqual("title_2", article_by_user2.title)
-#
+
+    def test_read_article_by_user(self):
+        user1 = User.objects.create(username='test_name', email='test1@test.com')
+        category = Category.objects.create(name='test_category')
+
+        article1 = create_article("title_1", user1, "content", category, '')
+        user2 = User.objects.create(username='test_name', email='test2@test.com')
+        article2 = create_article("title_2", user2, "content", category, '')
+
+        # When
+        article_by_user1 = read_article_by_user(user1.id).get()
+        article_by_user2 = read_article_by_user(user2.id).get()
+
+        # Expect
+        self.assertEqual("title_1", article_by_user1.title)
+        self.assertEqual("title_2", article_by_user2.title)
+
 #     def test_read_articles_by_user(self):
 #         user1 = Author.objects.create(name="test1")
 #         category = Category.objects.create(name='test_category')
