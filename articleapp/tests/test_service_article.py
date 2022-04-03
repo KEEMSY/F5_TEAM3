@@ -229,31 +229,31 @@ class TestView(TestCase):
         self.assertEqual(6, len(within_one_year))
 
         self.assertEqual("title_day", within_one_day[0].title)
-#
-#     def test_read_article_containing_username_within_a_specific_period(self):
-#         # Given
-#         user1 = Author.objects.create(name="test1")
-#         user2 = Author.objects.create(name="test2")
-#         category = Category.objects.create(name='test_category')
-#
-#         article1_1 = create_article("title_one_day", user1, "content", category, '')
-#         article1_2 = create_article("title_one_week", user2, "content", category, '')
-#
-#         article1_1.created_at = datetime.date.today() - datetime.timedelta(days=1)
-#         article1_1.save()
-#
-#         article1_2.created_at = datetime.date.today() - datetime.timedelta(days=7)
-#         article1_2.save()
-#
-#         # When
-#         within_one_day_username = read_article_containing_username_within_a_specific_period(1, 'test')
-#         within_one_week_username = read_article_containing_username_within_a_specific_period(7, 'test')
-#
-#         # Expect
-#         self.assertEqual('test1', within_one_day_username[0].user.name)
-#         self.assertEqual('test2', within_one_week_username[0].user.name)
-#         self.assertEqual('test1', within_one_week_username[1].user.name)
-#
+
+    def test_read_article_containing_username_within_a_specific_period(self):
+        # Given
+        user1 = User.objects.create(username='test_name1', email='test1@test.com')
+        user2 = User.objects.create(username='test_name2', email='test2@test.com')
+        category = Category.objects.create(name='test_category')
+
+        article1_1 = create_article("title_one_day", user1, "content", category, '')
+        article1_2 = create_article("title_one_week", user2, "content", category, '')
+
+        article1_1.created_at = datetime.date.today() - datetime.timedelta(days=1)
+        article1_1.save()
+
+        article1_2.created_at = datetime.date.today() - datetime.timedelta(days=7)
+        article1_2.save()
+
+        # When
+        within_one_day_username = read_article_containing_username_within_a_specific_period(1, 'test')
+        within_one_week_username = read_article_containing_username_within_a_specific_period(7, 'test')
+
+        # Expect
+        self.assertEqual('test_name1', within_one_day_username[0].user.username)
+        self.assertEqual('test_name2', within_one_week_username[0].user.username)
+        self.assertEqual('test_name1', within_one_week_username[1].user.username)
+
 #     def test_when_article_can_not_read_article_containing_username_within_a_specific_period(self):
 #         # Given
 #         user1 = Author.objects.create(name="test1")
