@@ -81,19 +81,20 @@ class TestView(TestCase):
         update_comment(comment_id, update_content)
         self.assertEqual(False, update_comment(comment_id, update_content))
 
-#     # comment 삭제 시
-#     def test_comment_can_delete_by_deleting_article(self):
-#         # Given
-#         user = Author.objects.create(name="test_name")
-#         article = Post.objects.create(title="test_title")
-#         content = 'test'
-#         comment = create_comment(article.id, user.id, content)
-#
-#         # When
-#         article.delete()
-#
-#         # Expectdd
-#         self.assertEqual(0, len(Comment.objects.all()))
+    # comment 삭제 시
+    def test_comment_can_delete_by_deleting_article(self):
+        # Given
+        user = User.objects.create(username='test_name', email='test@test.com')
+        category = Category.objects.create(name='test_category')
+        content = 'test'
+        article = create_article('title', user, content, category, '')
+        comment = create_comment(article.id, user.id, content)
+
+        # When
+        article.delete()
+
+        # Expectdd
+        self.assertEqual(0, len(Comment.objects.all()))
 #
 #     def test_comment_can_delete_by_deleting_user(self):
 #         # Given
