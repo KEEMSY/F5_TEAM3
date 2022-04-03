@@ -35,18 +35,18 @@ class TestView(TestCase):
         # expect
         self.assertIsNotNone(Article.id)
         self.assertEqual(user.id, article.id)
-#
-#     def test_when_there_is_not_enough_argument(self):
-#         # Given
-#         user = Author.objects.create(name='test')
-#         title = 'test_title'
-#         content = 'content'
-#         category = Category.objects.create(name='test_category')
-#
-#         # Expect
-#         with self.assertRaises(TypeError):
-#             article = create_article(title, user, content, category)
-#
+
+    def test_when_there_is_not_enough_argument(self):
+        # Given
+        user = User.objects.create(username='test_name',email='test@test.com')
+        title = 'test_title'
+        content = 'content'
+        category = Category.objects.create(name='test_category')
+
+        # Expect
+        with self.assertRaises(TypeError):
+            article = create_article(title, user, content, category)
+
 #     ''' R E A D '''
 #
 #     def test_when_article_does_not_exist(self):
