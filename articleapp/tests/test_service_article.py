@@ -292,20 +292,20 @@ class TestView(TestCase):
         self.assertEqual('title_one_day', within_one_day_title[0].title)
         self.assertEqual('title_one_week', within_one_week_title[0].title)
         self.assertEqual('title_one_day', within_one_week_title[1].title)
-#
-#     def test_when_article_can_not_read_article_by_title_within_a_specific_period(self):
-#         # Given
-#         user1 = Author.objects.create(name="test1")
-#         category = Category.objects.create(name='test_category')
-#
-#         article1_1 = create_article("title_one_day", user1, "content", category, '')
-#         article1_2 = create_article("title_one_week", user1, "content", category, '')
-#
-#         # When
-#         within_one_week_title = read_article_by_title_within_a_specific_period(7, 'abc')
-#
-#         # Expect
-#         self.assertEqual(False, within_one_week_title)
+
+    def test_when_article_can_not_read_article_by_title_within_a_specific_period(self):
+        # Given
+        user1 = User.objects.create(username='test_name1', email='test1@test.com')
+        category = Category.objects.create(name='test_category')
+
+        article1_1 = create_article("title_one_day", user1, "content", category, '')
+        article1_2 = create_article("title_one_week", user1, "content", category, '')
+
+        # When
+        within_one_week_title = read_article_by_title_within_a_specific_period(7, 'abc')
+
+        # Expect
+        self.assertEqual(False, within_one_week_title)
 #
 #     ''' U P D A T E '''
 #
