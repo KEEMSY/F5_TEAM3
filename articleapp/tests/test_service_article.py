@@ -254,20 +254,20 @@ class TestView(TestCase):
         self.assertEqual('test_name2', within_one_week_username[0].user.username)
         self.assertEqual('test_name1', within_one_week_username[1].user.username)
 
-#     def test_when_article_can_not_read_article_containing_username_within_a_specific_period(self):
-#         # Given
-#         user1 = Author.objects.create(name="test1")
-#         user2 = Author.objects.create(name="test2")
-#         category = Category.objects.create(name='test_category')
-#
-#         article1_1 = create_article("title_one_day", user1, "content", category, '')
-#         article1_2 = create_article("title_one_week", user2, "content", category, '')
-#
-#         # When
-#         within_one_week_username = read_article_containing_username_within_a_specific_period(7, 'abc')
-#
-#         # Expect
-#         self.assertEqual(False, within_one_week_username)
+    def test_when_it_can_not_read_article_containing_username_within_a_specific_period(self):
+        # Given
+        user1 = User.objects.create(username='test_name1', email='test1@test.com')
+        user2 = User.objects.create(username='test_name2', email='test2@test.com')
+        category = Category.objects.create(name='test_category')
+
+        article1_1 = create_article("title_one_day", user1, "content", category, '')
+        article1_2 = create_article("title_one_week", user2, "content", category, '')
+
+        # When
+        within_one_week_username = read_article_containing_username_within_a_specific_period(7, 'abc')
+
+        # Expect
+        self.assertEqual(False, within_one_week_username)
 #
 #     def test_read_article_containing_title_within_a_specific_period(self):
 #         # Given

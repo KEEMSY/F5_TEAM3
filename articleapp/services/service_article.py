@@ -68,8 +68,8 @@ def read_article_within_a_specific_period(date):
         '-created_at')
 
 
-def read_article_containing_username_within_a_specific_period(date, name):
-    before_article = read_article_containing_username(name)
+def read_article_containing_username_within_a_specific_period(date, keyword):
+    before_article = read_article_containing_username(keyword)
     if before_article:
         return before_article.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date))
     else:
