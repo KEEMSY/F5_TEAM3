@@ -29,6 +29,7 @@
                                     <span><a href="{% url 'articleapp:aritcle_write' %}">게시글 작성</a></span>
                                 </p>
                             </div>
+                            {% if target_articles.couint != 0 %}
                             <ul id="forums-list-0" class="bbp-forums">
                                 <li class="bbp-header">
                                     <ul class="forum-titles">
@@ -38,31 +39,33 @@
                                         <li class="bbp-forum-freshness">작성자</li>
                                     </ul>
                                 </li>
+                                    {% for article in target_articles %}
+                                        <li class="bbp-body">
+                                            <ul id="{{ article.id }}" class="loop-item-0 bbp-forum-status-open bbp-forum-visibility-publish forum type-forum hentry">
+                                                <li class="bbp-forum-info">
+                                                    <a class="bbp-forum-title" href="">{{ article.title }}</a>
+                                                    <div class="bbp-forum-content">
+                                                        {{ article.content }}
+                                                    </div>
+                                                </li>
+                                                <li class="bbp-forum-topic-count">{{ article.article_hits }}</li>
+                                                <li class="bbp-forum-reply-count">0</li>
+                                                <li class="bbp-forum-freshness">
+                                                    {{ article.user.name }}
+                                                    <p class="bbp-topic-meta">
+                                                    <span class="bbp-topic-freshness-author">
+                                                        <img alt="" src="http://1.gravatar.com/avatar/?s=14&amp;d=mm&amp;r=g" class="avatar avatar-14 photo avatar-default" height="14" width="14">&nbsp;{{ article.created_at }}
+                                                    </span>
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </li>
 
-                                {% for article in articles %}
+                                    {% endfor %}
 
-                                    <li class="bbp-body">
-                                        <ul id="{{ article.id }}" class="loop-item-0 bbp-forum-status-open bbp-forum-visibility-publish forum type-forum hentry">
-                                            <li class="bbp-forum-info">
-                                                <a class="bbp-forum-title" href="single-topic.html">{{ article.title }}</a>
-                                                <div class="bbp-forum-content">
-                                                    {{ article.content }}
-                                                </div>
-                                            </li>
-                                            <li class="bbp-forum-topic-count">{{ article.article_hits }}</li>
-                                            <li class="bbp-forum-reply-count">0</li>
-                                            <li class="bbp-forum-freshness">
-                                                {{ article.user.name }}
-                                                <p class="bbp-topic-meta">
-                                                <span class="bbp-topic-freshness-author">
-                                                    <img alt="" src="http://1.gravatar.com/avatar/?s=14&amp;d=mm&amp;r=g" class="avatar avatar-14 photo avatar-default" height="14" width="14">&nbsp;{{ article.created_at }}
-                                                </span>
-                                                </p>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                {% endfor %}
+                            {% else %}
+                                <h2>현제 해당 질문게시판에 게시글이 존재하지 않습니다.</h2>
+                            {% endif %}
 
 
 

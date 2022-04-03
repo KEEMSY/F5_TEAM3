@@ -39,12 +39,12 @@
                                     </ul>
                                 </li>
 
-                                {% for article in articles %}
+                                {% for article in main_area_article %}
 
                                     <li class="bbp-body">
                                         <ul id="{{ article.id }}" class="loop-item-0 bbp-forum-status-open bbp-forum-visibility-publish forum type-forum hentry">
                                             <li class="bbp-forum-info">
-                                                <a class="bbp-forum-title" href="single-topic.html">{{ article.title }}</a>
+                                                <a class="bbp-forum-title" href="">{{ article.title }}</a>
                                                 <div class="bbp-forum-content">
                                                     {{ article.content }}
                                                 </div>
