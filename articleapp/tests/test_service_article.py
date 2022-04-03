@@ -306,21 +306,21 @@ class TestView(TestCase):
 
         # Expect
         self.assertEqual(False, within_one_week_title)
-#
+
 #     ''' U P D A T E '''
-#
-#     def test_update_article(self):
-#         # Given
-#         user = Author.objects.create(name="test1")
-#         category = Category.objects.create(name='test_category')
-#         article = create_article("title", user, "before_content", category, '')
-#
-#         # When
-#         update_article(article.id, 'after content')
-#
-#         # Expect
-#         check_article = Article.objects.get(pk=article.id)
-#         self.assertEqual(check_article.content, 'after content')
+
+    def test_update_article(self):
+        # Given
+        user = User.objects.create(username='test_name', email='test1@test.com')
+        category = Category.objects.create(name='test_category')
+        article = create_article("title", user, "before_content", category, '')
+
+        # When
+        update_article(article.id, 'after content')
+
+        # Expect
+        check_article = Article.objects.get(pk=article.id)
+        self.assertEqual(check_article.content, 'after content')
 #
 #     def test_when_article_does_not_exist(self):
 #         # Given
