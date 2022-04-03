@@ -48,18 +48,18 @@ class TestView(TestCase):
             article = create_article(title, user, content, category)
 
 #     ''' R E A D '''
-#
-#     def test_when_article_does_not_exist(self):
-#         # Given
-#         user = Author.objects.create(name='test')
-#         category = Category.objects.create(name='test_category')
-#         article1 = create_article('title', user, 'content', category, '')
-#         target_id = article1.id
-#         article1.delete()
-#
-#         # Expect
-#         with self.assertRaises(ObjectDoesNotExist):
-#             target_article = read_target_article(target_id)
+
+    def test_when_article_does_not_exist(self):
+        # Given
+        user = User.objects.create(username='test_name',email='test@test.com')
+        category = Category.objects.create(name='test_category')
+        article1 = create_article('title', user, 'content', category, '')
+        target_id = 9999
+
+
+        # Expect
+        with self.assertRaises(ObjectDoesNotExist):
+            target_article = read_target_article(target_id)
 #
 #     def test_read_all_article(self):
 #         # Given
