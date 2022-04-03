@@ -33,7 +33,11 @@ def read_target_article(article_id):
 
 def read_category_article(category):
     catetgory_id = Category.objects.get(name=category).id
-    return Article.objects.filter(category=catetgory_id).order_by('-id')
+    target_articles = Article.objects.filter(category=catetgory_id).order_by('-id')
+    if len(target_articles) == 0:
+        return False
+    else:
+        return target_articles
 
 
 def read_article_by_title(title):

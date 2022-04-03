@@ -8,28 +8,30 @@
             <div class="content">
                 <article class="post_item post_item_single post_featured_left post_format_standard forum type-forum hentry">
                     <h2 class="post_title entry-title">질문 게시판</h2>
-                    <section class="post_content">
-                        <div id="bbpress-forums">
-                            <div class="bbp-search-form">
-                                <form role="search" method="get" id="bbp-search-form" action="#">
-                                    <div>
-                                        <label class="screen-reader-text hidden" for="bbp_search">Search for:</label>
-                                        <input type="hidden" name="action" value="bbp-search-request">
-                                        <input tabindex="101" type="text" value="" name="bbp_search" id="bbp_search">
-                                        <input tabindex="102" class="button" type="submit" id="bbp_search_submit" value="Search">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="bbp-breadcrumb">
-                                <p>
-                                    <a href="" class="bbp-breadcrumb-home">카테고리</a>
-                                    <span class="bbp-breadcrumb-sep"> › </span>
-                                    <span class="bbp-breadcrumb-current">질문 게시판</span>
-                                    <span class="bbp-breadcrumb-sep"> › </span>
-                                    <span><a href="{% url 'articleapp:aritcle_write' %}">게시글 작성</a></span>
-                                </p>
-                            </div>
-                            {% if target_articles.couint != 0 %}
+                    {% if msg %}
+                        <h5>질문 게시글이 존재하지 않습니다.</h5>
+                    {% else %}
+                        <section class="post_content">
+                            <div id="bbpress-forums">
+                                <div class="bbp-search-form">
+                                    <form role="search" method="get" id="bbp-search-form" action="#">
+                                        <div>
+                                            <label class="screen-reader-text hidden" for="bbp_search">Search for:</label>
+                                            <input type="hidden" name="action" value="bbp-search-request">
+                                            <input tabindex="101" type="text" value="" name="bbp_search" id="bbp_search">
+                                            <input tabindex="102" class="button" type="submit" id="bbp_search_submit" value="Search">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="bbp-breadcrumb">
+                                    <p>
+                                        <a href="" class="bbp-breadcrumb-home">카테고리</a>
+                                        <span class="bbp-breadcrumb-sep"> › </span>
+                                        <span class="bbp-breadcrumb-current">질문 게시판</span>
+                                        <span class="bbp-breadcrumb-sep"> › </span>
+                                        <span><a href="{% url 'articleapp:aritcle_write' %}">게시글 작성</a></span>
+                                    </p>
+                                </div>
                             <ul id="forums-list-0" class="bbp-forums">
                                 <li class="bbp-header">
                                     <ul class="forum-titles">
@@ -62,12 +64,6 @@
                                         </li>
 
                                     {% endfor %}
-
-                            {% else %}
-                                <h2>현제 해당 질문게시판에 게시글이 존재하지 않습니다.</h2>
-                            {% endif %}
-
-
 
                                 <li class="bbp-body">
                                     <ul id="bbp-forum-1725" class="loop-item-0 bbp-forum-status-open bbp-forum-visibility-publish forum type-forum hentry">
@@ -133,6 +129,8 @@
                             </ul>
                         </div>
                     </section>
+                {% endif %}
+
                 </article>
                 <section class="related_wrap related_wrap_empty"></section>
             </div>

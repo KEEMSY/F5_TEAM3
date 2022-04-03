@@ -81,11 +81,16 @@ def show_question_article(request):
     recent_comments = read_all_comment()[:5]
 
     target_articles = read_category_article('question')
-    page = int(request.GET.get('page', 1))
-    board_list = get_page_context(target_articles, page)
-    return render(request, 'articleapp/article_question.html',
-                  {'target_articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles,
-                   'left_content_recent_comments': recent_comments}, status=200)
+    if target_articles:
+        page = int(request.GET.get('page', 1))
+        board_list = get_page_context(target_articles, page)
+        return render(request, 'articleapp/article_question.html',
+                      {'target_articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles,
+                       'left_content_recent_comments': recent_comments}, status=200)
+    else:
+        return render(request, 'articleapp/article_question.html',
+                      {'left_content_articles': all_articles,
+                       'left_content_recent_comments': recent_comments, 'msg': 'article does not exist'}, status=200)
 
 
 def show_free_article(request):
@@ -93,11 +98,18 @@ def show_free_article(request):
     recent_comments = read_all_comment()[:5]
 
     target_articles = read_category_article('free')
-    page = int(request.GET.get('page', 1))
-    board_list = get_page_context(target_articles, page)
-    return render(request, 'articleapp/article_free.html',
-                  {'target_articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles,
-                   'left_content_recent_comments': recent_comments}, status=200)
+    print(target_articles)
+    if target_articles:
+        page = int(request.GET.get('page', 1))
+        board_list = get_page_context(target_articles, page)
+        return render(request, 'articleapp/article_free.html',
+                      {'target_articles': target_articles, 'board_list': board_list,
+                       'left_content_articles': all_articles,
+                       'left_content_recent_comments': recent_comments}, status=200)
+    else:
+        return render(request, 'articleapp/article_free.html',
+                      {'left_content_articles': all_articles,
+                       'left_content_recent_comments': recent_comments, 'msg': 'article does not exist'}, status=200)
 
 
 def show_tip_article(request):
@@ -105,11 +117,19 @@ def show_tip_article(request):
     recent_comments = read_all_comment()[:5]
 
     target_articles = read_category_article('tip')
-    page = int(request.GET.get('page', 1))
-    board_list = get_page_context(target_articles, page)
-    return render(request, 'articleapp/article_tip.html',
-                  {'target_articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles,
-                   'left_content_recent_comments': recent_comments}, status=200)
+    print(target_articles)
+
+    if target_articles:
+        page = int(request.GET.get('page', 1))
+        board_list = get_page_context(target_articles, page)
+        return render(request, 'articleapp/article_tip.html',
+                      {'target_articles': target_articles, 'board_list': board_list,
+                       'left_content_articles': all_articles,
+                       'left_content_recent_comments': recent_comments}, status=200)
+    else:
+        return render(request, 'articleapp/article_tip.html',
+                      {'left_content_articles': all_articles,
+                       'left_content_recent_comments': recent_comments, 'msg': 'article does not exist'}, status=200)
 
 
 def show_category_article(request):
