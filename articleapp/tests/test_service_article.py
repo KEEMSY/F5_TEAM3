@@ -322,21 +322,21 @@ class TestView(TestCase):
         check_article = Article.objects.get(pk=article.id)
         self.assertEqual(check_article.content, 'after content')
 #
-#     def test_when_article_does_not_exist(self):
-#         # Given
-#         user = Author.objects.create(name="test1")
-#         category = Category.objects.create(name='test_category')
-#
-#         article = create_article("title", user, "before_content", category, '')
-#
-#         # When
-#         article = Article.objects.get(pk=article.id)
-#         article.delete()
-#
-#         # Expect
-#         with self.assertRaises(ObjectDoesNotExist):
-#             update_article(article.id, 'after content')
-#
+    def test_article_does_not_exist_when_article_wants_to_update(self):
+        # Given
+        user = User.objects.create(username='test_name', email='test1@test.com')
+        category = Category.objects.create(name='test_category')
+
+        article = create_article("title", user, "before_content", category, '')
+
+        # When
+        article = Article.objects.get(pk=article.id)
+        article.delete()
+
+        # Expect
+        with self.assertRaises(ObjectDoesNotExist):
+            update_article(article.id, 'after content')
+
 #     ''' D E L E T E '''
 #
 #     def test_delete_article(self):
