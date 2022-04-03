@@ -268,30 +268,30 @@ class TestView(TestCase):
 
         # Expect
         self.assertEqual(False, within_one_week_username)
-#
-#     def test_read_article_containing_title_within_a_specific_period(self):
-#         # Given
-#         user1 = Author.objects.create(name="test1")
-#         user2 = Author.objects.create(name="test2")
-#         category = Category.objects.create(name='test_category')
-#
-#         article1_1 = create_article("title_one_day", user1, "content", category, '')
-#         article1_2 = create_article("title_one_week", user2, "content", category, '')
-#
-#         article1_1.created_at = datetime.date.today() - datetime.timedelta(days=1)
-#         article1_1.save()
-#
-#         article1_2.created_at = datetime.date.today() - datetime.timedelta(days=7)
-#         article1_2.save()
-#
-#         # When
-#         within_one_day_title = read_article_by_title_within_a_specific_period(1, 'title_one_day')
-#         within_one_week_title = read_article_by_title_within_a_specific_period(7, 'title_one')
-#
-#         # Expect
-#         self.assertEqual('title_one_day', within_one_day_title[0].title)
-#         self.assertEqual('title_one_week', within_one_week_title[0].title)
-#         self.assertEqual('title_one_day', within_one_week_title[1].title)
+
+    def test_read_article_containing_title_within_a_specific_period(self):
+        # Given
+        user1 = User.objects.create(username='test_name1', email='test1@test.com')
+        user2 = User.objects.create(username='test_name2', email='test2@test.com')
+        category = Category.objects.create(name='test_category')
+
+        article1_1 = create_article("title_one_day", user1, "content", category, '')
+        article1_2 = create_article("title_one_week", user2, "content", category, '')
+
+        article1_1.created_at = datetime.date.today() - datetime.timedelta(days=1)
+        article1_1.save()
+
+        article1_2.created_at = datetime.date.today() - datetime.timedelta(days=7)
+        article1_2.save()
+
+        # When
+        within_one_day_title = read_article_by_title_within_a_specific_period(1, 'title_one_day')
+        within_one_week_title = read_article_by_title_within_a_specific_period(7, 'title_one')
+
+        # Expect
+        self.assertEqual('title_one_day', within_one_day_title[0].title)
+        self.assertEqual('title_one_week', within_one_week_title[0].title)
+        self.assertEqual('title_one_day', within_one_week_title[1].title)
 #
 #     def test_when_article_can_not_read_article_by_title_within_a_specific_period(self):
 #         # Given
