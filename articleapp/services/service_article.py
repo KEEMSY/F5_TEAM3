@@ -1,6 +1,7 @@
 
 import datetime
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 
 from articleapp.models import Article, ArticleHits, Category
@@ -90,18 +91,22 @@ def read_article_by_title_within_a_specific_period(date, title):
 
 
 def update_article(article_id, content):
-    target_article = Article.objects.get(pk=article_id)
-    target_article.content = content
-    target_article.save()
-
+    try:
+        target_article = Article.objects.get(pk=article_id)
+        target_article.content = content
+        target_article.save()
+    except ObjectDoesNotExist:
+        return False
 
 ''' 1-4. D E L E T E '''
 
 
 def delete_article(article_id):
-    target_article = Article.objects.get(pk=article_id)
-    target_article.delete()
-
+    try:
+        target_article = Article.objects.get(pk=article_id)
+        target_article.delete()
+    except ObjectDoesNotExist:
+        return False
 
 ''' 2. Hits '''
 

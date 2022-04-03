@@ -330,12 +330,10 @@ class TestView(TestCase):
         article = create_article("title", user, "before_content", category, '')
 
         # When
-        article = Article.objects.get(pk=article.id)
-        article.delete()
+        article_id = 9999
 
         # Expect
-        with self.assertRaises(ObjectDoesNotExist):
-            update_article(article.id, 'after content')
+        self.assertEqual(False, update_article(article_id, 'contnet'))
 
 #     ''' D E L E T E '''
 
@@ -351,17 +349,17 @@ class TestView(TestCase):
 
         # Expect
         self.assertEqual(0, len(Article.objects.all()))
-#
-#     def test_when_article_delete_twice(self):
-#         # Given
-#         user = Author.objects.create(name="test1")
-#         category = Category.objects.create(name='test_category')
-#
-#         article = create_article("title", user, "before_content", category, '')
-#
-#         # When
-#         delete_article(article.id)
-#
-#         # Expect
-#         with self.assertRaises(ObjectDoesNotExist):
-#             delete_article(article.id)
+
+    def test_when_article_delete_twice(self):
+        # Given
+        user = User.objects.create(username='test_name', email='test1@test.com')
+
+        category = Category.objects.create(name='test_category')
+
+        article = create_article("title", user, "before_content", category, '')
+
+        # When
+        delete_article(9999)
+
+        # Expect
+        self.assertEqual(False,delete_article(9999))
