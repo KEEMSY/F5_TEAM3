@@ -1,9 +1,9 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404, render
 
 # Create your views here.
 from careerapp.models import Career, News
-from userapp.models import User, Profile
+from userapp.models import Profile, User
 
 
 def show_home(request):

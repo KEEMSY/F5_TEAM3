@@ -34,7 +34,7 @@ class TestView(TestCase):
 
         # expect
         self.assertIsNotNone(Article.id)
-        self.assertEqual(user.id, article.id)
+        self.assertEqual(user.id, article.user.id)
 
     def test_when_there_is_not_enough_argument(self):
         # Given

@@ -5,12 +5,12 @@ from django.views import View
 
 # 게시글 목록
 from articleapp.services.service_article import (
-    create_article, delete_article, get_client_ip, hit_article,
-    read_all_article, read_article_by_title,
+    create_article, delete_article, get_client_ip, get_page_context,
+    hit_article, read_all_article, read_article_by_title,
     read_article_by_title_within_a_specific_period,
     read_article_containing_username,
     read_article_containing_username_within_a_specific_period,
-    read_category_article, read_target_article, update_article, get_page_context)
+    read_category_article, read_target_article, update_article)
 # 단일 게시글 CRUD
 from commentapp.models import Comment
 from commentapp.services.comment_service import read_all_comment
