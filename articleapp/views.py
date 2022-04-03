@@ -17,14 +17,14 @@ from commentapp.services.comment_service import read_all_comment
 
 
 class ArticleView(View):
-    def get(self, request, article_id):
+    def get(self, request, pk):
         all_articles = read_all_article()[:8]
         recent_comments = read_all_comment()[:5]
         try:
             ip = get_client_ip(request)
-            target_article = hit_article(ip, article_id)
+            target_article = hit_article(ip, pk)
             return render(request, 'article_detail.html',
-                          {'result': target_article, 'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments},
+                          {'target_article': target_article, 'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments},
                           status=200)
 
         except ObjectDoesNotExist:

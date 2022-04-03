@@ -64,18 +64,12 @@
                 {% for comment in left_content_recent_comments %}
                     <div class="comment">
                     <span>
-                       ✍ <a href="">{{ comment.article.title }}</a> 에
-                        <a href="">{{ comment.user.username }}</a> 님께서 댓글을 남기셨습니다.
+                       ✍ <a href="{% url 'articleapp:article_CRUD' comment.article.pk %}">{{ comment.article.title }}</a> 에
+                        <a href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a> 님께서 댓글을 남기셨습니다.
                     </span>
                 </div>
                 {% endfor %}
 
-                <div class="comment">
-                    <span>
-                       ✍ <a href="">아 운동같이 갈사람</a> 에
-                        <a href="">익명의회원1</a> 님께서 댓글을 남기셨습니다.
-                    </span>
-                </div>
 
             </div>
 
