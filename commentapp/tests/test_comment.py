@@ -44,23 +44,25 @@ class TestView(TestCase):
         with self.assertRaises(IntegrityError):
             comment = create_comment(article_id, user.id, content)
 
-#     # comment 수정 시
-#     def test_update_target_comment(self):
-#         # Given
-#         user = Author.objects.create(name="test_name")
-#         article = Post.objects.create(title="test_title")
-#         content = 'test'
-#         comment = create_comment(article.id, user.id, content)
-#
-#         # When
-#         comment_id = comment.id
-#         update_content = 'update_Content!'
-#         update_comment(comment_id, update_content)
-#
-#         # Expect
-#         comment = Comment.objects.get(id=comment_id)
-#         self.assertEqual(update_content, comment.content)
-#
+    # comment 수정 시
+    def test_update_target_comment(self):
+        # Given
+        user = User.objects.create(username='test_name', email='test@test.com')
+        category = Category.objects.create(name='test_category')
+        content = 'test'
+        article = create_article('title', user, content, category, '')
+
+        comment = create_comment(article.id, user.id, content)
+
+        # When
+        comment_id = comment.id
+        update_content = 'update_Content!'
+        update_comment(comment_id, update_content)
+
+        # Expect
+        comment = Comment.objects.get(id=comment_id)
+        self.assertEqual(update_content, comment.content)
+
 #     # comment 삭제 시
 #     def test_comment_can_delete_by_deleting_article(self):
 #         # Given
