@@ -48,9 +48,8 @@ def read_article_by_user(user_id):
     return Article.objects.filter(user_id=user_id).order_by('-id')
 
 
-def read_article_containing_username(username):
-    users = User.objects.filter(name__icontains=username).order_by('-id')
-
+def read_article_containing_username(keyword):
+    users = User.objects.filter(username__icontains=keyword).order_by('-id')
     article_list = []
     for user in users:
         article_list.append(read_article_by_user(user.id))

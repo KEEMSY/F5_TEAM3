@@ -169,23 +169,24 @@ class TestView(TestCase):
         for i in range(len(article_by_user1)):
             self.assertEqual(expect_title[i], article_by_user1[i].title)
 
-#     def test_read_article_containing_username(self):
-#         # Given
-#         user1 = Author.objects.create(name="test1")
-#         category = Category.objects.create(name='test_category')
-#
-#         article1_1 = create_article("title_1", user1, "content", category, '')
-#
-#         user2 = Author.objects.create(name="test2")
-#         article2_1 = create_article("title_2", user2, "content", category, '')
-#         article2_2 = create_article("title_3", user2, "content", category, '')
-#
-#         # When
-#         article_list = read_article_containing_username('test')
-#
-#         # Expeect
-#         self.assertEqual(3, len(article_list))
-#
+    def test_read_article_containing_username(self):
+        # Given
+        user1 = User.objects.create(username='test_name', email='test1@test.com')
+        category = Category.objects.create(name='test_category')
+
+        article1_1 = create_article("title_1", user1, "content", category, '')
+
+        user2 = User.objects.create(username='test_', email='test2@test.com')
+
+        article2_1 = create_article("title_2", user2, "content", category, '')
+        article2_2 = create_article("title_3", user2, "content", category, '')
+
+        # When
+        article_list = read_article_containing_username('test')
+
+        # Expeect
+        self.assertEqual(3, len(article_list))
+
 #     def test_read_article_within_a_specific_period(self):
 #         # Given
 #         user1 = Author.objects.create(name="test1")
