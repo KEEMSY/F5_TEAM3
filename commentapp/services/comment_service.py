@@ -24,5 +24,8 @@ def update_comment(comment_id, content):
         return False
 
 def delete_comment(comment_id):
-    target_comment = Comment.objects.get(id=comment_id)
-    target_comment.delete()
+    try:
+        target_comment = Comment.objects.get(id=comment_id)
+        target_comment.delete()
+    except ObjectDoesNotExist:
+        return False
