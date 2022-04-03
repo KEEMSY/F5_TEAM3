@@ -80,32 +80,34 @@ class TestView(TestCase):
         for idx in range(len(article_list)):
             self.assertEqual(article_list[idx]['content'], latest_article_list[idx].content)
 
-#     def test_read_category_article(self):
-#         # Given
-#         user = Author.objects.create(name="test")
-#         category_1 = Category.objects.create(name='test_category1')
-#         category_2 = Category.objects.create(name='test_category2')
-#         category_3 = Category.objects.create(name='test_category3')
-#
-#         article1 = create_article("title", user, "content", category_1, '')
-#
-#         article2 = create_article("title", user, "content", category_2, '')
-#         article3 = create_article("title", user, "content", category_2, '')
-#
-#         article4 = create_article("title", user, "content", category_3, '')
-#         article5 = create_article("title", user, "content", category_3, '')
-#         article6 = create_article("title", user, "content", category_3, '')
-#
-#         # When
-#         article_1_list = read_category_article(category_1.name)
-#         article_2_list = read_category_article(category_2.name)
-#         article_3_list = read_category_article(category_3.name)
-#
-#         # expect
-#         self.assertEqual(1, len(article_1_list))
-#         self.assertEqual(2, len(article_2_list))
-#         self.assertEqual(3, len(article_3_list))
-#
+    def test_read_category_article(self):
+        # Given
+        user = User.objects.create(username='test_name',email='test@test.com')
+        category_1 = Category.objects.create(name='test_category1')
+        category_2 = Category.objects.create(name='test_category2')
+        category_3 = Category.objects.create(name='test_category3')
+
+        article1 = create_article("title", user, "content", category_1, '')
+
+        article2 = create_article("title", user, "content", category_2, '')
+        article3 = create_article("title", user, "content", category_2, '')
+
+        article4 = create_article("title", user, "content", category_3, '')
+        article5 = create_article("title", user, "content", category_3, '')
+        article6 = create_article("title", user, "content", category_3, '')
+
+        # When
+        article_1_list = read_category_article(category_1.name)
+        article_2_list = read_category_article(category_2.name)
+        article_3_list = read_category_article(category_3.name)
+
+        # expect
+        self.assertEqual(1, len(article_1_list))
+        self.assertEqual(2, len(article_2_list))
+        self.assertEqual(3, len(article_3_list))
+
+
+
 #     def test_read_article_by_title(self):
 #         # Given
 #         user = Author.objects.create(name="test")
