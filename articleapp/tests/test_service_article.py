@@ -60,26 +60,26 @@ class TestView(TestCase):
         # Expect
         with self.assertRaises(ObjectDoesNotExist):
             target_article = read_target_article(target_id)
-#
-#     def test_read_all_article(self):
-#         # Given
-#         user = Author.objects.create(name='test')
-#         category = Category.objects.create(name='test_category')
-#
-#         # When
-#         article1 = create_article('title', user, 'content', category, '')
-#         article2 = create_article('title', user, 'content', category, '')
-#         article3 = create_article('title', user, 'content', category, '')
-#
-#         # Then
-#         article_list = read_all_article().values()
-#         latest_article_list = [article3, article2, article1]
-#
-#         # expect
-#         self.assertEqual(len(article_list), 3)
-#         for idx in range(len(article_list)):
-#             self.assertEqual(article_list[idx]['content'], latest_article_list[idx].content)
-#
+
+    def test_read_all_article(self):
+        # Given
+        user = User.objects.create(username='test_name',email='test@test.com')
+        category = Category.objects.create(name='test_category')
+
+        # When
+        article1 = create_article('title', user, 'content', category, '')
+        article2 = create_article('title', user, 'content', category, '')
+        article3 = create_article('title', user, 'content', category, '')
+
+        # Then
+        article_list = read_all_article().values()
+        latest_article_list = [article3, article2, article1]
+
+        # expect
+        self.assertEqual(len(article_list), 3)
+        for idx in range(len(article_list)):
+            self.assertEqual(article_list[idx]['content'], latest_article_list[idx].content)
+
 #     def test_read_category_article(self):
 #         # Given
 #         user = Author.objects.create(name="test")
