@@ -95,20 +95,21 @@ class TestView(TestCase):
 
         # Expectdd
         self.assertEqual(0, len(Comment.objects.all()))
-#
-#     def test_comment_can_delete_by_deleting_user(self):
-#         # Given
-#         user = Author.objects.create(name="test_name")
-#         article = Post.objects.create(title="test_title")
-#         content = 'test'
-#         comment = create_comment(article.id, user.id, content)
-#
-#         # When
-#         user.delete()
-#
-#         # Expectdd
-#         self.assertEqual(0, len(Comment.objects.all()))
-#
+
+    def test_comment_can_delete_by_deleting_user(self):
+        # Given
+        user = User.objects.create(username='test_name', email='test@test.com')
+        category = Category.objects.create(name='test_category')
+        content = 'test'
+        article = create_article('title', user, content, category, '')
+        comment = create_comment(article.id, user.id, content)
+
+        # When
+        user.delete()
+
+        # Expectdd
+        self.assertEqual(0, len(Comment.objects.all()))
+
 #     def test_comment_delete(self):
 #         # Given
 #         user = Author.objects.create(name="test_name")
