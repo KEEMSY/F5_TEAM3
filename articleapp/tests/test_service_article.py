@@ -23,7 +23,7 @@ class TestView(TestCase):
 
     def test_create_article(self):
         # Given
-        user = User.objects.create(username='test_name',email='test@test.com')
+        user = User.objects.create(username='test_name', email='test@test.com')
         title = 'test_title'
         content = 'content'
         category = Category.objects.create(name='test_category')
@@ -38,7 +38,7 @@ class TestView(TestCase):
 
     def test_when_there_is_not_enough_argument(self):
         # Given
-        user = User.objects.create(username='test_name',email='test@test.com')
+        user = User.objects.create(username='test_name', email='test@test.com')
         title = 'test_title'
         content = 'content'
         category = Category.objects.create(name='test_category')
@@ -47,15 +47,14 @@ class TestView(TestCase):
         with self.assertRaises(TypeError):
             article = create_article(title, user, content, category)
 
-#     ''' R E A D '''
+    #     ''' R E A D '''
 
     def test_when_article_does_not_exist(self):
         # Given
-        user = User.objects.create(username='test_name',email='test@test.com')
+        user = User.objects.create(username='test_name', email='test@test.com')
         category = Category.objects.create(name='test_category')
         article1 = create_article('title', user, 'content', category, '')
         target_id = 9999
-
 
         # Expect
         with self.assertRaises(ObjectDoesNotExist):
@@ -63,7 +62,7 @@ class TestView(TestCase):
 
     def test_read_all_article(self):
         # Given
-        user = User.objects.create(username='test_name',email='test@test.com')
+        user = User.objects.create(username='test_name', email='test@test.com')
         category = Category.objects.create(name='test_category')
 
         # When
@@ -82,7 +81,7 @@ class TestView(TestCase):
 
     def test_read_category_article(self):
         # Given
-        user = User.objects.create(username='test_name',email='test@test.com')
+        user = User.objects.create(username='test_name', email='test@test.com')
         category_1 = Category.objects.create(name='test_category1')
         category_2 = Category.objects.create(name='test_category2')
         category_3 = Category.objects.create(name='test_category3')
@@ -106,8 +105,23 @@ class TestView(TestCase):
         self.assertEqual(2, len(article_2_list))
         self.assertEqual(3, len(article_3_list))
 
+    def test_articles_do_not_exist_in_category(self):
+        # Given
+        user = User.objects.create(username='test_name', email='test@test.com')
+        category_1 = Category.objects.create(name='test_category1')
+        category_2 = Category.objects.create(name='test_category2')
+        category_3 = Category.objects.create(name='test_category3')
 
+        article1 = create_article("title", user, "content", category_1, '')
 
+        article2 = create_article("title", user, "content", category_2, '')
+        article3 = create_article("title", user, "content", category_2, '')
+
+        # When
+        article_3_list = read_category_article(category_3.name)
+
+        # Expect
+        self.assertEqual(False, article_3_list)
 #     def test_read_article_by_title(self):
 #         # Given
 #         user = Author.objects.create(name="test")
