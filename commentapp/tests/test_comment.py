@@ -8,7 +8,7 @@ from django.test import TestCase
 # expect
 from articleapp.models import Article, Category
 from articleapp.services.service_article import create_article
-from commentapp.models import  Comment
+from commentapp.models import Comment
 from commentapp.services.comment_service import (create_comment,
                                                  delete_comment,
                                                  update_comment)
