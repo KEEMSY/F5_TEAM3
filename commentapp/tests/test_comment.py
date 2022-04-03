@@ -1,34 +1,39 @@
-# from django.core.exceptions import ObjectDoesNotExist
-# from django.db.utils import IntegrityError
-# from django.test import TestCase
-#
-# # Given
-# # When
-# # Then
-# # expect
-# from commentapp.models import Author, Comment, Post
-# from commentapp.services.comment_service import (create_comment,
-#                                                  delete_comment,
-#                                                  update_comment)
-#
-#
-# class TestView(TestCase):
-#     # comment 생성
-#     def test_create_comment(self):
-#         # Given
-#         user = Author.objects.create(name="test_name")
-#         article = Post.objects.create(title="test_title")
-#         content = 'test'
-#
-#
-#         # When
-#         comment = create_comment(article.id, user.id, content)
-#
-#         # expect
-#         self.assertIsNotNone(Comment.id)
-#         self.assertEqual(user.id, comment.user.id)
-#         self.assertEqual(article.id, comment.article.id)
-#
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.utils import IntegrityError
+from django.test import TestCase
+
+# Given
+# When
+# Then
+# expect
+from articleapp.models import Article, Category
+from articleapp.services.service_article import create_article
+from commentapp.models import  Comment
+from commentapp.services.comment_service import (create_comment,
+                                                 delete_comment,
+                                                 update_comment)
+from userapp.models import User
+
+
+class TestView(TestCase):
+    # comment 생성
+    def test_create_comment(self):
+        # Given
+        user = User.objects.create(username='test_name', email='test@test.com')
+        category = Category.objects.create(name='test_category')
+        content = 'test'
+        article = create_article('title', user, content, category, '')
+
+
+
+        # When
+        comment = create_comment(article.id, user.id, content)
+
+        # expect
+        self.assertIsNotNone(Comment.id)
+        self.assertEqual(user.id, comment.user.id)
+        self.assertEqual(article.id, comment.article.id)
+
 #     def test_when_create_comment_article_does_not_exist(self):
 #         # Given
 #         user = Author.objects.create(name="test_name")
