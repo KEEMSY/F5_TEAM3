@@ -41,7 +41,7 @@
                                         <li class="bbp-forum-freshness">작성자</li>
                                     </ul>
                                 </li>
-                                    {% for article in target_articles %}
+                                    {% for article in board_list %}
                                         <li class="bbp-body">
                                             <ul id="{{ article.id }}" class="loop-item-0 bbp-forum-status-open bbp-forum-visibility-publish forum type-forum hentry">
                                                 <li class="bbp-forum-info">
@@ -79,6 +79,44 @@
                 <section class="related_wrap related_wrap_empty"></section>
             </div>
         </div>
+    <!--            페이지네이터 적용부분         -->
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="pagination-area">
+                        <nav>
+                            <ul class="page-numbers d-inline-flex">
+
+                                <div style="width:12vw; margin: 0 5px;">
+
+
+                                    {% if board_list.has_previous %}
+                                    <a class="abutton" href="?page=1">맨 앞으로</a>
+                                    <a class="abutton" href="?page={{ board_list.previous_page_number }}">이전</a>
+                                    {% endif %}
+                                </div>
+
+
+                                {% for page in board_list.paginator.page_range %}
+                                {% if page >= board_list.number|add:-2 and page <= board_list.number|add:2 %}
+                                <li class="page-number {% if page == board_list.number %}active chosen_page{% endif %}">
+                                    <a href="?page={{ page }}">{{ page }}</a>
+                                </li>
+
+                                {% endif %}
+                                {% endfor %}
+
+                                <div style="width:12vw; margin: 0 5px;">
+                                    {% if board_list.has_next %}
+                                    <a class="abutton" href="?page={{ board_list.next_page_number }}">다음</a>
+                                    <a class="abutton" href="?page={{ board_list.paginator.num_pages }}">맨 뒤로</a>
+                                    {% endif %}
+                                </div>
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 </div>

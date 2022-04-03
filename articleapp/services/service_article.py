@@ -132,7 +132,7 @@ def hit_article(ip, article_id):
 
 
 def get_page_context(articles, page):
-    paginator = Paginator(articles, 10)
+    paginator = Paginator(articles, 3)
     board_list = paginator.get_page(page)
     return board_list
 

@@ -85,7 +85,7 @@ def show_question_article(request):
         page = int(request.GET.get('page', 1))
         board_list = get_page_context(target_articles, page)
         return render(request, 'articleapp/article_question.html',
-                      {'target_articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles[:8],
+                      {'board_list': board_list, 'left_content_articles': all_articles[:8],
                        'left_content_recent_comments': recent_comments}, status=200)
     else:
         return render(request, 'articleapp/article_question.html',
