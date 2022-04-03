@@ -2,38 +2,39 @@
 # # When
 # # Then
 # # Expect
-# import datetime
-#
-# from django.core.exceptions import ObjectDoesNotExist
-# from django.test import TestCase
-#
-# from articleapp.models import Article, Author, Category
-# from articleapp.services.service_article import (
-#     create_article, delete_article, read_all_article, read_article_by_title,
-#     read_article_by_title_within_a_specific_period, read_article_by_user,
-#     read_article_containing_username,
-#     read_article_containing_username_within_a_specific_period,
-#     read_article_within_a_specific_period, read_category_article,
-#     read_target_article, update_article)
-#
-#
-# class TestView(TestCase):
-#     """ C R E A T E """
-#
-#     def test_create_article(self):
-#         # Given
-#         user = Author.objects.create(name='test')
-#         title = 'test_title'
-#         content = 'content'
-#         category = Category.objects.create(name='test_category')
-#         img = ''
-#
-#         # When
-#         article = create_article(title, user, content, category, img)
-#
-#         # expect
-#         self.assertIsNotNone(Article.id)
-#         self.assertEqual(user.id, article.id)
+import datetime
+
+from django.core.exceptions import ObjectDoesNotExist
+from django.test import TestCase
+
+from articleapp.models import Article, Category
+from articleapp.services.service_article import (
+    create_article, delete_article, read_all_article, read_article_by_title,
+    read_article_by_title_within_a_specific_period, read_article_by_user,
+    read_article_containing_username,
+    read_article_containing_username_within_a_specific_period,
+    read_article_within_a_specific_period, read_category_article,
+    read_target_article, update_article)
+from userapp.models import User
+
+
+class TestView(TestCase):
+    """ C R E A T E """
+
+    def test_create_article(self):
+        # Given
+        user = User.objects.create(username='test_name',email='test@test.com')
+        title = 'test_title'
+        content = 'content'
+        category = Category.objects.create(name='test_category')
+        img = ''
+
+        # When
+        article = create_article(title, user, content, category, img)
+
+        # expect
+        self.assertIsNotNone(Article.id)
+        self.assertEqual(user.id, article.id)
 #
 #     def test_when_there_is_not_enough_argument(self):
 #         # Given
