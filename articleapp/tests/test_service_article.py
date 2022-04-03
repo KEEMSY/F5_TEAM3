@@ -338,19 +338,19 @@ class TestView(TestCase):
             update_article(article.id, 'after content')
 
 #     ''' D E L E T E '''
-#
-#     def test_delete_article(self):
-#         # Given
-#         user = Author.objects.create(name="test1")
-#         category = Category.objects.create(name='test_category')
-#
-#         article = create_article("title", user, "before_content", category, '')
-#
-#         # When
-#         delete_article(article.id)
-#
-#         # Expect
-#         self.assertEqual(0, len(Article.objects.all()))
+
+    def test_delete_article(self):
+        # Given
+        user = User.objects.create(username='test_name', email='test1@test.com')
+        category = Category.objects.create(name='test_category')
+
+        article = create_article("title", user, "before_content", category, '')
+
+        # When
+        delete_article(article.id)
+
+        # Expect
+        self.assertEqual(0, len(Article.objects.all()))
 #
 #     def test_when_article_delete_twice(self):
 #         # Given
