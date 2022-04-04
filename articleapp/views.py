@@ -24,7 +24,14 @@ class ArticleView(View):
             ip = get_client_ip(request)
             target_article = hit_article(ip, pk)
             target_comment = read_target_article_comment(pk)
-            return render(request, 'articleapp/article_detail.html',
+
+            if not target_comment:
+                return render(request, 'articleapp/article_detail.html',
+                              {'target_article': target_article,
+                               'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments},
+                              status=200)
+            else:
+                return render(request, 'articleapp/article_detail.html',
                           {'target_article': target_article, 'target_comment': target_comment,'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments},
                           status=200)
 
