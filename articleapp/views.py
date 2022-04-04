@@ -13,7 +13,7 @@ from articleapp.services.service_article import (
     read_category_article, read_target_article, update_article)
 # 단일 게시글 CRUD
 from commentapp.models import Comment
-from commentapp.services.comment_service import read_all_comment
+from commentapp.services.comment_service import read_all_comment, read_target_article_comment
 
 
 class ArticleView(View):
@@ -23,9 +23,9 @@ class ArticleView(View):
         try:
             ip = get_client_ip(request)
             target_article = hit_article(ip, pk)
-            # target_comment =
+            target_comment = read_target_article_comment(pk)
             return render(request, 'articleapp/article_detail.html',
-                          {'target_article': target_article, 'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments},
+                          {'target_article': target_article, 'target_comment': target_comment,'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments},
                           status=200)
 
         except ObjectDoesNotExist:

@@ -63,15 +63,23 @@
                     <hr>
                     <div class="content_comment">
                         <div class="content_comment_profile"></div>
+                        {% if not user.is_authenticated %}
+{#                        로그인을 해주세요 하는 html 작성, 로그인으로 바로 갈 수 있게 #}
+
+                        {% else %}
+{#                            코멘트 작성하는 html 작성 필요 #}
+{#                            코멘트는 더보기에서 보일 수 있게 만들기 #}
                         <div class="content_best_comment">
                             <span>
-                                익명의회원1
+                                {{ target_comment.user.username }}
                             </span>
                             <p>
-                                ㅇㅋ 내가 부스터 챙겨감
+                                {{ target_comment.content }}
                             </p>
                         </div>
                     </div>
+                        {% endif %}
+
                     <div class="content_botton">
                         <button> 더보기 </button>
                     </div>
