@@ -29,17 +29,14 @@
 
   <!--== End Header Wrapper ==-->
   <main class="main-content">
-    <!--== Start Page Header Area Wrapper ==-->
-    <div class="page-header-area sec-overlay sec-overlay-black" data-bg-img="assets/img/photos/bg2.jpg">
-    </div>
-    <!--== End Page Header Area Wrapper ==-->
 
     <!--== Start Recent Job Area Wrapper ==-->
     <section class="recent-job-area recent-job-inner-area">
       <div class="container">
         <div class="row">
 {#            <a href="{% url 'careerapp:crawling' %}"><button style="background-color: green" width="100px" height="100px">제발크롤링</button></a>#}
-        {% if board_list %}
+
+            {% for board_list in board_lists %}
           {% for career in board_list %}
           <div class="col-md-6 col-lg-4">
             <!--== Start Recent Job Item ==-->
@@ -70,7 +67,7 @@
             <!--== End Recent Job Item ==-->
           </div>
           {% endfor %}
-        {% endif %}
+        {% endfor %}
 
         </div>
         <div class="row">
@@ -80,6 +77,8 @@
                 <ul class="page-numbers d-inline-flex">
 
                     <div style="width:12vw; margin: 0 5px;">
+
+             {% for board_list in board_lists %}
                 {% if board_list.has_previous %}
                     <a class="abutton" href="?page=1">맨 앞으로</a>
                     <a class="abutton" href="?page={{ board_list.previous_page_number }}">이전</a>
@@ -96,23 +95,6 @@
                     {% elif page >= board_list.number|add:-3 and page <= board_list.number|add:3 %}
 
                     {% endif %}
-
-{#                  <li>#}
-{#                    <a class="page-number active" href="job.html">1</a>#}
-{#                  </li>#}
-{#                  <li>#}
-{#                    <a class="page-number" href="job.html">2</a>#}
-{#                  </li>#}
-{#                  <li>#}
-{#                    <a class="page-number" href="job.html">3</a>#}
-{#                  </li>#}
-{#                  <li>#}
-{#                    <a class="page-number next" href="job.html">#}
-{#                      <i class="icofont-long-arrow-right"></i>#}
-{#                    </a>#}
-{#                  </li>#}
-
-
                     {% endfor %}
 
                     <div style="width:12vw; margin: 0 5px;">
@@ -120,6 +102,7 @@
                         <a class="abutton" href="?page={{ board_list.next_page_number }}">다음</a>
                         <a class="abutton" href="?page={{ board_list.paginator.num_pages }}">맨 뒤로</a>
                     {% endif %}
+                    {% endfor %}
                     </div>
 
                 </ul>
