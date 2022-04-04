@@ -1,7 +1,7 @@
 from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
@@ -65,13 +65,15 @@ def log_out(request):
     return redirect(reverse("home"))
 
 
-
 def get_profile(request, pk):
     u = get_object_or_404(User, pk=pk)  # 로그인중인 사용자 객체를 얻어옴
     user_form = UserForm(initial={
         'username': u.username,
     })
     articles = Article.objects.filter(user_id=pk).order_by('-created_at')
+    paginator = Paginator(articles, 10)
+    page = int(request.GET.get('page', 1))
+    board_list = paginator.get_page(page)
 
     if hasattr(u, 'profile'):  # user가 profile을 가지고 있으면 True, 없으면 False (회원가입을 한다고 profile을 가지고 있진 않으므로)
         profile = u.profile
@@ -84,7 +86,31 @@ def get_profile(request, pk):
     else:
         profile_form = ProfileForm()
 
-    return render(request, 'userapp/profile.html', {"user_form": user_form, "profile_form": profile_form, 'u':u, 'articles':articles})
+    return render(request, 'userapp/profile.html', {"user_form": user_form, "profile_form": profile_form, 'u':u, 'board_list':board_list})
+
+
+def get_profile_bookmark(request, pk):
+    u = get_object_or_404(User, pk=pk)  # 로그인중인 사용자 객체를 얻어옴
+    user_form = UserForm(initial={
+        'username': u.username,
+    })
+    bookmarks = Bookmark.objects.filter(user_id=pk).order_by('-created_at')
+    paginator = Paginator(bookmarks, 10)
+    page = int(request.GET.get('page', 1))
+    board_list = paginator.get_page(page)
+
+    if hasattr(u, 'profile'):  # user가 profile을 가지고 있으면 True, 없으면 False (회원가입을 한다고 profile을 가지고 있진 않으므로)
+        profile = u.profile
+        profile_form = ProfileForm(initial={
+            'img': profile.img,
+            'skill': profile.skill,
+            'github': profile.github,
+            'blog': profile.blog,
+        })
+    else:
+        profile_form = ProfileForm()
+
+    return render(request, 'userapp/profile.html', {"user_form": user_form, "profile_form": profile_form, 'u':u, 'board_list':board_list})
 
 
 @login_required(login_url="/users/login/")
@@ -116,66 +142,3 @@ def update_profile(request, pk):
 
     return redirect(f'/users/profile/{int(pk)}/', pk=request.user.pk)  # 수정된 화면 보여주기
 
-
-#### 모델 합치면 import 해서 ajax 형식으로 마이페이지에 데이터 뿌려주는 get 형식 view
-### 아티클, 북마크 겟 함수 // 현재는 모델이 꼬일까바 주석 처리로 해놓았음!
-## form 데이터도 같이 뿌려줘야하나...? user_form, profile_form... ajax 형식이라 그부분에 대한 데이터만 필요한거 아닐까..??
-
-@login_required(login_url="/users/login/")
-def get_profile_article(request, pk):
-    if request.method == 'GET':
-        articles = Article.objects.filter(user_id=pk).order_by('-created_at')
-
-        articles_list = []
-        #제이슨은 쿼리문을 번역을 못한다 그래서 dict 형태로 키, 벨류로 데이터를 넣고 다시 객체들을 리스트에 어펜드 하여 리스폰스 해준다
-        for article in articles:
-            q={}
-            #게시글 정보
-            q['id'] = article.id
-            q['title'] = article.title
-            q['content'] = article.content
-            q['created_date'] = article.created_at
-            q['hits'] = article.article_hits
-            #게시글 카테고리
-            q['category_name'] = article.category.name
-            #게시글 작성자 정보
-            try:
-                q['author_img'] = article.user.profile.img.url
-            except:
-                q['author_img'] = None
-            q['author_name'] = article.user.username
-            q['author_id'] = article.user.id
-
-            articles_list.append(q)
-        print(article.created_at)
-        return JsonResponse(articles_list, safe=False)
-
-
-@login_required(login_url="/users/login/")
-def get_profile_bookmark(request, pk):
-    if request.method == 'GET':
-        bookmarks = Bookmark.objects.filter(user_id=pk).order_by('-created_at')
-
-        bookmarks_list = []
-        for bookmark in bookmarks:
-            q = {}
-            # 게시글 정보
-            q['id'] = bookmark.article.id
-            q['title'] = bookmark.article.title
-            q['content'] = bookmark.article.content
-            q['created_date'] = bookmark.article.created_at
-            q['hits'] = bookmark.article.article_hits
-            # 게시글 카테고리
-            q['category_name'] = bookmark.article.category.name
-            # 게시글 작성자 정보
-            q['author_id'] = bookmark.article.user.id
-            try:
-                q['author_img'] = bookmark.article.user.profile.img.url
-            except:
-                q['author_img'] = None
-            q['author_name'] = bookmark.article.user.username
-            q['author_id'] = bookmark.article.user.id
-
-            bookmarks_list.append(q)
-
-        return JsonResponse(bookmarks_list, safe=False)

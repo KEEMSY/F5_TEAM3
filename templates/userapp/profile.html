@@ -1353,103 +1353,6 @@
 
 </style>
 
-<script>
-    $.ajaxSetup({
-        headers: {"X-CSRFToken": '{{csrf_token}}'}
-    });
-
-    function show_articles() {
-       $('.list-group').empty()
-       $.ajax({
-           type: "GET",
-           url:"{% url 'user:profile_article' u.pk %}",
-           data:{},
-           dataType: 'json',
-           success: function (response) {
-               let articles = response
-               for (let i = 0; i < articles.length; i++) {
-
-                   let temp_html = `<li class="list-group-item list-group-item-small list-group-no-note clearfix">
-                                       <div class="list-icon-wrapper pull-left">
-                                           <img src="https://w7.pngwing.com/pngs/296/768/png-transparent-emoji-memorandum-computer-icons-text-messaging-writing-writing-pencil-emoticon-word-thumbnail.png">
-                                       </div>
-                                       <div class="list-title-wrapper list-activity">
-                                           <div class="list-activity-desc">
-                                               <span class="list-activity-desc-text">
-                                                   <a href="/articles/life" class="list-group-item-text item-tag label label-info">${articles[i]['category_name']}</a>
-                                                   에 #${articles[i]['id']} 게시물을 작성하였습니다.
-                                               </span>
-                                               <span class="timeago" title="2022-03-27T15:56:24">${articles[i]['created_date']}</span>
-                                           </div>
-                                           <h5 class="list-group-item-heading">
-                                               <a href="/article/1188123">${articles[i]['title']}</a>
-                                               <div class="list-group-item-author pull-right clearfix">
-                                                   <div class="avatar clearfix avatar-x-small ">
-                                                       <a href="/users/profile/${articles[i]['author_id']}" class="avatar-photo">
-                                                           <img src="${articles[i]['author_img']}">
-                                                       </a>
-                                                       <div class="avatar-info">
-                                                           <a class="nickname" title="${articles[i]['author_name']}" href="/users/profile/${articles[i]['author_id']}">${articles[i]['author_name']}</a>
-                                                           <div class="activity "> ${articles[i]['hits']}</div>
-                                                       </div>
-                                                   </div>
-                                               </div>
-                                           </h5>
-                                       </div>
-                                   </li>`
-
-                   $('.list-group').append(temp_html)
-               }
-           }
-       });
-    }
-
-    function show_bookmarks() {
-        $('.list-group').empty()
-        $.ajax({
-            type: "GET",
-            url:"{% url 'user:profile_bookmark' u.pk %}",
-            data:{},
-            dataType: 'json',
-            success: function (response) {
-                let articles = response
-                for (let i = 0; i < articles.length; i++) {
-
-                    let temp_html = `<li class="list-group-item list-group-item-small list-group-has-note clearfix">
-                                            <div class="list-icon-wrapper pull-left">
-                                                <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">
-                                            </div>
-                                            <div class="list-title-wrapper list-activity">
-                                                <div class="list-activity-desc">
-                                                    <span class="list-activity-desc-text">
-                                                        #${articles[i]['id']} 게시물을 스크랩 하였습니다.
-                                                    </span>
-                                                    <span class="timeago" title="2022-03-27T15:55:15">${articles[i]['created_date']}</span>
-                                                </div>
-                                                <h5 class="list-group-item-heading">
-                                                    <a href="/article/">${articles[i]['title']}</a>
-                                                    <div class="list-group-item-author pull-right clearfix">
-                                                        <div class="avatar clearfix avatar-x-small ">
-                                                            <a href="/users/profile/${articles[i]['author_id']}" class="avatar-photo"><img
-                                                                    src="${articles[i]['author_img']}"></a>
-                                                            <div class="avatar-info">
-                                                                <a class="nickname" href="/users/profile/${articles[i]['author_id']}/">${articles[i]['author_name']} </a>
-                                                                <div class="activity ">${articles[i]['hits']}</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </h5>
-                                            </div>
-                                        </li>`
-
-                    $('.list-group').append(temp_html)
-                }
-            }
-        });
-    }
-
-</script>
-
 
 <body>
 
@@ -1543,8 +1446,8 @@
                 <div class="col-sm-2 user-info-nav pull-right">
                     <ul class="nav">
                         <div class="widget-categories">
-                            <li><a onclick="show_articles()">게시물</a></li>
-                            <li><a onclick="show_bookmarks()">스크랩</a></li>
+                            <li><a href="{% url 'user:profile' u.pk %}">게시물</a></li>
+                            <li><a href="{% url 'user:profile_bookmark' u.pk %}">스크랩</a></li>
                         </div>
                     </ul>
                 </div>
@@ -1553,59 +1456,126 @@
                 <div class="col-sm-10 main-block-left pull-left">
                     <ul class="list-group">
                         {#                        게시글#}
-                        {% for article in articles %}
-                            <li class="list-group-item list-group-item-small list-group-no-note clearfix">
-                                <div class="list-icon-wrapper pull-left">
-                                    <img src="https://w7.pngwing.com/pngs/296/768/png-transparent-emoji-memorandum-computer-icons-text-messaging-writing-writing-pencil-emoticon-word-thumbnail.png">
-                                </div>
-                                <div class="list-title-wrapper list-activity">
-                                    <div class="list-activity-desc">
-                                    <span class="list-activity-desc-text">
-                                        <a href="/articles/life"
-                                           class="list-group-item-text item-tag label label-info">{{ article.category.name }}</a>
-                                        에 #{{ article.id }} 게시물을 작성하였습니다.
-                                    </span>
-                                        <span class="timeago"
-                                              title="2022-03-27T15:56:24">{{ article.created_at }}</span>
+                        {% url 'user:profile' u.pk as the_url %}
+                        {% if request.get_full_path == the_url %}
+                            {% for article in board_list %}
+                                <li class="list-group-item list-group-item-small list-group-no-note clearfix">
+                                    <div class="list-icon-wrapper pull-left">
+                                        <img src="https://w7.pngwing.com/pngs/296/768/png-transparent-emoji-memorandum-computer-icons-text-messaging-writing-writing-pencil-emoticon-word-thumbnail.png">
                                     </div>
-                                    <h5 class="list-group-item-heading">
-                                        <a href="/article/1188123">{{ article.title }}</a>
-                                        <div class="list-group-item-author pull-right clearfix">
-                                            <div class="avatar clearfix avatar-x-small ">
-                                                <a href="{% url 'user:profile' article.user.id %}" class="avatar-photo">
-                                                    {% if article.user.profile.img %}
-                                                        <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ article.user.profile.img }}">
-                                                    {% else %}
-                                                        <img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg">
-                                                    {% endif %}
-                                                </a>
-                                                <div class="avatar-info">
-                                                    <a class="nickname" href="{% url 'user:profile' article.user.id %}"
-                                                       title="{{ article.user.username }}">{{ article.user.username }}</a>
-                                                    <div class="activity "> {{ article.article_hits }}</div>
+                                    <div class="list-title-wrapper list-activity">
+                                        <div class="list-activity-desc">
+                                            <span class="list-activity-desc-text">
+                                                <a href="/communities/{{ article.category.name }}/" class="list-group-item-text item-tag label label-info">{{ article.category.name }}</a>에 #{{ article.id }} 게시물을 작성하였습니다.
+                                            </span>
+                                            <span class="timeago" title="2022-03-27T15:56:24">{{ article.created_at }}</span>
+                                        </div>
+                                        <h5 class="list-group-item-heading">
+                                            <a href="/communities/article/{{ article.id }}/">{{ article.title }}</a>
+                                            <div class="list-group-item-author pull-right clearfix">
+                                                <div class="avatar clearfix avatar-x-small ">
+                                                    <a href="{% url 'user:profile' article.user.id %}" class="avatar-photo">
+                                                        {% if article.user.profile.img %}
+                                                            <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ article.user.profile.img }}">
+                                                        {% else %}
+                                                            <img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg">
+                                                        {% endif %}
+                                                    </a>
+                                                    <div class="avatar-info">
+                                                        <a class="nickname" href="{% url 'user:profile' article.user.id %}"
+                                                           title="{{ article.user.username }}">{{ article.user.username }}</a>
+                                                        <div class="activity "> {{ article.article_hits }}</div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </h5>
-                                </div>
-                            </li>
-                        {% endfor %}
+                                        </h5>
+                                    </div>
+                                </li>
+                            {% endfor %}
                         {#                        게시글#}
+                        {% else %}
+                        {#                        북마크#}
+                            {% for bookmark in board_list %}
+                                <li class="list-group-item list-group-item-small list-group-has-note clearfix">
+                                    <div class="list-icon-wrapper pull-left">
+                                        <img src="https://w7.pngwing.com/pngs/820/528/png-transparent-emoji-unicode-symbol-cut-copy-and-paste-bookmark-angle-thumb-signal-sticker-thumbnail.png">
+                                    </div>
+                                    <div class="list-title-wrapper list-activity">
+                                        <div class="list-activity-desc">
+                                            <span class="list-activity-desc-text">#{{ bookmark.article.id }} 게시물을 스크랩 하였습니다.</span>
+                                            <span class="timeago" title="2022-03-27T15:55:15">{{ bookmark.article.created_at }}</span>
+                                        </div>
+                                        <h5 class="list-group-item-heading">
+                                            <a href="/communities/article/{{ bookmark.article.id }}/">{{ bookmark.article.title }}</a>
+                                            <div class="list-group-item-author pull-right clearfix">
+                                                <div class="avatar clearfix avatar-x-small ">
+                                                    <a href="{% url 'user:profile' bookmark.article.user.id %}" class="avatar-photo">
+                                                        {% if bookmark.article.user.profile.img %}
+                                                            <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ bookmark.article.user.profile.img }}">
+                                                        {% else %}
+                                                            <img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg">
+                                                        {% endif %}
+                                                    </a>
+                                                    <div class="avatar-info">
+                                                        <a class="nickname" href="{% url 'user:profile' bookmark.article.user.id %}">{{ bookmark.article.user.username }} </a>
+                                                        <div class="activity ">{{ bookmark.article.hits }}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </h5>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                        {#                        북마크#}
                     </ul>
 
-                    <div class="text-center">
-                        <ul class="pagination pagination-sm">
-                            <li class="prev disabled">
-                                <span>«</span>
-                            </li>
-                            <li class="disabled">
-                                <span>»</span>
-                            </li>
+                    {#                    페이지 네이터#}
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <div class="pagination-area">
+                                <nav>
+                                    <ul class="page-numbers d-inline-flex">
 
-                        </ul>
+                                        <div style="width:150px; margin: 0 5px;">
+
+
+                                            {% if board_list.has_previous %}
+                                                <a class="abutton" href="?page=1">맨 앞으로</a>
+                                                <a class="abutton"
+                                                   href="?page={{ board_list.previous_page_number }}">이전</a>
+                                            {% endif %}
+                                        </div>
+
+
+                                        {% for page in board_list.paginator.page_range %}
+                                            {#                    {% if page == |add:4 %}{%elif page == 2 |add:3 %}#}
+                                            {% if page >= board_list.number|add:-2 and page <= board_list.number|add:2 %}
+                                                <li class="page-number {% if page == board_list.number %}active chosen_page{% endif %}">
+                                                    <a href="?page={{ page }}">{{ page }}</a>
+                                                </li>
+                                            {% elif page >= board_list.number|add:-3 and page <= board_list.number|add:3 %}
+
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        <div style="width:150px; margin: 0 5px;">
+                                            {% if board_list.has_next %}
+                                                <a class="abutton" href="?page={{ board_list.next_page_number }}">다음</a>
+                                                <a class="abutton" href="?page={{ board_list.paginator.num_pages }}">맨
+                                                    뒤로</a>
+                                            {% endif %}
+
+                                        </div>
+
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    {#                    페이지 네이터#}
 
+                </div>
             </div>
         </div>
     </div>

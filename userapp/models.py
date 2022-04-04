@@ -16,7 +16,6 @@ class Blog(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     img = models.FileField(upload_to='uploads/%Y%m%d', blank=True, null=True)
-    #img = models.URLField(max_length=250, blank=True)
     github = models.URLField(max_length=250, blank=True)
     blog = models.URLField(max_length=250, blank=True)
 
