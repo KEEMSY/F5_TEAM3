@@ -1,19 +1,13 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-
 {% include 'head.html' %}
 <link rel="stylesheet" href="{% static 'css/comment.css' %}">
-
 <body>
-
 <!--wrapper start-->
 <div class="wrapper">
-
     <!--== Start Header Wrapper ==-->
     {% include 'header.html' %}
-
-
     {# End Header Wrpper#}
     <div class="wraper_wraper">
         <div class="col-4">
@@ -33,7 +27,6 @@
                                 </li>
                             </ul>
                         </div>
-
                     </div>
                 </div>
                 <div class="posts_wrapper">
@@ -186,9 +179,7 @@
                             <a href="">익명의회원2</a> 님께서 댓글을 남기셨습니다.
                         </span>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
@@ -210,7 +201,6 @@
                                 march 23, 2022 by <a href="">오늘운동뭐하지?</a>
                             </span>
                             </div>
-
                             <div class="content_title_footet_right_wrapper">
                                 <div class="right_wrapper_icons">
                                     <div class="icon_wrapper">
@@ -254,52 +244,57 @@
                         <br>
                         <hr>
                         <div class="content_comment">
-{#                            <div class="content_comment_profile"></div>#}
+                            {#                            <div class="content_comment_profile"></div>#}
                             <div class="content_best_comment">
-{#                            <span>#}
-{#                                익명의회원1#}
-{#                            </span>#}
-{#                                <p>#}
-{#                                    ㅇㅋ 내가 부스터 챙겨감#}
-{#                                </p>#}
+                                {#                            <span>#}
+                                {#                                익명의회원1#}
+                                {#                            </span>#}
+                                {#                                <p>#}
+                                {#                                    ㅇㅋ 내가 부스터 챙겨감#}
+                                {#                                </p>#}
                                 <ol class="timeline">
-        <li class="timeline-item">
-		<span class="timeline-item-icon | avatar-icon">
-			<i class="avatar">
-				<img src="https://assets.codepen.io/285131/hat-man.png"/>
-			</i>
-		</span>
-            <div class="new-comment">
-                <input type="text" placeholder="Add a comment..."/>
-                <button type="button" class="btn btn-light" id="comment-submit-button">Submit</button>
-            </div>
-        </li>
-        <li class="timeline-item | extra-space">
-		<span class="timeline-item-icon | filled-icon">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-				<path fill="none" d="M0 0h24v24H0z"/>
-				<path fill="currentColor"
+                                    <li class="timeline-item">
+        <span class="timeline-item-icon | avatar-icon">
+            <i class="avatar">
+                <img src="https://assets.codepen.io/285131/hat-man.png"/>
+            </i>
+        </span>
+                                        <div class="new-comment">
+                                            <input type="text" placeholder="Add a comment..."/>
+                                            <button type="button" class="btn btn-light" id="comment-submit-button">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </li>
+                                    <li class="timeline-item | extra-space">
+        <span class="timeline-item-icon | filled-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="none" d="M0 0h24v24H0z"/>
+                <path fill="currentColor"
                       d="M6.455 19L2 22.5V4a1 1 0 0 1 1-1h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H6.455zM7 10v2h2v-2H7zm4 0v2h2v-2h-2zm4 0v2h2v-2h-2z"/>
-			</svg>
-		</span>
-            <div class="timeline-item-wrapper">
-                <div class="timeline-item-description">
-                    <i class="avatar | small">
-                        <img src="https://assets.codepen.io/285131/hat-man.png"/>
-                    </i>
-                    <span><a href="#">Yoan Almedia</a> commented on <time
-                            datetime="20-01-2021">Jan 20, 2021</time></span>
-                </div>
-                <div class="comment">
-                    <p>I've sent him the assignment we discussed recently, he is coming back to us this week. Regarding
-                        to
-                        our last call, I really enjoyed talking to him and so far he has the profile we are looking for.
-                        Can't wait to see his technical test, I'll keep you posted and we'll debrief it all
-                        together!😊</p>
-                </div>
-            </div>
-        </li>
-    </ol>
+            </svg>
+        </span>
+                                        <div class="timeline-item-wrapper">
+                                            <div class="timeline-item-description">
+                                                <i class="avatar | small">
+                                                    <img src="https://assets.codepen.io/285131/hat-man.png"/>
+                                                </i>
+                                                <span><a href="#">Yoan Almedia</a> commented on <time
+                                                        datetime="20-01-2021">Jan 20, 2021</time></span>
+                                            </div>
+                                            <div class="comment">
+                                                <p>I've sent him the assignment we discussed recently, he is coming back
+                                                    to us this week. Regarding
+                                                    to
+                                                    our last call, I really enjoyed talking to him and so far he has the
+                                                    profile we are looking for.
+                                                    Can't wait to see his technical test, I'll keep you posted and we'll
+                                                    debrief it all
+                                                    together!😊</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ol>
                             </div>
                         </div>
                         <div class="content_botton">
@@ -310,19 +305,9 @@
             </div>
         </div>
     </div>
-
-
-
-
     {% include 'footer.html' %}
-
-
     <!--=======================Javascript============================-->
-
     {% include 'js.html' %}
-
 </div>
-
 </body>
-
 </html>
