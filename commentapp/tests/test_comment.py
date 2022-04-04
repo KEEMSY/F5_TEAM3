@@ -58,6 +58,15 @@ class TestView(TestCase):
         # Expect
         self.assertEqual(3, len(target_comments))
 
+    def test_when_comment_does_not_exist(self):
+        # Given
+        user = User.objects.create(username='test_name', email='test@test.com')
+        category = Category.objects.create(name='test_category')
+        article = create_article('title', user, 'test', category, '')
+
+        # Expect
+        target_comments = read_target_article_comment(article.id)
+        self.assertEqual(False, target_comments)
 
 
     # comment 수정 시
