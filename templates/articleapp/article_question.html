@@ -45,7 +45,7 @@
                                         <li class="bbp-body">
                                             <ul id="{{ article.id }}" class="loop-item-0 bbp-forum-status-open bbp-forum-visibility-publish forum type-forum hentry">
                                                 <li class="bbp-forum-info">
-                                                    <a class="bbp-forum-title" href="">{{ article.title }}</a>
+                                                    <a class="bbp-forum-title" href="{% url 'articleapp:question_RUD' article.pk %}">{{ article.title }}</a>
                                                     <div class="bbp-forum-content">
                                                         {{ article.content }}
                                                     </div>

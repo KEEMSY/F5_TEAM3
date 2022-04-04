@@ -11,7 +11,7 @@ from articleapp.services.service_article import create_article
 from commentapp.models import Comment
 from commentapp.services.comment_service import (create_comment,
                                                  delete_comment,
-                                                 update_comment)
+                                                 update_comment, read_target_article_comment)
 from userapp.models import User
 
 
@@ -23,8 +23,6 @@ class TestView(TestCase):
         category = Category.objects.create(name='test_category')
         content = 'test'
         article = create_article('title', user, content, category, '')
-
-
 
         # When
         comment = create_comment(article.id, user.id, content)
@@ -43,6 +41,24 @@ class TestView(TestCase):
         # Expect
         with self.assertRaises(IntegrityError):
             comment = create_comment(article_id, user.id, content)
+
+    # comment 불러오기
+    def test_get_target_article_comment(self):
+        # Given
+        user = User.objects.create(username='test_name', email='test@test.com')
+        category = Category.objects.create(name='test_category')
+        article = create_article('title', user, 'test', category, '')
+        comment1 = create_comment(article.id, user.id, 'test1')
+        comment2 = create_comment(article.id, user.id, 'test2')
+        comment3 = create_comment(article.id, user.id, 'test3')
+
+        # When
+        target_comments = read_target_article_comment(article.id)
+
+        # Expect
+        self.assertEqual(3, len(target_comments))
+
+
 
     # comment 수정 시
     def test_update_target_comment(self):
@@ -138,4 +154,4 @@ class TestView(TestCase):
 
         # Expect
         self.assertEqual(False, delete_comment(comment.id)
-)
+                         )

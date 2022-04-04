@@ -1,0 +1,82 @@
+{% extends 'articleapp/article_base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="col-8">
+        <div class="right_wrapper">
+            <div class="content_wrapper">
+                <div class="content_img">
+                    여기에 이미지이 들어갑니다
+                </div>
+                <div class="content_details">
+                    <div class="content_title">
+                        <h1>
+                            {{ target_article.title }}
+                        </h1>
+                    </div>
+                    <div class="content_title_footet">
+                        <div class="content_title_footet_left_wrapper">
+                            <span>
+                                {{ target_article.created_at }} by <a href="{% url 'user:profile' target_article.user.pk %}"> {{ target_article.user.username }}</a>
+                            </span>
+                        </div>
+
+                        <div class="content_title_footet_right_wrapper">
+                            <div class="right_wrapper_icons">
+                                <div class="icon_wrapper">
+                                    <img src="{% static 'img/icons/hearted.png' %}" alt="">
+                                </div>
+                                <div class="icon_cnt">
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div class="right_wrapper_icons">
+                                <div class="icon_wrapper">
+                                    <img src="{% static 'img/icons/comment.png' %}" alt="">
+                                </div>
+                                <div class="icon_cnt">
+                                    <span>2</span>
+                                </div>
+                            </div>
+                            <div class="right_wrapper_icons">
+                                <div class="icon_wrapper">
+                                    <img src="{% static 'img/icons/eye.png' %}" alt="">
+                                </div>
+                                <div class="icon_cnt">
+                                    <span>{{ target_article.article_hits }}</span>
+                                </div>
+                            </div>
+                            <div class="right_wrapper_icons">
+                                <div class="icon_wrapper">
+                                    <img src="{% static 'img/icons/bookmark.png' %}" alt="">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content_main">
+                        <span>
+                            {{ target_article.content }}
+                        </span>
+                    </div>
+                    <br>
+                    <hr>
+                    <div class="content_comment">
+                        <div class="content_comment_profile"></div>
+                        <div class="content_best_comment">
+                            <span>
+                                익명의회원1
+                            </span>
+                            <p>
+                                ㅇㅋ 내가 부스터 챙겨감
+                            </p>
+                        </div>
+                    </div>
+                    <div class="content_botton">
+                        <button> 더보기 </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

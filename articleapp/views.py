@@ -23,7 +23,8 @@ class ArticleView(View):
         try:
             ip = get_client_ip(request)
             target_article = hit_article(ip, pk)
-            return render(request, 'article_detail.html',
+            # target_comment =
+            return render(request, 'articleapp/article_detail.html',
                           {'target_article': target_article, 'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments},
                           status=200)
 
