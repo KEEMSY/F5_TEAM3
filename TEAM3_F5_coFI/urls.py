@@ -29,10 +29,7 @@ urlpatterns = [
     path('communities/', include("articleapp.urls")),
     path('careers/', include("careerapp.urls")),
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 641be5c42fc541ed6d80d9564f0733099fbee125
     path('temp/', views.show_community, name='temp'),
     path('temp1/question/', views.show_article_list_question, name='temp1_question'),
     path('temp1/tip/', views.show_article_list_tip, name='temp1_tip'),
