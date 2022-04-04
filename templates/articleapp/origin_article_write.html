@@ -1,0 +1,642 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+{% include 'head.html' %}
+
+<style>
+    .jbRBuB {
+        min-width: 0px;
+        flex: 1 1 0%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 1;
+        box-shadow: rgb(0 0 0 / 2%) 0px 0px 8px;
+    }
+
+    .gMrxDC {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .gMrxDC > .wrapper {
+        min-height: 0px;
+        padding-bottom: 4rem;
+        flex: 1 1 0%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .gtSQrI {
+        padding-top: 2rem;
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+
+    .jVzenP {
+        background: transparent;
+        display: block;
+        padding: 0px;
+        font-size: 2.75rem;
+        width: 100%;
+        resize: none;
+        line-height: 1.5;
+        outline: none;
+        border: none;
+        font-weight: bold;
+        color: #212529;
+    }
+
+    .cFLjAe {
+        background: rgb(73, 80, 87);
+        height: 6px;
+        width: 4rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+        border-radius: 1px;
+    }
+
+    .BioNQ {
+        color: #212529;
+        font-size: 1.125rem;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .hmsunO:hover {
+        opacity: 0.6;
+    }
+
+    .hmsunO {
+        font-size: 1rem;
+        display: inline-flex;
+        -webkit-box-align: center;
+        align-items: center;
+        height: 2rem;
+        border-radius: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        background: #f8f9fa;
+        color: #12b886;
+        margin-right: 0.75rem;
+        transition: all 0.125s ease-in 0s;
+        cursor: pointer;
+        margin-bottom: 0.75rem;
+        animation: 0.125s ease-in-out 0s 1 normal forwards running lnHDaM;
+    }
+
+    .bLfqeY {
+        background: transparent;
+        display: inline-flex;
+        outline: none;
+        cursor: text;
+        font-size: 1.125rem;
+        line-height: 2rem;
+        margin-bottom: 0.75rem;
+        min-width: 8rem;
+        border: none;
+        color: #212529;
+    }
+
+    .jchFmH {
+        display: block;
+        width: 100%;
+        color: #495057;
+        transition: all 0.125s ease-in 0s;
+    }
+
+    .gsfwdu {
+        top: 0px;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        background: #ffffff;
+        z-index: 10;
+        transition: all 0.125s ease-in 0s;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+        padding-left: 3rem;
+        padding-right: 3rem;
+        width: auto;
+    }
+
+    .llTfNu {
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        font-size: 1.75rem;
+        color: #868e96;
+        cursor: pointer;
+        flex-shrink: 0;
+        background: none;
+        outline: none;
+        border: none;
+        padding: 0px;
+    }
+
+    .kExaNS {
+        font-size: 1rem;
+        font-weight: bold;
+        font-family: serif;
+    }
+
+    .kExaNS span {
+        font-size: 0.75rem;
+    }
+
+    .eeeSIE {
+        width: 1px;
+        height: 1.25rem;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        background: #dee2e6;
+    }
+
+    .gsfwdu .mobile-placeholder {
+        display: none;
+        height: 1px;
+        width: 1rem;
+        flex-shrink: 0;
+    }
+
+    .euFpdu {
+        flex: 1 1 0%;
+        min-height: 0px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    input, button, textarea {
+        font-family: inherit;
+    }
+
+    .form-floating .form-control:not(:placeholder-shown) {
+        padding: 2vw 1.25vw;
+    }
+
+    .form-floating {
+        margin: 0 auto;
+        width: 90%;
+    }
+
+    .form-floating textarea.form-control {
+        padding: 1rem 0.75rem;
+        height: 22vw;
+    }
+
+    .form-floating > label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        padding: 1rem 0.75rem;
+        pointer-events: none;
+        border: 1px solid transparent;
+        transform-origin: 0 0;
+        transition: opacity .1s ease-in-out, transform .1s ease-in-out;
+    }
+
+
+    .form-floating. form-control {
+        line-height: 1.50;
+    }
+
+    .kXPrdw {
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        z-index: 10;
+    }
+
+    .hGUUhE {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        height: 4rem;
+        width: 100%;
+        box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px;
+        background: #ffffff;
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        align-items: center;
+    }
+
+    .dpvHhN {
+        height: 2.5rem;
+        padding: 0.5rem 1rem;
+        -webkit-box-align: center;
+        align-items: center;
+        background: none;
+        border-radius: 4px;
+        cursor: pointer;
+        border: none;
+        display: flex;
+        outline: none;
+        color: #212529;
+    }
+
+    .dpvHhN svg {
+        font-size: 1.25rem;
+        margin-right: 0.5rem;
+    }
+
+    .dpvHhN span {
+        font-size: 1.125rem;
+    }
+
+    .hAAhHZ {
+        -webkit-box-pack: end;
+        justify-content: flex-end;
+        -webkit-box-align: center;
+        align-items: center;
+    }
+
+    .iTdGoM {
+        height: 2.5rem;
+        font-size: 1.125rem;
+    }
+
+    .hLiqkr {
+        display: inline-flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        font-weight: bold;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        background: none;
+        color: #12b886;
+        border-radius: 4px;
+        padding: 0px 1.25rem;
+        height: 2rem;
+        font-size: 1rem;
+    }
+
+
+    .sc-jQrDum + .sc-jQrDum {
+        margin-left: 0.75rem;
+    }
+
+    .sc-pVTFL + .sc-pVTFL {
+        margin-left: 0.5rem;
+    }
+
+    .iTdGoM {
+        height: 2.5rem;
+        font-size: 1.125rem;
+    }
+
+    .bTEpzi {
+        display: inline-flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        font-weight: bold;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        background: #12b886;
+        color: #ffffff;
+        border-radius: 4px;
+        padding: 0px 1.25rem;
+        height: 2rem;
+        font-size: 1rem;
+    }
+
+</style>
+
+<body>
+
+<!--wrapper start-->
+<div class="wrapper">
+
+    <!--== Start Header Wrapper ==-->
+    {% include 'header.html' %}
+
+    {# End Header Wrpper#}
+    <div class="wraper_wraper">
+        <div class="col-4">
+            <div class="left_wrapper">
+                <div class="category_wrapper">
+                    <div class="categories">
+                        <div class="title_wrapper">
+                            <h5>Category</h5>
+                        </div>
+                        <div class="category_list_wrapper">
+                            <ul>
+                                <li class="category_list">
+                                    <a href="">게시판1</a>
+                                </li>
+                                <li class="category_list">
+                                    <a href="">게시판2</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="posts_wrapper">
+                    <div class="posts">
+                        <div class="title_wrapper">
+                            <h5>Latest POST</h5>
+                        </div>
+                        <div class="post">
+                        <span>
+                            <a href="">
+                                <div class="post_area">
+                                    <div class="post_img"></div>
+                                    <div class="post_details">
+                                        <div class="post_title">
+                                            <span class="post_user_title">
+                                                아 운동같이 갈사람
+                                            </span>
+                                        </div>
+                                            <div class="post_detail">
+                                                <span class="post_user_detail">
+                                                    march 23, 2022
+                                                </span>
+                                            </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </span>
+                        </div>
+                        <div class="post">
+                        <span>
+                            <a href="">
+                                <div class="post_area">
+                                    <div class="post_img"></div>
+                                    <div class="post_details">
+                                        <div class="post_title">
+                                            <span class="post_user_title">
+                                                아 운동같이 갈사람 진짜 없어..?
+                                            </span>
+                                        </div>
+                                            <div class="post_detail">
+                                                <span class="post_user_detail">
+                                                    march 23, 2022
+                                                </span>
+                                            </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </span>
+                        </div>
+                        <div class="post">
+                        <span>
+                            <a href="">
+                                <div class="post_area">
+                                    <div class="post_img"></div>
+                                    <div class="post_details">
+                                        <div class="post_title">
+                                            <span class="post_user_title">
+                                                나랑 떡볶이 먹으러 갈 사람?
+                                            </span>
+                                        </div>
+                                            <div class="post_detail">
+                                                <span class="post_user_detail">
+                                                    march 23, 2022
+                                                </span>
+                                            </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </span>
+                        </div>
+                        <div class="post">
+                        <span>
+                            <a href="">
+                                <div class="post_area">
+                                    <div class="post_img"></div>
+                                    <div class="post_details">
+                                        <div class="post_title">
+                                            <span class="post_user_title">
+                                                아 운동하고싶다
+                                            </span>
+                                        </div>
+                                            <div class="post_detail">
+                                                <span class="post_user_detail">
+                                                    march 23, 2022
+                                                </span>
+                                            </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </span>
+                        </div>
+                        <div class="post">
+                        <span>
+                            <a href="">
+                                <div class="post_area">
+                                    <div class="post_img"></div>
+                                    <div class="post_details">
+                                        <div class="post_title">
+                                            <span class="post_user_title">
+                                                안자는사람?
+                                            </span>
+                                        </div>
+                                            <div class="post_detail">
+                                                <span class="post_user_detail">
+                                                    march 23, 2022
+                                                </span>
+                                            </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </span>
+                        </div>
+                        <div class="post">
+                        <span>
+                            <a href="">
+                                <div class="post_area">
+                                    <div class="post_img"></div>
+                                    <div class="post_details">
+                                        <div class="post_title">
+                                            <span class="post_user_title">
+                                                나 지금 치킨시켰다 질문받는다
+                                            </span>
+                                        </div>
+                                            <div class="post_detail">
+                                                <span class="post_user_detail">
+                                                    march 23, 2022
+                                                </span>
+                                            </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment_wrapper">
+                    <div class="comments">
+                        <div class="title_wrapper">
+                            <h5>Recent Comments</h5>
+                        </div>
+                        <div class="comment">
+                        <span>
+                           ✍ <a href="">아 운동같이 갈사람</a> 에
+                            <a href="">익명의회원1</a> 님께서 댓글을 남기셨습니다.
+                        </span>
+                        </div>
+                        <div class="comment">
+                        <span>
+                           ✍ <a href="">아 운동같이 갈사람</a> 에
+                            <a href="">익명의회원2</a> 님께서 댓글을 남기셨습니다.
+                        </span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="right_wrapper">
+                <div class="content_wrapper">
+
+
+                    <div data-testid="left" class="sc-hiwPVj jbRBuB" style="background-color: transparent;">
+                        <div data-testid="codemirror" class="sc-TBWPX gMrxDC">
+                            <div class="wrapper">
+                                <div style="max-height: 540px; opacity: 1;">
+                                    <div class="sc-ZOtfp gtSQrI"><textarea placeholder="제목을 입력하세요"
+                                                                           class="sc-gGCDDS jVzenP"
+                                                                           style="height: 66px;"></textarea>
+                                        <div class="sc-jIkXHa cFLjAe"></div>
+                                        <div class="sc-kHOZwM BioNQ">
+                                            <div class="sc-dtMgUX hmsunO">커뮤니티</div>
+                                            <div class="sc-dtMgUX hmsunO">Team3</div>
+                                            <div class="sc-dtMgUX hmsunO">F5새로고침</div>
+                                            <div class="sc-dtMgUX hmsunO">coFi</div>
+                                            <input placeholder="태그를 입력하세요" tabindex="2"
+                                                   class="sc-hOGkXu bLfqeY" value="">
+                                            <div class="sc-bTfYFJ jchFmH"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="toolbar" class="sc-clIzBv gsfwdu">
+                                    <button class="sc-Galmp llTfNu ql-header" value="1">
+                                        <div class="sc-faUpoM kExaNS">H<span>1</span></div>
+                                    </button>
+                                    <button class="sc-Galmp llTfNu ql-header" value="2">
+                                        <div class="sc-faUpoM kExaNS">H<span>2</span></div>
+                                    </button>
+                                    <button class="sc-Galmp llTfNu ql-header" value="3">
+                                        <div class="sc-faUpoM kExaNS">H<span>3</span></div>
+                                    </button>
+                                    <button class="sc-Galmp llTfNu ql-header" value="4">
+                                        <div class="sc-faUpoM kExaNS">H<span>4</span></div>
+                                    </button>
+                                    <div class="sc-fWCJzd eeeSIE"></div>
+                                    <button class="sc-Galmp llTfNu ql-bold">
+                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                             viewBox="0 0 24 24" height="1em" width="1em"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="sc-Galmp llTfNu ql-italic">
+                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                             viewBox="0 0 24 24" height="1em" width="1em"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10 4v3h2.21l-3.42 8H6v3h8v-3h-2.21l3.42-8H18V4z"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="sc-Galmp llTfNu ql-strike">
+                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                             viewBox="0 0 24 24" height="1em" width="1em"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10 19h4v-3h-4v3zM5 4v3h5v3h4V7h5V4H5zM3 14h18v-2H3v2z"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="sc-fWCJzd eeeSIE"></div>
+                                    <button class="sc-Galmp llTfNu ql-blockquote">
+                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                             viewBox="0 0 24 24" height="1em" width="1em"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="sc-Galmp llTfNu ql-link">
+                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                             viewBox="0 0 24 24" height="1em" width="1em"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="sc-Galmp llTfNu ql-image">
+                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                             viewBox="0 0 24 24" height="1em" width="1em"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="sc-Galmp llTfNu ql-code-block">
+                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                             viewBox="0 0 24 24" height="1em" width="1em"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="mobile-placeholder"></div>
+                                </div>
+                                <div class="sc-jOxtWs euFpdu">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Leave a comment here"
+                                                  id="floatingTextarea2"></textarea>
+                                        <label for="floatingTextarea2">Comments</label>
+                                    </div>
+                                    {#                                    <input type = "{{ field.field.widget.input_type }}" class ="form-control" id ="{{field.id_for_label}}"#}
+                                    {#                placeholder = "{{field.label}}" name = "{{field.name}}">#}
+                                </div>
+                            </div>
+                            <div class="sc-hmjpVf kXPrdw" style="width: 960px;">
+                                <div class="sc-cZMNgc hGUUhE">
+                                    <button class="sc-fvxzrP dpvHhN">
+                                        <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                             viewBox="0 0 24 24" height="1em" width="1em"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"></path>
+                                        </svg>
+                                        <span>나가기</span></button>
+                                    <div class="sc-jUosCB hAAhHZ">
+                                        <button color="transparent" class="sc-pVTFL hLiqkr sc-jQrDum iTdGoM">임시저장
+                                        </button>
+                                        <button color="teal" class="sc-pVTFL bTEpzi sc-jQrDum iTdGoM">출간하기</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% include 'footer.html' %}
+
+
+    <!--=======================Javascript============================-->
+
+    {% include 'js.html' %}
+
+</div>
+
+</body>
+
+</html>

@@ -649,7 +649,7 @@ table p {
           transform: translate(0%, -50%);
 }
 .off-canvas-wrapper .btn-menu-close:hover {
-  color: #000000;
+  color: #fff;
   background-color: #2f2f2f;
 }
 
@@ -1271,7 +1271,7 @@ table p {
   }
 }
 
-@media only screen and (max-width: 1199px) {
+@media only screen and (max-width: 992px) {
   .home-slider-shape {
     display: none;
   }
@@ -1296,6 +1296,13 @@ table p {
     width: 600px;
   }
 }
+
+@media only screen and (max-width: 1100px) {
+  .home-slider-shape .shape1 {
+    width: 470px;
+  }
+}
+
 .home-slider-shape .shape2 {
   position: absolute;
   top: 0;
@@ -1650,6 +1657,8 @@ table p {
   color: #272a33;
   font-size: 24px;
   margin-bottom: 12px;
+  max-height: 87px;
+  overflow: hidden;
 }
 @media only screen and (max-width: 1199px) {
   .recent-job-item .main-content .title {
@@ -2322,7 +2331,7 @@ table p {
 .login-register-form-wrap {
   background-color: #f4f7f7;
   border-radius: 8px;
-  padding: 100px 70px 51px;
+  padding: 48px 70px 51px;
 }
 @media only screen and (max-width: 1199px) {
   .login-register-form-wrap {
@@ -5448,7 +5457,6 @@ table p {
 
 .post-home-style .post-item {
   margin-bottom: 0;
-
 }
 @media only screen and (max-width: 767px) {
   .post-home-style .post-item {
@@ -5514,7 +5522,6 @@ table p {
 
 .post-item {
   margin-bottom: 70px;
-  display: flex;
 }
 @media only screen and (max-width: 1199px) {
   .post-item {
@@ -5522,12 +5529,10 @@ table p {
   }
 }
 .post-item .thumb {
+  border-radius: 5px;
   margin-bottom: 39px;
   overflow: hidden;
   position: relative;
-  width: 152px;
-  height: 152px;
-  border-radius: 50%;
 }
 @media only screen and (max-width: 1199px) {
   .post-item .thumb {
@@ -5543,11 +5548,6 @@ table p {
   -ms-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
 }
-.post-item .content .sns {
-  display: flex;
-  margin-right: 10px;
-}
-
 .post-item .content .author {
   color: #929292;
   font-weight: 500;
@@ -5567,7 +5567,6 @@ table p {
 .post-item .content .author a:hover {
   color: #03a84e;
 }
-
 .post-item .content .title {
   font-size: 23px;
   line-height: 1.522;
@@ -6585,8 +6584,8 @@ table p {
   }
 }
 .footer-area .widget-title {
-  font-size: 25px;
-  color: #000000;
+  font-size: 28px;
+  color: #fff;
   text-transform: capitalize;
   margin-bottom: 40px;
 }
@@ -6703,7 +6702,7 @@ table p {
   line-height: 50px;
 }
 .footer-area .nav-menu li a {
-  color: #484b52;
+  color: #d8dadf;
   font-size: 18px;
   line-height: 50px;
   padding: 0 0;
@@ -6861,7 +6860,7 @@ table p {
 }
 
 .footer-main {
-  background-color: #f4f7f7;
+  background-color: #272a33;
   position: relative;
   padding: 126px 0 86px;
 }
@@ -6981,22 +6980,4 @@ table p {
   font-size: 16px;
   vertical-align: 0px;
   margin: 0;
-}
-
-
-.flex-container{
-  width: 800px;
-  min-height: 200px;
-  border: 1px solid #323332;
-  background-color: white;
-
-}
-
-.article-container{
-  width: 600px;
-  min-height: 200px;
-  border: 1px solid #323332;
-  background-color: white;
-
-
 }
