@@ -3,21 +3,46 @@
 
 {% include 'head.html' %}
 
-
 <head>
     {% load static %}
-
-    <link rel="stylesheet" href="{% static "css/user/sign-up.css" %}">
-
 </head>
-
 
 <body>
 
 <style>
-    body {
-        background-image: url('static/img/login_background.png');
+
+    .login-register-form-wrap {
+        background-color: #f4f7f7;
+        border-radius: 8px;
+        padding: 30px 40px 23px;
+        margin-top: 175px;
+        width: 450px;
+        margin-left: 75px;
     }
+
+    .header_img {
+        display: none;
+    }
+
+    {##전체 row#}
+    .row > * {
+        margin-top: -15px;
+    }
+
+    {#.account-login-area .container {#}
+    {#    padding-top: 0px;#}
+    {#    padding-bottom: 120px;#}
+    {#    margin-top: -50px;#}
+    {#}#}
+
+    .login-register-form .btn-theme {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 45px;
+    padding: 12px 35px 10px;
+}
+
 </style>
 
 <!--wrapper start-->
@@ -84,21 +109,10 @@
                                                     </p>
                                                 </div>
 
+
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <div class="remember-forgot-info">
-                                                            <div class="remember">
-                                                                <input class="form-check-input" type="checkbox" value=""
-                                                                       id="defaultCheck1">
-                                                                <label class="form-check-label" for="defaultCheck1">Aaccept
-                                                                    our terms and conditions and privacy policy.</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <button type="submit" class="btn-theme">Register Now</button>
+                                                        <button type="submit" class="btn-theme">회원가입</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -147,7 +161,7 @@
                                     </div>
                                 </div>
                                 <div class="login-register-form-info">
-                                    <p>Already have an account? <a href="{% url 'user:login' %}">Login</a></p>
+                                    <p>계정이 이미 있으신가요? <a href="{% url 'user:login' %}">로그인</a></p
                                 </div>
                             </div>
                         </div>
