@@ -117,7 +117,7 @@ WSGI_APPLICATION = 'TEAM3_F5_coFI.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "Team3",
+        "NAME": "TEAM3",
         "USER": "root",
         "PASSWORD": "2349",
         "HOST": "localhost",
