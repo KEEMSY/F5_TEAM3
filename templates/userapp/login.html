@@ -5,14 +5,29 @@
 
 {% include 'head.html' %}
 
+<head>
+{% load static %}
+
+    <link rel="stylesheet" href="{% static "css/user/login.css" %}">
+
+</head>
+
+
 <body>
+
+<style>
+
+wrapper {
+background-image:url('login_background.png');
+}
+</style>
 
 <!--wrapper start-->
 <div class="wrapper">
 
   <!--== Start Header Wrapper ==-->
 
-  {% include 'header.html' %}
+  {% include 'header_ver2.html' %}
 
   <!--== End Header Wrapper ==-->
   <main class="main-content">
@@ -22,9 +37,7 @@
           <div class="col-md-8 col-lg-7 col-xl-6">
               <div class="login-register-form-wrap">
               <div class="login-register-form">
-                <div class="form-title">
-                  <h4 class="title">Sign In</h4>
-                </div>
+
 
                 <form action="{% url 'user:login' %}" method="post" id="login-form">
                     {% csrf_token %}
