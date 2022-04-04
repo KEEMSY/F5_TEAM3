@@ -35,7 +35,7 @@
                                     <img src="{% static 'img/icons/comment.png' %}" alt="">
                                 </div>
                                 <div class="icon_cnt">
-                                    <span>2</span>
+                                    <span>{{ target_comment.count }}</span>
                                 </div>
                             </div>
                             <div class="right_wrapper_icons">
@@ -69,14 +69,18 @@
                         {% else %}
 {#                            코멘트 작성하는 html 작성 필요 #}
 {#                            코멘트는 더보기에서 보일 수 있게 만들기 #}
+                        {% for comment in target_comment %}
                         <div class="content_best_comment">
                             <span>
-                                {{ target_comment.user.username }}
+                                {{ comment.user.username }}
                             </span>
                             <p>
-                                {{ target_comment.content }}
+                                {{ comment.content }}
                             </p>
                         </div>
+
+                        {% endfor %}
+
                     </div>
                         {% endif %}
 
