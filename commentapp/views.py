@@ -5,7 +5,6 @@ from django.shortcuts import render
 # Create your views here.
 from django.views import View
 
-from commentapp.models import Author
 from commentapp.services.comment_service import (create_comment,
                                                  delete_comment,
                                                  update_comment)

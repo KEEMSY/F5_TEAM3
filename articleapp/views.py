@@ -2,7 +2,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View
-
+from .forms import CommunityPost
 # 게시글 목록
 from articleapp.services.service_article import (
     create_article, delete_article, get_client_ip, get_page_context,
@@ -69,7 +69,9 @@ class ArticleView(View):
 
 # 게시글 작성
 def write_article(request):
-    return render(request, 'articleapp/article_write.html', status=200)
+    form = CommunityPost()
+
+    return render(request, 'articleapp/article_write.html', {'form':form}, status=200)
 
 
 # 홈
