@@ -15,8 +15,8 @@ class Blog(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    #img = models.ImageField(blank=True) *추후 파일 업로드 형태로 변경 시 사용
-    img = models.URLField(max_length=250, blank=True)
+    img = models.FileField(upload_to='uploads/%Y%m%d', blank=True, null=True)
+    #img = models.URLField(max_length=250, blank=True)
     github = models.URLField(max_length=250, blank=True)
     blog = models.URLField(max_length=250, blank=True)
 

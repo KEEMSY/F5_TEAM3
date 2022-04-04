@@ -85,14 +85,19 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'TEAM3_F5_coFI.urls'
 
-# aws.json 가져와서 버킷,db 접근권한 주기
-# with open(os.path.join(BASE_DIR, 'aws.json')) as f:
-#     secrets = json.loads(f.read())
-#
-# AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
-# AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
-# AWS_STORAGE_BUCKET_NAME = secrets['AWS']['STORAGE_BUCKET_NAME']
-# AWS_DEFAULT_ACL = 'public-read'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+with open(os.path.join(BASE_DIR, 'aws.json')) as f:
+    secrets = json.loads(f.read())
+
+AWS_S3_REGION_NAME = 'ap-northeast-2'
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = secrets['AWS']['STORAGE_BUCKET_NAME']
+AWS_DEFAULT_ACL = 'public-read' # 올린 파일을 누구나 읽을 수 있게 지정합니다!
+AWS_S3_ADDRESSING_STYLE = "virtual"
 
 TEMPLATES = [
     {

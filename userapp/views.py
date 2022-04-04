@@ -98,9 +98,11 @@ def update_profile(request, pk):
         user_form.save()
 
     if hasattr(u, 'profile'):
+        print(request.FILES)
         profile = u.profile
         profile_form = ProfileForm(request.POST, request.FILES, instance=profile)  # 기존의 것 가져와 수정하는 것
     else:
+
         profile_form = ProfileForm(request.POST, request.FILES)  # 새로 만드는 것
 
     # Profile 폼
@@ -137,11 +139,15 @@ def get_profile_article(request, pk):
             #게시글 카테고리
             q['category_name'] = article.category.name
             #게시글 작성자 정보
-            q['author_img'] = article.user.profile.img
+            try:
+                q['author_img'] = article.user.profile.img.url
+            except:
+                q['author_img'] = None
             q['author_name'] = article.user.username
+            q['author_id'] = article.user.id
 
             articles_list.append(q)
-
+        print(article.created_at)
         return JsonResponse(articles_list, safe=False)
 
 
@@ -163,8 +169,12 @@ def get_profile_bookmark(request, pk):
             q['category_name'] = bookmark.article.category.name
             # 게시글 작성자 정보
             q['author_id'] = bookmark.article.user.id
-            q['author_img'] = bookmark.article.user.profile.img
+            try:
+                q['author_img'] = bookmark.article.user.profile.img.url
+            except:
+                q['author_img'] = None
             q['author_name'] = bookmark.article.user.username
+            q['author_id'] = bookmark.article.user.id
 
             bookmarks_list.append(q)
 

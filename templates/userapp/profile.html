@@ -6,6 +6,19 @@
 <link href="{% static 'css/community.css' %}" rel="stylesheet"/>
 
 <style>
+    #modal .content {
+    margin-top: 5px;
+    padding: 0px 10px;
+    text-shadow: 1px 1px 2px gray;
+    color: white;
+    width: 100%;
+    }
+
+    .modal-form-group {
+        margin-bottom: 10px;
+        width: min-content;
+    }
+
     .layout-container {
         padding: 0;
         margin: 0;
@@ -925,7 +938,6 @@
         min-height: 1px;
         padding-right: 15px;
         padding-left: 15px;
-        z-index: -1;
     }
 
     .list-group {
@@ -1347,56 +1359,56 @@
     });
 
     function show_articles() {
-        $('.list-group').empty()
-        $.ajax({
-            type: "GET",
-            url:"{% url 'user:profile_article' user.pk %}",
-            data:{},
-            dataType: 'json',
-            success: function (response) {
-                let articles = response
-                for (let i = 0; i < articles.length; i++) {
+       $('.list-group').empty()
+       $.ajax({
+           type: "GET",
+           url:"{% url 'user:profile_article' u.pk %}",
+           data:{},
+           dataType: 'json',
+           success: function (response) {
+               let articles = response
+               for (let i = 0; i < articles.length; i++) {
 
-                    let temp_html = `<li class="list-group-item list-group-item-small list-group-no-note clearfix">
-                                        <div class="list-icon-wrapper pull-left">
-                                            <img src="https://w7.pngwing.com/pngs/296/768/png-transparent-emoji-memorandum-computer-icons-text-messaging-writing-writing-pencil-emoticon-word-thumbnail.png">
-                                        </div>
-                                        <div class="list-title-wrapper list-activity">
-                                            <div class="list-activity-desc">
-                                                <span class="list-activity-desc-text">
-                                                    <a href="/articles/life" class="list-group-item-text item-tag label label-info">${articles[i]['category_name']}</a>
-                                                    에 #${articles[i]['id']} 게시물을 작성하였습니다.
-                                                </span>
-                                                <span class="timeago" title="2022-03-27T15:56:24">${articles[i]['created_date']}</span>
-                                            </div>
-                                            <h5 class="list-group-item-heading">
-                                                <a href="/article/1188123">${articles[i]['title']}</a>
-                                                <div class="list-group-item-author pull-right clearfix">
-                                                    <div class="avatar clearfix avatar-x-small ">
-                                                        <a href="/user/info/139377" class="avatar-photo">
-                                                            <img src="${articles[i]['author_img']}">
-                                                        </a>
-                                                        <div class="avatar-info">
-                                                            <a class="nickname" title="${articles[i]['author_name']}">${articles[i]['author_name']}</a>
-                                                            <div class="activity "> ${articles[i]['hits']}</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </h5>
-                                        </div>
-                                    </li>`
+                   let temp_html = `<li class="list-group-item list-group-item-small list-group-no-note clearfix">
+                                       <div class="list-icon-wrapper pull-left">
+                                           <img src="https://w7.pngwing.com/pngs/296/768/png-transparent-emoji-memorandum-computer-icons-text-messaging-writing-writing-pencil-emoticon-word-thumbnail.png">
+                                       </div>
+                                       <div class="list-title-wrapper list-activity">
+                                           <div class="list-activity-desc">
+                                               <span class="list-activity-desc-text">
+                                                   <a href="/articles/life" class="list-group-item-text item-tag label label-info">${articles[i]['category_name']}</a>
+                                                   에 #${articles[i]['id']} 게시물을 작성하였습니다.
+                                               </span>
+                                               <span class="timeago" title="2022-03-27T15:56:24">${articles[i]['created_date']}</span>
+                                           </div>
+                                           <h5 class="list-group-item-heading">
+                                               <a href="/article/1188123">${articles[i]['title']}</a>
+                                               <div class="list-group-item-author pull-right clearfix">
+                                                   <div class="avatar clearfix avatar-x-small ">
+                                                       <a href="/users/profile/${articles[i]['author_id']}" class="avatar-photo">
+                                                           <img src="${articles[i]['author_img']}">
+                                                       </a>
+                                                       <div class="avatar-info">
+                                                           <a class="nickname" title="${articles[i]['author_name']}" href="/users/profile/${articles[i]['author_id']}">${articles[i]['author_name']}</a>
+                                                           <div class="activity "> ${articles[i]['hits']}</div>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           </h5>
+                                       </div>
+                                   </li>`
 
-                    $('.list-group').append(temp_html)
-                }
-            }
-        });
+                   $('.list-group').append(temp_html)
+               }
+           }
+       });
     }
 
     function show_bookmarks() {
         $('.list-group').empty()
         $.ajax({
             type: "GET",
-            url:"{% url 'user:profile_bookmark' user.pk %}",
+            url:"{% url 'user:profile_bookmark' u.pk %}",
             data:{},
             dataType: 'json',
             success: function (response) {
@@ -1415,13 +1427,13 @@
                                                     <span class="timeago" title="2022-03-27T15:55:15">${articles[i]['created_date']}</span>
                                                 </div>
                                                 <h5 class="list-group-item-heading">
-                                                    <a href="/article/1183419">${articles[i]['title']}</a>
+                                                    <a href="/article/">${articles[i]['title']}</a>
                                                     <div class="list-group-item-author pull-right clearfix">
                                                         <div class="avatar clearfix avatar-x-small ">
-                                                            <a href="/user/info/24311" class="avatar-photo"><img
-                                                                    src="//file.okky.kr/profile/2021/1627520420297.png"></a>
+                                                            <a href="/users/profile/${articles[i]['author_id']}" class="avatar-photo"><img
+                                                                    src="${articles[i]['author_img']}"></a>
                                                             <div class="avatar-info">
-                                                                <a class="nickname" href="/users/profile/${articles[i]['author_id']}/">${articles[i]['author_name']}</a>
+                                                                <a class="nickname" href="/users/profile/${articles[i]['author_id']}/">${articles[i]['author_name']} </a>
                                                                 <div class="activity ">${articles[i]['hits']}</div>
                                                             </div>
                                                         </div>
@@ -1464,7 +1476,7 @@
                                 <a class="avatar-photo"><img
                                         src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg"></a>
                             {% else %}
-                                <a class="avatar-photo"><img src="{{ u.profile.img }}"></a>
+                                <a class="avatar-photo"><img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ u.profile.img }}"></a>
                             {% endif %}
                         </div>
 
@@ -1502,7 +1514,7 @@
                     </div>
 
                     {#                    모달창#}
-                    <div id="modal" class="modal-overlay">
+                    <div id="modal" class="modal-overlay" style="z-index: 1">
                         <div class="modal-window">
                             <div class="title">
                                 <h2>프로필 수정</h2>
@@ -1510,10 +1522,10 @@
                             <div class="close-area" id="close-area">X</div>
                             <div class="content">
                                 <form action="{% url 'user:update_profile' user.pk %}" method="post"
-                                      class="modal-form-groups">
+                                      class="modal-form-groups" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <div class="modal-form-group">
-                                        {{ profile_form.img | as_crispy_field }}
+                                        {{ profile_form.img }}
                                         {{ user_form.username | as_crispy_field }}
                                         {{ profile_form.skill | as_crispy_field }}
                                         {{ profile_form.github | as_crispy_field }}
@@ -1560,9 +1572,9 @@
                                         <a href="/article/1188123">{{ article.title }}</a>
                                         <div class="list-group-item-author pull-right clearfix">
                                             <div class="avatar clearfix avatar-x-small ">
-                                                <a href="/user/info/139377" class="avatar-photo">
+                                                <a href="{% url 'user:profile' article.user.id %}" class="avatar-photo">
                                                     {% if article.user.profile.img %}
-                                                        <img src="{{ article.user.profile.img }}">
+                                                        <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ article.user.profile.img }}">
                                                     {% else %}
                                                         <img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg">
                                                     {% endif %}
