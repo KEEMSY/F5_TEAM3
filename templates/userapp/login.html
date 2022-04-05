@@ -31,6 +31,13 @@
         margin-top: -15px;
     }
 
+    @media only screen and (max-width: 400px) {
+  .login-register-form-wrap {
+    padding: 32px 34px 29px;
+    width: 360px;
+  }
+}
+
 </style>
 
 
@@ -52,8 +59,6 @@
                     <div class="col-md-8 col-lg-7 col-xl-6">
                         <div class="login-register-form-wrap">
                             <div class="login-register-form">
-
-
                                 <form action="{% url 'user:login' %}" method="post" id="login-form">
                                     {% csrf_token %}
                                     <div class="row">
@@ -130,37 +135,29 @@
             <!-- Mobile Menu Start -->
             <div class="mobile-menu-items">
                 <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#">Find Jobs</a>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{% url 'careerapp:job' %}">채용정보</a>
                         <ul class="sub-menu">
-                            <li><a href="job.html">Jobs</a></li>
-                            <li><a href="job-details.html">Job Details</a></li>
+                            <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
                         </ul>
                     </li>
-                    <li><a href="employers-details.html">Employers Details</a></li>
-                    <li><a href="#">Candidates</a>
+                    <li><a href="{% url 'articleapp:home' %}">커뮤니티</a>
                         <ul class="sub-menu">
-                            <li><a href="candidate.html">Candidates</a></li>
-                            <li><a href="candidate-details.html">Candidate Details</a></li>
+                            <li><a href="{% url 'temp1_free' %}">자유게시판</a></li>
+                            <li><a href="{% url 'temp1_tip' %}">꿀팁게시판</a></li>
+                            <li><a href="{% url 'temp1_question' %}">질문게시판</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">Blog</a>
-                        <ul class="sub-menu">
-                            <li><a href="blog-grid.html">Blog Grid</a></li>
-                            <li><a href="blog.html">Blog Left Sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                            <li><a href="blog-details.html">Blog Details</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Pages</a>
-                        <ul class="sub-menu">
-                            <li><a href="about-us.html">About us</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="registration.html">Registration</a></li>
-                            <li><a href="page-not-found.html">Page Not Found</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
+                    {% if not user.is_authenticated %}
+                                    <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
+                                    <li><a href="{% url 'user:sign-up' %}"><span>회원가입</span></a></li>
+                                {% else %}
+                                    <li class="has-submenu"><a
+                                            href="{% url 'user:profile' user.pk %}"><span>마이페이지</span></a>
+                                    </li>
+                                    <li><a href="{% url 'user:logout' %}"><span>로그아웃</span></a></li>
+                                {% endif %}
+{#                    <li><a href="contact.html">Contact</a></li>#}
                 </ul>
             </div>
             <!-- Mobile Menu End -->
