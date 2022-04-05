@@ -11,11 +11,11 @@ def create_comment(article_id, user_id, content):
     )
 
 def read_all_comment():
-    return Comment.objects.all()
+    return Comment.objects.all().order_by('-id')
 
 
 def read_target_article_comment(pk):
-    target_comment = Comment.objects.filter(article_id=pk)
+    target_comment = Comment.objects.filter(article_id=pk).order_by('-id')
     if len(target_comment) != 0:
         return target_comment
     else:
