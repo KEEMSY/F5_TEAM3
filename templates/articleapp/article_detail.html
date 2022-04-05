@@ -3,6 +3,8 @@
 <html lang="ko">
 {% include 'head.html' %}
 <link rel="stylesheet" href="{% static 'css/comment.css' %}">
+<link rel="stylesheet" href="{% static 'css/articleapp/article_write.css' %}">
+<link rel="stylesheet" href="{% static 'css/articleapp/article_base.css' %}">
 <body>
 <!--wrapper start-->
 <div class="wrapper">
@@ -10,179 +12,9 @@
     {% include 'header.html' %}
     {# End Header Wrpper#}
     <div class="wraper_wraper">
-        <div class="col-4">
-            <div class="left_wrapper">
-                <div class="category_wrapper">
-                    <div class="categories">
-                        <div class="title_wrapper">
-                            <h5>Category</h5>
-                        </div>
-                        <div class="category_list_wrapper">
-                            <ul>
-                                <li class="category_list">
-                                    <a href="">게시판1</a>
-                                </li>
-                                <li class="category_list">
-                                    <a href="">게시판2</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="posts_wrapper">
-                    <div class="posts">
-                        <div class="title_wrapper">
-                            <h5>Latest POST</h5>
-                        </div>
-                        <div class="post">
-                        <span>
-                            <a href="">
-                                <div class="post_area">
-                                    <div class="post_img"></div>
-                                    <div class="post_details">
-                                        <div class="post_title">
-                                            <span class="post_user_title">
-                                                아 운동같이 갈사람
-                                            </span>
-                                        </div>
-                                            <div class="post_detail">
-                                                <span class="post_user_detail">
-                                                    march 23, 2022
-                                                </span>
-                                            </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </span>
-                        </div>
-                        <div class="post">
-                        <span>
-                            <a href="">
-                                <div class="post_area">
-                                    <div class="post_img"></div>
-                                    <div class="post_details">
-                                        <div class="post_title">
-                                            <span class="post_user_title">
-                                                아 운동같이 갈사람 진짜 없어..?
-                                            </span>
-                                        </div>
-                                            <div class="post_detail">
-                                                <span class="post_user_detail">
-                                                    march 23, 2022
-                                                </span>
-                                            </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </span>
-                        </div>
-                        <div class="post">
-                        <span>
-                            <a href="">
-                                <div class="post_area">
-                                    <div class="post_img"></div>
-                                    <div class="post_details">
-                                        <div class="post_title">
-                                            <span class="post_user_title">
-                                                나랑 떡볶이 먹으러 갈 사람?
-                                            </span>
-                                        </div>
-                                            <div class="post_detail">
-                                                <span class="post_user_detail">
-                                                    march 23, 2022
-                                                </span>
-                                            </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </span>
-                        </div>
-                        <div class="post">
-                        <span>
-                            <a href="">
-                                <div class="post_area">
-                                    <div class="post_img"></div>
-                                    <div class="post_details">
-                                        <div class="post_title">
-                                            <span class="post_user_title">
-                                                아 운동하고싶다
-                                            </span>
-                                        </div>
-                                            <div class="post_detail">
-                                                <span class="post_user_detail">
-                                                    march 23, 2022
-                                                </span>
-                                            </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </span>
-                        </div>
-                        <div class="post">
-                        <span>
-                            <a href="">
-                                <div class="post_area">
-                                    <div class="post_img"></div>
-                                    <div class="post_details">
-                                        <div class="post_title">
-                                            <span class="post_user_title">
-                                                안자는사람?
-                                            </span>
-                                        </div>
-                                            <div class="post_detail">
-                                                <span class="post_user_detail">
-                                                    march 23, 2022
-                                                </span>
-                                            </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </span>
-                        </div>
-                        <div class="post">
-                        <span>
-                            <a href="">
-                                <div class="post_area">
-                                    <div class="post_img"></div>
-                                    <div class="post_details">
-                                        <div class="post_title">
-                                            <span class="post_user_title">
-                                                나 지금 치킨시켰다 질문받는다
-                                            </span>
-                                        </div>
-                                            <div class="post_detail">
-                                                <span class="post_user_detail">
-                                                    march 23, 2022
-                                                </span>
-                                            </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="comment_wrapper">
-                    <div class="comments">
-                        <div class="title_wrapper">
-                            <h5>Recent Comments</h5>
-                        </div>
-                        <div class="comment">
-                        <span>
-                           ✍ <a href="">아 운동같이 갈사람</a> 에
-                            <a href="">익명의회원1</a> 님께서 댓글을 남기셨습니다.
-                        </span>
-                        </div>
-                        <div class="comment">
-                        <span>
-                           ✍ <a href="">아 운동같이 갈사람</a> 에
-                            <a href="">익명의회원2</a> 님께서 댓글을 남기셨습니다.
-                        </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+    {% include 'articleapp/article_left_content.html' %}
+
         <div class="col-8">
             <div class="right_wrapper">
                 <div class="content_wrapper">
@@ -292,6 +124,7 @@
                                                     debrief it all
                                                     together!😊</p>
                                             </div>
+
                                         </div>
                                     </li>
                                 </ol>
@@ -305,9 +138,12 @@
             </div>
         </div>
     </div>
-    {% include 'footer.html' %}
+
     <!--=======================Javascript============================-->
     {% include 'js.html' %}
+
 </div>
 </body>
+    {% include 'footer.html' %}
+
 </html>
