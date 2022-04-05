@@ -9,7 +9,6 @@
 
 <script>
     function open_comment() {
-        console.log("open")
         $('#comment_content').removeClass('disp_none')
         $('#more_show_btn').addClass('disp_none')
         $('#less_show_btn').removeClass('disp_none')
@@ -18,8 +17,33 @@
         $('#comment_content').addClass('disp_none')
         $('#more_show_btn').removeClass('disp_none')
         $('#less_show_btn').addClass('disp_none')
+    }
+
+    function save_comment(){
+        let url = window.location.href.split('/')
+        let article_id = url[url.length - 1]
+        let comment = $('#target_comment').val()
+        console.log(url)
+        console.log(article_id)
+            $.ajax({
+                type: "POST",
+                url: '{% url 'commentapp:interatction_comment' %}',
+                data: {
+                    'article_id':article_id,
+                    'content':comment
+                },
+                headers: {
+                   'X-CSRFTOKEN' : '{{ csrf_token }}'
+                },
+                success: function (response) {
+                    alert(response["msg"])
+                    console.log((response["msg"]))
+                }
+            });
+            window.location.reload()
 
     }
+
 </script>
 <body>
 
@@ -104,8 +128,9 @@
                                             </i>
                                         </span>
                                         <div class="new-comment">
-                                            <input type="text" placeholder="댓글을 작성해보세요!"/>
-                                            <button type="button" class="btn btn-light" id="comment-submit-button">
+                                            {% csrf_token %}
+                                            <input id="target_comment" type="text" placeholder="댓글을 작성해보세요!"/>
+                                            <button type="button" class="btn btn-light" id="comment-submit-button" onclick="save_comment()">
                                                 작성
                                             </button>
                                         </div>
@@ -154,8 +179,8 @@
                                                         together!😊</p>
                                                 </div>
                                                 {% for comment in target_comment %}
-                                                    <div class="timeline-item-description">
-                                                    <i class="avatar | small">
+                                                    <div class="timeline-item-description" id="comment_append">
+                                                   <i class="avatar | small">
                                                         <img src="https://assets.codepen.io/285131/hat-man.png"/>
                                                     </i>
                                                     <span><a href="#">{{ comment.user.username }}</a>   작성된 날짜
