@@ -1,4 +1,3 @@
-
 from django.db import models
 
 from TEAM3_F5_coFI.models import BaseModel
@@ -6,6 +5,9 @@ from userapp.models import User
 
 
 class Category(models.Model):
+    class Meta:
+        db_table = "category"
+
     name = models.CharField(max_length=50)
 
 
@@ -18,11 +20,12 @@ class Article(BaseModel):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     content = models.TextField(null=True)
     img = models.TextField(null=True)
+    like_cnt = models.IntegerField(default=0)
+
     article_hits = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
-
 
 
 class ArticleHits(models.Model):
@@ -37,5 +40,3 @@ class ArticleHits(models.Model):
 
     def __str__(self):
         return str(self.article.id)
-
-

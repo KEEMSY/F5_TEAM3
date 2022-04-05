@@ -1,0 +1,308 @@
+.jbRBuB {
+    min-width: 0px;
+    flex: 1 1 0%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+    box-shadow: rgb(0 0 0 / 2%) 0px 0px 8px;
+}
+
+.gMrxDC {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.gMrxDC > .wrapper {
+    min-height: 0px;
+    padding-bottom: 4rem;
+    flex: 1 1 0%;
+    display: flex;
+    flex-direction: column;
+}
+
+.gtSQrI {
+    padding-top: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.jVzenP {
+    background: transparent;
+    display: block;
+    padding: 0px;
+    font-size: 2.75rem;
+    width: 100%;
+    resize: none;
+    line-height: 1.5;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    color: #212529;
+}
+
+.cFLjAe {
+    background: rgb(73, 80, 87);
+    height: 6px;
+    width: 4rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 1px;
+}
+
+.BioNQ {
+    color: #212529;
+    font-size: 1.125rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.hmsunO:hover {
+    opacity: 0.6;
+}
+
+.hmsunO {
+    font-size: 1rem;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 2rem;
+    border-radius: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background: #f8f9fa;
+    color: #12b886;
+    margin-right: 0.75rem;
+    transition: all 0.125s ease-in 0s;
+    cursor: pointer;
+    margin-bottom: 0.75rem;
+    animation: 0.125s ease-in-out 0s 1 normal forwards running lnHDaM;
+}
+
+.bLfqeY {
+    background: transparent;
+    display: inline-flex;
+    outline: none;
+    cursor: text;
+    font-size: 1.125rem;
+    line-height: 2rem;
+    margin-bottom: 0.75rem;
+    min-width: 8rem;
+    border: none;
+    color: #212529;
+}
+
+.jchFmH {
+    display: block;
+    width: 100%;
+    color: #495057;
+    transition: all 0.125s ease-in 0s;
+}
+
+.gsfwdu {
+    top: 0px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    background: #ffffff;
+    z-index: 10;
+    transition: all 0.125s ease-in 0s;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    width: auto;
+}
+
+.llTfNu {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    color: #868e96;
+    cursor: pointer;
+    flex-shrink: 0;
+    background: none;
+    outline: none;
+    border: none;
+    padding: 0px;
+}
+
+.kExaNS {
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: serif;
+}
+
+.kExaNS span {
+    font-size: 0.75rem;
+}
+
+.eeeSIE {
+    width: 1px;
+    height: 1.25rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    background: #dee2e6;
+}
+
+.gsfwdu .mobile-placeholder {
+    display: none;
+    height: 1px;
+    width: 1rem;
+    flex-shrink: 0;
+}
+
+.euFpdu {
+    flex: 1 1 0%;
+    min-height: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+input, button, textarea {
+    font-family: inherit;
+}
+
+.form-floating .form-control:not(:placeholder-shown) {
+    padding: 2vw 1.25vw;
+}
+
+.form-floating {
+    margin: 0 auto;
+    width: 90%;
+}
+
+.form-floating textarea.form-control {
+    padding: 1rem 0.75rem;
+    height: 22vw;
+}
+
+.form-floating > label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding: 1rem 0.75rem;
+    pointer-events: none;
+    border: 1px solid transparent;
+    transform-origin: 0 0;
+    transition: opacity .1s ease-in-out, transform .1s ease-in-out;
+}
+
+
+.form-floating. form-control {
+    line-height: 1.50;
+}
+
+.kXPrdw {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    z-index: 10;
+}
+
+.hGUUhE {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 4rem;
+    width: 100%;
+    box-shadow: rgb(0 0 0 / 10%) 0px 0px 8px;
+    background: #ffffff;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.dpvHhN {
+    height: 2.5rem;
+    padding: 0.5rem 1rem;
+    -webkit-box-align: center;
+    align-items: center;
+    background: none;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    outline: none;
+    color: #212529;
+}
+
+.dpvHhN svg {
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+}
+
+.dpvHhN span {
+    font-size: 1.125rem;
+}
+
+.hAAhHZ {
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.iTdGoM {
+    height: 2.5rem;
+    font-size: 1.125rem;
+}
+
+.hLiqkr {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: none;
+    color: #12b886;
+    border-radius: 4px;
+    padding: 0px 1.25rem;
+    height: 2rem;
+    font-size: 1rem;
+}
+
+
+.sc-jQrDum + .sc-jQrDum {
+    margin-left: 0.75rem;
+}
+
+.sc-pVTFL + .sc-pVTFL {
+    margin-left: 0.5rem;
+}
+
+.iTdGoM {
+    height: 2.5rem;
+    font-size: 1.125rem;
+}
+
+.bTEpzi {
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background: #12b886;
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 0px 1.25rem;
+    height: 2rem;
+    font-size: 1rem;
+}

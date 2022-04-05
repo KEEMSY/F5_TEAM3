@@ -8,7 +8,9 @@ app_name = 'articleapp'
 urlpatterns = [
 
     path('', views.show_all_article, name='home'),
-    path('category/', views.show_category_article, name='category_list'),
+    path('question/', views.show_question_article, name='question'),
+    path('free/', views.show_free_article, name='free'),
+    path('tip/', views.show_tip_article, name='tip'),
 
     path('article/', ArticleView.as_view(), name='article_CRUD'),
     path('write/', views.write_article, name='aritcle_write'),

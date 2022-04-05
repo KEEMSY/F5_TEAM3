@@ -13,7 +13,7 @@
     padding:0.01vw;
     width: 85%;
     max-width: 400px;
-    margin: 400px 30px;
+    margin: 170px 30px;
     background-color:#badbcc;
 
 }
@@ -257,6 +257,11 @@
     border: none;
     border-radius: 0.5rem;
 
+}
+
+.search_bar {
+    display: flex;
+    flex-direction: row;
 }
 
 hr{
