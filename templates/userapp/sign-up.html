@@ -1,57 +1,18 @@
+{% load socialaccount %}
+
 <!DOCTYPE html>
 <html lang="ko">
 
 {% include 'head.html' %}
+
+{#헤드가 두개?#}
+
 
 <head>
     {% load static %}
 </head>
 
 <body>
-
-<style>
-
-    .header_img {
-        display: none;
-    }
-
-    .login-register-form-wrap {
-        background-color: #f4f7f7;
-        border-radius: 8px;
-        padding: 30px 40px 23px;
-        margin-top: 175px;
-        width: 450px;
-        margin-left: 75px;
-    }
-
-    {##전체 row#}
-    .row > * {
-        margin-top: -15px;
-    }
-
-    .account-login-area .container {
-        padding-top: 0px;
-        padding-bottom: 120px;
-        margin-top: -50px;
-    }
-
-    .login-register-form .btn-theme {
-        display: block;
-        width: 100%;
-        font-size: 16px;
-        margin-top: 45px;
-        padding: 12px 35px 10px;
-    }
-
-
-    @media only screen and (max-width: 400px)
-        .login-register-form-wrap register-form-wrap{
-            padding: 32px 34px 29px;
-            width: 360px;
-            margin: 120px auto auto;
-        }
-
-</style>
 
 <!--wrapper start-->
 <div class="wrapper">
@@ -62,11 +23,11 @@
 
     <!--== End Header Wrapper ==-->
     <main class="main-content">
-        <section class="account-login-area">
+        <section class="sign-up-account-login-area">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-10 col-lg-7 col-xl-6">
-                        <div class="login-register-form-wrap register-form-wrap">
+                        <div class="only_register login-register-form-wrap">
                             <div class="login-register-form">
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="candidate" role="tabpanel"
@@ -75,7 +36,6 @@
                                             {% csrf_token %}
                                             {#                        {{ form.as_p }}#}
                                             <div class="row">
-
                                                 <div class="col-12">
                                                     <p class="form-group">
                                                         <label for="id_email"></label>
@@ -159,17 +119,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <button type="button" class="btn-theme">Register Now</button>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div class="login-register-form-info">
-                                    <p>계정이 이미 있으신가요? <a href="{% url 'user:login' %}">로그인</a></p
+                                    <p>계정이 이미 있으신가요? <a href="{% url 'user:login' %}">로그인</a></p>
+                                    <a href="{% provider_login_url 'google' %}">Google 계정으로 로그인</a>
                                 </div>
                             </div>
                         </div>
@@ -212,15 +168,15 @@
                         </ul>
                     </li>
                     {% if not user.is_authenticated %}
-                                    <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
-                                    <li><a href="{% url 'user:sign-up' %}"><span>회원가입</span></a></li>
-                                {% else %}
-                                    <li class="has-submenu"><a
-                                            href="{% url 'user:profile' user.pk %}"><span>마이페이지</span></a>
-                                    </li>
-                                    <li><a href="{% url 'user:logout' %}"><span>로그아웃</span></a></li>
-                                {% endif %}
-{#                    <li><a href="contact.html">Contact</a></li>#}
+                        <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
+                        <li><a href="{% url 'user:sign-up' %}"><span>회원가입</span></a></li>
+                    {% else %}
+                        <li class="has-submenu"><a
+                                href="{% url 'user:profile' user.pk %}"><span>마이페이지</span></a>
+                        </li>
+                        <li><a href="{% url 'user:logout' %}"><span>로그아웃</span></a></li>
+                    {% endif %}
+                    {#                    <li><a href="contact.html">Contact</a></li>#}
                 </ul>
             </div>
             <!-- Mobile Menu End -->
