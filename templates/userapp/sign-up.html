@@ -125,7 +125,12 @@
                                 </div>
                                 <div class="login-register-form-info">
                                     <p>계정이 이미 있으신가요? <a href="{% url 'user:login' %}">로그인</a></p>
-                                    <a href="{% provider_login_url 'google' %}">Google 계정으로 로그인</a>
+                                    <div class="register_google_wrap">
+                                        <div class="google_class">
+                                            <a class="avatar-google-photo" href="{% provider_login_url 'google' %}"><img
+                                                    src="https://pbs.twimg.com/profile_images/770139154898382848/ndFg-IDH_200x200.jpg"></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

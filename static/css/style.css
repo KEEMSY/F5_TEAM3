@@ -2608,8 +2608,48 @@ table p {
     padding-top: 0px;
     padding-bottom: 120px;
     margin-top: 130px;
-    width: 800px;
+    width: 1000px;
 }
+
+.google_wrap {
+    margin-top: 30px;
+}
+
+.register_google_wrap {
+    margin-top: 30px;
+}
+
+
+.avatar-google-photo {
+    display: inline-block;
+    border: 1px solid #ededed;
+    border-radius: 50%;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.avatar-google-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    border: 0;
+}
+
+
+.google_class {
+    display: flex;
+    justify-content: center;
+}
+
+.avatar-google-photo {
+    width: 20%;
+    height: 20%;
+    border: 1px solid #d9e7df;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
 
 @media only screen and (max-width: 1199px) {
     .account-login-area .container {
@@ -2698,7 +2738,7 @@ table p {
     padding-top: 0px;
     padding-bottom: 120px;
     margin-top: 150px;
-    width: 800px;
+    width: 1000px;
 }
 
 
