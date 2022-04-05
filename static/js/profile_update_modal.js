@@ -31,3 +31,10 @@ window.addEventListener("keyup", e => {
         modalOff();
     }
 })
+
+
+$.ajaxSetup({
+    headers: {"X-CSRFToken": '{{csrf_token}}'}
+});
+
+
