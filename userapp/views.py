@@ -127,7 +127,6 @@ def update_profile(request, pk):
         profile = u.profile
         profile_form = ProfileForm(request.POST, request.FILES, instance=profile)  # 기존의 것 가져와 수정하는 것
     else:
-
         profile_form = ProfileForm(request.POST, request.FILES)  # 새로 만드는 것
 
     # Profile 폼
