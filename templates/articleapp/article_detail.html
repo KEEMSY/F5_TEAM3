@@ -23,8 +23,6 @@
         let url = window.location.href.split('/')
         let article_id = url[url.length - 1]
         let comment = $('#target_comment').val()
-        console.log(url)
-        console.log(article_id)
             $.ajax({
                 type: "POST",
                 url: '{% url 'commentapp:interatction_comment' %}',
@@ -36,11 +34,10 @@
                    'X-CSRFTOKEN' : '{{ csrf_token }}'
                 },
                 success: function (response) {
-                    alert(response["msg"])
-                    console.log((response["msg"]))
+                    window.location.reload(true)
+
                 }
             });
-            window.location.reload(true)
 
     }
 

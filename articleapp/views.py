@@ -44,7 +44,7 @@ class ArticleView(View):
                            user_id=request.user,
                            content=request.POST.get('content'),
                            category=request.POST.get('category'),
-                           img=request.POST.get('img'))
+                           img=request.POST.get('img', ''))
             return JsonResponse({'result': '게시글이 생성 되었습니다.'}, status=200)
 
         except TypeError:
