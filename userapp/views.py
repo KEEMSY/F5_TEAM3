@@ -124,7 +124,6 @@ def update_profile(request, pk):
         user_form.save()
 
     if hasattr(u, 'profile'):
-        print(request.FILES)
         profile = u.profile
         profile_form = ProfileForm(request.POST, request.FILES, instance=profile)  # 기존의 것 가져와 수정하는 것
     else:

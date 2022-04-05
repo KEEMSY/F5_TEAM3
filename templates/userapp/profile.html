@@ -7,11 +7,11 @@
 
 <style>
     #modal .content {
-    margin-top: 5px;
-    padding: 0px 10px;
-    text-shadow: 1px 1px 2px gray;
-    color: white;
-    width: 100%;
+        margin-top: 5px;
+        padding: 0px 10px;
+        text-shadow: 1px 1px 2px gray;
+        color: white;
+        width: 100%;
     }
 
     .modal-form-group {
@@ -1357,7 +1357,6 @@
 <body>
 
 
-
 <!--wrapper start-->
 <div class="wrapper">
 
@@ -1379,13 +1378,15 @@
                                 <a class="avatar-photo"><img
                                         src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg"></a>
                             {% else %}
-                                <a class="avatar-photo"><img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ u.profile.img }}"></a>
+                                <a class="avatar-photo"><img
+                                        src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ u.profile.img }}"></a>
                             {% endif %}
                         </div>
 
                         <div class="user-info col-sm-9">
                             <div class="user-name-skill">
-                                <h2 class="pull-left"><strong class="strong">{{ u.username }}</strong></br>{{ u.profile.skill }}</h2>
+                                <h2 class="pull-left"><strong
+                                        class="strong">{{ u.username }}</strong></br>{{ u.profile.skill }}</h2>
                             </div>
 
                             <div class="user-basic-info">
@@ -1466,15 +1467,18 @@
                                     <div class="list-title-wrapper list-activity">
                                         <div class="list-activity-desc">
                                             <span class="list-activity-desc-text">
-                                                <a href="/communities/{{ article.category.name }}/" class="list-group-item-text item-tag label label-info">{{ article.category.name }}</a>에 #{{ article.id }} 게시물을 작성하였습니다.
+                                                <a href="/communities/{{ article.category.name }}/"
+                                                   class="list-group-item-text item-tag label label-info">{{ article.category.name }}</a>에 #{{ article.id }} 게시물을 작성하였습니다.
                                             </span>
-                                            <span class="timeago" title="2022-03-27T15:56:24">{{ article.created_at }}</span>
+                                            <span class="timeago"
+                                                  title="2022-03-27T15:56:24">{{ article.created_at }}</span>
                                         </div>
                                         <h5 class="list-group-item-heading">
                                             <a href="/communities/article/{{ article.id }}/">{{ article.title }}</a>
                                             <div class="list-group-item-author pull-right clearfix">
                                                 <div class="avatar clearfix avatar-x-small ">
-                                                    <a href="{% url 'user:profile' article.user.id %}" class="avatar-photo">
+                                                    <a href="{% url 'user:profile' article.user.id %}"
+                                                       class="avatar-photo">
                                                         {% if article.user.profile.img %}
                                                             <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ article.user.profile.img }}">
                                                         {% else %}
@@ -1482,7 +1486,8 @@
                                                         {% endif %}
                                                     </a>
                                                     <div class="avatar-info">
-                                                        <a class="nickname" href="{% url 'user:profile' article.user.id %}"
+                                                        <a class="nickname"
+                                                           href="{% url 'user:profile' article.user.id %}"
                                                            title="{{ article.user.username }}">{{ article.user.username }}</a>
                                                         <div class="activity "> {{ article.article_hits }}</div>
                                                     </div>
@@ -1492,9 +1497,9 @@
                                     </div>
                                 </li>
                             {% endfor %}
-                        {#                        게시글#}
+                            {#                        게시글#}
                         {% else %}
-                        {#                        북마크#}
+                            {#                        북마크#}
                             {% for bookmark in board_list %}
                                 <li class="list-group-item list-group-item-small list-group-has-note clearfix">
                                     <div class="list-icon-wrapper pull-left">
@@ -1503,13 +1508,15 @@
                                     <div class="list-title-wrapper list-activity">
                                         <div class="list-activity-desc">
                                             <span class="list-activity-desc-text">#{{ bookmark.article.id }} 게시물을 스크랩 하였습니다.</span>
-                                            <span class="timeago" title="2022-03-27T15:55:15">{{ bookmark.article.created_at }}</span>
+                                            <span class="timeago"
+                                                  title="2022-03-27T15:55:15">{{ bookmark.article.created_at }}</span>
                                         </div>
                                         <h5 class="list-group-item-heading">
                                             <a href="/communities/article/{{ bookmark.article.id }}/">{{ bookmark.article.title }}</a>
                                             <div class="list-group-item-author pull-right clearfix">
                                                 <div class="avatar clearfix avatar-x-small ">
-                                                    <a href="{% url 'user:profile' bookmark.article.user.id %}" class="avatar-photo">
+                                                    <a href="{% url 'user:profile' bookmark.article.user.id %}"
+                                                       class="avatar-photo">
                                                         {% if bookmark.article.user.profile.img %}
                                                             <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ bookmark.article.user.profile.img }}">
                                                         {% else %}
@@ -1517,7 +1524,8 @@
                                                         {% endif %}
                                                     </a>
                                                     <div class="avatar-info">
-                                                        <a class="nickname" href="{% url 'user:profile' bookmark.article.user.id %}">{{ bookmark.article.user.username }} </a>
+                                                        <a class="nickname"
+                                                           href="{% url 'user:profile' bookmark.article.user.id %}">{{ bookmark.article.user.username }} </a>
                                                         <div class="activity ">{{ bookmark.article.hits }}</div>
                                                     </div>
                                                 </div>
@@ -1601,43 +1609,36 @@
         <!-- Mobile Menu Start -->
         <div class="mobile-menu-items">
             <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#">Find Jobs</a>
+                <li><a href="/">Home</a></li>
+                <li><a href="{% url 'careerapp:job' %}">채용정보</a>
                     <ul class="sub-menu">
-                        <li><a href="job.html">Jobs</a></li>
-                        <li><a href="job-details.html">Job Details</a></li>
+                        <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
                     </ul>
                 </li>
-                <li><a href="employers-details.html">Employers Details</a></li>
-                <li><a href="#">Candidates</a>
+                <li><a href="{% url 'articleapp:home' %}">커뮤니티</a>
                     <ul class="sub-menu">
-                        <li><a href="candidate.html">Candidates</a></li>
-                        <li><a href="candidate-details.html">Candidate Details</a></li>
+                        <li><a href="{% url 'temp1_free' %}">자유게시판</a></li>
+                        <li><a href="{% url 'temp1_tip' %}">꿀팁게시판</a></li>
+                        <li><a href="{% url 'temp1_question' %}">질문게시판</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Blog</a>
-                    <ul class="sub-menu">
-                        <li><a href="blog-grid.html">Blog Grid</a></li>
-                        <li><a href="blog.html">Blog Left Sidebar</a></li>
-                        <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                        <li><a href="blog-details.html">Blog Details</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Pages</a>
-                    <ul class="sub-menu">
-                        <li><a href="about-us.html">About us</a></li>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="registration.html">Registration</a></li>
-                        <li><a href="page-not-found.html">Page Not Found</a></li>
-                    </ul>
-                </li>
-                <li><a href="contact.html">Contact</a></li>
+                {% if not user.is_authenticated %}
+                    <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
+                    <li><a href="{% url 'user:sign-up' %}"><span>회원가입</span></a></li>
+                {% else %}
+                    <li class="has-submenu"><a
+                            href="{% url 'user:profile' user.pk %}"><span>마이페이지</span></a>
+                    </li>
+                    <li><a href="{% url 'user:logout' %}"><span>로그아웃</span></a></li>
+                {% endif %}
+                {#                    <li><a href="contact.html">Contact</a></li>#}
             </ul>
         </div>
         <!-- Mobile Menu End -->
     </div>
 </aside>
 <!--== End Aside Menu ==-->
+
 </div>
 
 {% include 'js.html' %}
