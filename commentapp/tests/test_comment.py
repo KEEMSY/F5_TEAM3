@@ -11,7 +11,8 @@ from articleapp.services.service_article import create_article
 from commentapp.models import Comment
 from commentapp.services.comment_service import (create_comment,
                                                  delete_comment,
-                                                 update_comment, read_target_article_comment)
+                                                 update_comment, read_target_article_comment, read_best_comment)
+
 from userapp.models import User
 
 
@@ -68,6 +69,18 @@ class TestView(TestCase):
         target_comments = read_target_article_comment(article.id)
         self.assertEqual(False, target_comments)
 
+
+    def test_when_it_does_not_exist_target_comment_that_read_best_comment(self):
+        # Given
+        user = User.objects.create(username='test_name', email='test@test.com')
+        category = Category.objects.create(name='test_category')
+        article = create_article('title', user, 'test', category, '')
+
+        # When
+        target_comments = read_best_comment()
+
+        # Expect
+        self.assertEqual(False, target_comments)
 
     # comment 수정 시
     def test_update_target_comment(self):

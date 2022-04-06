@@ -10,8 +10,17 @@ def create_comment(article_id, user_id, content):
         content=content
     )
 
+
 def read_all_comment():
     return Comment.objects.all().order_by('-id')
+
+
+def read_best_comment():
+    try:
+        target_comment = Comment.objects.filter(like_cnt__gte=1).order_by('like_cnt').get()
+        return target_comment
+    except ObjectDoesNotExist:
+        return False
 
 
 def read_target_article_comment(pk):
@@ -21,6 +30,7 @@ def read_target_article_comment(pk):
     else:
         return False
 
+
 def update_comment(comment_id, content):
     try:
         target_comment = Comment.objects.get(id=comment_id)
@@ -29,9 +39,11 @@ def update_comment(comment_id, content):
     except ObjectDoesNotExist:
         return False
 
+
 def delete_comment(comment_id):
     try:
         target_comment = Comment.objects.get(id=comment_id)
         target_comment.delete()
     except ObjectDoesNotExist:
         return False
+

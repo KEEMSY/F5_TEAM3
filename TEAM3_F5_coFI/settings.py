@@ -95,6 +95,7 @@ ROOT_URLCONF = 'TEAM3_F5_coFI.urls'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+
 ### s3와 연동했다면, aws.json파일 깃 이그노어를 해놨기에 git push 할 때는 이 구간을 주석 처리해주세요!
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 #
@@ -229,10 +230,10 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-try:
-    from TEAM3_F5_coFI.deploy_settings import *
-except ImportError:
-    pass
+# try:
+#     from TEAM3_F5_coFI.deploy_settings import *
+# except ImportError:
+#     pass
 
 try:
     from TEAM3_F5_coFI.local_settings import *

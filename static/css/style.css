@@ -2616,7 +2616,7 @@ table p {
 .account-login-area .container {
     padding-top: 0px;
     padding-bottom: 120px;
-    margin-top: 130px;
+    margin-top: 110px;
     width: 1000px;
 }
 
@@ -2670,7 +2670,7 @@ table p {
 .login-register-form-wrap {
     background-color: #f4f7f7;
     border-radius: 8px;
-    padding: 30px 40px 35px;
+    padding: 20px 40px 35px;
 }
 
 @media only screen and (max-width: 1199px) {
@@ -2722,6 +2722,11 @@ table p {
     }
 }
 
+.form-group .go_register .a {
+    justify-content: center;
+}
+
+
 .login-register-form-wrap .form-title .title:before {
     background-color: #03a84e;
     content: "";
@@ -2743,10 +2748,12 @@ img.header_img {
     margin-top: 0;
 }
 
+
+
 .sign-up-account-login-area .container {
     padding-top: 0px;
     padding-bottom: 120px;
-    margin-top: 150px;
+    margin-top: 100px;
     width: 1000px;
 }
 
