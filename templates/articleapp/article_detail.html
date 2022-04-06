@@ -136,41 +136,12 @@
                         <hr>
                         <div class="content_comment">
                             <div class="content_best_comment">
-{#                                추 후 업데이트#}
                                 <ol class="timeline">
-                                    <li class="timeline-item">
-                                        {% if user.is_authenticated %}
-
-                                        <span class="timeline-item-icon | avatar-icon">
-                                            <i class="avatar">
-                                                <img src="https://assets.codepen.io/285131/hat-man.png"/>
-                                            </i>
-                                        </span>
-                                        <div class="new-comment">
-                                            {% csrf_token %}
-                                            <input id="target_comment" type="text" placeholder="댓글을 작성해보세요!"/>
-                                            <button type="button" class="btn btn-light" id="comment-submit-button" onclick="save_comment()">
-                                                작성
-                                            </button>
-                                        </div>
-                                        {% else %}
-                                            <div class="login_required">
-                                                <div class="login_required_title">
-                                                    <h5>로그인 후에 댓글을 작성 할 수 있습니다.</h5>
-                                                </div>
-                                                <div class="login_required_content">
-                                                    <a href="{% url 'user:login' %}">
-                                                        <span>로그인 하러 가볼까?</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    </li>
-                                    <div class="content_botton">
-                                        <button id="more_show_btn" onclick="open_comment() ">더보기</button>
-                                    </div>
+{#                                    <div class="content_botton">#}
+{#                                        <button id="more_show_btn" onclick="open_comment() ">더보기</button>#}
+{#                                    </div>#}
 {#                                    작성된 댓글이 있는 곳#}
-                                    <div id="comment_content" class="disp_none">
+                                    <div id="comment_content">
                                         <li class="timeline-item | extra-space">
                                             <span class="timeline-item-icon | filled-icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -217,11 +188,39 @@
                                                     </div>
                                                 </div>
                                                 {% endfor %}
-
-
                                             </div>
                                         </li>
                                     </div>
+                                    <hr>
+{#                                댓글 작성#}
+                                 {% if user.is_authenticated %}
+                                    <li class="timeline-item">
+                                        <span class="timeline-item-icon | avatar-icon">
+                                            <i class="avatar">
+                                                <img src="https://assets.codepen.io/285131/hat-man.png"/>
+                                            </i>
+                                        </span>
+{#                                        댓글 작성하는곳#}
+                                        <div class="new-comment">
+                                            {% csrf_token %}
+                                            <input id="target_comment" type="text" placeholder="댓글을 작성해보세요!"/>
+                                            <button type="button" class="btn btn-light" id="comment-submit-button" onclick="save_comment()">
+                                                작성
+                                            </button>
+                                        </div>
+                                    </li>
+                                 {% else %}
+                                     <div class="login_required">
+                                        <div class="login_required_title">
+                                            <h5>로그인 후에 댓글을 작성 할 수 있습니다.</h5>
+                                        </div>
+                                        <div class="login_required_content">
+                                            <a href="{% url 'user:login' %}">
+                                                <span>로그인 하러 가볼까?</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                {% endif %}
                                 </ol>
                                 <div class="content_botton">
                                     <button id="less_show_btn" class="disp_none" onclick="close_comment()">닫기</button>
