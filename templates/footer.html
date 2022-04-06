@@ -20,19 +20,23 @@
                     <div class="row">
                         <div class="col-md-3 col-lg-3">
                             <div class="widget-item nav-menu-item1">
-                                <a href="/"><h4 class="widget-title">Home</h4></a>
+                                <a href="/"><h4 class="widget-title">홈</h4></a>
+                                <a href="/"><h4 class="widget-collapsed-title-no-sub collapsed" data-bs-toggle="collapse"
+                                    data-bs-target="#widgetId-1">홈</h4></a>
                             </div>
                         </div>
                         <div class="col-md-3 col-lg-3">
                             <div class="widget-item nav-menu-item2">
-                                <a href="{% url 'careerapp:job' %}"><h4 class="widget-title">Career</h4></a>
+                                <a href="{% url 'careerapp:job' %}"><h4 class="widget-title">채용정보</h4></a>
+                                <a href="{% url 'careerapp:job' %}"><h4 class="widget-collapsed-title-no-sub collapsed" data-bs-toggle="collapse"
+                                    data-bs-target="#widgetId-2">채용정보</h4></a>
                             </div>
                         </div>
                         <div class="col-md-3 col-lg-3">
                             <div class="widget-item nav-menu-item3">
-                                <a href="{% url 'articleapp:home' %}"><h4 class="widget-title">Community</h4></a>
+                                <a href="{% url 'articleapp:home' %}"><h4 class="widget-title">커뮤니티</h4></a>
                                 <h4 class="widget-collapsed-title collapsed" data-bs-toggle="collapse"
-                                    data-bs-target="#widgetId-3">Legal</h4>
+                                    data-bs-target="#widgetId-3">커뮤니티</h4>
                                 <div id="widgetId-3" class="collapse widget-collapse-body">
                                     <div class="collapse-body">
                                         <div class="widget-menu-wrap">
@@ -49,13 +53,17 @@
                         {% if not user.is_authenticated %}
                             <div class="col-md-3 col-lg-3">
                                 <div class="widget-item nav-menu-item3">
-                                    <a href="{% url 'user:login' %}"><h4 class="widget-title">login</h4></a>
+                                    <a href="{% url 'user:login' %}"><h4 class="widget-title">로그인</h4></a>
+                                    <a href="{% url 'user:login' %}"><h4 class="widget-collapsed-title-no-sub collapsed" data-bs-toggle="collapse"
+                                    data-bs-target="#widgetId-4">로그인</h4></a>
                                 </div>
                             </div>
                         {% else %}
                             <div class="col-md-3 col-lg-3">
                                 <div class="widget-item nav-menu-item3">
-                                    <a href="{% url 'user:profile' user.pk %}"><h4 class="widget-title">Mypage</h4></a>
+                                    <a href="{% url 'user:profile' user.pk %}"><h4 class="widget-title">마이페이지</h4></a>
+                                    <a href="{% url 'user:profile' user.pk %}"><h4 class="widget-collapsed-title-no-sub collapsed" data-bs-toggle="collapse"
+                                    data-bs-target="#widgetId-4">마이페이지</h4></a>
                                 </div>
                             </div>
                         {% endif %}
@@ -72,8 +80,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="footer-bottom-content">
-                        <p class="copyright">© 2021 Finate. Made with <i class="icofont-heart"></i> by <a
-                                target="_blank" href="https://themeforest.net/user/codecarnival">Codecarnival.</a></p>
+                        <p class="copyright">© 2022 Team3 F5. Made with <i class="icofont-heart"></i> by <a
+                                target="_blank" href="https://www.notion.so/coFi-999b633a3bfb426abaed72d18eab0021">강현준 하용운 박다희 김성연 김지용</a></p>
                     </div>
                 </div>
             </div>

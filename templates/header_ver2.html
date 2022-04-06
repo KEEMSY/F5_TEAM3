@@ -10,7 +10,7 @@
                         <div class="header-logo-area">
                             <a href="{% url 'home' %}">
                                 <img class="logo-main" src="{% static 'img/coFi1.png' %}" alt="Logo"/>
-                                <img class="logo-light" src="../static/img/logo-light.png" alt="Logo"/>
+                                <img class="logo-light" src="{%  static '/img/logo-light.png' %}" alt="Logo"/>
                             </a>
                         </div>
                     </div>
@@ -26,9 +26,9 @@
                                 </li>
                                 <li class="has-submenu"><a href="{% url 'articleapp:home' %}"><span>게시판</span></a>
                                     <ul class="submenu-nav">
-                                        <li><a href="{% url 'temp1_free' %}"><span>자유게시판</span></a></li>
-                                        <li><a href="{% url 'temp1_tip' %}"><span>꿀팁게시판</span></a></li>
-                                        <li><a href="{% url 'temp1_question' %}"><span>질문게시판</span></a></li>
+                                        <li><a href="{% url 'articleapp:free' %}"><span>자유게시판</span></a></li>
+                                        <li><a href="{% url 'articleapp:tip' %}"><span>꿀팁게시판</span></a></li>
+                                        <li><a href="{% url 'articleapp:question' %}"><span>질문게시판</span></a></li>
                                     </ul>
                                 </li>
 

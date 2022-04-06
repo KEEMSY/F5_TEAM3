@@ -5,7 +5,6 @@ from django.shortcuts import render
 # Create your views here.
 from django.views import View
 
-from commentapp.models import Author
 from commentapp.services.comment_service import (create_comment,
                                                  delete_comment,
                                                  update_comment)
@@ -14,7 +13,7 @@ from commentapp.services.comment_service import (create_comment,
 class CommentView(View):
     def post(self, request):
         try:
-            comment = create_comment(article_id=request.article_id, user_id=request.user_id, content=request.content)
+            comment = create_comment(article_id=request.POST['article_id'], user_id=request.user.id, content=request.POST['content'])
             return HttpResponse(status=200)
 
         except IntegrityError:

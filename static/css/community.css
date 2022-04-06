@@ -1,5 +1,4 @@
 .wrapper{
-    max-width: 2500px;
 }
 
 .wraper_wraper{
@@ -127,7 +126,7 @@
 /* START RIGHT_WRAPPER*/
 .right_wrapper{
     padding: 0.1vw;
-    margin: 400px 30px;
+    margin: 170px 30px;
     background-color: #9abbac;
     width: 100%;
     max-width: 1600px;
@@ -267,4 +266,39 @@
 hr{
     width: 100%;
     margin-bottom: 3rem;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.write_title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8vw;
+}
+
+.btn {
+    margin: 0 auto;
+
+}
+
+.new-comment {
+    display: flex;
+    flex-direction: row;
+}
+
+#comment-submit-button:hover {
+    background-color: #badbcc;
+
+
 }

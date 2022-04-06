@@ -10,6 +10,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('articleapp', '0001_initial'),
     ]
@@ -20,8 +21,10 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
+
                 ('article', models.ForeignKey(db_column='article', on_delete=django.db.models.deletion.CASCADE, to='articleapp.article')),
                 ('user', models.ForeignKey(db_column='user', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+
             ],
             options={
                 'db_table': 'user_bookmark',

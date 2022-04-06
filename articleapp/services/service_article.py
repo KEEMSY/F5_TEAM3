@@ -1,6 +1,7 @@
 
 import datetime
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 
 from articleapp.models import Article, ArticleHits, Category
@@ -33,7 +34,11 @@ def read_target_article(article_id):
 
 def read_category_article(category):
     catetgory_id = Category.objects.get(name=category).id
-    return Article.objects.filter(category=catetgory_id).order_by('-id')
+    target_articles = Article.objects.filter(category=catetgory_id).order_by('-id')
+    if len(target_articles) == 0:
+        return False
+    else:
+        return target_articles
 
 
 def read_article_by_title(title):
@@ -41,12 +46,11 @@ def read_article_by_title(title):
 
 
 def read_article_by_user(user_id):
-    return Article.objects.filter(user=user_id).order_by('-id')
+    return Article.objects.filter(user_id=user_id).order_by('-id')
 
 
-def read_article_containing_username(username):
-    users = User.objects.filter(name__icontains=username).order_by('-id')
-
+def read_article_containing_username(keyword):
+    users = User.objects.filter(username__icontains=keyword).order_by('-id')
     article_list = []
     for user in users:
         article_list.append(read_article_by_user(user.id))
@@ -65,8 +69,8 @@ def read_article_within_a_specific_period(date):
         '-created_at')
 
 
-def read_article_containing_username_within_a_specific_period(date, name):
-    before_article = read_article_containing_username(name)
+def read_article_containing_username_within_a_specific_period(date, keyword):
+    before_article = read_article_containing_username(keyword)
     if before_article:
         return before_article.filter(created_at__gte=datetime.date.today() - datetime.timedelta(days=date))
     else:
@@ -87,18 +91,22 @@ def read_article_by_title_within_a_specific_period(date, title):
 
 
 def update_article(article_id, content):
-    target_article = Article.objects.get(pk=article_id)
-    target_article.content = content
-    target_article.save()
-
+    try:
+        target_article = Article.objects.get(pk=article_id)
+        target_article.content = content
+        target_article.save()
+    except ObjectDoesNotExist:
+        return False
 
 ''' 1-4. D E L E T E '''
 
 
 def delete_article(article_id):
-    target_article = Article.objects.get(pk=article_id)
-    target_article.delete()
-
+    try:
+        target_article = Article.objects.get(pk=article_id)
+        target_article.delete()
+    except ObjectDoesNotExist:
+        return False
 
 ''' 2. Hits '''
 
@@ -127,7 +135,7 @@ def hit_article(ip, article_id):
 ''' 3. etc '''
 
 
-def get_page(articles, page):
+def get_page_context(articles, page):
     paginator = Paginator(articles, 10)
     board_list = paginator.get_page(page)
     return board_list

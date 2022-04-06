@@ -40,4 +40,5 @@
 #
 #         # Then
 #         with self.assertRaises(Bookmark.DoesNotExist):
+#
 #             Bookmark.objects.get(id=scrap.id)

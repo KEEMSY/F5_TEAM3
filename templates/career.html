@@ -29,17 +29,14 @@
 
   <!--== End Header Wrapper ==-->
   <main class="main-content">
-    <!--== Start Page Header Area Wrapper ==-->
-    <div class="page-header-area sec-overlay sec-overlay-black" data-bg-img="assets/img/photos/bg2.jpg">
-    </div>
-    <!--== End Page Header Area Wrapper ==-->
 
     <!--== Start Recent Job Area Wrapper ==-->
     <section class="recent-job-area recent-job-inner-area">
       <div class="container">
         <div class="row">
 {#            <a href="{% url 'careerapp:crawling' %}"><button style="background-color: green" width="100px" height="100px">제발크롤링</button></a>#}
-        {% if board_list %}
+
+            {% for board_list in board_lists %}
           {% for career in board_list %}
           <div class="col-md-6 col-lg-4">
             <!--== Start Recent Job Item ==-->
@@ -70,7 +67,7 @@
             <!--== End Recent Job Item ==-->
           </div>
           {% endfor %}
-        {% endif %}
+        {% endfor %}
 
         </div>
         <div class="row">
@@ -79,7 +76,9 @@
               <nav>
                 <ul class="page-numbers d-inline-flex">
 
-                    <div style="width:12vw; margin: 0 5px;">
+                    <div style="width:130px; margin: 0 5px;">
+
+             {% for board_list in board_lists %}
                 {% if board_list.has_previous %}
                     <a class="abutton" href="?page=1">맨 앞으로</a>
                     <a class="abutton" href="?page={{ board_list.previous_page_number }}">이전</a>
@@ -96,30 +95,14 @@
                     {% elif page >= board_list.number|add:-3 and page <= board_list.number|add:3 %}
 
                     {% endif %}
-
-{#                  <li>#}
-{#                    <a class="page-number active" href="job.html">1</a>#}
-{#                  </li>#}
-{#                  <li>#}
-{#                    <a class="page-number" href="job.html">2</a>#}
-{#                  </li>#}
-{#                  <li>#}
-{#                    <a class="page-number" href="job.html">3</a>#}
-{#                  </li>#}
-{#                  <li>#}
-{#                    <a class="page-number next" href="job.html">#}
-{#                      <i class="icofont-long-arrow-right"></i>#}
-{#                    </a>#}
-{#                  </li>#}
-
-
                     {% endfor %}
 
-                    <div style="width:12vw; margin: 0 5px;">
+                    <div style="width:130px; margin: 0 5px;">
                     {% if board_list.has_next %}
                         <a class="abutton" href="?page={{ board_list.next_page_number }}">다음</a>
                         <a class="abutton" href="?page={{ board_list.paginator.num_pages }}">맨 뒤로</a>
                     {% endif %}
+                    {% endfor %}
                     </div>
 
                 </ul>
@@ -138,53 +121,43 @@
   <!--== Scroll Top Button ==-->
   <div id="scroll-to-top" class="scroll-to-top"><span class="icofont-rounded-up"></span></div>
 
-  <!--== Start Aside Menu ==-->
-  <aside class="off-canvas-wrapper offcanvas offcanvas-start" tabindex="-1" id="AsideOffcanvasMenu" aria-labelledby="offcanvasExampleLabel">
-    <div class="offcanvas-header">
-      <h1 class="d-none" id="offcanvasExampleLabel">Aside Menu</h1>
-      <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">menu <i class="icofont-simple-left"></i></button>
-    </div>
-    <div class="offcanvas-body">
-      <!-- Mobile Menu Start -->
-      <div class="mobile-menu-items">
-        <ul class="nav-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="#">Find Jobs</a>
-            <ul class="sub-menu">
-              <li><a href="job.html">Jobs</a></li>
-              <li><a href="job-details.html">Job Details</a></li>
-            </ul>
-          </li>
-          <li><a href="employers-details.html">Employers Details</a></li>
-          <li><a href="#">Candidates</a>
-            <ul class="sub-menu">
-              <li><a href="candidate.html">Candidates</a></li>
-              <li><a href="candidate-details.html">Candidate Details</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Blog</a>
-            <ul class="sub-menu">
-              <li><a href="blog-grid.html">Blog Grid</a></li>
-              <li><a href="blog.html">Blog Left Sidebar</a></li>
-              <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-              <li><a href="blog-details.html">Blog Details</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Pages</a>
-            <ul class="sub-menu">
-              <li><a href="about-us.html">About us</a></li>
-              <li><a href="login.html">Login</a></li>
-              <li><a href="registration.html">Registration</a></li>
-              <li><a href="page-not-found.html">Page Not Found</a></li>
-            </ul>
-          </li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <!-- Mobile Menu End -->
-    </div>
-  </aside>
-  <!--== End Aside Menu ==-->
+    <!--== Start Aside Menu ==-->
+    <aside class="off-canvas-wrapper offcanvas offcanvas-start" tabindex="-1" id="AsideOffcanvasMenu"
+           aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h1 class="d-none" id="offcanvasExampleLabel">Aside Menu</h1>
+            <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">메뉴 <i
+                    class="icofont-simple-left"></i></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Mobile Menu Start -->
+            <div class="mobile-menu-items">
+                <ul class="nav-menu">
+                    <li><a href="/">홈</a></li>
+                    <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
+                    <li><a href="{% url 'articleapp:home' %}">커뮤니티</a>
+                        <ul class="sub-menu">
+                            <li><a href="{% url 'temp1_free' %}">자유게시판</a></li>
+                            <li><a href="{% url 'temp1_tip' %}">꿀팁게시판</a></li>
+                            <li><a href="{% url 'temp1_question' %}">질문게시판</a></li>
+                        </ul>
+                    </li>
+                    {% if not user.is_authenticated %}
+                                    <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
+                                    <li><a href="{% url 'user:sign-up' %}"><span>회원가입</span></a></li>
+                                {% else %}
+                                    <li class="has-submenu"><a
+                                            href="{% url 'user:profile' user.pk %}"><span>마이페이지</span></a>
+                                    </li>
+                                    <li><a href="{% url 'user:logout' %}"><span>로그아웃</span></a></li>
+                                {% endif %}
+{#                    <li><a href="contact.html">Contact</a></li>#}
+                </ul>
+            </div>
+            <!-- Mobile Menu End -->
+        </div>
+    </aside>
+    <!--== End Aside Menu ==-->
 </div>
 
 <!--=======================Javascript============================-->
