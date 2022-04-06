@@ -5,44 +5,115 @@
 <link rel="stylesheet" href="{% static 'css/comment.css' %}">
 <link rel="stylesheet" href="{% static 'css/articleapp/article_write.css' %}">
 <link rel="stylesheet" href="{% static 'css/articleapp/article_base.css' %}">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<script>
-    function open_comment() {
-        $('#comment_content').removeClass('disp_none')
-        $('#more_show_btn').addClass('disp_none')
-        $('#less_show_btn').removeClass('disp_none')
+<style>
+
+    .content_comment {
+        width: 100%;
     }
 
-    function close_comment() {
-        $('#comment_content').addClass('disp_none')
-        $('#more_show_btn').removeClass('disp_none')
-        $('#less_show_btn').addClass('disp_none')
+    .content_best_comment {
+        width: 100%;
+    }
+
+    button#comment-submit-button {
+        width: 80px;
+        margin-left: 20px;
+    }
+
+    @media only screen and (max-width: 1150px) {
+        .left_wrapper {
+            display: none;
+        }
+
+        .right_wrapper {
+            margin: 0 auto;
+        }
+
+        .col-4 {
+            display: none;
+        }
+
+        .col-8 {
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .content_title_footet_right_wrapper {
+            width: 75%;
+        }
+    }
+
+    @media only screen and (max-width: 850px) {
+
+        .header-area.transparent {
+            display: none;
+        }
+
+        .header_img {
+            display: none;
+        }
+
+        .wraper_wraper {
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .content_title_footet_left_wrapper {
+            display: none;
+        }
+
+        .content_img {
+            display: none;
+        }
+
+        .content_title h1 {
+            padding: 3vw 0;
+        }
+
+        .content_title_footet_right_wrapper {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .right_wrapper_icons {
+            width: 16%;
+            display: flex;
+            margin: 0 auto;
+        }
+
+        .icon_cnt {
+            align-items: center;
+            display: flex;
+        }
+
+        span.timeline-item-icon.\|.avatar-icon {
+    display: none;
+}
+
+        .timeline-item-icon.filled-icon {
+            display: none;
+        }
+        .timeline {
+            width: 100%;
+            border: none;
+            padding: 32px 1px 32px 1px;
+        }
+
+        button#comment-submit-button {
+            width: 69px;
+            margin-left: 10px;
+            font-size: 13px;
+}
+
     }
 
 
-  function save_comment() {
-        let url = window.location.href.split('/')
-        let article_id = url[url.length - 1]
-        let comment = $('#target_comment').val()
-        
-    function plus_comment_cnt(){
-        let comment_cnt = parseInt($('#comment_cnt').text())
-        console.log(comment_cnt)
-        comment_cnt ++
-        parseInt($('#comment_cnt').html(comment_cnt))
+</style>
 
-    }
-
-    function minus_comment_cnt(){
-        let comment_cnt = parseInt($('#comment_cnt').text())
-        console.log(comment_cnt)
-        comment_cnt --
-        parseInt($('#comment_cnt').html(comment_cnt))
-
-    }
-
-
+=======
     function like_article() {
         $.ajax({
             type: 'POST',
@@ -167,7 +238,7 @@
 
 <div class="wrapper">
     <!--== Start Header Wrapper ==-->
-    {% include 'header.html' %}
+    {% include 'header_ver2.html' %}
     {# End Header Wrpper#}
     <div class="wraper_wraper">
 
@@ -317,7 +388,6 @@
                                     </div>
                                     <div id="comment_content" class="disp_none">
 
-
                                         <div id="comment_content2">
 
                                         </div>
@@ -334,6 +404,7 @@
                                                                 </i>
                                                                 <span><a href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a>   작성된 날짜
 ]
+
                                                         <time
                                                                 datetime="{{ comment.created_at }}">{{ comment.created_at|date:'Y-m-d H:i' }}
                                                         </time>
@@ -341,7 +412,6 @@
                                                         <button class="comment_delete_btn" onclick="delete_comment({{ comment.pk }})">삭제하기</button>
                                                         {% endif %}
                                                     </span>
-
                                                             </div>
                                                             <div class="comment" style="width: 33.85rem;">
                                                                 <p>
@@ -373,8 +443,43 @@
 
 {% include 'js.html' %}
 
-</div>
+<script>
+    function open_comment() {
+        $('#comment_content').removeClass('disp_none')
+        $('#more_show_btn').addClass('disp_none')
+        $('#less_show_btn').removeClass('disp_none')
+    }
 
+    function close_comment() {
+        $('#comment_content').addClass('disp_none')
+        $('#more_show_btn').removeClass('disp_none')
+        $('#less_show_btn').addClass('disp_none')
+    }
+
+    function save_comment() {
+        let url = window.location.href.split('/')
+        let article_id = url[url.length - 1]
+        let comment = $('#target_comment').val()
+        $.ajax({
+            type: "POST",
+            url: '{% url 'commentapp:interatction_comment' %}',
+            data: {
+                'article_id': article_id,
+                'content': comment
+            },
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            success: function (response) {
+                window.location.reload(true)
+
+            }
+        });
+
+    }
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 {% include 'footer.html' %}
 

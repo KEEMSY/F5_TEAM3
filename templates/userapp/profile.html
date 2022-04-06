@@ -1308,6 +1308,10 @@
         content: "\f0e7";
     }
 
+    .mobile_article_scrap {
+        display: none;
+    }
+
 
     @media (min-width: 768px) {
         .col-sm-3 {
@@ -1368,9 +1372,146 @@
         .user-info.col-sm-9 {
             width: 60%
         }
+
+        .content {
+            margin: 5vw auto 1vw;
+        }
+
+        .main {
+            padding: 0;
+        }
+
+        .panel {
+            height: 330px;
+        }
+
+        .panel-body {
+            display: block;
+        }
+
+        .avatar.clearfix.avatar-big.col-sm-3.text-center {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .user-info.col-sm-9 {
+            width: 100%;
+            display: block;
+        }
+
+        .user-basic-info {
+            display: flex;
+            justify-content: center;
+            align-items: end;
+        }
+
+        .user-name-skill {
+            display: flex;
+            margin: 0 auto;
+            width: 64%;
+        }
+
+        h2.pull-left {
+            font-size: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .user-info .user-point {
+            width: 45px;
+            text-align: center;
+            margin-right: 10px;
+        }
+
+        .modal-button-wraper {
+            width: 100%;
+            display: flex;
+            flex-direction: column-reverse;
+            position: relative;
+            bottom: 238px;
+        }
+
+
+        .col-sm-3 {
+            flex: 0 0 auto;
+            width: 60%;
+        }
+
+        .content.clearfix .col-sm-2.user-info-nav.pull-right {
+            display: none;
+        }
+
+        .btn.btn-success.pull-right.btn-wide a {
+            color: black;
+        }
+
+        .modal-button-wraper {
+            display: none;
+        }
+
+
+        .mobile_article_scrap {
+            display: block;
+            padding-left: 18px;
+        }
+
+        .col-sm-10.main-block-left.pull-left {
+            width: 100%;
+        }
+
+        .mobile_paginator.row {
+            display: none;
+        }
+
+        .mobile_paginator {
+            display: block;
+        }
+
+        .widget-categories {
+            display: flex;
+            justify-content: space-around;
+            width: 160px;
+        }
+
+        .widget-categories .btn-success {
+            color: black;
+            background-color: transparent;
+            border-color: gray;
+            border: gray;
+            border-bottom: 1px solid;
+        }
+
+        .widget-categories .btn-success.left_article {
+            border-right: 1px solid gray;
+        }
+
+        .widget-categories .btn-success.right_scrap {
+            border-left: 1px solid gray;
+        }
+    }
+
+    .widget-categories .btn-success:hover {
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: lightgray;
+
+        border-color: gray;
+    }
+
+
+    @media only screen and (min-width: 781px) {
+        .mobile_paginator .row {
+            display: block;
+        }
+
+        .mobile_paginator {
+            display: none;
+        }
     }
 </style>
-  
+
 <body>
 
 <!--wrapper start-->
@@ -1384,32 +1525,47 @@
 
     <div class="layout-container">
         <div class="main ">
-            <div class="sidebar">
-                {#                게시글 사이드 바 추가#}
-            </div>
+
             <div id="user" class="content clearfix" role="main">
                 {#프로필#}
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="avatar clearfix avatar-big col-sm-3 text-center">
                             {% if not u.profile.img %}
-                                <a class="avatar-photo"><img
-                                        src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg"></a>
+                                {% if u.pk == user.id %}
+                                    <button type="button" id="img-modal" class="avatar-photo"><img
+                                            src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg">
+                                    </button>
+                                {% else %}
+                                    <a class="avatar-photo">
+                                        <img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg">
+                                    </a>
+                                {% endif %}
                             {% else %}
-                                <a class="avatar-photo"><img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ u.profile.img }}"></a>
+                                {% if u.pk == user.id %}
+                                    <button type="button" id="img-modal" class="avatar-photo"><img
+                                            src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ u.profile.img }}">
+                                    </button>
+                                {% else %}
+                                    <a class="avatar-photo">
+                                        <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ u.profile.img }}">
+                                    </a>
+                                {% endif %}
                             {% endif %}
                         </div>
 
                         <div class="user-info col-sm-9">
                             <div class="user-name-skill">
-                                <h2 class="pull-left"><strong class="strong">{{ u.username }}</strong></br>{{ u.profile.skill }}</h2>
+                                <h2 class="pull-left"><strong
+                                        class="strong">{{ u.username }}</strong></br>{{ u.profile.skill }}</h2>
                             </div>
 
                             <div class="user-basic-info">
                                 {% if u.profile.github %}
                                     <div class="user-point">
                                         <div class="github">
-                                            <a href="{{ u.profile.github }}"><img src="{% static 'img/github_icon.png' %}"></a>
+                                            <a href="{{ u.profile.github }}"><img
+                                                    src="{% static 'img/github_icon.png' %}"></a>
                                         </div>
                                     </div>
                                 {% endif %}
@@ -1440,7 +1596,7 @@
                             </div>
                             <div class="close-area" id="close-area">X</div>
                             <div class="content">
-                                <form action="{% url 'user:update_profile' user.pk %}" method="post"
+                                <form action="{% url 'user:update_profile' u.pk %}" method="post"
                                       class="modal-form-groups" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <div class="modal-form-group">
@@ -1468,7 +1624,17 @@
                     </ul>
                 </div>
                 {# 게시글 또는 북마크 디브 #}
+                {#게시글 아티클 구분 디브 모바일용#}
+                <div class="mobile_article_scrap">
+                    <div class="widget-categories">
+                        <button class="btn btn-success pull-right btn-wide left_article"><a
+                                href="{% url 'user:profile' u.pk %}">게시물</a></button>
+                        <button class="btn btn-success pull-right btn-wide right_scrap"><a
+                                href="{% url 'user:profile_bookmark' u.pk %}">스크랩</a></button>
 
+                    </div>
+                </div>
+                {#게시글 아티클 구분 디브 모바일용#}
                 <div class="col-sm-10 main-block-left pull-left">
                     <ul class="list-group">
                         {#                        게시글#}
@@ -1598,7 +1764,50 @@
                     </div>
                     {#                    페이지 네이터#}
                 </div>
+                {#                    페이지 네이터#}
+                <div class="mobile_paginator row">
+                    <div class="col-lg-12 text-center">
+                        <div class="pagination-area">
+                            <nav>
+                                <ul class="page-numbers d-inline-flex">
 
+                                    <div style="width:150px; margin: 0 5px;">
+
+
+                                        {% if board_list.has_previous %}
+                                            <a class="abutton" href="?page=1">맨 앞으로</a>
+                                            <a class="abutton"
+                                               href="?page={{ board_list.previous_page_number }}">이전</a>
+                                        {% endif %}
+                                    </div>
+
+
+                                    {% for page in board_list.paginator.page_range %}
+                                        {#                    {% if page == |add:4 %}{%elif page == 2 |add:3 %}#}
+                                        {% if page >= board_list.number|add:-2 and page <= board_list.number|add:2 %}
+                                            <li class="page-number {% if page == board_list.number %}active chosen_page{% endif %}">
+                                                <a href="?page={{ page }}">{{ page }}</a>
+                                            </li>
+                                        {% elif page >= board_list.number|add:-3 and page <= board_list.number|add:3 %}
+
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    <div style="width:150px; margin: 0 5px;">
+                                        {% if board_list.has_next %}
+                                            <a class="abutton" href="?page={{ board_list.next_page_number }}">다음</a>
+                                            <a class="abutton" href="?page={{ board_list.paginator.num_pages }}">맨
+                                                뒤로</a>
+                                        {% endif %}
+
+                                    </div>
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                {#                    페이지 네이터#}
             </div>
         </div>
     </div>
@@ -1617,19 +1826,15 @@
        aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
         <h1 class="d-none" id="offcanvasExampleLabel">Aside Menu</h1>
-        <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">menu <i
+        <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">메뉴 <i
                 class="icofont-simple-left"></i></button>
     </div>
     <div class="offcanvas-body">
         <!-- Mobile Menu Start -->
         <div class="mobile-menu-items">
             <ul class="nav-menu">
-                <li><a href="/">Home</a></li>
-                <li><a href="{% url 'careerapp:job' %}">채용정보</a>
-                    <ul class="sub-menu">
-                        <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
-                    </ul>
-                </li>
+                <li><a href="/">홈</a></li>
+                <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
                 <li><a href="{% url 'articleapp:home' %}">커뮤니티</a>
                     <ul class="sub-menu">
                         <li><a href="{% url 'temp1_free' %}">자유게시판</a></li>

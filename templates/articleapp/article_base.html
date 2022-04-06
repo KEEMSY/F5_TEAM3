@@ -9,40 +9,145 @@
 
 <style>
 
+    #bbpress-forums div.bbp-search-form {
+        width: 60%;
+    }
+
+    #bbpress-forums #bbp-search-form {
+        width: 100%;
+    }
+
+    #bbp-search-form div {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    #bbpress-forums #bbp-search-form #bbp_search {
+        width: 65%;
+        display: flex;
+        margin-right: 5px;
+    }
+    .article_write {
+        display: none;
+    }
+
+    @media only screen and (max-width: 600px) {
+        .bbp-breadcrumb {
+            display: none;
+        }
+
+        .page_content_wrap {
+            margin: 0;
+        }
+
+        #bbpress-forums div.bbp-search-form {
+            width: 70%;
+        }
+
+    {#검색바#}
+        #bbpress-forums #bbp-search-form #bbp_search {
+            width: 80%;
+        }
+
+    {#제목#}
+        li.bbp-forum-info {
+            width: 50%;
+        }
+
+    {#조회수#}
+        li.bbp-forum-topic-count {
+            width: 14%;
+        }
+
+    {#좋아요#}
+        li.bbp-forum-reply-count {
+            width: 14%;
+        }
+    {#게시글 작성버튼#}
+    .article_write {
+        display: block;
+        padding: 11px 12px;
+        margin: 0;
+        border: none;
+        background-color: #67d3e0;
+        color: #ffffff;
+        border-radius: 5px;
+        font-family: "Lato", sans-serif;
+        font-weight: 600;
+        }
+    }
+    @media only screen and (max-width: 1150px) {
+        .left_wrapper {
+            display: none;
+        }
+
+        .right_wrapper {
+            margin: 0 auto;
+        }
+
+        .col-4 {
+            display: none;
+        }
+
+        .col-8 {
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .content_title_footet_right_wrapper {
+            width: 75%;
+        }
+    }
+
+    @media only screen and (max-width: 850px) {
+
+        .header-area.transparent {
+            display: none;
+        }
+
+        .header_img {
+            display: none;
+        }
+
+        .wraper_wraper {
+            max-width: 100%;
+            width: 100%;
+        }
+
+    }
 </style>
 <body>
 <div class="wrapper">
 
 
     {% include 'header_ver2.html' %}
-
-    {% include 'articleapp/article_left_content.html' %}
+    <div class="wraper_wraper">
+        {% include 'articleapp/article_left_content.html' %}
 
 
         {% block content %}
         {% endblock %}
-
+    </div>
 
     {% include 'footer.html' %}
 
-<!--== Start Aside Menu ==-->
+    <!--== Start Aside Menu ==-->
     <aside class="off-canvas-wrapper offcanvas offcanvas-start" tabindex="-1" id="AsideOffcanvasMenu"
            aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
             <h1 class="d-none" id="offcanvasExampleLabel">Aside Menu</h1>
-            <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">menu <i
+            <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">메뉴 <i
                     class="icofont-simple-left"></i></button>
         </div>
         <div class="offcanvas-body">
             <!-- Mobile Menu Start -->
             <div class="mobile-menu-items">
                 <ul class="nav-menu">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="{% url 'careerapp:job' %}">채용정보</a>
-                        <ul class="sub-menu">
-                            <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="/">홈</a></li>
+                    <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
                     <li><a href="{% url 'articleapp:home' %}">커뮤니티</a>
                         <ul class="sub-menu">
                             <li><a href="{% url 'temp1_free' %}">자유게시판</a></li>
@@ -51,15 +156,15 @@
                         </ul>
                     </li>
                     {% if not user.is_authenticated %}
-                                    <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
-                                    <li><a href="{% url 'user:sign-up' %}"><span>회원가입</span></a></li>
-                                {% else %}
-                                    <li class="has-submenu"><a
-                                            href="{% url 'user:profile' user.pk %}"><span>마이페이지</span></a>
-                                    </li>
-                                    <li><a href="{% url 'user:logout' %}"><span>로그아웃</span></a></li>
-                                {% endif %}
-{#                    <li><a href="contact.html">Contact</a></li>#}
+                        <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
+                        <li><a href="{% url 'user:sign-up' %}"><span>회원가입</span></a></li>
+                    {% else %}
+                        <li class="has-submenu"><a
+                                href="{% url 'user:profile' user.pk %}"><span>마이페이지</span></a>
+                        </li>
+                        <li><a href="{% url 'user:logout' %}"><span>로그아웃</span></a></li>
+                    {% endif %}
+                    {#                    <li><a href="contact.html">Contact</a></li>#}
                 </ul>
             </div>
             <!-- Mobile Menu End -->
