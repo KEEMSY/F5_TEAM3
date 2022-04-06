@@ -68,6 +68,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'crispy_forms',
+
+    'ckeditor',
+    'ckeditor_uploader',
+
+
     'storages',
 ]
 
@@ -173,8 +178,24 @@ USE_I18N = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 # 배포용
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATICFILES_DIRS = [
+  os.path.join(BASE_DIR, "static")
+]
 # STATIC_ROOT = os.path.join("static")
+
+
+# article_front에서옴
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'height': 300,
+        'width': 800,
+    }
+}
 
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")

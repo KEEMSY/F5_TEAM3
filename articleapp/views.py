@@ -2,29 +2,37 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View
-
+from .forms import CommunityPost
 # 게시글 목록
 from articleapp.services.service_article import (
-    create_article, delete_article, get_client_ip, hit_article,
-    read_all_article, read_article_by_title,
+    create_article, delete_article, get_client_ip, get_page_context,
+    hit_article, read_all_article, read_article_by_title,
     read_article_by_title_within_a_specific_period,
     read_article_containing_username,
     read_article_containing_username_within_a_specific_period,
-    read_category_article, read_target_article, update_article, get_page_context)
+    read_category_article, read_target_article, update_article)
 # 단일 게시글 CRUD
 from commentapp.models import Comment
-from commentapp.services.comment_service import read_all_comment
+from commentapp.services.comment_service import read_all_comment, read_target_article_comment
 
 
 class ArticleView(View):
-    def get(self, request, article_id):
-        all_articles = read_all_article()
-        recent_comments = read_all_comment()
+    def get(self, request, pk):
+        all_articles = read_all_article()[:8]
+        recent_comments = read_all_comment()[:5]
         try:
             ip = get_client_ip(request)
-            target_article = hit_article(ip, article_id)
-            return render(request, 'article_detail.html',
-                          {'result': target_article, 'all_articles': all_articles, 'recent_comments': recent_comments},
+            target_article = hit_article(ip, pk)
+            target_comment = read_target_article_comment(pk)
+
+            if not target_comment:
+                return render(request, 'articleapp/article_detail.html',
+                              {'target_article': target_article,
+                               'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments},
+                              status=200)
+            else:
+                return render(request, 'articleapp/article_detail.html',
+                          {'target_article': target_article, 'target_comment': target_comment,'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments},
                           status=200)
 
         except ObjectDoesNotExist:
@@ -36,7 +44,7 @@ class ArticleView(View):
                            user_id=request.user,
                            content=request.POST.get('content'),
                            category=request.POST.get('category'),
-                           img=request.POST.get('img'))
+                           img=request.POST.get('img', ''))
             return JsonResponse({'result': '게시글이 생성 되었습니다.'}, status=200)
 
         except TypeError:
@@ -61,73 +69,95 @@ class ArticleView(View):
 
 # 게시글 작성
 def write_article(request):
-    return render(request, 'articleapp/article_write.html', status=200)
+    form = CommunityPost()
+
+    return render(request, 'articleapp/article_write.html', {'form':form}, status=200)
 
 
 # 홈
 def show_all_article(request):
     all_articles = read_all_article()
-    recent_comments = read_all_comment()
+    recent_comments = read_all_comment()[:5]
     page = int(request.GET.get('page', 1))
     board_list = get_page_context(all_articles, page)
 
     return render(request, 'articleapp/article_all.html',
-                  {'articles': all_articles, 'board_list': board_list, 'recent_comments': recent_comments}, status=200)
+                  {'main_area_article': all_articles, 'left_content_articles': all_articles[:8], 'board_list': board_list, 'left_content_recent_comments': recent_comments}, status=200)
 
 
 # 카테고리 별 게시판 불러오기
 def show_question_article(request):
     all_articles = read_all_article()
-    recent_comments = read_all_comment()
+    recent_comments = read_all_comment()[:5]
 
     target_articles = read_category_article('question')
-    page = int(request.GET.get('page', 1))
-    board_list = get_page_context(target_articles, page)
-    return render(request, 'articleapp/article_question.html',
-                  {'target_articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
-                   'recent_comments': recent_comments}, status=200)
+    if target_articles:
+        page = int(request.GET.get('page', 1))
+        board_list = get_page_context(target_articles, page)
+        return render(request, 'articleapp/article_question.html',
+                      {'board_list': board_list, 'left_content_articles': all_articles[:8],
+                       'left_content_recent_comments': recent_comments}, status=200)
+    else:
+        return render(request, 'articleapp/article_question.html',
+                      {'left_content_articles': all_articles,
+                       'left_content_recent_comments': recent_comments, 'msg': 'article does not exist'}, status=200)
 
 
 def show_free_article(request):
     all_articles = read_all_article()
-    recent_comments = read_all_comment()
+    recent_comments = read_all_comment()[:5]
 
     target_articles = read_category_article('free')
-    page = int(request.GET.get('page', 1))
-    board_list = get_page_context_context(target_articles, page)
-    return render(request, 'articleapp/article_free.html',
-                  {'target_articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
-                   'recent_comments': recent_comments}, status=200)
+    print(target_articles)
+    if target_articles:
+        page = int(request.GET.get('page', 1))
+        board_list = get_page_context(target_articles, page)
+        return render(request, 'articleapp/article_free.html',
+                      {'target_articles': target_articles, 'board_list': board_list,
+                       'left_content_articles': all_articles[:8],
+                       'left_content_recent_comments': recent_comments}, status=200)
+    else:
+        return render(request, 'articleapp/article_free.html',
+                      {'left_content_articles': all_articles,
+                       'left_content_recent_comments': recent_comments, 'msg': 'article does not exist'}, status=200)
 
 
 def show_tip_article(request):
     all_articles = read_all_article()
-    recent_comments = read_all_comment()
+    recent_comments = read_all_comment()[:5]
 
     target_articles = read_category_article('tip')
-    page = int(request.GET.get('page', 1))
-    board_list = get_page_context(target_articles, page)
-    return render(request, 'articleapp/article_tip.html',
-                  {'target_articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
-                   'recent_comments': recent_comments}, status=200)
+    print(target_articles)
+
+    if target_articles:
+        page = int(request.GET.get('page', 1))
+        board_list = get_page_context(target_articles, page)
+        return render(request, 'articleapp/article_tip.html',
+                      {'target_articles': target_articles, 'board_list': board_list,
+                       'left_content_articles': all_articles[:8],
+                       'left_content_recent_comments': recent_comments}, status=200)
+    else:
+        return render(request, 'articleapp/article_tip.html',
+                      {'left_content_articles': all_articles[:8],
+                       'left_content_recent_comments': recent_comments, 'msg': 'article does not exist'}, status=200)
 
 
 def show_category_article(request):
     all_articles = read_all_article()
-    recent_comments = read_all_comment()
+    recent_comments = read_all_comment()[:5]
 
     target_articles = read_category_article(request.POST['category'])
     page = int(request.GET.get('page', 1))
     board_list = get_page_context(target_articles, page)
     return render(request, 'community.html',
-                  {'target_articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
-                   'recent_comments': recent_comments}, status=200)
+                  {'target_articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles[:5],
+                   'left_content_recent_comments': recent_comments}, status=200)
 
 
 # 게시글 검색: 기간, 키워드(유저이름, 제목)
 def search_article(request):
     all_articles = read_all_article()
-    recent_comments = read_all_comment()
+    recent_comments = read_all_comment()[:5]
 
     standard = request.POST['standard']
     period = request.POST['period']
@@ -139,8 +169,8 @@ def search_article(request):
             page = int(request.GET.get('page', 1))
             board_list = get_page_context(target_articles, page)
             return render(request, 'community.html',
-                          {'articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
-                           'recent_comments': recent_comments},
+                          {'articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles,
+                           'left_content_recent_comments': recent_comments},
                           status=200)
 
         else:
@@ -148,8 +178,8 @@ def search_article(request):
             page = int(request.GET.get('page', 1))
             board_list = get_page_context(target_articles, page)
             return render(request, 'community.html',
-                          {'articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
-                           'recent_comments': recent_comments},
+                          {'articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles[:8],
+                           'left_content_recent_comments': recent_comments},
                           status=200)
 
     else:
@@ -159,8 +189,8 @@ def search_article(request):
                 page = int(request.GET.get('page', 1))
                 board_list = get_page_context(target_articles, page)
                 return render(request, 'community.html',
-                              {'articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
-                               'recent_comments': recent_comments},
+                              {'articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles[:8],
+                               'left_content_recent_comments': recent_comments},
                               status=200)
             except ObjectDoesNotExist:
                 return JsonResponse({'result': '게시글이 존재하지 않습니다.'}, status=404)
@@ -171,8 +201,8 @@ def search_article(request):
                 page = int(request.GET.get('page', 1))
                 board_list = get_page_context(target_articles, page)
                 return render(request, 'community.html',
-                              {'articles': target_articles, 'board_list': board_list, 'all_articles': all_articles,
-                               'recent_comments': recent_comments},
+                              {'articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles[:8],
+                               'left_content_recent_comments': recent_comments},
                               status=200)
             except ObjectDoesNotExist:
                 return JsonResponse({'result': '게시글이 존재하지 않습니다.'}, status=404)

@@ -28,6 +28,7 @@ urlpatterns = [
     path('', views.show_home, name='home'),
     path('communities/', include("articleapp.urls")),
     path('careers/', include("careerapp.urls")),
+    path('comments/', include("commentapp.urls")),
 
 
     path('temp/', views.show_community, name='temp'),
