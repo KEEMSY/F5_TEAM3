@@ -1,190 +1,193 @@
+{% load socialaccount %}
+
 <!DOCTYPE html>
 <html lang="ko">
 
 {% include 'head.html' %}
+
+{#헤드가 두개?#}
+
+
+<head>
+    {% load static %}
+</head>
 
 <body>
 
 <!--wrapper start-->
 <div class="wrapper">
 
-  <!--== Start Header Wrapper ==-->
+    <!--== Start Header Wrapper ==-->
 
-  {% include 'header.html' %}
+    {% include 'header_ver2.html' %}
 
-  <!--== End Header Wrapper ==-->
-  <main class="main-content">
-    <section class="account-login-area">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-10 col-lg-7 col-xl-6">
-            <div class="login-register-form-wrap register-form-wrap">
-              <div class="login-register-form">
-                <div class="form-title">
-                  <h4 class="title">Register Now</h4>
-                </div>
-                <div class="tab-content" id="pills-tabContent">
-                  <div class="tab-pane fade show active" id="candidate" role="tabpanel" aria-labelledby="candidate-tab">
-                    <form action="{% url 'user:sign-up' %}" method="post" id="signup-form">
-                        {% csrf_token %}
-{#                        {{ form.as_p }}#}
-                      <div class="row">
+    <!--== End Header Wrapper ==-->
+    <main class="main-content">
+        <section class="sign-up-account-login-area">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 col-lg-7 col-xl-6">
+                        <div class="only_register login-register-form-wrap">
+                            <div class="login-register-form">
+                                <div class="tab-content" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="candidate" role="tabpanel"
+                                         aria-labelledby="candidate-tab">
+                                        <form action="{% url 'user:sign-up' %}" method="post" id="signup-form">
+                                            {% csrf_token %}
+                                            {#                        {{ form.as_p }}#}
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <p class="form-group">
+                                                        <label for="id_email"></label>
+                                                        <input class="form-control" type="email" placeholder="Email"
+                                                               id="id_email" name="email"
+                                                               required>
+                                                    <ul class="errorlist">
+                                                        {{ form.errors.email }}
+                                                    </ul>
+                                                    </p>
+                                                </div>
+                                                <div class="col-12">
+                                                    <p class="form-group">
+                                                        <label for="id_username"></label>
+                                                        <input class="form-control" type="text" placeholder="Name"
+                                                               id="id_username" name="username" required>
+                                                    <ul class="errorlist">
+                                                        {{ form.errors.username }}
+                                                    </ul>
+                                                    </p>
+                                                </div>
+                                                <div class="col-12">
+                                                    <p class="form-group">
+                                                        <label for="id_password"></label>
+                                                        <input class="form-control" type="password"
+                                                               placeholder="Password" id="id_password" name="password"
+                                                               required>
+                                                    <ul class="errorlist">
+                                                        {{ form.errors.password1 }}
+                                                    </ul>
+                                                    </p>
+                                                </div>
+                                                <div class="col-12">
+                                                    <p class="form-group">
+                                                        <label for="id_password1"></label>
+                                                        <input class="form-control" type="password"
+                                                               placeholder="Confirm Password" id="id_password1"
+                                                               name="password1" required>
+                                                    </p>
+                                                </div>
 
-                        <div class="col-12">
-                          <p class="form-group">
-                              <label for="id_email"></label>
-                              <input class="form-control" type="email" placeholder="Email" id="id_email" name="email"
-                                     required>
-                              <ul class="errorlist">
-                                  {{ form.errors.email }}
-                              </ul>
-                          </p>
-                        </div>
-                        <div class="col-12">
-                          <p class="form-group">
-                            <label for="id_username"></label>
-                            <input class="form-control" type="text" placeholder="Name" id="id_username" name="username" required>
-                            <ul class="errorlist">
-                                {{ form.errors.username }}
-                            </ul>
-                          </p>
-                        </div>
-                        <div class="col-12">
-                          <p class="form-group">
-                            <label for="id_password"></label>
-                            <input class="form-control" type="password" placeholder="Password" id="id_password" name="password" required>
-                            <ul class="errorlist">
-                                {{ form.errors.password1 }}
-                            </ul>
-                          </p>
-                        </div>
-                        <div class="col-12">
-                          <p class="form-group">
-                            <label for="id_password1"></label>
-                            <input class="form-control" type="password" placeholder="Confirm Password" id="id_password1" name="password1" required>
-                          </p>
-                        </div>
 
-                        <div class="col-12">
-                          <div class="form-group">
-                            <div class="remember-forgot-info">
-                              <div class="remember">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label" for="defaultCheck1">Aaccept our terms and conditions and privacy policy.</label>
-                              </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn-theme">회원가입</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade" id="employer" role="tabpanel"
+                                         aria-labelledby="employer-tab">
+                                        <form action="#">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="email" placeholder="Email">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="password"
+                                                               placeholder="Password">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="password"
+                                                               placeholder="Confirm Password">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="remember-forgot-info">
+                                                            <div class="remember">
+                                                                <input class="form-check-input" type="checkbox" value=""
+                                                                       id="defaultCheck1">
+                                                                <label class="form-check-label" for="defaultCheck1">Aaccept
+                                                                    our terms and conditions and privacy policy.</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="login-register-form-info">
+                                    <p>계정이 이미 있으신가요? <a href="{% url 'user:login' %}">로그인</a></p>
+                                    <div class="register_google_wrap">
+                                        <div class="google_class">
+                                            <a class="avatar-google-photo" href="{% provider_login_url 'google' %}"><img
+                                                    src="https://pbs.twimg.com/profile_images/770139154898382848/ndFg-IDH_200x200.jpg"></a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
                         </div>
-                        <div class="col-12">
-                          <div class="form-group">
-                            <button type="submit" class="btn-theme">Register Now</button>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="tab-pane fade" id="employer" role="tabpanel" aria-labelledby="employer-tab">
-                    <form action="#">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="form-group">
-                            <input class="form-control" type="email" placeholder="Email">
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <div class="form-group">
-                            <input class="form-control" type="password" placeholder="Password">
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <div class="form-group">
-                            <input class="form-control" type="password" placeholder="Confirm Password">
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <div class="form-group">
-                            <div class="remember-forgot-info">
-                              <div class="remember">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label" for="defaultCheck1">Aaccept our terms and conditions and privacy policy.</label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <div class="form-group">
-                            <button type="button" class="btn-theme">Register Now</button>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
+                    </div>
                 </div>
-                <div class="login-register-form-info">
-                  <p>Already have an account? <a href="{% url 'user:login' %}">Login</a></p>
-                </div>
-              </div>
             </div>
-          </div>
+        </section>
+        <!--== End Login Area Wrapper ==-->
+    </main>
+
+    {% include 'footer.html' %}
+    <!--== End Footer Area Wrapper ==-->
+
+    <!--== Scroll Top Button ==-->
+    <div id="scroll-to-top" class="scroll-to-top"><span class="icofont-rounded-up"></span></div>
+
+    <!--== Start Aside Menu ==-->
+    <aside class="off-canvas-wrapper offcanvas offcanvas-start" tabindex="-1" id="AsideOffcanvasMenu"
+           aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h1 class="d-none" id="offcanvasExampleLabel">Aside Menu</h1>
+            <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">menu <i
+                    class="icofont-simple-left"></i></button>
         </div>
-      </div>
-    </section>
-    <!--== End Login Area Wrapper ==-->
-  </main>
-
-{% include 'footer.html' %}
-  <!--== End Footer Area Wrapper ==-->
-
-  <!--== Scroll Top Button ==-->
-  <div id="scroll-to-top" class="scroll-to-top"><span class="icofont-rounded-up"></span></div>
-
-  <!--== Start Aside Menu ==-->
-  <aside class="off-canvas-wrapper offcanvas offcanvas-start" tabindex="-1" id="AsideOffcanvasMenu" aria-labelledby="offcanvasExampleLabel">
-    <div class="offcanvas-header">
-      <h1 class="d-none" id="offcanvasExampleLabel">Aside Menu</h1>
-      <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">menu <i class="icofont-simple-left"></i></button>
-    </div>
-    <div class="offcanvas-body">
-      <!-- Mobile Menu Start -->
-      <div class="mobile-menu-items">
-        <ul class="nav-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="#">Find Jobs</a>
-            <ul class="sub-menu">
-              <li><a href="job.html">Jobs</a></li>
-              <li><a href="job-details.html">Job Details</a></li>
-            </ul>
-          </li>
-          <li><a href="employers-details.html">Employers Details</a></li>
-          <li><a href="#">Candidates</a>
-            <ul class="sub-menu">
-              <li><a href="candidate.html">Candidates</a></li>
-              <li><a href="candidate-details.html">Candidate Details</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Blog</a>
-            <ul class="sub-menu">
-              <li><a href="blog-grid.html">Blog Grid</a></li>
-              <li><a href="blog.html">Blog Left Sidebar</a></li>
-              <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-              <li><a href="blog-details.html">Blog Details</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Pages</a>
-            <ul class="sub-menu">
-              <li><a href="about-us.html">About us</a></li>
-              <li><a href="login.html">Login</a></li>
-              <li><a href="registration.html">Registration</a></li>
-              <li><a href="page-not-found.html">Page Not Found</a></li>
-            </ul>
-          </li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <!-- Mobile Menu End -->
-    </div>
-  </aside>
-  <!--== End Aside Menu ==-->
+        <div class="offcanvas-body">
+            <!-- Mobile Menu Start -->
+            <div class="mobile-menu-items">
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{% url 'careerapp:job' %}">채용정보</a>
+                        <ul class="sub-menu">
+                            <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{% url 'articleapp:home' %}">커뮤니티</a>
+                        <ul class="sub-menu">
+                            <li><a href="{% url 'temp1_free' %}">자유게시판</a></li>
+                            <li><a href="{% url 'temp1_tip' %}">꿀팁게시판</a></li>
+                            <li><a href="{% url 'temp1_question' %}">질문게시판</a></li>
+                        </ul>
+                    </li>
+                    {% if not user.is_authenticated %}
+                        <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
+                        <li><a href="{% url 'user:sign-up' %}"><span>회원가입</span></a></li>
+                    {% else %}
+                        <li class="has-submenu"><a
+                                href="{% url 'user:profile' user.pk %}"><span>마이페이지</span></a>
+                        </li>
+                        <li><a href="{% url 'user:logout' %}"><span>로그아웃</span></a></li>
+                    {% endif %}
+                    {#                    <li><a href="contact.html">Contact</a></li>#}
+                </ul>
+            </div>
+            <!-- Mobile Menu End -->
+        </div>
+    </aside>
+    <!--== End Aside Menu ==-->
 </div>
 
 <!--=======================Javascript============================-->
