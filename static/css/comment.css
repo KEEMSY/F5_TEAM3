@@ -228,6 +228,15 @@ img {
   margin-right: -8px;
 }
 
+.content_best_comment{
+  width: 100%;
+}
 
+.content_botton{
+  margin: 0 auto;
+}
 .disp_none {display: none;}
 
+.comment_list_wrapper{
+  margin: 1rem 0;
+}
