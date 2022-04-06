@@ -96,7 +96,7 @@
         list-style: none;
     }
 
-    ul {
+    .ul {
         margin-top: 0;
     }
 
@@ -645,7 +645,6 @@
         width: 100%;
         height: 88px;
         margin-left: 19px;
-
     }
 
     .user-basic-info {
@@ -1370,13 +1369,9 @@
             width: 60%
         }
     }
-
-
 </style>
-
-
+  
 <body>
-
 
 <!--wrapper start-->
 <div class="wrapper">
@@ -1398,7 +1393,8 @@
                     <div class="panel-body">
                         <div class="avatar clearfix avatar-big col-sm-3 text-center">
                             {% if not u.profile.img %}
-                                <a class="avatar-photo"><img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg"></a>
+                                <a class="avatar-photo"><img
+                                        src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg"></a>
                             {% else %}
                                 <a class="avatar-photo"><img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ u.profile.img }}"></a>
                             {% endif %}
@@ -1602,6 +1598,7 @@
                     </div>
                     {#                    페이지 네이터#}
                 </div>
+
             </div>
         </div>
     </div>

@@ -39,4 +39,6 @@ urlpatterns = [
     path("articles/", include("bookmarkapp.urls")),
     path('accounts/', include('allauth.urls')),
     path('google/', include('allauth.urls')),
+
+    path('404/', views.show_404page, name='404page'),
 ]
