@@ -37,7 +37,7 @@ class CommentView(View):
 
     def delete(self, request):
         try:
-            delete_comment(comment_id=request.comment_id)
+            delete_comment(comment_id=request.DELETE.get('pk'))
             return JsonResponse({'msg': '댓글이 삭제되었습니다.'}, status=200)
 
         except ObjectDoesNotExist:

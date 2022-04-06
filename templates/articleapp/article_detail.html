@@ -26,7 +26,6 @@
         let comment = $('#target_comment').val()
         let temp_html =``
 
-
         $.ajax({
             type: "POST",
             url: '{% url 'commentapp:interatction_comment' %}',
@@ -41,8 +40,6 @@
                 let username = response['comment']['username']
                 let date = response['comment']['date']
                 let content = response['comment']['content']
-                console.log(username)
-                console.log(date)
 
                 temp_html = `
                     <div class="timeline-item-description">
@@ -62,13 +59,28 @@
                 {#window.location.reload(true)#}
                 $('#target_comment').val('')
                 open_comment()
-                comment_plus()
 
             }
         });
 
     }
 
+    function delete_comment(id){
+        $.ajax({
+            type: "DELETE",
+            url: '{% url 'commentapp:interatction_comment' %}',
+            data: {
+                'pk':id
+            },
+            headers: {
+                'X-CSRFTOKEN' : '{{ csrf_token }}'
+            },
+            success: function (response) {
+                window.location.reload(true)
+                open_comment()
+            }
+        });
+    }
 </script>
 <body>
 
@@ -221,6 +233,7 @@
                                                         <time
                                                                 datetime="{{ comment.created_at }}">{{ comment.created_at|date:'Y-m-d H:i' }}
                                                         </time>
+                                                          <button class="comment_delete_btn" onclick="delete_comment({{ comment.pk }})">삭제하기</button>
                                                     </span>
                                                             </div>
                                                             <div class="comment" style="width: 33.85rem;">
