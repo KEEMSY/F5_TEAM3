@@ -1,9 +1,12 @@
 from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
+from articleapp.models import Article
+from bookmarkapp.models import Bookmark
 from userapp.models import User
 
 from . import forms
@@ -62,12 +65,15 @@ def log_out(request):
     return redirect(reverse("home"))
 
 
-
 def get_profile(request, pk):
     u = get_object_or_404(User, pk=pk)  # 로그인중인 사용자 객체를 얻어옴
     user_form = UserForm(initial={
         'username': u.username,
     })
+    articles = Article.objects.filter(user_id=pk).order_by('-created_at')
+    paginator = Paginator(articles, 10)
+    page = int(request.GET.get('page', 1))
+    board_list = paginator.get_page(page)
 
     if hasattr(u, 'profile'):  # user가 profile을 가지고 있으면 True, 없으면 False (회원가입을 한다고 profile을 가지고 있진 않으므로)
         profile = u.profile
@@ -80,12 +86,31 @@ def get_profile(request, pk):
     else:
         profile_form = ProfileForm()
 
-    #게시글 모델 머지 후 추가 예정
-    #articles = Artilce.objects.filter(user_id=request.user.pk).order_by('-created_at') #-는 역순으로 정렬해서 준다는 의미
-            #{'articles': articles} 를 아래 추가
+    return render(request, 'userapp/profile.html', {"user_form": user_form, "profile_form": profile_form, 'u':u, 'board_list':board_list})
 
 
-    return render(request, 'userapp/profile.html', {"user_form": user_form, "profile_form": profile_form, 'u':u})
+def get_profile_bookmark(request, pk):
+    u = get_object_or_404(User, pk=pk)  # 로그인중인 사용자 객체를 얻어옴
+    user_form = UserForm(initial={
+        'username': u.username,
+    })
+    bookmarks = Bookmark.objects.filter(user_id=pk).order_by('-created_at')
+    paginator = Paginator(bookmarks, 10)
+    page = int(request.GET.get('page', 1))
+    board_list = paginator.get_page(page)
+
+    if hasattr(u, 'profile'):  # user가 profile을 가지고 있으면 True, 없으면 False (회원가입을 한다고 profile을 가지고 있진 않으므로)
+        profile = u.profile
+        profile_form = ProfileForm(initial={
+            'img': profile.img,
+            'skill': profile.skill,
+            'github': profile.github,
+            'blog': profile.blog,
+        })
+    else:
+        profile_form = ProfileForm()
+
+    return render(request, 'userapp/profile.html', {"user_form": user_form, "profile_form": profile_form, 'u':u, 'board_list':board_list})
 
 
 @login_required(login_url="/users/login/")
@@ -114,22 +139,4 @@ def update_profile(request, pk):
         profile.save()
 
     return redirect(f'/users/profile/{int(pk)}/', pk=request.user.pk)  # 수정된 화면 보여주기
-
-
-#### 모델 합치면 import 해서 ajax 형식으로 마이페이지에 데이터 뿌려주는 get 형식 view
-### 아티클, 북마크 겟 함수 // 현재는 모델이 꼬일까바 주석 처리로 해놓았음!
-## form 데이터도 같이 뿌려줘야하나...? user_form, profile_form... ajax 형식이라 그부분에 대한 데이터만 필요한거 아닐까..??
-
-# @login_required(login_url="/users/login/")
-# def get_profile_article(request, pk):
-#     if request.is_ajax:
-#         all_articles = Article.objects.filter(user_id=pk)
-#         return render(request, 'userapp/profile.html', {"all_articles": all_articles})
-
-
-# @login_required(login_url="/users/login/")
-# def get_profile_bookmark(request, pk):
-#     if request.is_ajax:
-#         all_bookmarks = Bookmark.objects.filter(user_id=pk)
-#         return render(request, 'userapp/profile.html', {"all_bookmarks": all_bookmarks})
 

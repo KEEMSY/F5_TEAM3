@@ -3,6 +3,7 @@
 import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
+import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
@@ -18,11 +19,13 @@ class Migration(migrations.Migration):
             name='Article',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('title', models.CharField(max_length=50)),
                 ('content', models.TextField(null=True)),
                 ('img', models.TextField(null=True)),
+                ('like_cnt', models.IntegerField(default=0)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('updated_at', models.DateTimeField(auto_now=True)),
+
                 ('article_hits', models.IntegerField(default=0)),
             ],
             options={
@@ -30,11 +33,22 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
+            name='Author',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.TextField()),
+            ],
+        ),
+
+        migrations.CreateModel(
             name='Category',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=50)),
             ],
+            options={
+                'db_table': 'category',
+            },
         ),
         migrations.CreateModel(
             name='ArticleHits',

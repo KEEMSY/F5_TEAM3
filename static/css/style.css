@@ -704,8 +704,8 @@ table p {
 }
 
 .off-canvas-wrapper .btn-menu-close:hover {
-    color: #000000;
-    background-color: #2f2f2f;
+  color: #fff;
+  background-color: #2f2f2f;
 }
 
 .offcanvas-backdrop,
@@ -1422,10 +1422,10 @@ table p {
     }
 }
 
-@media only screen and (max-width: 1199px) {
-    .home-slider-shape {
-        display: none;
-    }
+@media only screen and (max-width: 992px) {
+  .home-slider-shape {
+    display: none;
+  }
 }
 
 .home-slider-shape .shape1 {
@@ -1449,6 +1449,12 @@ table p {
     .home-slider-shape .shape1 {
         width: 600px;
     }
+}
+
+@media only screen and (max-width: 1100px) {
+  .home-slider-shape .shape1 {
+    width: 470px;
+  }
 }
 
 .home-slider-shape .shape2 {
@@ -1843,9 +1849,11 @@ table p {
 }
 
 .recent-job-item .main-content .title {
-    color: #272a33;
-    font-size: 24px;
-    margin-bottom: 12px;
+  color: #272a33;
+  font-size: 24px;
+  margin-bottom: 12px;
+  max-height: 87px;
+  overflow: hidden;
 }
 
 @media only screen and (max-width: 1199px) {
@@ -6301,8 +6309,7 @@ table p {
 }
 
 .post-home-style .post-item {
-    margin-bottom: 0;
-
+  margin-bottom: 0;
 }
 
 @media only screen and (max-width: 767px) {
@@ -6375,8 +6382,7 @@ table p {
 }
 
 .post-item {
-    margin-bottom: 70px;
-    display: flex;
+  margin-bottom: 70px;
 }
 
 @media only screen and (max-width: 1199px) {
@@ -6386,12 +6392,10 @@ table p {
 }
 
 .post-item .thumb {
-    margin-bottom: 39px;
-    overflow: hidden;
-    position: relative;
-    width: 152px;
-    height: 152px;
-    border-radius: 50%;
+  border-radius: 5px;
+  margin-bottom: 39px;
+  overflow: hidden;
+  position: relative;
 }
 
 @media only screen and (max-width: 1199px) {
@@ -6408,11 +6412,6 @@ table p {
     -moz-transition: all 0.3s ease-in-out;
     -ms-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
-}
-
-.post-item .content .sns {
-    display: flex;
-    margin-right: 10px;
 }
 
 .post-item .content .author {
@@ -6437,7 +6436,6 @@ table p {
 .post-item .content .author a:hover {
     color: #03a84e;
 }
-
 .post-item .content .title {
     font-size: 23px;
     line-height: 1.522;
@@ -7614,10 +7612,10 @@ table p {
 }
 
 .footer-area .widget-title {
-    font-size: 25px;
-    color: #000000;
-    text-transform: capitalize;
-    margin-bottom: 40px;
+  font-size: 28px;
+  color: #fff;
+  text-transform: capitalize;
+  margin-bottom: 40px;
 }
 
 @media only screen and (max-width: 1199px) {
@@ -7755,11 +7753,11 @@ table p {
 }
 
 .footer-area .nav-menu li a {
-    color: #484b52;
-    font-size: 18px;
-    line-height: 50px;
-    padding: 0 0;
-    display: block;
+  color: #d8dadf;
+  font-size: 18px;
+  line-height: 50px;
+  padding: 0 0;
+  display: block;
 }
 
 @media only screen and (max-width: 1199px) {
@@ -7935,9 +7933,9 @@ table p {
 }
 
 .footer-main {
-    background-color: #f4f7f7;
-    position: relative;
-    padding: 126px 0 86px;
+  background-color: #272a33;
+  position: relative;
+  padding: 126px 0 86px;
 }
 
 @media only screen and (max-width: 1199px) {
@@ -8068,26 +8066,8 @@ table p {
 }
 
 .footer-bottom .copyright i {
-    color: #03a84e;
-    font-size: 16px;
-    vertical-align: 0px;
-    margin: 0;
-}
-
-
-.flex-container {
-    width: 800px;
-    min-height: 200px;
-    border: 1px solid #323332;
-    background-color: white;
-
-}
-
-.article-container {
-    width: 600px;
-    min-height: 200px;
-    border: 1px solid #323332;
-    background-color: white;
-
-
+  color: #03a84e;
+  font-size: 16px;
+  vertical-align: 0px;
+  margin: 0;
 }

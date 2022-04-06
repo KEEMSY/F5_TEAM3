@@ -16,6 +16,7 @@
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     padding-top: 308px;
+
 }
 
 #modal .modal-window {
@@ -59,8 +60,10 @@
     padding: 0px 10px;
     text-shadow: 1px 1px 2px gray;
     color: white;
+    width: 100%;
 }
 
 .modal-form-group {
     margin-bottom: 10px;
+    width: min-content;
 }
