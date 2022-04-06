@@ -1473,7 +1473,7 @@
                     <ul class="list-group">
                         {#                        게시글#}
                         {% url 'user:profile' u.pk as the_url %}
-                        {% if request.get_full_path == the_url %}
+                        {% if request.path == the_url %}
                             {% for article in board_list %}
                                 <li class="list-group-item list-group-item-small list-group-no-note clearfix">
                                     <div class="list-icon-wrapper pull-left">
