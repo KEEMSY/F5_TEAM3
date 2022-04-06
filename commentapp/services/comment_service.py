@@ -19,7 +19,7 @@ def read_best_comment():
     try:
         target_comment = Comment.objects.filter(like_cnt__gte=1).order_by('like_cnt').get()
         return target_comment
-    except:
+    except ObjectDoesNotExist:
         return False
 
 
