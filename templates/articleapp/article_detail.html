@@ -13,12 +13,19 @@
         $('#more_show_btn').addClass('disp_none')
         $('#less_show_btn').removeClass('disp_none')
     }
+
     function close_comment() {
         $('#comment_content').addClass('disp_none')
         $('#more_show_btn').removeClass('disp_none')
         $('#less_show_btn').addClass('disp_none')
     }
 
+
+  function save_comment() {
+        let url = window.location.href.split('/')
+        let article_id = url[url.length - 1]
+        let comment = $('#target_comment').val()
+        
     function plus_comment_cnt(){
         let comment_cnt = parseInt($('#comment_cnt').text())
         console.log(comment_cnt)
@@ -36,7 +43,31 @@
     }
 
 
-    function save_comment(){
+    function like_article() {
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'likeapp:articlelike' target_article.pk %}',
+            headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+            success: function (response) {
+                alert(response['msg'])
+                window.location.reload(true)
+            }
+        });
+    }
+
+    function unlike_article() {
+        $.ajax({
+            type: 'DELETE',
+            url: '{% url 'likeapp:articlelike' target_article.pk %}',
+            headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+            success: function (response) {
+                alert(response['msg'])
+                window.location.reload(true)
+            }
+        });
+    }
+
+  function save_comment(){
         let url = window.location.href.split('/')
         let article_id = url[url.length - 1]
         let comment = $('#target_comment').val()
@@ -84,7 +115,31 @@
             }
         });
 
+
+    function bookmark_article(){
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'bookmarkapp:bookmark' target_article.pk %}',
+            headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+            success: function (response) {
+                alert(response['msg'])
+                window.location.reload(true)
+            }
+        });
     }
+    
+    function unbookmark_article(){
+        $.ajax({
+            type: 'DELETE',
+            url: '{% url 'bookmarkapp:bookmark' target_article.pk %}',
+            headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+            success: function (response) {
+                alert(response['msg'])
+                window.location.reload(true)
+            }
+        });
+    }
+
 
     function delete_comment(id){
         let pk_data = JSON.stringify({"pk":id})
@@ -106,6 +161,7 @@
         });
         open_comment()
     }
+
 </script>
 <body>
 
@@ -137,11 +193,24 @@
                             </div>
                             <div class="content_title_footet_right_wrapper">
                                 <div class="right_wrapper_icons">
-                                    <div class="icon_wrapper">
-                                        <img src="{% static 'img/icons/hearted.png' %}" alt="">
-                                    </div>
-                                    <div class="icon_cnt">
-                                        <span>{{ target_article.like_cnt }}</span>
+                                    <div class="like_function">
+                                        {#                                        {% csrf_token %}#}
+                                        {#                                            <div class="like_article" type="button" onclick="changeLike(0)">#}
+                                        {#                                                <img src="{% static 'img/icons/hearted.png' %}" alt="">#}
+                                        {#                                            </div>#}
+                                        {#                                            <div class="like_article" type="button" onclick="changeLike(1)">#}
+                                        {#                                                <img src="{% static 'img/icons/heart.png' %}" alt="">#}
+                                        {#                                            </div>#}
+                                        {% csrf_token %}
+                                        {% if like_article %}
+                                            <div class="like_article" type="button" onclick="unlike_article()">
+                                                <img src="{% static 'img/icons/hearted.png' %}" alt="">
+                                            </div>
+                                        {% else %}
+                                            <div class="unlike_article" type="button" onclick="like_article()">
+                                                <img src="{% static 'img/icons/heart.png' %}" alt="">
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="right_wrapper_icons">
@@ -161,9 +230,16 @@
                                     </div>
                                 </div>
                                 <div class="right_wrapper_icons">
-                                    <div class="icon_wrapper">
-                                        <img src="{% static 'img/icons/bookmark.png' %}" alt="">
-                                    </div>
+                                    {% if check_bookmark %}
+                                        <div class="bookmark_article" type="button" onclick="unbookmark_article()">
+                                            <img src="{% static 'img/icons/bookmarked.png' %}" alt="">
+                                        </div>
+
+                                    {% else %}
+                                        <div class="unbookmark_article" type="button" onclick="bookmark_article()">
+                                            <img src="{% static 'img/icons/bookmark.png' %}" alt="">
+                                        </div>
+                                    {% endif %}
                                     <div class="icon_cnt">
                                         <span></span>
                                     </div>
@@ -172,13 +248,14 @@
                         </div>
                         <div class="content_main">
                         <span>
-                            {{ target_article.content}}
+                            {{ target_article.content }}
                         </span>
                         </div>
                         <br>
                         <hr>
                         <div class="content_comment">
                             <div class="content_best_comment">
+
                                 <ol class="timeline">
                                     <li class="timeline-item | extra-space">
                                     {% if best_comment %}
@@ -240,6 +317,7 @@
                                     </div>
                                     <div id="comment_content" class="disp_none">
 
+
                                         <div id="comment_content2">
 
                                         </div>
@@ -255,6 +333,7 @@
                                                                     <img src="https://assets.codepen.io/285131/hat-man.png"/>
                                                                 </i>
                                                                 <span><a href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a>   작성된 날짜
+]
                                                         <time
                                                                 datetime="{{ comment.created_at }}">{{ comment.created_at|date:'Y-m-d H:i' }}
                                                         </time>
@@ -262,6 +341,7 @@
                                                         <button class="comment_delete_btn" onclick="delete_comment({{ comment.pk }})">삭제하기</button>
                                                         {% endif %}
                                                     </span>
+
                                                             </div>
                                                             <div class="comment" style="width: 33.85rem;">
                                                                 <p>
