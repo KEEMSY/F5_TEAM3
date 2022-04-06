@@ -126,10 +126,10 @@
 /* START RIGHT_WRAPPER*/
 .right_wrapper{
     padding: 0.1vw;
-    margin: 170px 30px;
+    margin: 170px 0px;
     background-color: #9abbac;
-    width: 100%;
-    max-width: 1600px;
+    width: 805px;
+    min-width: 805px;
 }
 
 .content_wrapper{
