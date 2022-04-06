@@ -1,0 +1,486 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+{% include 'head.html' %}
+<link rel="stylesheet" href="{% static 'css/comment.css' %}">
+<link rel="stylesheet" href="{% static 'css/articleapp/article_write.css' %}">
+<link rel="stylesheet" href="{% static 'css/articleapp/article_base.css' %}">
+
+<style>
+
+    .content_comment {
+        width: 100%;
+    }
+
+    .content_best_comment {
+        width: 100%;
+    }
+
+    button#comment-submit-button {
+        width: 80px;
+        margin-left: 20px;
+    }
+
+    @media only screen and (max-width: 1150px) {
+        .left_wrapper {
+            display: none;
+        }
+
+        .right_wrapper {
+            margin: 0 auto;
+        }
+
+        .col-4 {
+            display: none;
+        }
+
+        .col-8 {
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .content_title_footet_right_wrapper {
+            width: 75%;
+        }
+    }
+
+    @media only screen and (max-width: 850px) {
+
+        .header-area.transparent {
+            display: none;
+        }
+
+        .header_img {
+            display: none;
+        }
+
+        .wraper_wraper {
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .content_title_footet_left_wrapper {
+            display: none;
+        }
+
+        .content_img {
+            display: none;
+        }
+
+        .content_title h1 {
+            padding: 3vw 0;
+        }
+
+        .content_title_footet_right_wrapper {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .right_wrapper_icons {
+            width: 16%;
+            display: flex;
+            margin: 0 auto;
+        }
+
+        .icon_cnt {
+            align-items: center;
+            display: flex;
+        }
+
+        span.timeline-item-icon.\|.avatar-icon {
+    display: none;
+}
+
+        .timeline-item-icon.filled-icon {
+            display: none;
+        }
+        .timeline {
+            width: 100%;
+            border: none;
+            padding: 32px 1px 32px 1px;
+        }
+
+        button#comment-submit-button {
+            width: 69px;
+            margin-left: 10px;
+            font-size: 13px;
+}
+
+    }
+
+
+</style>
+
+=======
+    function like_article() {
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'likeapp:articlelike' target_article.pk %}',
+            headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+            success: function (response) {
+                alert(response['msg'])
+                window.location.reload(true)
+            }
+        });
+    }
+
+    function unlike_article() {
+        $.ajax({
+            type: 'DELETE',
+            url: '{% url 'likeapp:articlelike' target_article.pk %}',
+            headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+            success: function (response) {
+                alert(response['msg'])
+                window.location.reload(true)
+            }
+        });
+    }
+
+  function save_comment(){
+        let url = window.location.href.split('/')
+        let article_id = url[url.length - 1]
+        let comment = $('#target_comment').val()
+        let temp_html =``
+
+        $.ajax({
+            type: "POST",
+            url: '{% url 'commentapp:interatction_comment' %}',
+            data: {
+                'article_id':article_id,
+                'content':comment
+            },
+            headers: {
+                'X-CSRFTOKEN' : '{{ csrf_token }}'
+            },
+            success: function (response) {
+                let username = response['comment']['username']
+                let date = response['comment']['date']
+                let content = response['comment']['content']
+                let pk = response['comment']['pk']
+
+                temp_html = `
+                <div id="${pk}">
+                    <div class="timeline-item-description">
+                        <i class="avatar | small">
+                            <img src="https://assets.codepen.io/285131/hat-man.png"/>
+                        </i>
+                        <span><a href="#"> ${username} </a>   작성된 날짜 <time
+                                datetime="20-01-2021"> ${date} </time>
+                                <button class="comment_delete_btn" onclick="delete_comment(${pk})">삭제하기</button>
+                        </span>
+                    </div>
+                    <div class="comment">
+                        <p>
+                            ${content}
+                        </p>
+                    </div>
+                </div>`
+                $('#comment_content2').append(temp_html)
+                {#window.location.reload(true)#}
+                $('#target_comment').val('')
+                open_comment()
+                plus_comment_cnt()
+
+            }
+        });
+
+
+    function bookmark_article(){
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'bookmarkapp:bookmark' target_article.pk %}',
+            headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+            success: function (response) {
+                alert(response['msg'])
+                window.location.reload(true)
+            }
+        });
+    }
+    
+    function unbookmark_article(){
+        $.ajax({
+            type: 'DELETE',
+            url: '{% url 'bookmarkapp:bookmark' target_article.pk %}',
+            headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+            success: function (response) {
+                alert(response['msg'])
+                window.location.reload(true)
+            }
+        });
+    }
+
+
+    function delete_comment(id){
+        let pk_data = JSON.stringify({"pk":id})
+        $.ajax({
+            type: "DELETE",
+            url: '{% url 'commentapp:interatction_comment' %}',
+            contentType:"application/json",
+            dataType: "JSON",
+            data: pk_data,
+            headers: {
+                'X-CSRFTOKEN' : '{{ csrf_token }}'
+            },
+            success: function (response) {
+                $('#'+id).remove()
+                console.log(id)
+                {#window.location.reload(true)#}
+                minus_comment_cnt()
+            }
+        });
+        open_comment()
+    }
+
+</script>
+<body>
+
+<div class="wrapper">
+    <!--== Start Header Wrapper ==-->
+    {% include 'header_ver2.html' %}
+    {# End Header Wrpper#}
+    <div class="wraper_wraper">
+
+        {% include 'articleapp/article_left_content.html' %}
+
+        <div class="col-8">
+            <div class="right_wrapper">
+                <div class="content_wrapper">
+                    {#                    <div class="content_img">#}
+                    {#                        여기에 이미지이 들어갑니다#}
+                    {#                    </div>#}
+                    <div class="content_details">
+                        <div class="content_title">
+                            <h1>
+                                {{ target_article.title }}
+                            </h1>
+                        </div>
+                        <div class="content_title_footet">
+                            <div class="content_title_footet_left_wrapper">
+                            <span>
+                                {{ target_article.created_at|date:'Y-m-d H:i' }} by <a href="{% url 'user:profile' target_article.user.pk %}">{{ target_article.user.username }}</a>
+                            </span>
+                            </div>
+                            <div class="content_title_footet_right_wrapper">
+                                <div class="right_wrapper_icons">
+                                    <div class="like_function">
+                                        {#                                        {% csrf_token %}#}
+                                        {#                                            <div class="like_article" type="button" onclick="changeLike(0)">#}
+                                        {#                                                <img src="{% static 'img/icons/hearted.png' %}" alt="">#}
+                                        {#                                            </div>#}
+                                        {#                                            <div class="like_article" type="button" onclick="changeLike(1)">#}
+                                        {#                                                <img src="{% static 'img/icons/heart.png' %}" alt="">#}
+                                        {#                                            </div>#}
+                                        {% csrf_token %}
+                                        {% if like_article %}
+                                            <div class="like_article" type="button" onclick="unlike_article()">
+                                                <img src="{% static 'img/icons/hearted.png' %}" alt="">
+                                            </div>
+                                        {% else %}
+                                            <div class="unlike_article" type="button" onclick="like_article()">
+                                                <img src="{% static 'img/icons/heart.png' %}" alt="">
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="right_wrapper_icons">
+                                    <div class="icon_wrapper">
+                                        <img src="{% static 'img/icons/comment.png' %}" alt="">
+                                    </div>
+                                    <div class="icon_cnt">
+                                        <span id="comment_cnt">{{ target_comment.count }}</span>
+                                    </div>
+                                </div>
+                                <div class="right_wrapper_icons">
+                                    <div class="icon_wrapper">
+                                        <img src="{% static 'img/icons/eye.png' %}" alt="">
+                                    </div>
+                                    <div class="icon_cnt">
+                                        <span>{{ target_article.article_hits }}</span>
+                                    </div>
+                                </div>
+                                <div class="right_wrapper_icons">
+                                    {% if check_bookmark %}
+                                        <div class="bookmark_article" type="button" onclick="unbookmark_article()">
+                                            <img src="{% static 'img/icons/bookmarked.png' %}" alt="">
+                                        </div>
+
+                                    {% else %}
+                                        <div class="unbookmark_article" type="button" onclick="bookmark_article()">
+                                            <img src="{% static 'img/icons/bookmark.png' %}" alt="">
+                                        </div>
+                                    {% endif %}
+                                    <div class="icon_cnt">
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content_main">
+                        <span>
+                            {{ target_article.content }}
+                        </span>
+                        </div>
+                        <br>
+                        <hr>
+                        <div class="content_comment">
+                            <div class="content_best_comment">
+
+                                <ol class="timeline">
+                                    <li class="timeline-item | extra-space">
+                                    {% if best_comment %}
+                                    <span>
+                                        <div style="width: 2rem; height: 2rem;">
+                                            <img src="{% static 'img/recommendation.png' %}" alt="">
+                                        </div>
+
+                                    </span>
+                                        <div class="timeline-item-wrapper" id="comment_here">
+
+                                            <div class="timeline-item-description">
+                                                <i class="avatar | small">
+                                                    <img src="https://assets.codepen.io/285131/hat-man.png"/>
+                                                </i>
+                                                <span><a href="{% url 'user:profile' best_comment.user.pk %}">{{ best_comment.user.username }}</a> commented on <time
+                                                        datetime="20-01-2021">{{ best_comment.created_at|date:'Y-m-d H:i' }}</time></span>
+                                            </div>
+                                            <div class="comment">
+                                                <p>{{ best_comment.content }}</p>
+                                            </div>
+                                        {% endif %}
+                                            <br>
+                                            {#                                댓글 작성#}
+                                            {% if user.is_authenticated %}
+                                                <li class="timeline-item">
+                                                    <span class="timeline-item-icon | avatar-icon">
+                                                        <i class="avatar">
+                                                            <img src="https://assets.codepen.io/285131/hat-man.png"/>
+                                                        </i>
+                                                    </span>
+                                                    {#                                        댓글 작성하는곳#}
+                                                    <div class="new-comment">
+                                                        {% csrf_token %}
+                                                        <input id="target_comment" type="text" placeholder="댓글을 작성해보세요!"/>
+                                                        <button type="button" class="btn btn-light" id="comment-submit-button" onclick="save_comment()">
+                                                            작성
+                                                        </button>
+                                                    </div>
+                                                </li>
+                                            {% else %}
+                                                <div class="login_required">
+                                                    <div class="login_required_title">
+                                                        <h5>로그인 후에 댓글을 작성 할 수 있습니다.</h5>
+                                                    </div>
+                                                    <div class="login_required_content">
+                                                        <a href="{% url 'user:login' %}">
+                                                            <span><span style="font-weight: bold">로그인</span> 을 해볼까?</span>
+                                                        </a>
+                                                        <a href="{% url 'user:sign-up' %}" style="display: block">
+                                                            <span style="font-size: 0.8rem">아니면</span>
+                                                            <span><span style="font-weight: bold">회원가입</span> 을 해볼까?</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                    <div class="content_botton">
+                                        <button style="width: 8rem;" id="more_show_btn" onclick="open_comment() ">더보기</button>
+                                    </div>
+                                    <div id="comment_content" class="disp_none">
+
+                                        <div id="comment_content2">
+
+                                        </div>
+                                        {#                                    작성된 댓글이 있는 곳#}
+                                        <div >
+                                            <li class="timeline-item | extra-space">
+                                                <div class="timeline-item-wrapper" id="comment_here">
+                                                    <br>
+                                                    {% for comment in target_comment %}
+                                                        <div class="comment_list_wrapper" id="{{ comment.pk }}">
+                                                            <div class="timeline-item-description">
+                                                                <i class="avatar | small">
+                                                                    <img src="https://assets.codepen.io/285131/hat-man.png"/>
+                                                                </i>
+                                                                <span><a href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a>   작성된 날짜
+]
+
+                                                        <time
+                                                                datetime="{{ comment.created_at }}">{{ comment.created_at|date:'Y-m-d H:i' }}
+                                                        </time>
+                                                        {% if user == comment.user %}
+                                                        <button class="comment_delete_btn" onclick="delete_comment({{ comment.pk }})">삭제하기</button>
+                                                        {% endif %}
+                                                    </span>
+                                                            </div>
+                                                            <div class="comment" style="width: 33.85rem;">
+                                                                <p>
+                                                                    {{ comment.content }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
+                                                    {% endfor %}
+                                                </div>
+                                            </li>
+                                        </div>
+                                </ol>
+                                <div class="content_botton">
+                                    <button id="less_show_btn" class="disp_none" onclick="close_comment()">닫기</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--=======================Javascript============================-->
+
+{% include 'js.html' %}
+
+<script>
+    function open_comment() {
+        $('#comment_content').removeClass('disp_none')
+        $('#more_show_btn').addClass('disp_none')
+        $('#less_show_btn').removeClass('disp_none')
+    }
+
+    function close_comment() {
+        $('#comment_content').addClass('disp_none')
+        $('#more_show_btn').removeClass('disp_none')
+        $('#less_show_btn').addClass('disp_none')
+    }
+
+    function save_comment() {
+        let url = window.location.href.split('/')
+        let article_id = url[url.length - 1]
+        let comment = $('#target_comment').val()
+        $.ajax({
+            type: "POST",
+            url: '{% url 'commentapp:interatction_comment' %}',
+            data: {
+                'article_id': article_id,
+                'content': comment
+            },
+            headers: {
+                'X-CSRFTOKEN': '{{ csrf_token }}'
+            },
+            success: function (response) {
+                window.location.reload(true)
+
+            }
+        });
+
+    }
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+{% include 'footer.html' %}
+
+</html>

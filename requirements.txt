@@ -21,6 +21,8 @@ typing-extensions==4.1.1
 django-allauth==0.49.0
 pillow==9.0.1
 django-crispy-forms==1.14.0
+django-ckeditor==6.2.0
+
 boto3==1.21.29
 django-storages==1.12.3
 

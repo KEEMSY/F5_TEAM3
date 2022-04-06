@@ -1,4 +1,3 @@
-<div class="wraper_wraper">
     <div class="col-4">
         <div class="left_wrapper">
         <div class="category_wrapper">
@@ -27,16 +26,16 @@
                 <div class="title_wrapper">
                     <h5>Latest POST</h5>
                 </div>
-                {% for article in all_articles %}
+                {% for article in left_content_articles %}
                     <div class="post">
                     <span>
-                        <a href="">
+                        <a href="{% url 'articleapp:article_CRUD' article.pk %}">
                             <div class="post_area" id="post_area_{{ article.id }}">
-                                <div class="post_img"></div>
+{#                                <div class="post_img"></div>#}
                                 <div class="post_details">
                                     <div class="post_title">
                                         <span class="post_user_title">
-                                            {{ article.title }}
+                                            📖  {{ article.title }}
                                         </span>
                                     </div>
                                         <div class="post_detail">
@@ -51,69 +50,7 @@
                 </div>
                 {% endfor %}
 
-                <div class="post">
-                    <span>
-                        <a href="">
-                            <div class="post_area">
-                                <div class="post_img"></div>
-                                <div class="post_details">
-                                    <div class="post_title">
-                                        <span class="post_user_title">
-                                            아 운동같이 갈사람
-                                        </span>
-                                    </div>
-                                        <div class="post_detail">
-                                            <span class="post_user_detail">
-                                                march 23, 2022
-                                            </span>
-                                        </div>
-                                </div>
-                            </div>
-                        </a>
-                    </span>
-                </div>
-                <div class="post">
-                    <span>
-                        <a href="">
-                            <div class="post_area">
-                                <div class="post_img"></div>
-                                <div class="post_details">
-                                    <div class="post_title">
-                                        <span class="post_user_title">
-                                            아 운동같이 갈사람 진짜 없어..?
-                                        </span>
-                                    </div>
-                                        <div class="post_detail">
-                                            <span class="post_user_detail">
-                                                march 23, 2022
-                                            </span>
-                                        </div>
-                                </div>
-                            </div>
-                        </a>
-                    </span>
-                </div>
-                <div class="post">
-                    <span>
-                        <a href="">
-                            <div class="post_area">
-                                <div class="post_img"></div>
-                                <div class="post_details">
-                                    <div class="post_title">
-                                        <span class="post_user_title">
-                                            나랑 떡볶이 먹으러 갈 사람?
-                                        </span>
-                                    </div>
-                                        <div class="post_detail">
-                                            <span class="post_user_detail">
-                                                march 23, 2022
-                                            </span>
-                                        </div>
-                                </div>
-                            </div>
-                        </a>
-                    </span>
-                </div>
+
 
             </div>
         </div>
@@ -123,21 +60,15 @@
                     <h5>Recent Comments</h5>
                 </div>
 
-                {% for comment in recent_comments %}
+                {% for comment in left_content_recent_comments %}
                     <div class="comment">
                     <span>
-                       ✍ <a href="">{{ comment.article.title }}</a> 에
-                        <a href="">{{ comment.user.name }}</a> 님께서 댓글을 남기셨습니다.
+                       ✍ <a href="{% url 'articleapp:article_CRUD' comment.article.pk %}">{{ comment.article.title }}</a> 에
+                        <a href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a> 님께서 댓글을 남기셨습니다.
                     </span>
                 </div>
                 {% endfor %}
 
-                <div class="comment">
-                    <span>
-                       ✍ <a href="">아 운동같이 갈사람</a> 에
-                        <a href="">익명의회원1</a> 님께서 댓글을 남기셨습니다.
-                    </span>
-                </div>
 
             </div>
 

@@ -1,5 +1,4 @@
 .wrapper{
-    max-width: 2500px;
 }
 
 .wraper_wraper{
@@ -16,18 +15,6 @@
     margin: 170px 30px;
     background-color:#badbcc;
 
-}
-
-@media only screen and (max-width: 1150px) {
-    .left_wrapper {
-        display: none;
-    }
-    .col-4{
-        width: 0%;
-    }
-    .col-8{
-        width: 100%;
-    }
 }
 
 @media only screen and (max-width: 557px) {
@@ -127,10 +114,10 @@
 /* START RIGHT_WRAPPER*/
 .right_wrapper{
     padding: 0.1vw;
-    margin: 400px 30px;
+    margin: 170px 0px;
     background-color: #9abbac;
-    width: 100%;
-    max-width: 1600px;
+    width: 805px;
+    min-width: 805px;
 }
 
 .content_wrapper{
@@ -164,36 +151,43 @@
 }
 
 .content_title_footet{
-    margin-top: 2vw;
+    width: 100%;
+    margin: 2vw auto 0 auto;
     display: flex;
 
 }
 
-.content_title_footet_left_wrapper{
-    margin-right: 10rem;
+.content_title_footet_left_wrapper {
+    margin-right: 0rem;
+    width: 40%;
 }
 
 .content_title_footet_left_wrapper > span{
     font-size: 1rem;
 }
 
-.content_title_footet_right_wrapper{
-    width: 100%;
+.content_title_footet_right_wrapper {
+    width: 68%;
     display: flex;
+    justify-content: end;
     text-align: center;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .right_wrapper_icons{
-    width: 3rem;
-    margin-right: 3rem;
+    width: 5rem;
+    margin-right: 1rem;
     display: flex;
 
 }
 
 .icon_wrapper{
+    width: 50%;
     margin-right: 0.5rem;
+}
+
+.icon_cnt{
+    width: 50%;
 }
 
 .content_main{
@@ -242,10 +236,9 @@
 
 }
 
-.content_botton{
+.content_botton {
     display: flex;
-    flex-direction: row-reverse;
-    margin:  4rem 0 0 0;
+    margin: 4rem auto 0 auto;
     padding: 2rem;
     border-radius: 1rem;
 }
@@ -267,4 +260,45 @@
 hr{
     width: 100%;
     margin-bottom: 3rem;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.write_title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8vw;
+}
+
+.btn {
+    margin: 0 auto;
+
+}
+
+.new-comment {
+    display: flex;
+    flex-direction: row;
+}
+
+#comment-submit-button:hover {
+    background-color: #badbcc;
+    width: 5rem;
+    margin-left: 1rem;
+
+
+}
+#comment-submit-button {
+    width: 5rem;
+    margin-left: 1rem;
 }

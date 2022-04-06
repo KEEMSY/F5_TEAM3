@@ -1,6 +1,6 @@
 <!--== Start Header Wrapper ==-->
 {% load static %}
-<img src="{% static 'img/home_02.png' %}">
+<img class="header_img" src="{% static 'img/home_02.png' %}">
 <header class="header-area transparent">
     <div class="container">
         <div class="row no-gutter align-items-center position-relative">
@@ -17,27 +17,22 @@
                     <div class="header-align-center">
                         <div class="header-navigation-area position-relative">
                             <ul class="main-menu nav">
-                                <li><a href="/"><span>Home</span></a></li>
-                                <li class="has-submenu"><a href="{% url 'careerapp:job' %}"><span>Career</span></a>
+                                <li><a href="/"><span>홈</span></a></li>
+                                <li class="has-submenu"><a href="{% url 'careerapp:job' %}"><span>채용정보</span></a></li>
+                                <li class="has-submenu"><a href="{% url 'articleapp:home' %}"><span>게시판</span></a>
                                     <ul class="submenu-nav">
-                                        <li><a href="{% url 'careerapp:job' %}"><span>Jobs</span></a></li>
-                                        {#                      <li><a href="{% url 'careerapp:detail' %}"><span>Job Details</span></a></li>#}
-                                    </ul>
-                                </li>
-                                <li class="has-submenu"><a href="{% url 'articleapp:home' %}"><span>Community</span></a>
-                                    <ul class="submenu-nav">
-                                        <li><a href="{% url 'temp1_free' %}"><span>자유게시판</span></a></li>
-                                        <li><a href="{% url 'temp1_tip' %}"><span>꿀팁게시판</span></a></li>
-                                        <li><a href="{% url 'temp1_question' %}"><span>질문게시판</span></a></li>
+                                        <li><a href="{% url 'articleapp:free' %}"><span>자유게시판</span></a></li>
+                                        <li><a href="{% url 'articleapp:tip' %}"><span>꿀팁게시판</span></a></li>
+                                        <li><a href="{% url 'articleapp:question' %}"><span>질문게시판</span></a></li>
                                     </ul>
                                 </li>
 
 
                                 {% if not user.is_authenticated %}
-                                    <li><a href="{% url 'user:login' %}"><span>login</span></a></li>
-                                    <li><a href="{% url 'user:sign-up' %}"><span>Registration</span></a></li>
+                                    <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
+                                    <li><a href="{% url 'user:sign-up' %}"><span>회원가입</span></a></li>
                                 {% else %}
-                                    <li class="has-submenu"><a href="{% url 'user:profile' user.pk %}"><span>Mypage</span></a>
+                                    <li class="has-submenu"><a href="{% url 'user:profile' user.pk %}"><span>마이페이지</span></a>
                                     </li>
                                     <li><a href="{% url 'user:logout' %}"><span>logout</span></a></li>
                                 {% endif %}

@@ -16,6 +16,12 @@ const btnModal = document.getElementById("btn-modal")
 btnModal.addEventListener("click", e => {
     modalOn();
 })
+
+const imgModal = document.getElementById("img-modal")
+imgModal.addEventListener("click", e => {
+    modalOn();
+})
+
 const closeBtn = document.getElementById("close-area")
 closeBtn.addEventListener("click", e => {
     modalOff();
@@ -31,3 +37,10 @@ window.addEventListener("keyup", e => {
         modalOff();
     }
 })
+
+
+$.ajaxSetup({
+    headers: {"X-CSRFToken": '{{csrf_token}}'}
+});
+
+

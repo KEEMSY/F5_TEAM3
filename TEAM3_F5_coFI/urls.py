@@ -28,6 +28,8 @@ urlpatterns = [
     path('', views.show_home, name='home'),
     path('communities/', include("articleapp.urls")),
     path('careers/', include("careerapp.urls")),
+    path('comments/', include("commentapp.urls")),
+
 
     path('temp/', views.show_community, name='temp'),
     path('temp1/question/', views.show_article_list_question, name='temp1_question'),
@@ -38,4 +40,6 @@ urlpatterns = [
     path("articles/", include("bookmarkapp.urls")),
     path('accounts/', include('allauth.urls')),
     path('google/', include('allauth.urls')),
+
+    path('404/', views.show_404page, name='404page'),
 ]
