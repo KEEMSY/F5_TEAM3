@@ -21,7 +21,7 @@ class Article(BaseModel):
     title = models.CharField(max_length=50)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    content = RichTextField(null=False)
+    content = RichTextField(null=True, blank=True)
     img = models.FileField(upload_to='uploads/%Y%m%d', blank=True, null=True)
     like_cnt = models.IntegerField(default=0)
 
