@@ -17,7 +17,7 @@ class CommentView(View):
             print(comment.created_at.strftime('%Y년 %m월 %d일 %H:%M'))
             date = {
                 'username': comment.user.username,
-                'date': comment.created_at.strftime('%Y년 %m월 %d일 %H:%M'),
+                'date': comment.created_at.strftime('%Y %m %d %H:%M'),
                 'content': comment.content
             }
             return JsonResponse({'comment': date},status=200)
