@@ -10,6 +10,7 @@ class Category(models.Model):
         db_table = "category"
 
     name = models.CharField(max_length=50)
+
     def __str__(self):
         return self.name
 
@@ -20,8 +21,8 @@ class Article(BaseModel):
     title = models.CharField(max_length=50)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    content = RichTextField(blank=True, null=True)
-    img = models.TextField(null=True)
+    content = RichTextField(null=False)
+    #img = models.FieldFile(null=True) #추후 업데이트 예정
     like_cnt = models.IntegerField(default=0)
 
     article_hits = models.IntegerField(default=0)

@@ -121,12 +121,15 @@
             </div>
             <h1 class="write_title">New post</h1>
                 <div class="form-group-text">
-                    <form method="POST" class="post-form">
+                    <form method="POST" class="post-form" action="{% url 'articleapp:aritcle_write' %}">
                         {% csrf_token %}
-                        {{ form.media }}
-                        {{ form.as_p }}
+                        {{ article_form.media }}
+                        {{ article_form.as_p }}
+{#                        {{ article_form.title }}#}
+{#                        {{ article_form.category }}#}
+{#                        {{ article_form.content }}#}
                         <p></p>
-                        <button type="button" class="btn btn-light">발행</button>
+                        <button class="btn btn-light">발행</button>
                     </form>
                 </div>
         </div>

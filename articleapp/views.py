@@ -1,8 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
-from .forms import CommunityPost
+from .forms import ArticleForm
 # 게시글 목록
 from articleapp.services.service_article import (
     create_article, delete_article, get_client_ip, get_page_context,
@@ -14,6 +15,10 @@ from articleapp.services.service_article import (
 # 단일 게시글 CRUD
 from commentapp.models import Comment
 from commentapp.services.comment_service import read_all_comment, read_target_article_comment
+
+from django.urls import reverse
+
+from .models import Category
 
 
 class ArticleView(View):
@@ -68,10 +73,25 @@ class ArticleView(View):
 
 
 # 게시글 작성
+@login_required(login_url="/users/login/")
 def write_article(request):
-    form = CommunityPost()
+    if request.method == 'POST':
+        article_form = ArticleForm(request.POST)
+        category_id = request.POST.get('category')
+        category_name = Category.objects.get(id=category_id)
 
-    return render(request, 'articleapp/article_write.html', {'form':form}, status=200)
+        if article_form.is_valid():
+            article = article_form.save(commit=False)
+            article.user = request.user
+            article.save()
+
+            return redirect(f'/communities/{category_name}/') # 작성한 게시판으로 리로드 해놓음.
+
+    if request.method == 'GET':
+        article_form = ArticleForm()
+
+        return render(request, 'articleapp/article_write.html', {'article_form': article_form}, status=200)
+
 
 
 # 홈
