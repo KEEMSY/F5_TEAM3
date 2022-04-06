@@ -571,7 +571,8 @@
     }
 
     .content {
-        width: 800px;
+        width: 100%;
+        max-width: 800px;
         min-height: 847px;
         margin: 4vw 0 0 2vw;
         float: left;
@@ -591,7 +592,7 @@
     }
 
     .panel {
-        width: 750px;
+        width: 100%;
         height: 215px;
         margin-bottom: 20px;
         background-color: #fff;
@@ -601,10 +602,11 @@
         box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
     }
 
+
     .panel-body {
         align-items: center;
         display: flex;
-        width: 780px;
+        width: 100%;
         padding: 30px;
     }
 
@@ -641,13 +643,14 @@
 
     .user-name-skill {
         width: 100%;
-        height: 100%;
-        margin-left: 2%;
+        height: 88px;
+        margin-left: 19px;
+
     }
 
     .user-basic-info {
         width: 100%;
-        height: 100%;
+        height: 70px;
     }
 
     .avatar-photo {
@@ -668,6 +671,7 @@
     }
 
     .col-sm-9 {
+        flex-direction: column;
         min-height: 1px;
     }
 
@@ -791,9 +795,9 @@
     }
 
     .user-info .user-point {
-        margin-left: 5%;
+        margin-left: 15px;
         float: left;
-        width: 15%;
+        width: 60px;
         text-align: center;
     }
 
@@ -1351,6 +1355,23 @@
         cursor: pointer;
     }
 
+    @media only screen and (max-width: 920px) {
+
+        .avatar-big .avatar-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 70%;
+            overflow: hidden;
+        }
+    }
+
+    @media only screen and (max-width: 780px) {
+        .user-info.col-sm-9 {
+            width: 60%
+        }
+    }
+
+
 </style>
 
 
@@ -1368,33 +1389,31 @@
 
     <div class="layout-container">
         <div class="main ">
-
+            <div class="sidebar">
+                {#                게시글 사이드 바 추가#}
+            </div>
             <div id="user" class="content clearfix" role="main">
                 {#프로필#}
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="avatar clearfix avatar-big col-sm-3 text-center">
                             {% if not u.profile.img %}
-                                <a class="avatar-photo"><img
-                                        src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg"></a>
+                                <a class="avatar-photo"><img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg"></a>
                             {% else %}
-                                <a class="avatar-photo"><img
-                                        src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ u.profile.img }}"></a>
+                                <a class="avatar-photo"><img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ u.profile.img }}"></a>
                             {% endif %}
                         </div>
 
                         <div class="user-info col-sm-9">
                             <div class="user-name-skill">
-                                <h2 class="pull-left"><strong
-                                        class="strong">{{ u.username }}</strong></br>{{ u.profile.skill }}</h2>
+                                <h2 class="pull-left"><strong class="strong">{{ u.username }}</strong></br>{{ u.profile.skill }}</h2>
                             </div>
 
                             <div class="user-basic-info">
                                 {% if u.profile.github %}
                                     <div class="user-point">
                                         <div class="github">
-                                            <a href="{{ u.profile.github }}"><img
-                                                    src="{% static 'img/github_icon.png' %}"></a>
+                                            <a href="{{ u.profile.github }}"><img src="{% static 'img/github_icon.png' %}"></a>
                                         </div>
                                     </div>
                                 {% endif %}
@@ -1582,7 +1601,6 @@
                         </div>
                     </div>
                     {#                    페이지 네이터#}
-
                 </div>
             </div>
         </div>

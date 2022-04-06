@@ -19,8 +19,8 @@ def show_job(request):
     board = paginator.get_page(page)
     board_lists.append(board)
 
-    # 로그인했고, 로그인 한 사람이 스킬까지 있다면,
-    if request.user.is_authenticated and target_user_profile.get().skill is not None:
+    # 로그인했고, 로그인 한 사람이 스킬까지 있다면, **수정 필요
+    if request.user.is_authenticated:
         skills = []
         for i in target_user_profile:
             skills.append(i.skill)
