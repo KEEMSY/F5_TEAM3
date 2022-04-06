@@ -299,6 +299,12 @@ hr{
 
 #comment-submit-button:hover {
     background-color: #badbcc;
+    width: 5rem;
+    margin-left: 1rem;
 
 
+}
+#comment-submit-button {
+    width: 5rem;
+    margin-left: 1rem;
 }

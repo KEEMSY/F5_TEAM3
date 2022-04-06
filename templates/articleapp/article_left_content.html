@@ -1,4 +1,3 @@
-<div class="wraper_wraper">
     <div class="col-4">
         <div class="left_wrapper">
         <div class="category_wrapper">
@@ -30,13 +29,13 @@
                 {% for article in left_content_articles %}
                     <div class="post">
                     <span>
-                        <a href="">
+                        <a href="{% url 'articleapp:article_CRUD' article.pk %}">
                             <div class="post_area" id="post_area_{{ article.id }}">
-                                <div class="post_img"></div>
+{#                                <div class="post_img"></div>#}
                                 <div class="post_details">
                                     <div class="post_title">
                                         <span class="post_user_title">
-                                            {{ article.title }}
+                                            📖  {{ article.title }}
                                         </span>
                                     </div>
                                         <div class="post_detail">
