@@ -1,6 +1,6 @@
 <!--== Start Header Wrapper ==-->
 {% load static %}
-<img src="{% static 'img/home_02.png' %}">
+<img class="header_img" src="{% static 'img/home_02.png' %}">
 <header class="header-area transparent">
     <div class="container">
         <div class="row no-gutter align-items-center position-relative">
@@ -10,7 +10,7 @@
                         <div class="header-logo-area">
                             <a href="{% url 'home' %}">
                                 <img class="logo-main" src="{% static 'img/coFi1.png' %}" alt="Logo"/>
-                                <img class="logo-light" src="../static/img/logo-light.png" alt="Logo"/>
+                                <img class="logo-light" src="{%  static '/img/logo-light.png' %}" alt="Logo"/>
                             </a>
                         </div>
                     </div>

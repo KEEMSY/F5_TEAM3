@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -100,7 +101,7 @@
         }
     }
 
-    .row.align-items-center.post-home-style.row-gutter-40 {
+    .row.align-items-center.post-home-style.row-gutter-40.news_container {
         margin-top: 4vw;
 }
 
@@ -121,7 +122,11 @@
         -ms-transition: all 0.3s ease-in-out;
         -o-transition: all 0.3s ease-in-out;
     }
-
+@media only screen and (max-width: 992px) {
+    .row.align-items-center.post-home-style.row-gutter-40.news_container {
+        justify-content: center;
+    }
+}
 </style>
 <body>
 
@@ -162,11 +167,11 @@
 
 
             <div class="home-slider-shape">
-                <img class="shape1" data-aos="fade-down" data-aos-duration="1500" src="static/img/slider/home_01.png"
+                <img class="shape1" data-aos="fade-down" data-aos-duration="1500" src="{%  static '/img/slider/home_01.png' %}"
                      width="900" height="700" alt="Image-HasTech">
-                <img class="shape2" data-aos="fade-left" data-aos-duration="2000" src="static/img/slider/vector2.png"
+                <img class="shape2" data-aos="fade-left" data-aos-duration="2000" src="{%  static '/img/slider/vector2.png' %}"
                      width="201" height="346" alt="Image-HasTech">
-                <img class="shape3" data-aos="fade-right" data-aos-duration="2000" src="static/img/slider/vector3.png"
+                <img class="shape3" data-aos="fade-right" data-aos-duration="2000" src="{%  static '/img/slider/vector3.png' %}"
                      width="276" height="432" alt="Image-HasTech">
             </div>
 
@@ -178,19 +183,19 @@
             <div class="badge-contatiner">
                 <a href="#TopPosts">
                     <div class="badge">
-                    <img src="static/img/icons/TopPosts.png" alt="Image">
+                    <img src="{%  static '/img/icons/TopPosts.png' %}" alt="Image">
                     <h3>Top posts</h3>
                 </div>
                 </a>
                 <a href="#Career">
                     <div class="badge">
-                    <img src="static/img/icons/Career.png" alt="Image">
+                    <img src="{%  static '/img/icons/Career.png' %}" alt="Image">
                     <h3>Career</h3>
                 </div>
                 </a>
                 <a href="#News">
                     <div class="badge">
-                    <img src="static/img/icons/News.png" alt="Image">
+                    <img src="{%  static '/img/icons/News.png' %}" alt="Image">
                     <h3>News</h3>
                 </div>
                 </a>
@@ -209,7 +214,7 @@
                     <div class="col-12">
                         <div class="play-video-btn">
                             <a href="https://www.youtube.com/watch?v=yS1A2ELIwgg" class="video-popup">
-                                <img src="static/img/icons/play.png" alt="Image-HasTech">
+                                <img src="{%  static '/img/icons/play.png' %}" alt="Image-HasTech">
                             </a>
                         </div>
                     </div>
@@ -235,139 +240,36 @@
         <section class="blog-area blog-grid-area">
             <div class="container">
                 <div class="row">
+
+{#                    {% for article in article_list %}#}
                     <div class="col-sm-6 col-lg-4">
                         <!--== Start Blog Post Item ==-->
                         <div class="post-item">
                             <div class="thumb">
-                                <a href="blog-details.html"><img src="static/img/blog/2.jpg" alt="Image" width="370"
+                                <a href="{{ article.link }}"><img src="{%  static '/img/blog/2.jpg' %}" alt="Image" width="370"
                                                                  height="270"></a>
                             </div>
                             <div class="content">
-                                <div class="author">By <a href="blog.html">Walter Houston</a></div>
-                                <h4 class="title"><a href="blog-details.html">All of these amazing features <br>come at
-                                    an affordable price!</a></h4>
-                                <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them
-                                    industry spa also the loep into type setting.</p>
+                                <div class="author"><a href="blog.html">{{ article.user }}</a>님께서 올린글</div>
+                                <h4 class="title"><a href="blog-details.html">{{ article.title }}</a></h4>
+                                <p>{ article.content }}</p>
                                 <div class="meta">
-                                    <span class="post-date">03 April, 2022</span>
+                                    <span class="post-date">게시 날짜</span>
                                     <span class="dots"></span>
-                                    <span class="post-time">10 min read</span>
+                                    <span class="post-time">좋아요수</span>
+                                    <span class="dots"></span>
+                                    <span class="post-time">북마크</span>
                                 </div>
                             </div>
                         </div>
                         <!--== End Blog Post Item ==-->
                     </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <!--== Start Blog Post Item ==-->
-                        <div class="post-item">
-                            <div class="thumb">
-                                <a href="blog-details.html"><img src="static/img/blog/3.jpg" alt="Image" width="370"
-                                                                 height="270"></a>
-                            </div>
-                            <div class="content">
-                                <div class="author">By <a href="blog.html">Walter Houston</a></div>
-                                <h4 class="title"><a href="blog-details.html">With WooLentor's drag-and <br>drop
-                                    interface for creating...</a></h4>
-                                <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them
-                                    industry spa also the loep into type setting.</p>
-                                <div class="meta">
-                                    <span class="post-date">03 April, 2022</span>
-                                    <span class="dots"></span>
-                                    <span class="post-time">10 min read</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!--== End Blog Post Item ==-->
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <!--== Start Blog Post Item ==-->
-                        <div class="post-item">
-                            <div class="thumb">
-                                <a href="blog-details.html"><img src="static/img/blog/4.jpg" alt="Image" width="370"
-                                                                 height="270"></a>
-                            </div>
-                            <div class="content">
-                                <div class="author">By <a href="blog.html">Walter Houston</a></div>
-                                <h4 class="title"><a href="blog-details.html">With WooLentor's drag-and <br>drop
-                                    interface for creating...</a></h4>
-                                <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them
-                                    industry spa also the loep into type setting.</p>
-                                <div class="meta">
-                                    <span class="post-date">03 April, 2022</span>
-                                    <span class="dots"></span>
-                                    <span class="post-time">10 min read</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!--== End Blog Post Item ==-->
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <!--== Start Blog Post Item ==-->
-                        <div class="post-item">
-                            <div class="thumb">
-                                <a href="blog-details.html"><img src="static/img/blog/5.jpg" alt="Image" width="370"
-                                                                 height="270"></a>
-                            </div>
-                            <div class="content">
-                                <div class="author">By <a href="blog.html">Walter Houston</a></div>
-                                <h4 class="title"><a href="blog-details.html">Make your store stand out <br>from the
-                                    others by converting</a></h4>
-                                <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them
-                                    industry spa also the loep into type setting.</p>
-                                <div class="meta">
-                                    <span class="post-date">03 April, 2021</span>
-                                    <span class="dots"></span>
-                                    <span class="post-time">10 min read</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!--== End Blog Post Item ==-->
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <!--== Start Blog Post Item ==-->
-                        <div class="post-item">
-                            <div class="thumb">
-                                <a href="blog-details.html"><img src="static/img/blog/6.jpg" alt="Image" width="370"
-                                                                 height="270"></a>
-                            </div>
-                            <div class="content">
-                                <div class="author">By <a href="blog.html">Walter Houston</a></div>
-                                <h4 class="title"><a href="blog-details.html">All of these amazing features <br>come at
-                                    an affordable price!</a></h4>
-                                <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them
-                                    industry spa also the loep into type setting.</p>
-                                <div class="meta">
-                                    <span class="post-date">03 April, 2022</span>
-                                    <span class="dots"></span>
-                                    <span class="post-time">10 min read</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!--== End Blog Post Item ==-->
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <!--== Start Blog Post Item ==-->
-                        <div class="post-item">
-                            <div class="thumb">
-                                <a href="blog-details.html"><img src="static/img/blog/7.jpg" alt="Image" width="370"
-                                                                 height="270"></a>
-                            </div>
-                            <div class="content">
-                                <div class="author">By <a href="blog.html">Walter Houston</a></div>
-                                <h4 class="title"><a href="blog-details.html">With WooLentor's drag-and <br>drop
-                                    interface for creating...</a></h4>
-                                <p>Lorem Ipsum is simpely dummy & text themes print industry orem psumen has been them
-                                    industry spa also the loep into type setting.</p>
-                                <div class="meta">
-                                    <span class="post-date">03 April, 2022</span>
-                                    <span class="dots"></span>
-                                    <span class="post-time">10 min read</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!--== End Blog Post Item ==-->
-                    </div>
+{#                    {% endfor %}#}
+
                 </div>
+
+
+{#                페이지네이터 적용예정  적용 안하면 삭제요망  !#}
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <div class="pagination-area">
@@ -395,6 +297,8 @@
                         </div>
                     </div>
                 </div>
+{#                페이지네이터 적용예정  적용 안하면 삭제요망  !#}
+
             </div>
         </section>
         <!--== End Blog Area Wrapper ==-->
@@ -416,6 +320,7 @@
                     </div>
                 </div>
                 <div class="row Career-row">
+                {% for board_list in board_lists %}
                     {% if board_list %}
                         {% for career in board_list %}
                             <div class="col-md-6 col-lg-4">
@@ -449,6 +354,7 @@
                             </div>
                         {% endfor %}
                     {% endif %}
+                {% endfor %}
                 </div>
             </div>
         </section>
@@ -473,7 +379,7 @@
                 {% if news %}
                     {#                        {% for info in news_list %}#}
                     <!--== Start first POST Wrapper ==-->
-                    <div class="row align-items-center post-home-style row-gutter-40">
+                    <div class="row align-items-center post-home-style row-gutter-40 news_container">
                         <div class="col-md-6 col-lg-4" data-aos="fade-right">
                             <!--== Start Blog Post Item ==-->
                             <div class="post-item">
@@ -488,7 +394,7 @@
                                             href="{{ news.0.news_link }}">{{ news.0.news_desc|truncatewords:40 }}</a>
                                     </div>
                                     <div class="meta">
-                                        <span class="post-date">{{ new.0.news_date }}</span>
+                                        <span class="post-date">{{ news.0.news_date }}</span>
                                         <span class="dots"></span>
                                         <span class="post-time">10 min read</span>
                                     </div>
@@ -512,7 +418,7 @@
                                                 href="{{ news.1.news_link }}">{{ news.1.news_desc|truncatewords:40 }}</a>
                                         </div>
                                         <div class="meta">
-                                            <span class="post-date">{{ new.1.news_date }}</span>
+                                            <span class="post-date">{{ news.1.news_date }}</span>
                                             <span class="dots"></span>
                                             <span class="post-time">10 min read</span>
                                         </div>
@@ -535,7 +441,7 @@
                                             href="{{ news.2.news_link }}">{{ news.2.news_desc|truncatewords:40 }}</a>
                                     </div>
                                     <div class="meta">
-                                        <span class="post-date">{{ new.2.news_date }}</span>
+                                        <span class="post-date">{{ news.2.news_date }}</span>
                                         <span class="dots"></span>
                                         <span class="post-time">10 min read</span>
                                     </div>
@@ -570,44 +476,32 @@
            aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
             <h1 class="d-none" id="offcanvasExampleLabel">Aside Menu</h1>
-            <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">menu <i
+            <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">메뉴 <i
                     class="icofont-simple-left"></i></button>
         </div>
         <div class="offcanvas-body">
             <!-- Mobile Menu Start -->
             <div class="mobile-menu-items">
                 <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#">Find Jobs</a>
+                    <li><a href="/">홈</a></li>
+                    <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
+                    <li><a href="{% url 'articleapp:home' %}">커뮤니티</a>
                         <ul class="sub-menu">
-                            <li><a href="job.html">Jobs</a></li>
-                            <li><a href="job-details.html">Job Details</a></li>
+                            <li><a href="{% url 'temp1_free' %}">자유게시판</a></li>
+                            <li><a href="{% url 'temp1_tip' %}">꿀팁게시판</a></li>
+                            <li><a href="{% url 'temp1_question' %}">질문게시판</a></li>
                         </ul>
                     </li>
-                    <li><a href="employers-details.html">Employers Details</a></li>
-                    <li><a href="#">Candidates</a>
-                        <ul class="sub-menu">
-                            <li><a href="candidate.html">Candidates</a></li>
-                            <li><a href="candidate-details.html">Candidate Details</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Blog</a>
-                        <ul class="sub-menu">
-                            <li><a href="blog-grid.html">Blog Grid</a></li>
-                            <li><a href="blog.html">Blog Left Sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                            <li><a href="blog-details.html">Blog Details</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Pages</a>
-                        <ul class="sub-menu">
-                            <li><a href="about-us.html">About us</a></li>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="registration.html">Registration</a></li>
-                            <li><a href="page-not-found.html">Page Not Found</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
+                    {% if not user.is_authenticated %}
+                                    <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
+                                    <li><a href="{% url 'user:sign-up' %}"><span>회원가입</span></a></li>
+                                {% else %}
+                                    <li class="has-submenu"><a
+                                            href="{% url 'user:profile' user.pk %}"><span>마이페이지</span></a>
+                                    </li>
+                                    <li><a href="{% url 'user:logout' %}"><span>로그아웃</span></a></li>
+                                {% endif %}
+{#                    <li><a href="contact.html">Contact</a></li>#}
                 </ul>
             </div>
             <!-- Mobile Menu End -->
