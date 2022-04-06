@@ -40,6 +40,7 @@
                 let username = response['comment']['username']
                 let date = response['comment']['date']
                 let content = response['comment']['content']
+                let pk = response['comment']['pk']
 
                 temp_html = `
                     <div class="timeline-item-description">
@@ -47,7 +48,9 @@
                             <img src="https://assets.codepen.io/285131/hat-man.png"/>
                         </i>
                         <span><a href="#"> ${username} </a>   작성된 날짜 <time
-                                datetime="20-01-2021"> ${date} </time></span>
+                                datetime="20-01-2021"> ${date} </time>
+                                <button class="comment_delete_btn" onclick="delete_comment(${pk})">삭제하기</button>
+                        </span>
                     </div>
                     <div class="comment">
                         <p>
@@ -66,7 +69,6 @@
     }
 
     function delete_comment(id){
-        {#let pk = document.getElementById('')#}
         let pk_data = JSON.stringify({"pk":id})
         $.ajax({
             type: "DELETE",
@@ -79,9 +81,10 @@
             },
             success: function (response) {
                 window.location.reload(true)
-                open_comment()
+
             }
         });
+        open_comment()
     }
 </script>
 <body>
@@ -182,11 +185,11 @@
                                             {#                                댓글 작성#}
                                             {% if user.is_authenticated %}
                                                 <li class="timeline-item">
-                                        <span class="timeline-item-icon | avatar-icon">
-                                            <i class="avatar">
-                                                <img src="https://assets.codepen.io/285131/hat-man.png"/>
-                                            </i>
-                                        </span>
+                                                    <span class="timeline-item-icon | avatar-icon">
+                                                        <i class="avatar">
+                                                            <img src="https://assets.codepen.io/285131/hat-man.png"/>
+                                                        </i>
+                                                    </span>
                                                     {#                                        댓글 작성하는곳#}
                                                     <div class="new-comment">
                                                         {% csrf_token %}
@@ -213,7 +216,7 @@
                                                 </div>
                                             {% endif %}
                                     <div class="content_botton">
-                                        <button id="more_show_btn" onclick="open_comment() ">더보기</button>
+                                        <button style="width: 8rem;" id="more_show_btn" onclick="open_comment() ">더보기</button>
                                     </div>
                                     <div id="comment_content" class="disp_none">
 
@@ -235,7 +238,9 @@
                                                         <time
                                                                 datetime="{{ comment.created_at }}">{{ comment.created_at|date:'Y-m-d H:i' }}
                                                         </time>
-                                                          <button class="comment_delete_btn" onclick="delete_comment({{ comment.pk }})">삭제하기</button>
+                                                        {% if user == comment.user %}
+                                                        <button class="comment_delete_btn" onclick="delete_comment({{ comment.pk }})">삭제하기</button>
+                                                        {% endif %}
                                                     </span>
                                                             </div>
                                                             <div class="comment" style="width: 33.85rem;">
