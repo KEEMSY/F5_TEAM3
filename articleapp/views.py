@@ -8,7 +8,6 @@ from django.views import View
 
 from bookmarkapp.models import Bookmark
 from likeapp.models import ArticleLikes
-from .forms import CommunityPost
 
 # 게시글 목록
 from articleapp.services.service_article import (
