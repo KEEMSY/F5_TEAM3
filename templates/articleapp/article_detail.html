@@ -27,6 +27,15 @@
 
     }
 
+    function minus_comment_cnt(){
+        let comment_cnt = parseInt($('#comment_cnt').text())
+        console.log(comment_cnt)
+        comment_cnt --
+        parseInt($('#comment_cnt').html(comment_cnt))
+
+    }
+
+
     function save_comment(){
         let url = window.location.href.split('/')
         let article_id = url[url.length - 1]
@@ -50,6 +59,7 @@
                 let pk = response['comment']['pk']
 
                 temp_html = `
+                <div id="${pk}">
                     <div class="timeline-item-description">
                         <i class="avatar | small">
                             <img src="https://assets.codepen.io/285131/hat-man.png"/>
@@ -63,8 +73,8 @@
                         <p>
                             ${content}
                         </p>
-                    </div>`
-
+                    </div>
+                </div>`
                 $('#comment_content2').append(temp_html)
                 {#window.location.reload(true)#}
                 $('#target_comment').val('')
@@ -89,8 +99,9 @@
             },
             success: function (response) {
                 $('#'+id).remove()
+                console.log(id)
                 {#window.location.reload(true)#}
-
+                minus_comment_cnt()
             }
         });
         open_comment()
