@@ -24,6 +24,8 @@
         let article_id = url[url.length - 1]
         let comment = $('#target_comment').val()
         let temp_html =``
+
+
             $.ajax({
                 type: "POST",
                 url: '{% url 'commentapp:interatction_comment' %}',
@@ -57,6 +59,8 @@
 
                     $('#comment_content2').append(temp_html)
                     {#window.location.reload(true)#}
+                    $('#target_comment').val('')
+                    open_comment()
 
                 }
             });
@@ -211,7 +215,7 @@
                                                 <br>
                                                 {% for comment in target_comment %}
                                                 <div class="comment_list_wrapper" id="{{ comment.pk }}">
-                                                    <div class="timeline-item-description" id="comment_append">
+                                                    <div class="timeline-item-description">
                                                        <i class="avatar | small">
                                                             <img src="https://assets.codepen.io/285131/hat-man.png"/>
                                                         </i>
@@ -221,7 +225,7 @@
                                                             </time>
                                                         </span>
                                                     </div>
-                                                    <div class="comment">
+                                                    <div class="comment" style="width: 33.85rem;">
                                                         <p>
                                                             {{ comment.content }}
                                                         </p>

@@ -46,3 +46,4 @@ def delete_comment(comment_id):
         target_comment.delete()
     except ObjectDoesNotExist:
         return False
+
