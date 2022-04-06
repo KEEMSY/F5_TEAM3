@@ -169,6 +169,7 @@
                                                         debrief it all
                                                         together!😊</p>
                                                 </div>
+                                                <hr>
                                                 {% for comment in target_comment %}
                                                 <div id="{{ comment.pk }}">
                                                     <div class="timeline-item-description" id="comment_append">
@@ -187,6 +188,7 @@
                                                         </p>
                                                     </div>
                                                 </div>
+
                                                 {% endfor %}
                                             </div>
                                         </li>
@@ -216,7 +218,11 @@
                                         </div>
                                         <div class="login_required_content">
                                             <a href="{% url 'user:login' %}">
-                                                <span>로그인 하러 가볼까?</span>
+                                                <span><span style="font-weight: bold">로그인</span> 을 해볼까?</span>
+                                            </a>
+                                            <a href="{% url 'user:sign-up' %}" style="display: block">
+                                                <span style="font-size: 0.8rem">아니면</span>
+                                                <span><span style="font-weight: bold">회원가입</span> 을 해볼까?</span>
                                             </a>
                                         </div>
                                     </div>
