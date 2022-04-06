@@ -6,17 +6,21 @@
         <div class="page_content_wrap">
             <div class="content_wrap">
                 <div class="content">
-                    <article class="post_item post_item_single post_featured_left post_format_standard forum type-forum hentry">
+                    <article
+                            class="post_item post_item_single post_featured_left post_format_standard forum type-forum hentry">
                         <h2 class="post_title entry-title">모든 게시글</h2>
                         <section class="post_content">
                             <div id="bbpress-forums">
                                 <div class="bbp-search-form">
                                     <form role="search" method="get" id="bbp-search-form" action="#">
                                         <div>
-                                            <label class="screen-reader-text hidden" for="bbp_search">Search for:</label>
+                                            <label class="screen-reader-text hidden" for="bbp_search">Search
+                                                for:</label>
                                             <input type="hidden" name="action" value="bbp-search-request">
-                                            <input tabindex="101" type="text" value="" name="bbp_search" id="bbp_search">
-                                            <input tabindex="102" class="button" type="submit" id="bbp_search_submit" value="Search">
+                                            <input tabindex="101" type="text" value="" name="bbp_search"
+                                                   id="bbp_search">
+                                            <input tabindex="102" class="button" type="submit" id="bbp_search_submit"
+                                                   value="Search">
                                         </div>
                                     </form>
                                 </div>
@@ -29,6 +33,7 @@
                                         <span><a href="{% url 'articleapp:aritcle_write' %}">게시글 작성</a></span>
                                     </p>
                                 </div>
+                                <button class="article_write">게시글 작성</button>
                                 <ul id="forums-list-0" class="bbp-forums">
                                     <li class="bbp-header">
                                         <ul class="forum-titles">
@@ -38,34 +43,37 @@
                                             <li class="bbp-forum-freshness">작성자</li>
                                         </ul>
                                     </li>
+                                        {% for article in board_list %}
 
-                                    {% for article in board_list %}
+                                            <li class="bbp-body">
+                                                <ul id="{{ article.id }}"
+                                                    class="loop-item-0 bbp-forum-status-open bbp-forum-visibility-publish forum type-forum hentry">
 
-                                        <li class="bbp-body">
-                                            <ul id="{{ article.id }}" class="loop-item-0 bbp-forum-status-open bbp-forum-visibility-publish forum type-forum hentry">
-
-                                                <li class="bbp-forum-info">
-                                                    <a class="bbp-forum-title" href="{% url 'articleapp:article_CRUD' article.pk %}">{{ article.title }}</a>
-                                                    <div class="bbp-forum-content">
-                                                        {{ article.content }}
-                                                    </div>
-                                                </li>
-                                                <li class="bbp-forum-topic-count">{{ article.article_hits }}</li>
-                                                <li class="bbp-forum-reply-count">0</li>
-                                                <li class="bbp-forum-freshness">
-                                                    {{ article.user.name }}
-                                                    <p class="bbp-topic-meta">
+                                                    <li class="bbp-forum-info">
+                                                        <a class="bbp-forum-title"
+                                                           href="{% url 'articleapp:article_CRUD' article.pk %}">{{ article.title }}</a>
+                                                        <div class="bbp-forum-content">
+                                                            {{ article.content }}
+                                                        </div>
+                                                    </li>
+                                                    <li class="bbp-forum-topic-count">{{ article.article_hits }}</li>
+                                                    <li class="bbp-forum-reply-count">0</li>
+                                                    <li class="bbp-forum-freshness">
+                                                        {{ article.user.name }}
+                                                        <p class="bbp-topic-meta">
                                                 <span class="bbp-topic-freshness-author">
-                                                    <img alt="" src="http://1.gravatar.com/avatar/?s=14&amp;d=mm&amp;r=g" class="avatar avatar-14 photo avatar-default" height="14" width="14">&nbsp;{{ article.created_at }}
+                                                    <img alt=""
+                                                         src="http://1.gravatar.com/avatar/?s=14&amp;d=mm&amp;r=g"
+                                                         class="avatar avatar-14 photo avatar-default" height="14"
+                                                         width="14">&nbsp;{{ article.created_at }}
                                                 </span>
-                                                    </p>
-                                                </li>
+                                                        </p>
+                                                    </li>
 
-                                            </ul>
-                                        </li>
+                                                </ul>
+                                            </li>
 
-                                    {% endfor %}
-
+                                        {% endfor %}
                                     <li class="bbp-footer">
                                         <div class="tr">
                                             <p class="td colspan4">&nbsp;</p>

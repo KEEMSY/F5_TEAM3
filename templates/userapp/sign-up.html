@@ -152,19 +152,15 @@
            aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
             <h1 class="d-none" id="offcanvasExampleLabel">Aside Menu</h1>
-            <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">menu <i
+            <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">메뉴 <i
                     class="icofont-simple-left"></i></button>
         </div>
         <div class="offcanvas-body">
             <!-- Mobile Menu Start -->
             <div class="mobile-menu-items">
                 <ul class="nav-menu">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="{% url 'careerapp:job' %}">채용정보</a>
-                        <ul class="sub-menu">
-                            <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="/">홈</a></li>
+                    <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
                     <li><a href="{% url 'articleapp:home' %}">커뮤니티</a>
                         <ul class="sub-menu">
                             <li><a href="{% url 'temp1_free' %}">자유게시판</a></li>
@@ -173,15 +169,15 @@
                         </ul>
                     </li>
                     {% if not user.is_authenticated %}
-                        <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
-                        <li><a href="{% url 'user:sign-up' %}"><span>회원가입</span></a></li>
-                    {% else %}
-                        <li class="has-submenu"><a
-                                href="{% url 'user:profile' user.pk %}"><span>마이페이지</span></a>
-                        </li>
-                        <li><a href="{% url 'user:logout' %}"><span>로그아웃</span></a></li>
-                    {% endif %}
-                    {#                    <li><a href="contact.html">Contact</a></li>#}
+                                    <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
+                                    <li><a href="{% url 'user:sign-up' %}"><span>회원가입</span></a></li>
+                                {% else %}
+                                    <li class="has-submenu"><a
+                                            href="{% url 'user:profile' user.pk %}"><span>마이페이지</span></a>
+                                    </li>
+                                    <li><a href="{% url 'user:logout' %}"><span>로그아웃</span></a></li>
+                                {% endif %}
+{#                    <li><a href="contact.html">Contact</a></li>#}
                 </ul>
             </div>
             <!-- Mobile Menu End -->
