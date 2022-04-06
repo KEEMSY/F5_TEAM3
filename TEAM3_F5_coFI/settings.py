@@ -124,16 +124,16 @@ WSGI_APPLICATION = 'TEAM3_F5_coFI.wsgi.application'
 
 pymysql.install_as_MySQLdb()  # 이것을 실행하면 pymysql을 사용하면서 mysql클라이언트를 실행하는 것처럼 됨
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': "TEAM3",
-#         'USER': "root",
-#         'PASSWORD': "2349",
-#         'HOST' : "localhost",
-#         'PORT' : "3306"
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': "TEAM3",
+        'USER': "root",
+        'PASSWORD': "2349",
+        'HOST' : "localhost",
+        'PORT' : "3306"
+    }
+}
 
 # # 로컬 db 연결
 # DATABASES = {
