@@ -185,17 +185,17 @@ STATICFILES_DIRS = [
 
 
 # article_front에서옴
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# CKEDITOR_UPLOAD_PATH = 'uploads/'
-# CKEDITOR_IMAGE_BACKEND = 'pillow'
-# CKEDITOR_CONFIGS = {
-#     'default': {
-#         'height': 300,
-#         'width': 800,
-#     }
-# }
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'height': 300,
+        'width': 800,
+    }
+}
 
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
