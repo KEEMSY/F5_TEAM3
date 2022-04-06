@@ -19,6 +19,13 @@
         $('#less_show_btn').addClass('disp_none')
     }
 
+    function plus_comment_cnt(){
+        let comment_cnt = parseInt($('#comment_cnt').text())
+        console.log(comment_cnt)
+        comment_cnt ++
+        parseInt($('#comment_cnt').html(comment_cnt))
+
+    }
 
     function save_comment(){
         let url = window.location.href.split('/')
@@ -62,6 +69,7 @@
                 {#window.location.reload(true)#}
                 $('#target_comment').val('')
                 open_comment()
+                plus_comment_cnt()
 
             }
         });
@@ -80,7 +88,8 @@
                 'X-CSRFTOKEN' : '{{ csrf_token }}'
             },
             success: function (response) {
-                window.location.reload(true)
+                $('#'+id).remove()
+                {#window.location.reload(true)#}
 
             }
         });
