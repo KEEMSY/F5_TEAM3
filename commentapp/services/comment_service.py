@@ -15,7 +15,7 @@ def read_all_comment():
 
 
 def read_target_article_comment(pk):
-    target_comment = Comment.objects.filter(article_id=pk).order_by('-id')
+    target_comment = Comment.objects.filter(article_id=pk).order_by()
     if len(target_comment) != 0:
         return target_comment
     else:
