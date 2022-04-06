@@ -2,6 +2,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views import View
+
+from bookmarkapp.models import Bookmark
+from likeapp.models import ArticleLikes
 from .forms import CommunityPost
 # 게시글 목록
 from articleapp.services.service_article import (
@@ -14,26 +17,45 @@ from articleapp.services.service_article import (
 # 단일 게시글 CRUD
 from commentapp.models import Comment
 from commentapp.services.comment_service import read_all_comment, read_target_article_comment
-
+from bookmarkapp.services.bookmark_service import bookmark_check
 
 class ArticleView(View):
     def get(self, request, pk):
+        article_id = pk
         all_articles = read_all_article()[:8]
         recent_comments = read_all_comment()[:5]
+        check_bookmark = bookmark_check(request.user.id, article_id)
+
+
         try:
             ip = get_client_ip(request)
             target_article = hit_article(ip, pk)
             target_comment = read_target_article_comment(pk)
 
-            if not target_comment:
+            try:
+                like_article = ArticleLikes.objects.filter(article=article_id, user=request.user.id).get()
+
+
+
+                if not target_comment:
+                    return render(request, 'articleapp/article_detail.html',
+                                  {'target_article': target_article,
+                                   'left_content_articles': all_articles,
+                                   'left_content_recent_comments': recent_comments, 'like_article': like_article, 'check_bookmark':check_bookmark},
+                                  status=200)
+                else:
+                    return render(request, 'articleapp/article_detail.html',
+                                  {'target_article': target_article, 'target_comment': target_comment,
+                                   'left_content_articles': all_articles,
+                                   'left_content_recent_comments': recent_comments, 'like_article': like_article, 'check_bookmark':check_bookmark},
+                                  status=200)
+
+
+            except ObjectDoesNotExist:
                 return render(request, 'articleapp/article_detail.html',
                               {'target_article': target_article,
-                               'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments},
+                               'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments, 'check_bookmark':check_bookmark},
                               status=200)
-            else:
-                return render(request, 'articleapp/article_detail.html',
-                          {'target_article': target_article, 'target_comment': target_comment,'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments},
-                          status=200)
 
         except ObjectDoesNotExist:
             return JsonResponse({'msg': "게시글이 존재하지 않습니다."}, status=404)
@@ -71,7 +93,7 @@ class ArticleView(View):
 def write_article(request):
     form = CommunityPost()
 
-    return render(request, 'articleapp/article_write.html', {'form':form}, status=200)
+    return render(request, 'articleapp/article_write.html', {'form': form}, status=200)
 
 
 # 홈
@@ -82,7 +104,8 @@ def show_all_article(request):
     board_list = get_page_context(all_articles, page)
 
     return render(request, 'articleapp/article_all.html',
-                  {'main_area_article': all_articles, 'left_content_articles': all_articles[:8], 'board_list': board_list, 'left_content_recent_comments': recent_comments}, status=200)
+                  {'main_area_article': all_articles, 'left_content_articles': all_articles[:8],
+                   'board_list': board_list, 'left_content_recent_comments': recent_comments}, status=200)
 
 
 # 카테고리 별 게시판 불러오기
@@ -150,7 +173,8 @@ def show_category_article(request):
     page = int(request.GET.get('page', 1))
     board_list = get_page_context(target_articles, page)
     return render(request, 'community.html',
-                  {'target_articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles[:5],
+                  {'target_articles': target_articles, 'board_list': board_list,
+                   'left_content_articles': all_articles[:5],
                    'left_content_recent_comments': recent_comments}, status=200)
 
 
@@ -178,7 +202,8 @@ def search_article(request):
             page = int(request.GET.get('page', 1))
             board_list = get_page_context(target_articles, page)
             return render(request, 'community.html',
-                          {'articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles[:8],
+                          {'articles': target_articles, 'board_list': board_list,
+                           'left_content_articles': all_articles[:8],
                            'left_content_recent_comments': recent_comments},
                           status=200)
 
@@ -189,7 +214,8 @@ def search_article(request):
                 page = int(request.GET.get('page', 1))
                 board_list = get_page_context(target_articles, page)
                 return render(request, 'community.html',
-                              {'articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles[:8],
+                              {'articles': target_articles, 'board_list': board_list,
+                               'left_content_articles': all_articles[:8],
                                'left_content_recent_comments': recent_comments},
                               status=200)
             except ObjectDoesNotExist:
@@ -201,7 +227,8 @@ def search_article(request):
                 page = int(request.GET.get('page', 1))
                 board_list = get_page_context(target_articles, page)
                 return render(request, 'community.html',
-                              {'articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles[:8],
+                              {'articles': target_articles, 'board_list': board_list,
+                               'left_content_articles': all_articles[:8],
                                'left_content_recent_comments': recent_comments},
                               status=200)
             except ObjectDoesNotExist:
