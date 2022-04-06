@@ -68,6 +68,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'crispy_forms',
+
+    'ckeditor',
+    'ckeditor_uploader',
+
+
     'storages',
 ]
 
@@ -86,6 +91,22 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'TEAM3_F5_coFI.urls'
+
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+### s3와 연동했다면, aws.json파일 깃 이그노어를 해놨기에 git push 할 때는 이 구간을 주석 처리해주세요!
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#
+# with open(os.path.join(BASE_DIR, 'aws.json')) as f:
+#     secrets = json.loads(f.read())
+# AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
+# AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
+# AWS_STORAGE_BUCKET_NAME = secrets['AWS']['STORAGE_BUCKET_NAME']
+# AWS_DEFAULT_ACL = 'public-read' # 올린 파일을 누구나 읽을 수 있게 지정합니다!
+# AWS_S3_ADDRESSING_STYLE = "virtual"
+######################################################################
 
 
 TEMPLATES = [
@@ -125,8 +146,6 @@ DATABASES = {
     }
 }
 
-
-
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -160,8 +179,24 @@ USE_I18N = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 # 배포용
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATICFILES_DIRS = [
+  os.path.join(BASE_DIR, "static")
+]
 # STATIC_ROOT = os.path.join("static")
+
+
+# article_front에서옴
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'height': 300,
+        'width': 800,
+    }
+}
 
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
@@ -199,3 +234,4 @@ try:
     from TEAM3_F5_coFI.deploy_settings import *
 except ImportError:
     pass
+
