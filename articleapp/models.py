@@ -1,8 +1,8 @@
+from ckeditor.fields import RichTextField
 from django.db import models
 
 from TEAM3_F5_coFI.models import BaseModel
 from userapp.models import User
-from ckeditor.fields import RichTextField
 
 
 class Category(models.Model):

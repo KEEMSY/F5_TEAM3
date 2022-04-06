@@ -1,9 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.views import View
-from .forms import ArticleForm
+
 # 게시글 목록
 from articleapp.services.service_article import (
     create_article, delete_article, get_client_ip, get_page_context,
@@ -14,10 +15,10 @@ from articleapp.services.service_article import (
     read_category_article, read_target_article, update_article)
 # 단일 게시글 CRUD
 from commentapp.models import Comment
-from commentapp.services.comment_service import read_all_comment, read_target_article_comment
+from commentapp.services.comment_service import (read_all_comment,
+                                                 read_target_article_comment)
 
-from django.urls import reverse
-
+from .forms import ArticleForm
 from .models import Category
 
 
@@ -78,20 +79,19 @@ def write_article(request):
     if request.method == 'POST':
         article_form = ArticleForm(request.POST)
         category_id = request.POST.get('category')
-        category_name = Category.objects.get(id=category_id)
+        category = Category.objects.get(id=category_id)
 
         if article_form.is_valid():
             article = article_form.save(commit=False)
             article.user = request.user
             article.save()
 
-            return redirect(f'/communities/{category_name}/') # 작성한 게시판으로 리로드 해놓음.
+            return redirect(f'/communities/{category}/') # 작성한 게시판으로 리로드 해놓음.
 
     if request.method == 'GET':
         article_form = ArticleForm()
 
         return render(request, 'articleapp/article_write.html', {'article_form': article_form}, status=200)
-
 
 
 # 홈
@@ -128,7 +128,6 @@ def show_free_article(request):
     recent_comments = read_all_comment()[:5]
 
     target_articles = read_category_article('free')
-    print(target_articles)
     if target_articles:
         page = int(request.GET.get('page', 1))
         board_list = get_page_context(target_articles, page)

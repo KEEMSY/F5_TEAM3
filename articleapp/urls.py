@@ -11,7 +11,6 @@ urlpatterns = [
     path('question/', views.show_question_article, name='question'),
     path('question/<int:pk>', ArticleView.as_view(), name='question_RUD'),
 
-
     path('free/', views.show_free_article, name='free'),
     path('free/<int:pk>', ArticleView.as_view(), name='free_RUD'),
 
@@ -19,9 +18,7 @@ urlpatterns = [
     path('tip/<int:pk>', ArticleView.as_view(), name='tip_RUD'),
 
     path('article/<int:pk>', ArticleView.as_view(), name='article_CRUD'),
-    path('article/write', views.write_article, name='aritcle_write'),
-
-    # path('write/', views.write_article, name='aritcle_write'),
+    path('article/write/', views.write_article, name='aritcle_write'),
 
     path('search/', views.search_article, name='article_search'),
 
