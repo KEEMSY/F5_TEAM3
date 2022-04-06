@@ -20,8 +20,10 @@ from articleapp.services.service_article import (
 # 단일 게시글 CRUD
 from commentapp.models import Comment
 
-from commentapp.services.comment_service import read_all_comment, read_target_article_comment
+
+from commentapp.services.comment_service import read_all_comment, read_target_article_comment, read_best_comment
 from bookmarkapp.services.bookmark_service import bookmark_check
+
 
 from .forms import ArticleForm
 from .models import Category
@@ -39,6 +41,7 @@ class ArticleView(View):
             ip = get_client_ip(request)
             target_article = hit_article(ip, pk)
             target_comment = read_target_article_comment(pk)
+            best_comment = read_best_comment()
 
             try:
                 like_article = ArticleLikes.objects.filter(article=article_id, user=request.user.id).get()
@@ -62,7 +65,9 @@ class ArticleView(View):
             except ObjectDoesNotExist:
                 return render(request, 'articleapp/article_detail.html',
                               {'target_article': target_article,
-                               'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments, 'check_bookmark':check_bookmark},
+
+                               'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments, 'best_comment':best_comment, 'check_bookmark':check_bookmark},
+
                               status=200)
 
         except ObjectDoesNotExist:

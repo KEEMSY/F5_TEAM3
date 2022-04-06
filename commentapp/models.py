@@ -16,3 +16,4 @@ class Comment(BaseModel):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
+    like_cnt = models.IntegerField(default=0)
