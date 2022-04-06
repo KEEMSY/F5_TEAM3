@@ -5,6 +5,7 @@
 
 {% include 'head.html' %}
 
+
 {% load static %}
 
 
@@ -64,8 +65,11 @@
                                                                                  type="checkbox" value=""
                                                                                  id="defaultCheck1"> <label
                                                             class="form-check-label" for="defaultCheck1">Email
-                                                        기억하기</label></div>
-                                                    <div class="forgot-password"><a href="#/">비밀번호를 잊어버리셨나요?</a>
+                                                        기억하기</label>
+
+                                                    </div>
+                                                    <div class="go_register"></div>
+                                                    <a href="{% url 'user:sign-up' %}"><span>회원이 아니신가요?</span></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -76,7 +80,6 @@
                                                 <button type="submit" class="btn-theme">로그인</button>
                                             </div>
                                         </div>
-                                    </div>
                                 </form>
                                 <div class="google_wrap">
                                     <div class="google_class">
@@ -141,7 +144,7 @@
 
 <!--=======================Javascript============================-->
 
+{% include 'js.html'%}
 
 </body>
-
 </html>
