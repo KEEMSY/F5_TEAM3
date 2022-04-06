@@ -89,7 +89,7 @@
                         <div class="content_title_footet">
                             <div class="content_title_footet_left_wrapper">
                             <span>
-                                {{ target_article.created_at }} by <a href="">{{ target_article.user.username }}</a>
+                                {{ target_article.created_at|date:'Y-m-d H:i' }} by <a href="">{{ target_article.user.username }}</a>
                             </span>
                             </div>
                             <div class="content_title_footet_right_wrapper">
@@ -169,6 +169,7 @@
                                     <div class="content_botton">
                                         <button id="more_show_btn" onclick="open_comment() ">더보기</button>
                                     </div>
+{#                                    작성된 댓글이 있는 곳#}
                                     <div id="comment_content" class="disp_none">
                                         <li class="timeline-item | extra-space">
                                             <span class="timeline-item-icon | filled-icon">
