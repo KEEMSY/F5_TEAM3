@@ -229,13 +229,13 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-try:
-    from TEAM3_F5_coFI.deploy_settings import *
-except ImportError:
-    pass
-
 # try:
-#     from TEAM3_F5_coFI.local_settings import *
+#     from TEAM3_F5_coFI.deploy_settings import *
 # except ImportError:
 #     pass
+
+try:
+    from TEAM3_F5_coFI.local_settings import *
+except ImportError:
+    pass
 
