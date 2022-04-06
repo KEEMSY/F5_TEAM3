@@ -66,12 +66,14 @@
     }
 
     function delete_comment(id){
+        {#let pk = document.getElementById('')#}
+        let pk_data = JSON.stringify({"pk":id})
         $.ajax({
             type: "DELETE",
             url: '{% url 'commentapp:interatction_comment' %}',
-            data: {
-                'pk':id
-            },
+            contentType:"application/json",
+            dataType: "JSON",
+            data: pk_data,
             headers: {
                 'X-CSRFTOKEN' : '{{ csrf_token }}'
             },

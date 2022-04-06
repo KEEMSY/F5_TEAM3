@@ -1,3 +1,5 @@
+import json
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
 from django.http import HttpResponse, JsonResponse
@@ -37,7 +39,12 @@ class CommentView(View):
 
     def delete(self, request):
         try:
-            delete_comment(comment_id=request.DELETE.get('pk'))
+            print(request.body)
+            print(type(request.body))
+            # comment_pk = request.DELETE.get('pk')
+            comment_pk = json.loads(request.body)['pk']
+            print(comment_pk)
+            delete_comment(comment_id=comment_pk)
             return JsonResponse({'msg': '댓글이 삭제되었습니다.'}, status=200)
 
         except ObjectDoesNotExist:
