@@ -22,10 +22,10 @@
 
 
   function save_comment() {
-        let url = window.location.href.split('/')
-        let article_id = url[url.length - 1]
-        let comment = $('#target_comment').val()
-        
+      let url = window.location.href.split('/')
+      let article_id = url[url.length - 1]
+      let comment = $('#target_comment').val()
+  }
     function plus_comment_cnt(){
         let comment_cnt = parseInt($('#comment_cnt').text())
         console.log(comment_cnt)
@@ -114,7 +114,7 @@
 
             }
         });
-
+  }
 
     function bookmark_article(){
         $.ajax({
@@ -312,11 +312,11 @@
                                                     </div>
                                                 </div>
                                             {% endif %}
+
                                     <div class="content_botton">
                                         <button style="width: 8rem;" id="more_show_btn" onclick="open_comment() ">더보기</button>
                                     </div>
                                     <div id="comment_content" class="disp_none">
-
 
                                         <div id="comment_content2">
 
@@ -333,7 +333,7 @@
                                                                     <img src="https://assets.codepen.io/285131/hat-man.png"/>
                                                                 </i>
                                                                 <span><a href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a>   작성된 날짜
-]
+
                                                         <time
                                                                 datetime="{{ comment.created_at }}">{{ comment.created_at|date:'Y-m-d H:i' }}
                                                         </time>
@@ -354,6 +354,7 @@
                                                 </div>
                                             </li>
                                         </div>
+                                    </div>
                                 </ol>
                                 <div class="content_botton">
                                     <button id="less_show_btn" class="disp_none" onclick="close_comment()">닫기</button>
