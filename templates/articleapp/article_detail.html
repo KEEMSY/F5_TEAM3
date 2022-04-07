@@ -8,18 +8,37 @@
 
 <style>
 
+    .content_img{
+        width: 250px;
+        height: 331px;
+        background-color: #badbcc;
+        text-align: center;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
     .content_comment {
         width: 100%;
     }
 
     .content_best_comment {
         width: 100%;
+        display: none;
+
     }
 
 
     button#comment-submit-button {
         width: 80px;
         margin-left: 20px;
+    }
+
+    .timeline-item {
+        margin-left: 7%;
+    }
+
+    .content_comment {
+        display: block;
     }
 
     @media only screen and (max-width: 1150px) {
@@ -66,9 +85,6 @@
             display: none;
         }
 
-        .content_img {
-            display: none;
-        }
 
         .content_title h1 {
             padding: 3vw 0;
@@ -112,7 +128,34 @@
 
     }
 
+    div#comment_here {
+    width: 100%;
+}
 
+
+    .comment_list_wrapper {
+    width: 100%;
+}
+
+    .comment {
+    width: 90%;
+        max-width: 33.85rem;
+}
+
+    @media only screen and (max-width: 600px) {
+        .timeline-item-description span time {
+            display: none;
+        }
+
+    }
+
+
+    @media only screen and (max-width: 700px) {
+        .timeline-item-description span time {
+            display: none;
+        }
+
+    }
 </style>
 
 
@@ -129,9 +172,6 @@
         <div class="col-8">
             <div class="right_wrapper">
                 <div class="content_wrapper">
-                    {#                    <div class="content_img">#}
-                    {#                        여기에 이미지이 들어갑니다#}
-                    {#                    </div>#}
                     <div class="content_details">
                         <div class="content_title">
                             <h1>
@@ -208,20 +248,28 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="content_main">
-                        <span>
-                            {{ target_article.content }}
-                        </span>
-                            </div>
-                            <br>
-                            <hr>
-                            <div class="content_comment">
-                                <div class="content_best_comment">
 
-                                    <ol class="timeline">
-                                        <li class="timeline-item | extra-space">
-                                            {% if best_comment %}
-                                                <span>
+                        </div>
+                        <div class="content_main">
+                            {% if target_article.img %}
+                                <div class="content_img">
+                                    <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ target_article.img }}">
+                                </div>
+                            {% endif %}
+                            <span>
+                                <h3>{{ target_article.content }}</h3>
+                            </span>
+                        </div>
+                        <br>
+                        <hr>
+                        <div class="content_comment">
+                            <div class="content_best_comment">
+
+                                <ol class="timeline">
+                                    <li class="timeline-item | extra-space">
+                                        {% if best_comment %}
+                                            <span>
+
                                         <div style="width: 2rem; height: 2rem;">
                                             <img src="{% static 'img/recommendation.png' %}" alt="">
                                         </div>
@@ -230,107 +278,111 @@
                                                 <div class="timeline-item-wrapper" id="comment_here">
 
 
-                                                <div class="timeline-item-description">
-                                                    <i class="avatar | small">
-                                                        <img src="https://assets.codepen.io/285131/hat-man.png"/>
-                                                    </i>
-                                                    <span><a
-                                                            href="{% url 'user:profile' best_comment.user.pk %}">{{ best_comment.user.username }}</a> commented on <time
-                                                            datetime="20-01-2021">{{ best_comment.created_at|date:'Y-m-d H:i' }}</time></span>
-                                                </div>
-                                                <div class="comment">
-                                                    <p>{{ best_comment.content }}</p>
-                                                </div>
-                                            {% endif %}
-                                            <br>
-                                            {#                                댓글 작성#}
-                                            {% if user.is_authenticated %}
+                                            <div class="timeline-item-description">
+                                                <i class="avatar | small">
+                                                    {% if best_profiles.img == '' %}
+                                                        <img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg"/>
+                                                    {% else %}
+                                                        <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ best_profiles.img }}"/>
+                                                    {% endif %}
+                                                </i>
+                                                <span><a
+                                                        href="{% url 'user:profile' best_comment.user.pk %}">{{ best_comment.user.username }}</a> commented on <time
+                                                        datetime="20-01-2021">{{ best_comment.created_at|date:'Y-m-d H:i' }}</time></span>
+                                            </div>
+                                            <div class="comment">
+                                                <p>{{ best_comment.content }}</p>
+                                            </div>
+                                        {% endif %}
+                                        <br>
+                                        </div>
+                                    </li>
+                                        {#                                댓글 작성#}
+                                        {% if user.is_authenticated %}
 
-                                                </div>
-                                                </li>
-                                                <li class="timeline-item">
+
+                                            <li class="timeline-item">
                                                     <span class="timeline-item-icon | avatar-icon">
                                                         <i class="avatar">
-                                                            <img src="https://assets.codepen.io/285131/hat-man.png"/>
+                                                            <img src="{{ user_img }}"/>
                                                         </i>
                                                     </span>
-                                                    {#                                        댓글 작성하는곳#}
-                                                    <div class="new-comment">
-                                                        {% csrf_token %}
-                                                        <input id="target_comment" type="text"
-                                                               placeholder="댓글을 작성해보세요!"/>
-                                                        <button type="button" class="btn btn-light"
-                                                                id="comment-submit-button" onclick="save_comment()">
-                                                            작성
-                                                        </button>
-                                                    </div>
-                                                </li>
-                                            {% else %}
-                                                <div class="login_required">
-                                                    <div class="login_required_title">
-                                                        <h5>로그인 후에 댓글을 작성 할 수 있습니다.</h5>
-                                                    </div>
-                                                    <div class="login_required_content">
-                                                        <a href="{% url 'user:login' %}">
-                                                            <span><span
-                                                                    style="font-weight: bold">로그인</span> 을 해볼까?</span>
-                                                        </a>
-                                                        <a href="{% url 'user:sign-up' %}" style="display: block">
-                                                            <span style="font-size: 0.8rem">아니면</span>
-                                                            <span><span
-                                                                    style="font-weight: bold">회원가입</span> 을 해볼까?</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            {% endif %}
 
-                                        <div class="content_botton">
-                                            <button style="width: 8rem;" id="more_show_btn" onclick="open_comment() ">
-                                                더보기
-                                            </button>
-                                        </div>
-                                        <div id="comment_content" class="disp_none">
+                                                {#                                        댓글 작성하는곳#}
+                                                <div class="new-comment">
+                                                    {% csrf_token %}
+                                                    <input id="target_comment" type="text" placeholder="댓글을 작성해보세요!">
+                                                    <button type="button" class="btn btn-light"
+                                                            id="comment-submit-button" onclick="save_comment()">
+                                                        작성
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        {% else %}
+                                            <div class="login_required">
+                                                <div class="login_required_title">
+                                                    <h5>로그인 후에 댓글을 작성 할 수 있습니다.</h5>
+                                                </div>
+                                                <div class="login_required_content">
+                                                    <a href="{% url 'user:login' %}">
+                                                        <span><span style="font-weight: bold">로그인</span> 을 해볼까?</span>
+                                                    </a>
+                                                    <a href="{% url 'user:sign-up' %}" style="display: block">
+                                                        <span style="font-size: 0.8rem">아니면</span>
+                                                        <span><span style="font-weight: bold">회원가입</span> 을 해볼까?</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    <div class="content_botton">
+                                        <button style="width: 8rem;" id="more_show_btn" onclick="open_comment() ">더보기
+                                        </button>
+                                    </div>
+                                    <div id="comment_content" class="disp_none">
+
 
                                             <div id="comment_content2">
 
-                                            </div>
-                                            {#                                    작성된 댓글이 있는 곳#}
-                                            <div>
-                                                <li class="timeline-item | extra-space">
-                                                    <div class="timeline-item-wrapper" id="comment_here">
-                                                        <br>
-                                                        {% if target_comment %}
-                                                            {% for comment in target_comment %}
-                                                                <div class="comment_list_wrapper" id="{{ comment.pk }}">
-                                                                    <div class="timeline-item-description">
-                                                                        <i class="avatar | small">
-                                                                            <img src="https://assets.codepen.io/285131/hat-man.png"/>
-                                                                        </i>
-                                                                        <span><a
-                                                                                href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a>   작성된 날짜
+
+                                        </div>
+                                        {#                                    작성된 댓글이 있는 곳#}
+                                        <div>
+                                            <li class="timeline-item | extra-space">
+                                                <div class="timeline-item-wrapper" id="comment_here">
+                                                    <br>
+                                                    {% if target_date %}
+                                                    {% for comment, profile in target_date %}
+                                                        <div class="comment_list_wrapper" id="{{ comment.pk }}">
+                                                            <div class="timeline-item-description">
+                                                                <i class="avatar | small">
+                                                                    <img src="{{ profile }}"/>
+                                                                </i>
+                                                                <span><a href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a>   작성된 날짜
+
 
 
                                                         <time
                                                                 datetime="{{ comment.created_at }}">{{ comment.created_at|date:'Y-m-d H:i' }}
                                                         </time>
-                                                                            {% if user == comment.user %}
-                                                                                <button class="comment_delete_btn"
-                                                                                        onclick="delete_comment({{ comment.pk }})">삭제하기</button>
-                                                                            {% endif %}
-                                                    </span>
-                                                                    </div>
-                                                                    <div class="comment" style="width: 33.85rem;">
-                                                                        <p>
-                                                                            {{ comment.content }}
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
 
-                                                            {% endfor %}
-                                                        {% endif %}
-                                                    </div>
-                                                </li>
-                                            </div>
+                                                                        {% if user == comment.user %}
+                                                                            <button class="comment_delete_btn"
+                                                                                    onclick="delete_comment({{ comment.pk }})">삭제하기</button>
+                                                                        {% endif %}
+                                                    </span>
+                                                                </div>
+                                                                <div class="comment" style="width: 33.85rem;">
+                                                                    <p>
+                                                                        {{ comment.content }}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                </div>
+                                            </li>
+
                                         </div>
                                     </ol>
                                     <div class="content_botton">
@@ -423,17 +475,19 @@
                 let username = response['comment']['username']
                 let date = response['comment']['date']
                 let content = response['comment']['content']
-                let pk = response['comment']['pk']
+                let comment_pk = response['comment']['comment_pk']
+                let user_pk = response['comment']['user_pk']
+                let user_img = response['comment']['user_img']
 
                 temp_html = `
-                <div id="${pk}">
+                <div id="${comment_pk}">
                     <div class="timeline-item-description">
                         <i class="avatar | small">
-                            <img src="https://assets.codepen.io/285131/hat-man.png"/>
+                            <img src="${user_img}"/>
                         </i>
-                        <span><a href="#"> ${username} </a>   작성된 날짜 <time
+                        <span><a href="/users/profile/${user_pk}"> ${username} </a>   작성된 날짜 <time
                                 datetime="20-01-2021"> ${date} </time>
-                                <button class="comment_delete_btn" onclick="delete_comment(${pk})">삭제하기</button>
+                                <button class="comment_delete_btn" onclick="delete_comment(${comment_pk})">삭제하기</button>
                         </span>
                     </div>
                     <div class="comment">

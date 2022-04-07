@@ -150,7 +150,7 @@
                                 <div class="row justify-content-center align-items-center">
                                     <div class="col-12 col-lg-8">
                                         <div class="slider-content">
-                                            <h1 class="title Co-title"><span id="first-cofi">Co</span> - <span
+                                            <h1 class="title Co-title" style="width: 34rem;"><span id="first-cofi">Co</span> - <span
                                                     id="second-cofi">Fi</span>nd</h1>
                                             <h1 class="title">for our Success</h1>
                                             <p class="desc"><span class="counter" data-counterup-delay="80">2,568</span>
@@ -208,98 +208,60 @@
         <!--== End participants,badge Wrapper ==-->
 
         <!--== Start Video button ==-->
-            <div class="container pt--0 pb--0 video-button">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="play-video-btn">
-                            <a href="https://www.youtube.com/watch?v=yS1A2ELIwgg" class="video-popup">
-                                <img src="{%  static '/img/icons/play.png' %}" alt="Image-HasTech">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         <!--== End Video button ==-->
 
 
         <!--== Start Blog Post Item Wrapper ==-->
-        <div id="TopPosts" class="container Top-posts" data-aos="fade-down">
-            <div class="row">
-                <div class="col-12">
-                    <div class="section-title text-center">
-                        <h3 class="title">핫한 게시물</h3>
-                        <div class="desc">
-                            <p>좋은 게시글은 보고 좋아요 눌러주실거죠?</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--== Start Blog Area Wrapper ==-->
-        <section class="blog-area blog-grid-area">
-            <div class="container">
-                <div class="row">
-
+{#        <div id="TopPosts" class="container Top-posts" data-aos="fade-down">#}
+{#            <div class="row">#}
+{#                <div class="col-12">#}
+{#                    <div class="section-title text-center">#}
+{#                        <h3 class="title">핫한 게시물</h3>#}
+{#                        <div class="desc">#}
+{#                            <p>좋은 게시글은 보고 좋아요 눌러주실거죠?</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <!--== Start Blog Area Wrapper ==-->#}
+{#        <section class="blog-area blog-grid-area">#}
+{#            <div class="container">#}
+{#                <div class="row">#}
+{##}
 {#                    {% for article in article_list %}#}
-                    <div class="col-sm-6 col-lg-4">
-                        <!--== Start Blog Post Item ==-->
-                        <div class="post-item">
-                            <div class="thumb">
-                                <a href="{{ article.link }}"><img src="{%  static '/img/blog/2.jpg' %}" alt="Image" width="370"
-                                                                 height="270"></a>
-                            </div>
-                            <div class="content">
-                                <div class="author"><a href="blog.html">{{ article.user }}</a>님께서 올린글</div>
-                                <h4 class="title"><a href="blog-details.html">{{ article.title }}</a></h4>
-                                <p>{ article.content }}</p>
-                                <div class="meta">
-                                    <span class="post-date">게시 날짜</span>
-                                    <span class="dots"></span>
-                                    <span class="post-time">좋아요수</span>
-                                    <span class="dots"></span>
-                                    <span class="post-time">북마크</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!--== End Blog Post Item ==-->
-                    </div>
+{#                    <div class="col-sm-6 col-lg-4">#}
+{#                        <!--== Start Blog Post Item ==-->#}
+{#                        <div class="post-item">#}
+{#                            <div class="thumb">#}
+{#                                <a href="{{ article.link }}"><img src="{%  static '/img/blog/2.jpg' %}" alt="Image" width="370"#}
+{#                                                                 height="270"></a>#}
+{#                            </div>#}
+{#                            <div class="content">#}
+{#                                <div class="author"><a href="blog.html">{{ article.user }}</a>님께서 올린글</div>#}
+{#                                <h4 class="title"><a href="blog-details.html">{{ article.title }}</a></h4>#}
+{#                                <p>{ article.content }}</p>#}
+{#                                <div class="meta">#}
+{#                                    <span class="post-date">게시 날짜</span>#}
+{#                                    <span class="dots"></span>#}
+{#                                    <span class="post-time">좋아요수</span>#}
+{#                                    <span class="dots"></span>#}
+{#                                    <span class="post-time">북마크</span>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <!--== End Blog Post Item ==-->#}
+{#                    </div>#}
 {#                    {% endfor %}#}
-
-                </div>
-
-
-{#                페이지네이터 적용예정  적용 안하면 삭제요망  !#}
-                <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <div class="pagination-area">
-                            <nav>
-                                <ul class="page-numbers d-inline-flex">
-                                    <li>
-                                        <a class="page-number active" href="blog.html">1</a>
-                                    </li>
-                                    <li>
-                                        <a class="page-number" href="blog.html">2</a>
-                                    </li>
-                                    <li>
-                                        <a class="page-number" href="blog.html">3</a>
-                                    </li>
-                                    <li>
-                                        <a class="page-number" href="blog.html">4</a>
-                                    </li>
-                                    <li>
-                                        <a class="page-number next" href="blog.html">
-                                            <i class="icofont-long-arrow-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-{#                페이지네이터 적용예정  적용 안하면 삭제요망  !#}
-
-            </div>
-        </section>
+{##}
+{#                </div>#}
+{##}
+{##}
+{##}
+{##}
+{#            </div>#}
+{#        </section>#}
         <!--== End Blog Area Wrapper ==-->
         <!--== End Blog Post Item Wrapper ==-->
 
@@ -518,14 +480,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-

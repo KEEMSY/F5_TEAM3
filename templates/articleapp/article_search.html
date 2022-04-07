@@ -7,9 +7,9 @@
         <div class="content_wrap">
             <div class="content">
                 <article class="post_item post_item_single post_featured_left post_format_standard forum type-forum hentry">
-                    <h2 class="post_title entry-title">질문 게시판</h2>
+                    <h2 class="post_title entry-title">검색결과</h2>
                     {% if msg %}
-                        <h5>질문 게시글이 존재하지 않습니다.</h5>
+                        <h5>게시글이 존재하지 않습니다.</h5>
                     {% else %}
                         <section class="post_content">
                             <div id="bbpress-forums">
@@ -57,8 +57,7 @@
                                                     {{ article.user.name }}
                                                     <p class="bbp-topic-meta">
                                                     <span class="bbp-topic-freshness-author">
-{#                                                        <img alt="" src="http://1.gravatar.com/avatar/?s=14&amp;d=mm&amp;r=g" class="avatar avatar-14 photo avatar-default" height="14" width="14">&nbsp;#}
-                                                        {{ article.created_at|date:'Y-m-d H:i' }}
+                                                        <img alt="" src="http://1.gravatar.com/avatar/?s=14&amp;d=mm&amp;r=g" class="avatar avatar-14 photo avatar-default" height="14" width="14">&nbsp;{{ article.created_at }}
                                                     </span>
                                                     </p>
                                                 </li>

@@ -9,6 +9,7 @@
             <div class="content_wrapper">
             </div>
             <h1 class="write_title">New post</h1>
+
             <div class="form-group-text">
                 <form method="POST" class="post-form" action="{% url 'articleapp:aritcle_write' %}">
                                             {% csrf_token %}
@@ -45,6 +46,7 @@
 {#            console.error(error);#}
 {#        });#}
 {#    </script>#}
+
 {% endblock %}
 
 
