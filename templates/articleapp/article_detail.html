@@ -278,6 +278,7 @@
                                             <li class="timeline-item | extra-space">
                                                 <div class="timeline-item-wrapper" id="comment_here">
                                                     <br>
+                                                    {% if target_comment %}
                                                     {% for comment in target_comment %}
                                                         <div class="comment_list_wrapper" id="{{ comment.pk }}">
                                                             <div class="timeline-item-description">
@@ -303,6 +304,7 @@
                                                         </div>
 
                                                     {% endfor %}
+                                                    {% endif %}
                                                 </div>
                                             </li>
                                         </div>
