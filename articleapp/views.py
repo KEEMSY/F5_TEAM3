@@ -5,10 +5,6 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
 
-
-from bookmarkapp.models import Bookmark
-from likeapp.models import ArticleLikes
-
 # 게시글 목록
 from articleapp.services.service_article import (
     create_article, delete_article, get_client_ip, get_page_context,
@@ -17,12 +13,15 @@ from articleapp.services.service_article import (
     read_article_containing_username,
     read_article_containing_username_within_a_specific_period,
     read_category_article, read_target_article, update_article)
+from bookmarkapp.models import Bookmark
+from bookmarkapp.services.bookmark_service import bookmark_check
 # 단일 게시글 CRUD
 from commentapp.models import Comment
 
-
 from commentapp.services.comment_service import read_all_comment, read_target_article_comment, read_best_comment
 from bookmarkapp.services.bookmark_service import bookmark_check
+from likeapp.models import ArticleLikes
+from userapp.models import Profile
 
 
 from .forms import ArticleForm
@@ -35,39 +34,59 @@ class ArticleView(View):
         all_articles = read_all_article()[:8]
         recent_comments = read_all_comment()[:5]
         check_bookmark = bookmark_check(request.user.id, article_id)
-
+        try:
+            user_img = 'https://cofi.s3.ap-northeast-2.amazonaws.com/' + Profile.objects.get(user_id=request.user.id)
+        except:
+            user_img='https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg'
         try:
             ip = get_client_ip(request)
+
             target_article = hit_article(ip, pk)
             best_comment = read_best_comment()
-            target_comment = read_target_article_comment(article_id)
 
+            target_comment = read_target_article_comment(article_id)
+            print(type(target_comment))
+            if target_comment:
+                target_profiles = []
+                for comment in target_comment:
+                    try:
+                        profile_img = 'https://cofi.s3.ap-northeast-2.amazonaws.com/' + Profile.objects.get(user_id=comment.user.id)
+                    except:
+                        profile_img = 'https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg'
+                    target_profiles.append(profile_img)
+
+                target_data =[]
+                for data in zip(target_comment, target_profiles):
+                    target_data.append(data)
+            else:
+                target_data = False
 
             try:
                 like_article = ArticleLikes.objects.filter(article=article_id, user=request.user.id).get()
 
-                if not target_comment:
-                    print('123123123123')
-                    return render(request, 'articleapp/article_detail.html',
-                                  {'target_article': target_article,
-                                   'left_content_articles': all_articles,
-                                   'left_content_recent_comments': recent_comments, 'target_comment':target_comment,'like_article': like_article, 'check_bookmark':check_bookmark},
-                                  status=200)
+                if best_comment:
+                    best_profile = Profile.objects.get(user_id=best_comment.user.id)
                 else:
-                    print('asdfasdfasdf')
-                    return render(request, 'articleapp/article_detail.html',
-                                  {'target_article': target_article, 'target_comment': target_comment,'best_comment':best_comment,
-                                   'left_content_articles': all_articles,
-                                   'left_content_recent_comments': recent_comments, 'like_article': like_article, 'check_bookmark':check_bookmark},
-                                  status=200)
-
-            except ObjectDoesNotExist:
+                    best_profile = False
                 return render(request, 'articleapp/article_detail.html',
-                              {'target_article': target_article,
-
-                               'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments, 'best_comment':best_comment, 'check_bookmark':check_bookmark, 'target_comment':target_comment},
-
+                              {'target_article': target_article, 'target_date': target_data,
+                               'target_comment': target_comment, 'user_img': user_img,
+                               'best_comment': best_comment,'best_profile':best_profile,
+                               'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments,
+                               'like_article': like_article, 'check_bookmark': check_bookmark},
                               status=200)
+            # 좋아요가 없을 때
+            except ObjectDoesNotExist:
+                if best_comment:
+                    best_profile = Profile.objects.get(user_id=best_comment.user.id)
+                else:
+                    best_profile = False
+
+                return render(request, 'articleapp/article_detail.html',
+                              {'target_article': target_article, 'user_img': user_img,
+                               'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments,
+                               'best_comment':best_comment,'best_profiles':best_profile, 'target_date': target_data,
+                            'target_comment':target_comment, 'check_bookmark': check_bookmark}, status=200)
 
         except ObjectDoesNotExist:
             return JsonResponse({'msg': "게시글이 존재하지 않습니다."}, status=404)
@@ -104,8 +123,11 @@ class ArticleView(View):
 # 게시글 작성
 @login_required(login_url="/users/login/")
 def write_article(request):
+    all_articles = read_all_article()[:8]
+    recent_comments = read_all_comment()[:5]
     if request.method == 'POST':
-        article_form = ArticleForm(request.POST)
+        article_form = ArticleForm(request.POST, request.FILES)
+        print(request.FILES)
         category_id = request.POST.get('category')
         category = Category.objects.get(id=category_id)
 
@@ -120,7 +142,7 @@ def write_article(request):
     if request.method == 'GET':
         article_form = ArticleForm()
 
-        return render(request, 'articleapp/article_write.html', {'article_form': article_form}, status=200)
+        return render(request, 'articleapp/article_write.html', {'article_form': article_form, 'left_content_articles':all_articles, 'left_content_recent_comments':recent_comments}, status=200)
 
 
 

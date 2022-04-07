@@ -8,6 +8,15 @@
 
 <style>
 
+    .content_img{
+        width: 250px;
+        height: 331px;
+        background-color: #badbcc;
+        text-align: center;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
     .content_comment {
         width: 100%;
     }
@@ -74,9 +83,6 @@
             display: none;
         }
 
-        .content_img {
-            display: none;
-        }
 
         .content_title h1 {
             padding: 3vw 0;
@@ -163,9 +169,6 @@
         <div class="col-8">
             <div class="right_wrapper">
                 <div class="content_wrapper">
-                    {#                    <div class="content_img">#}
-                    {#                        여기에 이미지이 들어갑니다#}
-                    {#                    </div>#}
                     <div class="content_details">
                         <div class="content_title">
                             <h1>
@@ -235,9 +238,14 @@
                             </div>
                         </div>
                         <div class="content_main">
-                        <span>
-                            {{ target_article.content }}
-                        </span>
+                            {% if target_article.img %}
+                                <div class="content_img">
+                                    <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ target_article.img }}">
+                                </div>
+                            {% endif %}
+                            <span>
+                                <h3>{{ target_article.content }}</h3>
+                            </span>
                         </div>
                         <br>
                         <hr>
@@ -253,11 +261,15 @@
                                         </div>
 
                                     </span>
-                                            <div class="timeline-item-wrapper" id="comment_here">
+                                        <div class="timeline-item-wrapper" id="comment_here">
 
                                             <div class="timeline-item-description">
                                                 <i class="avatar | small">
-                                                    <img src="https://assets.codepen.io/285131/hat-man.png">
+                                                    {% if best_profiles.img == '' %}
+                                                        <img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg"/>
+                                                    {% else %}
+                                                        <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ best_profiles.img }}"/>
+                                                    {% endif %}
                                                 </i>
                                                 <span><a
                                                         href="{% url 'user:profile' best_comment.user.pk %}">{{ best_comment.user.username }}</a> commented on <time
@@ -274,7 +286,7 @@
                                             <li class="timeline-item">
                                                     <span class="timeline-item-icon | avatar-icon">
                                                         <i class="avatar">
-                                                            <img src="https://assets.codepen.io/285131/hat-man.png">
+                                                            <img src="{{ user_img }}"/>
                                                         </i>
                                                     </span>
                                                 {#                                        댓글 작성하는곳#}
@@ -317,18 +329,18 @@
                                             <li class="timeline-item | extra-space">
                                                 <div class="timeline-item-wrapper" id="comment_here">
                                                     <br>
-                                                    {% if target_comment %}
-                                                        {% for comment in target_comment %}
-                                                            <div class="comment_list_wrapper" id="{{ comment.pk }}">
-                                                                <div class="timeline-item-description">
-                                                                    <i class="avatar | small">
-                                                                        <img src="https://assets.codepen.io/285131/hat-man.png">
-                                                                    </i>
-                                                                    <span><a
-                                                                            href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a>   작성된 날짜
-]
+                                                    {% if target_date %}
+                                                    {% for comment, profile in target_date %}
+                                                        <div class="comment_list_wrapper" id="{{ comment.pk }}">
+                                                            <div class="timeline-item-description">
+                                                                <i class="avatar | small">
+                                                                    <img src="{{ profile }}"/>
+                                                                </i>
+                                                                <span><a href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a>   작성된 날짜
 
-                                                        <time datetime="{{ comment.created_at }}">{{ comment.created_at|date:'Y-m-d H:i' }}
+
+                                                        <time
+                                                                datetime="{{ comment.created_at }}">{{ comment.created_at|date:'Y-m-d H:i' }}
                                                         </time>
                                                                         {% if user == comment.user %}
                                                                             <button class="comment_delete_btn"
@@ -440,17 +452,19 @@
                 let username = response['comment']['username']
                 let date = response['comment']['date']
                 let content = response['comment']['content']
-                let pk = response['comment']['pk']
+                let comment_pk = response['comment']['comment_pk']
+                let user_pk = response['comment']['user_pk']
+                let user_img = response['comment']['user_img']
 
                 temp_html = `
-                <div id="${pk}">
+                <div id="${comment_pk}">
                     <div class="timeline-item-description">
                         <i class="avatar | small">
-                            <img src="https://assets.codepen.io/285131/hat-man.png"/>
+                            <img src="${user_img}"/>
                         </i>
-                        <span><a href="#"> ${username} </a>   작성된 날짜 <time
+                        <span><a href="/users/profile/${user_pk}"> ${username} </a>   작성된 날짜 <time
                                 datetime="20-01-2021"> ${date} </time>
-                                <button class="comment_delete_btn" onclick="delete_comment(${pk})">삭제하기</button>
+                                <button class="comment_delete_btn" onclick="delete_comment(${comment_pk})">삭제하기</button>
                         </span>
                     </div>
                     <div class="comment">

@@ -44,38 +44,36 @@
                                             <li class="bbp-forum-freshness">작성자</li>
                                         </ul>
                                     </li>
+                                    {% for article in board_list %}
+                                        <li class="bbp-body">
+                                            <ul id="{{ article.id }}"
+                                                class="loop-item-0 bbp-forum-status-open bbp-forum-visibility-publish forum type-forum hentry">
 
-                                        {% for article in board_list %}
+                                                <li class="bbp-forum-info">
+                                                    <a class="bbp-forum-title"
+                                                       href="{% url 'articleapp:article_CRUD' article.pk %}">{{ article.title }}</a>
+                                                    <div class="bbp-forum-content">
+                                                        {{ article.content }}
+                                                    </div>
+                                                </li>
+                                                <li class="bbp-forum-topic-count">{{ article.article_hits }}</li>
+                                                <li class="bbp-forum-reply-count">0</li>
+                                                <li class="bbp-forum-freshness">
+                                                    {{ article.user.name }}
+                                                    <p class="bbp-topic-meta">
+                                            <span class="bbp-topic-freshness-author">
+                                                <img alt=""
+                                                     src="http://1.gravatar.com/avatar/?s=14&amp;d=mm&amp;r=g"
+                                                     class="avatar avatar-14 photo avatar-default" height="14"
+                                                     width="14">&nbsp;{{ article.created_at }}
+                                            </span>
+                                                    </p>
+                                                </li>
 
-                                            <li class="bbp-body">
-                                                <ul id="{{ article.id }}"
-                                                    class="loop-item-0 bbp-forum-status-open bbp-forum-visibility-publish forum type-forum hentry">
+                                            </ul>
+                                        </li>
+                                    {% endfor %}
 
-                                                    <li class="bbp-forum-info">
-                                                        <a class="bbp-forum-title"
-                                                           href="{% url 'articleapp:article_CRUD' article.pk %}">{{ article.title }}</a>
-                                                        <div class="bbp-forum-content">
-                                                            {{ article.content }}
-                                                        </div>
-                                                    </li>
-                                                    <li class="bbp-forum-topic-count">{{ article.article_hits }}</li>
-                                                    <li class="bbp-forum-reply-count">0</li>
-                                                    <li class="bbp-forum-freshness">
-                                                        {{ article.user.name }}
-                                                        <p class="bbp-topic-meta">
-                                                <span class="bbp-topic-freshness-author">
-                                                    <img alt=""
-                                                         src="http://1.gravatar.com/avatar/?s=14&amp;d=mm&amp;r=g"
-                                                         class="avatar avatar-14 photo avatar-default" height="14"
-                                                         width="14">&nbsp;{{ article.created_at }}
-                                                </span>
-                                                        </p>
-                                                    </li>
-
-                                                </ul>
-                                            </li>
-                                        {% endfor %}
-                                  
                                     <li class="bbp-footer">
                                         <div class="tr">
                                             <p class="td colspan4">&nbsp;</p>
