@@ -36,23 +36,25 @@ class ArticleView(View):
         recent_comments = read_all_comment()[:5]
         check_bookmark = bookmark_check(request.user.id, article_id)
 
-
         try:
             ip = get_client_ip(request)
             target_article = hit_article(ip, pk)
-            target_comment = read_target_article_comment(pk)
             best_comment = read_best_comment()
+            target_comment = read_target_article_comment(article_id)
+
 
             try:
                 like_article = ArticleLikes.objects.filter(article=article_id, user=request.user.id).get()
 
                 if not target_comment:
+                    print('123123123123')
                     return render(request, 'articleapp/article_detail.html',
                                   {'target_article': target_article,
                                    'left_content_articles': all_articles,
                                    'left_content_recent_comments': recent_comments, 'target_comment':target_comment,'like_article': like_article, 'check_bookmark':check_bookmark},
                                   status=200)
                 else:
+                    print('asdfasdfasdf')
                     return render(request, 'articleapp/article_detail.html',
                                   {'target_article': target_article, 'target_comment': target_comment,'best_comment':best_comment,
                                    'left_content_articles': all_articles,
@@ -64,7 +66,7 @@ class ArticleView(View):
                 return render(request, 'articleapp/article_detail.html',
                               {'target_article': target_article,
 
-                               'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments, 'best_comment':best_comment, 'check_bookmark':check_bookmark},
+                               'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments, 'best_comment':best_comment, 'check_bookmark':check_bookmark, 'target_comment':target_comment},
 
                               status=200)
 
