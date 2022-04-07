@@ -148,7 +148,7 @@
 .content_title_footet{
     width: 100%;
     margin: 2vw auto 0 auto;
-    display: flex;
+    display: block;
 
 }
 

@@ -25,7 +25,7 @@ from userapp.models import Profile
 
 
 from .forms import ArticleForm
-from .models import Category
+from .models import Category, Article
 
 
 class ArticleView(View):
@@ -34,10 +34,13 @@ class ArticleView(View):
         all_articles = read_all_article()[:8]
         recent_comments = read_all_comment()[:5]
         check_bookmark = bookmark_check(request.user.id, article_id)
+        like_cnt = Article.objects.get(pk=article_id)
+
         try:
             user_img = 'https://cofi.s3.ap-northeast-2.amazonaws.com/' + Profile.objects.get(user_id=request.user.id)
         except:
             user_img='https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg'
+
         try:
             ip = get_client_ip(request)
 
@@ -73,7 +76,7 @@ class ArticleView(View):
                                'target_comment': target_comment, 'user_img': user_img,
                                'best_comment': best_comment,'best_profile':best_profile,
                                'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments,
-                               'like_article': like_article, 'check_bookmark': check_bookmark},
+                               'like_article': like_article, 'check_bookmark': check_bookmark , 'like_cnt':like_cnt},
                               status=200)
             # 좋아요가 없을 때
             except ObjectDoesNotExist:
@@ -86,7 +89,7 @@ class ArticleView(View):
                               {'target_article': target_article, 'user_img': user_img,
                                'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments,
                                'best_comment':best_comment,'best_profiles':best_profile, 'target_date': target_data,
-                            'target_comment':target_comment, 'check_bookmark': check_bookmark}, status=200)
+                            'target_comment':target_comment, 'check_bookmark': check_bookmark, 'like_cnt':like_cnt}, status=200)
 
         except ObjectDoesNotExist:
             return JsonResponse({'msg': "게시글이 존재하지 않습니다."}, status=404)
