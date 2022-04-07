@@ -20,6 +20,7 @@ from commentapp.models import Comment
 
 from commentapp.services.comment_service import read_all_comment, read_target_article_comment, read_best_comment
 from bookmarkapp.services.bookmark_service import bookmark_check
+from likeapp.models import ArticleLikes
 from userapp.models import Profile
 
 
