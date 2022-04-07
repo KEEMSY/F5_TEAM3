@@ -89,7 +89,7 @@ class ArticleView(View):
                               {'target_article': target_article, 'user_img': user_img,
                                'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments,
                                'best_comment':best_comment,'best_profiles':best_profile, 'target_date': target_data,
-                            'target_comment':target_comment, 'check_bookmark': check_bookmark, , 'like_cnt':like_cnt}, status=200)
+                            'target_comment':target_comment, 'check_bookmark': check_bookmark, 'like_cnt':like_cnt}, status=200)
 
         except ObjectDoesNotExist:
             return JsonResponse({'msg': "게시글이 존재하지 않습니다."}, status=404)
