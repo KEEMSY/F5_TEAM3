@@ -5,7 +5,6 @@ from commentapp.models import Comment
 from likeapp.models import ArticleLikes, CommentLikes
 
 
-
 def do_article_like(user_id: int, article_id: int) -> ArticleLikes:
     article = Article.objects.filter(pk=article_id).get()
     ArticleLikes.objects.create(user_id=user_id, article_id=article_id)
