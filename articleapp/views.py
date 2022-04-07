@@ -104,6 +104,8 @@ class ArticleView(View):
 # 게시글 작성
 @login_required(login_url="/users/login/")
 def write_article(request):
+    all_articles = read_all_article()[:8]
+    recent_comments = read_all_comment()[:5]
     if request.method == 'POST':
         article_form = ArticleForm(request.POST)
         category_id = request.POST.get('category')
@@ -120,7 +122,7 @@ def write_article(request):
     if request.method == 'GET':
         article_form = ArticleForm()
 
-        return render(request, 'articleapp/article_write.html', {'article_form': article_form}, status=200)
+        return render(request, 'articleapp/article_write.html', {'article_form': article_form, 'left_content_articles':all_articles, 'left_content_recent_comments':recent_comments}, status=200)
 
 
 
