@@ -404,17 +404,18 @@
                 let username = response['comment']['username']
                 let date = response['comment']['date']
                 let content = response['comment']['content']
-                let pk = response['comment']['pk']
+                let comment_pk = response['comment']['comment_pk']
+                let user_pk = response['comment']['user_pk']
 
                 temp_html = `
-                <div id="${pk}">
+                <div id="${comment_pk}">
                     <div class="timeline-item-description">
                         <i class="avatar | small">
                             <img src="https://assets.codepen.io/285131/hat-man.png"/>
                         </i>
-                        <span><a href="#"> ${username} </a>   작성된 날짜 <time
+                        <span><a href="/users/profile/${user_pk}"> ${username} </a>   작성된 날짜 <time
                                 datetime="20-01-2021"> ${date} </time>
-                                <button class="comment_delete_btn" onclick="delete_comment(${pk})">삭제하기</button>
+                                <button class="comment_delete_btn" onclick="delete_comment(${comment_pk})">삭제하기</button>
                         </span>
                     </div>
                     <div class="comment">
