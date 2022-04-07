@@ -1693,7 +1693,7 @@
                                                   title="2022-03-27T15:55:15">{{ bookmark.article.created_at }}</span>
                                         </div>
                                         <h5 class="list-group-item-heading">
-                                            <a href="/communities/article/{{ bookmark.article.id }}/">{{ bookmark.article.title }}</a>
+                                            <a href="{% url 'articleapp:article_CRUD' bookmark.article.id %}">{{ bookmark.article.title }}</a>
                                             <div class="list-group-item-author pull-right clearfix">
                                                 <div class="avatar clearfix avatar-x-small ">
                                                     <a href="{% url 'user:profile' bookmark.article.user.id %}"

@@ -234,4 +234,3 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #     from TEAM3_F5_coFI.deploy_settings import *
 # except ImportError:
 #     pass
-
