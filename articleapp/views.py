@@ -61,7 +61,6 @@ class ArticleView(View):
                                    'left_content_recent_comments': recent_comments, 'like_article': like_article, 'check_bookmark':check_bookmark},
                                   status=200)
 
-
             except ObjectDoesNotExist:
                 return render(request, 'articleapp/article_detail.html',
                               {'target_article': target_article,
