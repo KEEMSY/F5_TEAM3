@@ -4,10 +4,10 @@ import os
 
 from TEAM3_F5_coFI.settings import BASE_DIR
 
-# ALLOWED_HOSTS = ['cofi-f5.com']
-# DEBUG = False
-ALLOWED_HOSTS = []
-DEBUG = True
+ALLOWED_HOSTS = ['cofi-f5.com']
+DEBUG = False
+# ALLOWED_HOSTS = []
+# DEBUG = True
 
 # aws.json 가져와서 버킷,db 접근권한 주기
 with open(os.path.join(BASE_DIR, 'aws.json')) as f:
