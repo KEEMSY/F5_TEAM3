@@ -219,6 +219,7 @@
                                     </span>
                                         <div class="timeline-item-wrapper" id="comment_here">
 
+
                                             <div class="timeline-item-description">
                                                 <i class="avatar | small">
                                                     <img src="https://assets.codepen.io/285131/hat-man.png"/>
@@ -233,6 +234,9 @@
                                             <br>
                                             {#                                댓글 작성#}
                                             {% if user.is_authenticated %}
+
+                                                </div>
+                                                </li>
                                                 <li class="timeline-item">
                                                     <span class="timeline-item-icon | avatar-icon">
                                                         <i class="avatar">
@@ -274,7 +278,7 @@
 
                                         </div>
                                         {#                                    작성된 댓글이 있는 곳#}
-                                        <div >
+                                        <div>
                                             <li class="timeline-item | extra-space">
                                                 <div class="timeline-item-wrapper" id="comment_here">
                                                     <br>
