@@ -10,6 +10,7 @@ from django.views import View
 from commentapp.services.comment_service import (create_comment,
                                                  delete_comment,
                                                  update_comment)
+from userapp.models import Profile
 
 
 class CommentView(View):
@@ -18,12 +19,17 @@ class CommentView(View):
             comment = create_comment(article_id=request.POST['article_id'], user_id=request.user.id,
                                      content=request.POST['content'])
             print(comment.created_at.strftime('%Y년 %m월 %d일 %H:%M'))
+            try:
+                user_img = Profile.objects.get(user_id=comment.user.id).img
+            except:
+                user_img = 'https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg'
             date = {
                 'username': comment.user.username,
                 'date': comment.created_at.strftime('%Y %m %d %H:%M'),
                 'content': comment.content,
-                'comment_pk':comment.id,
-                'user_pk':comment.user.id
+                'comment_pk': comment.id,
+                'user_pk': comment.user.id,
+                'user_img': user_img
             }
             return JsonResponse({'comment': date}, status=200)
 

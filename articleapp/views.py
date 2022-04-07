@@ -35,48 +35,61 @@ class ArticleView(View):
         all_articles = read_all_article()[:8]
         recent_comments = read_all_comment()[:5]
         check_bookmark = bookmark_check(request.user.id, article_id)
-
+        try:
+            user_img = Profile.objects.get(user_id=request.user.id)
+        except:
+            user_img='https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg'
         try:
             ip = get_client_ip(request)
+
             target_article = hit_article(ip, pk)
             best_comment = read_best_comment()
+
             target_comment = read_target_article_comment(article_id)
-            best_profiles = Profile.objects.get(user_id=best_comment.user.id)
+            print(type(target_comment))
+            if target_comment:
+                target_profiles = []
+                for comment in target_comment:
+                    try:
+                        profile_img = Profile.objects.get(user_id=comment.user.id)
+                    except:
+                        profile_img = 'https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg'
 
-            target_profiles = []
-            for profile in target_comment:
-                profile_img = Profile.objects.get(user_id=profile.user.id)
-                target_profiles.append(profile_img)
 
-            if len(target_profiles) == 0:
-                target_profiles = False
+                    target_profiles.append(profile_img)
 
-            if target_profiles and target_comment:
                 target_data =[]
                 for data in zip(target_comment,target_profiles):
                     target_data.append(data)
+            else:
+                target_data = False
 
             try:
                 like_article = ArticleLikes.objects.filter(article=article_id, user=request.user.id).get()
 
-                if not target_comment:
-                    return render(request, 'articleapp/article_detail.html',
-                                  {'target_article': target_article,
-                                   'left_content_articles': all_articles,
-                                   'left_content_recent_comments': recent_comments, 'target_comment': target_comment, 'target_profiles':target_profiles, 'like_article': like_article, 'check_bookmark':check_bookmark},
-                                  status=200)
+                if best_comment:
+                    best_profile = Profile.objects.get(user_id=best_comment.user.id)
                 else:
-                    return render(request, 'articleapp/article_detail.html',
-                                  {'target_article': target_article, 'target_comment': target_comment,'best_comment':best_comment,'best_profiles':best_profiles,
-                                   'left_content_articles': all_articles,
-                                   'left_content_recent_comments': recent_comments, 'target_profiles': target_profiles, 'like_article': like_article, 'check_bookmark':check_bookmark},
-                                  status=200)
-
-            except ObjectDoesNotExist:
+                    best_profile = False
                 return render(request, 'articleapp/article_detail.html',
-                              {'target_article': target_article,'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments,
-                               'best_comment':best_comment,'best_profiles':best_profiles,
-                               'target_profiles':target_profiles, 'target_comment':target_comment, 'check_bookmark': check_bookmark}, status=200)
+                              {'target_article': target_article, 'target_date': target_data,
+                               'target_comment': target_comment, 'user_img': user_img,
+                               'best_comment': best_comment,'best_profile':best_profile,
+                               'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments,
+                               'like_article': like_article, 'check_bookmark': check_bookmark},
+                              status=200)
+            # 좋아요가 없을 때
+            except ObjectDoesNotExist:
+                if best_comment:
+                    best_profile = Profile.objects.get(user_id=best_comment.user.id)
+                else:
+                    best_profile = False
+
+                return render(request, 'articleapp/article_detail.html',
+                              {'target_article': target_article, 'user_img': user_img,
+                               'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments,
+                               'best_comment':best_comment,'best_profiles':best_profile, 'target_date': target_data,
+                            'target_comment':target_comment, 'check_bookmark': check_bookmark}, status=200)
 
         except ObjectDoesNotExist:
             return JsonResponse({'msg': "게시글이 존재하지 않습니다."}, status=404)

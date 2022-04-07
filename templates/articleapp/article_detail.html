@@ -221,7 +221,11 @@
 
                                             <div class="timeline-item-description">
                                                 <i class="avatar | small">
-                                                    <img src="{{ best_profiles.img }}"/>
+                                                    {% if best_profiles.img == '' %}
+                                                        <img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg"/>
+                                                    {% else %}
+                                                        <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ best_profiles.img }}"/>
+                                                    {% endif %}
                                                 </i>
                                                 <span><a href="{% url 'user:profile' best_comment.user.pk %}">{{ best_comment.user.username }}</a> commented on <time
                                                         datetime="20-01-2021">{{ best_comment.created_at|date:'Y-m-d H:i' }}</time></span>
@@ -239,7 +243,7 @@
                                                 <li class="timeline-item">
                                                     <span class="timeline-item-icon | avatar-icon">
                                                         <i class="avatar">
-                                                            <img src="https://assets.codepen.io/285131/hat-man.png"/>
+                                                            <img src="{{ user_img }}"/>
                                                         </i>
                                                     </span>
                                                     {#                                        댓글 작성하는곳#}
@@ -281,12 +285,16 @@
                                             <li class="timeline-item | extra-space">
                                                 <div class="timeline-item-wrapper" id="comment_here">
                                                     <br>
-                                                    {% if target_comment %}
-                                                    {% for comment in target_comment %}
+                                                    {% if target_date %}
+                                                    {% for comment, profile in target_date %}
                                                         <div class="comment_list_wrapper" id="{{ comment.pk }}">
                                                             <div class="timeline-item-description">
                                                                 <i class="avatar | small">
-                                                                    <img src="https://assets.codepen.io/285131/hat-man.png"/>
+                                                                    {% if profile.img == '' %}
+                                                                        <img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg"/>
+                                                                    {% else %}
+                                                                        <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ profile.img }}"/>
+                                                                    {% endif %}
                                                                 </i>
                                                                 <span><a href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a>   작성된 날짜
 
@@ -405,12 +413,13 @@
                 let content = response['comment']['content']
                 let comment_pk = response['comment']['comment_pk']
                 let user_pk = response['comment']['user_pk']
+                let user_img = response['comment']['user_img']
 
                 temp_html = `
                 <div id="${comment_pk}">
                     <div class="timeline-item-description">
                         <i class="avatar | small">
-                            <img src="https://assets.codepen.io/285131/hat-man.png"/>
+                            <img src="${user_img}"/>
                         </i>
                         <span><a href="/users/profile/${user_pk}"> ${username} </a>   작성된 날짜 <time
                                 datetime="20-01-2021"> ${date} </time>
