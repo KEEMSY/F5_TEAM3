@@ -112,15 +112,14 @@
 
 
 </style>
-
-=======
+<script>
     function like_article() {
         $.ajax({
             type: 'POST',
             url: '{% url 'likeapp:articlelike' target_article.pk %}',
             headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
             success: function (response) {
-                alert(response['msg'])
+                {#alert(response['msg'])#}
                 window.location.reload(true)
             }
         });
@@ -132,7 +131,30 @@
             url: '{% url 'likeapp:articlelike' target_article.pk %}',
             headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
             success: function (response) {
-                alert(response['msg'])
+                {#alert(response['msg'])#}
+                window.location.reload(true)
+            }
+        });
+    }
+    function bookmark_article() {
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'bookmarkapp:bookmark' target_article.pk %}',
+            headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+            success: function (response) {
+                {#alert(response['msg'])#}
+                window.location.reload(true)
+            }
+        });
+    }
+
+    function unbookmark_article() {
+        $.ajax({
+            type: 'DELETE',
+            url: '{% url 'bookmarkapp:bookmark' target_article.pk %}',
+            headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+            success: function (response) {
+                {#alert(response['msg'])#}
                 window.location.reload(true)
             }
         });
@@ -232,6 +254,7 @@
         });
         open_comment()
     }
+  }
 
 </script>
 <body>
@@ -275,11 +298,17 @@
                                         {% csrf_token %}
                                         {% if like_article %}
                                             <div class="like_article" type="button" onclick="unlike_article()">
-                                                <img src="{% static 'img/icons/hearted.png' %}" alt="">
+                                                <img src="{% static 'img/icons/hearted.png' %}" alt="" width="36px" height="36px">
+                                            </div>
+                                            <div class="icon_cnt">
+                                                <span id="comment_cnt">{{ like_cnt.like_cnt }}</span>
                                             </div>
                                         {% else %}
                                             <div class="unlike_article" type="button" onclick="like_article()">
-                                                <img src="{% static 'img/icons/heart.png' %}" alt="">
+                                                <img src="{% static 'img/icons/heart.png' %}" alt="" width="36px" height="36px">
+                                            </div>
+                                            <div class="icon_cnt">
+                                                <span id="comment_cnt">{{ like_cnt.like_cnt }}</span>
                                             </div>
                                         {% endif %}
                                     </div>
@@ -303,12 +332,12 @@
                                 <div class="right_wrapper_icons">
                                     {% if check_bookmark %}
                                         <div class="bookmark_article" type="button" onclick="unbookmark_article()">
-                                            <img src="{% static 'img/icons/bookmarked.png' %}" alt="">
+                                            <img src="{% static 'img/icons/bookmarked.png' %}" alt="" width="36px" height="36px">
                                         </div>
 
                                     {% else %}
                                         <div class="unbookmark_article" type="button" onclick="bookmark_article()">
-                                            <img src="{% static 'img/icons/bookmark.png' %}" alt="">
+                                            <img src="{% static 'img/icons/bookmark.png' %}" alt="" width="36px" height="36px">
                                         </div>
                                     {% endif %}
                                     <div class="icon_cnt">
@@ -352,6 +381,7 @@
                                             <br>
                                             {#                                댓글 작성#}
                                             {% if user.is_authenticated %}
+                                                </div>
                                                 <li class="timeline-item">
                                                     <span class="timeline-item-icon | avatar-icon">
                                                         <i class="avatar">
@@ -424,7 +454,9 @@
                                                 </div>
                                             </li>
                                         </div>
+                                    </div>
                                 </ol>
+
                                 <div class="content_botton">
                                     <button id="less_show_btn" class="disp_none" onclick="close_comment()">닫기</button>
                                 </div>

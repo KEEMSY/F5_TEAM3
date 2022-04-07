@@ -26,7 +26,7 @@ from bookmarkapp.services.bookmark_service import bookmark_check
 
 
 from .forms import ArticleForm
-from .models import Category
+from .models import Category, Article
 
 
 class ArticleView(View):
@@ -42,9 +42,12 @@ class ArticleView(View):
             target_article = hit_article(ip, pk)
             target_comment = read_target_article_comment(pk)
             best_comment = read_best_comment()
+            like_cnt = Article.objects.get(pk=article_id)
+            print('like_cnt:', like_cnt)
 
             try:
                 like_article = ArticleLikes.objects.filter(article=article_id, user=request.user.id).get()
+
 
 
 
@@ -52,13 +55,13 @@ class ArticleView(View):
                     return render(request, 'articleapp/article_detail.html',
                                   {'target_article': target_article,
                                    'left_content_articles': all_articles,
-                                   'left_content_recent_comments': recent_comments, 'like_article': like_article, 'check_bookmark':check_bookmark},
+                                   'left_content_recent_comments': recent_comments, 'like_article': like_article, 'check_bookmark':check_bookmark,'like_cnt':like_cnt},
                                   status=200)
                 else:
                     return render(request, 'articleapp/article_detail.html',
                                   {'target_article': target_article, 'target_comment': target_comment,
                                    'left_content_articles': all_articles,
-                                   'left_content_recent_comments': recent_comments, 'like_article': like_article, 'check_bookmark':check_bookmark},
+                                   'left_content_recent_comments': recent_comments, 'like_article': like_article, 'check_bookmark':check_bookmark,'like_cnt':like_cnt},
                                   status=200)
 
 
@@ -66,7 +69,8 @@ class ArticleView(View):
                 return render(request, 'articleapp/article_detail.html',
                               {'target_article': target_article,
 
-                               'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments, 'best_comment':best_comment, 'check_bookmark':check_bookmark},
+                               'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments, 'best_comment':best_comment,
+                               'check_bookmark':check_bookmark,'like_cnt':like_cnt},
 
                               status=200)
 
