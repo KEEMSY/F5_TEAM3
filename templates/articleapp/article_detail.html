@@ -23,6 +23,8 @@
 
     .content_best_comment {
         width: 100%;
+        display: none;
+
     }
 
 
@@ -280,9 +282,11 @@
                                             </div>
                                         {% endif %}
                                         <br>
+                                        </div>
+                                    </li>
                                         {#                                댓글 작성#}
                                         {% if user.is_authenticated %}
-                                            </div></li>
+
                                             <li class="timeline-item">
                                                     <span class="timeline-item-icon | avatar-icon">
                                                         <i class="avatar">
