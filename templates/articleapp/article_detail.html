@@ -165,10 +165,9 @@
     <!--== Start Header Wrapper ==-->
     {% include 'header_ver2.html' %}
     {# End Header Wrpper#}
+
     <div class="wraper_wraper">
-
         {% include 'articleapp/article_left_content.html' %}
-
         <div class="col-8">
             <div class="right_wrapper">
                 <div class="content_wrapper">
@@ -180,7 +179,7 @@
                         </div>
                         <div class="content_title_footet">
                             <div class="content_title_footet_left_wrapper">
-                            <span>
+                                <span>
                                 {{ target_article.created_at|date:'Y-m-d H:i' }} by <a
                                     href="{% url 'user:profile' target_article.user.pk %}">{{ target_article.user.username }}</a>
                             </span>
@@ -189,13 +188,6 @@
                                     <div class="right_wrapper_icons">
                                         <div class="icon_wrapper">
                                             <div class="like_function">
-                                                {#                                        {% csrf_token %}#}
-                                                {#                                            <div class="like_article" type="button" onclick="changeLike(0)">#}
-                                                {#                                                <img src="{% static 'img/icons/hearted.png' %}" alt="">#}
-                                                {#                                            </div>#}
-                                                {#                                            <div class="like_article" type="button" onclick="changeLike(1)">#}
-                                                {#                                                <img src="{% static 'img/icons/heart.png' %}" alt="">#}
-                                                {#                                            </div>#}
                                                 {% csrf_token %}
                                                 {% if like_article %}
                                                     <div class="like_article" type="button" onclick="unlike_article()">
@@ -245,11 +237,11 @@
                                         <div class="icon_cnt">
                                             <span></span>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
 
+                                    </div>
+                            </div>
                         </div>
+                    </div>
                         <div class="content_main">
                             {% if target_article.img %}
                                 <div class="content_img">
@@ -264,27 +256,18 @@
                         <hr>
                         <div class="content_comment">
                             <div class="content_best_comment">
-
                                 <ol class="timeline">
                                     <li class="timeline-item | extra-space">
                                         {% if best_comment %}
                                             <span>
-
-                                        <div style="width: 2rem; height: 2rem;">
-                                            <img src="{% static 'img/recommendation.png' %}" alt="">
-                                        </div>
-
-                                    </span>
-                                                <div class="timeline-item-wrapper" id="comment_here">
-
-
+                                                <div style="width: 2rem; height: 2rem;">
+                                                    <img src="{% static 'img/recommendation.png' %}" alt="">
+                                                </div>
+                                            </span>
+                                        <div class="timeline-item-wrapper" id="comment_here">
                                             <div class="timeline-item-description">
                                                 <i class="avatar | small">
-                                                    {% if best_profiles.img == '' %}
-                                                        <img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg"/>
-                                                    {% else %}
-                                                        <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ best_profiles.img }}"/>
-                                                    {% endif %}
+                                                        <img src="{{ best_profiles.img }}"/>
                                                 </i>
                                                 <span><a
                                                         href="{% url 'user:profile' best_comment.user.pk %}">{{ best_comment.user.username }}</a> commented on <time
@@ -294,20 +277,17 @@
                                                 <p>{{ best_comment.content }}</p>
                                             </div>
                                         {% endif %}
-                                        <br>
+                                            <br>
                                         </div>
                                     </li>
                                         {#                                댓글 작성#}
                                         {% if user.is_authenticated %}
-
-
                                             <li class="timeline-item">
                                                     <span class="timeline-item-icon | avatar-icon">
                                                         <i class="avatar">
                                                             <img src="{{ user_img }}"/>
                                                         </i>
                                                     </span>
-
                                                 {#                                        댓글 작성하는곳#}
                                                 <div class="new-comment">
                                                     {% csrf_token %}
@@ -339,12 +319,8 @@
                                         </button>
                                     </div>
                                     <div id="comment_content" class="disp_none">
-
-
-                                            <div id="comment_content2">
-
-
-                                        </div>
+                                        <div id="comment_content2">
+                                            </div>
                                         {#                                    작성된 댓글이 있는 곳#}
                                         <div>
                                             <li class="timeline-item | extra-space">
@@ -358,47 +334,41 @@
                                                                     <img src="{{ profile }}"/>
                                                                 </i>
                                                                 <span><a href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a>   작성된 날짜
-
-
-
-                                                        <time
-                                                                datetime="{{ comment.created_at }}">{{ comment.created_at|date:'Y-m-d H:i' }}
-                                                        </time>
-
-                                                                        {% if user == comment.user %}
-                                                                            <button class="comment_delete_btn"
-                                                                                    onclick="delete_comment({{ comment.pk }})">삭제하기</button>
-                                                                        {% endif %}
-                                                    </span>
-                                                                </div>
-                                                                <div class="comment" style="width: 33.85rem;">
-                                                                    <p>
-                                                                        {{ comment.content }}
-                                                                    </p>
-                                                                </div>
+                                                                    <time
+                                                                        datetime="{{ comment.created_at }}">{{ comment.created_at|date:'Y-m-d H:i' }}
+                                                                    </time>
+                                                                    {% if user == comment.user %}
+                                                                        <button class="comment_delete_btn"
+                                                                                onclick="delete_comment({{ comment.pk }})">삭제하기</button>
+                                                                    {% endif %}
+                                                                </span>
                                                             </div>
-
+                                                            <div class="comment" style="width: 33.85rem;">
+                                                                <p>
+                                                                    {{ comment.content }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
                                                         {% endfor %}
                                                     {% endif %}
                                                 </div>
                                             </li>
-
                                         </div>
-                                    </ol>
-                                    <div class="content_botton">
+                                    </div>
+                                </ol>
+                                <div class="content_botton">
                                         <button id="less_show_btn" class="disp_none" onclick="close_comment()">닫기
                                         </button>
+{#                                    문제점 1#}
                                     </div>
-                                </div>
-
                             </div>
-                        </div>
 
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
 <!--=======================Javascript============================-->
@@ -472,6 +442,7 @@
                 'X-CSRFTOKEN': '{{ csrf_token }}'
             },
             success: function (response) {
+                console.log('되나?')
                 let username = response['comment']['username']
                 let date = response['comment']['date']
                 let content = response['comment']['content']

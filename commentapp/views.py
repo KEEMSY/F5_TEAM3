@@ -2,7 +2,8 @@ import json
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
+
 from django.shortcuts import render
 # Create your views here.
 from django.views import View
@@ -19,11 +20,13 @@ class CommentView(View):
             comment = create_comment(article_id=request.POST['article_id'], user_id=request.user.id,
                                      content=request.POST['content'])
             print(comment.created_at.strftime('%Y년 %m월 %d일 %H:%M'))
+
             try:
-                user_img = Profile.objects.get(user_id=comment.user.id).img
+                user_img = 'https://cofi.s3.ap-northeast-2.amazonaws.com/' + Profile.objects.get(user_id=comment.user.id).img
             except:
                 user_img = 'https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg'
-            date = {
+
+            data = {
                 'username': comment.user.username,
                 'date': comment.created_at.strftime('%Y %m %d %H:%M'),
                 'content': comment.content,
@@ -31,7 +34,9 @@ class CommentView(View):
                 'user_pk': comment.user.id,
                 'user_img': user_img
             }
-            return JsonResponse({'comment': date}, status=200)
+
+            return JsonResponse({'comment':data}, status=200)
+
 
         except IntegrityError:
             return JsonResponse({'msg': '게시글이 존재하지 않습니다.'}, status=400)
