@@ -3,7 +3,8 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
 # Create your views here.
-from bookmarkapp.services.bookmark_service import do_bookmark, undo_bookmark, bookmark_check
+from bookmarkapp.services.bookmark_service import (bookmark_check, do_bookmark,
+                                                   undo_bookmark)
 
 
 def click_bookmark(request, article_id):

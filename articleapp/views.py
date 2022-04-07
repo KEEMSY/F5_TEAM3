@@ -5,10 +5,6 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views import View
 
-
-from bookmarkapp.models import Bookmark
-from likeapp.models import ArticleLikes
-
 # 게시글 목록
 from articleapp.services.service_article import (
     create_article, delete_article, get_client_ip, get_page_context,
@@ -17,13 +13,15 @@ from articleapp.services.service_article import (
     read_article_containing_username,
     read_article_containing_username_within_a_specific_period,
     read_category_article, read_target_article, update_article)
+from bookmarkapp.models import Bookmark
+from bookmarkapp.services.bookmark_service import bookmark_check
 # 단일 게시글 CRUD
 from commentapp.models import Comment
-
 
 from commentapp.services.comment_service import read_all_comment, read_target_article_comment, read_best_comment
 from bookmarkapp.services.bookmark_service import bookmark_check
 from userapp.models import Profile
+
 
 from .forms import ArticleForm
 from .models import Category
@@ -127,7 +125,8 @@ def write_article(request):
     all_articles = read_all_article()[:8]
     recent_comments = read_all_comment()[:5]
     if request.method == 'POST':
-        article_form = ArticleForm(request.POST)
+        article_form = ArticleForm(request.POST, request.FILES)
+        print(request.FILES)
         category_id = request.POST.get('category')
         category = Category.objects.get(id=category_id)
 
