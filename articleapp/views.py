@@ -23,7 +23,7 @@ from commentapp.models import Comment
 
 from commentapp.services.comment_service import read_all_comment, read_target_article_comment, read_best_comment
 from bookmarkapp.services.bookmark_service import bookmark_check
-
+from userapp.models import Profile
 
 from .forms import ArticleForm
 from .models import Category
@@ -41,33 +41,42 @@ class ArticleView(View):
             target_article = hit_article(ip, pk)
             best_comment = read_best_comment()
             target_comment = read_target_article_comment(article_id)
+            best_profiles = Profile.objects.get(user_id=best_comment.user.id)
 
+            target_profiles = []
+            for profile in target_comment:
+                profile_img = Profile.objects.get(user_id=profile.user.id)
+                target_profiles.append(profile_img)
+
+            if len(target_profiles) == 0:
+                target_profiles = False
+
+            if target_profiles and target_comment:
+                target_data =[]
+                for data in zip(target_comment,target_profiles):
+                    target_data.append(data)
 
             try:
                 like_article = ArticleLikes.objects.filter(article=article_id, user=request.user.id).get()
 
                 if not target_comment:
-                    print('123123123123')
                     return render(request, 'articleapp/article_detail.html',
                                   {'target_article': target_article,
                                    'left_content_articles': all_articles,
-                                   'left_content_recent_comments': recent_comments, 'target_comment':target_comment,'like_article': like_article, 'check_bookmark':check_bookmark},
+                                   'left_content_recent_comments': recent_comments, 'target_comment': target_comment, 'target_profiles':target_profiles, 'like_article': like_article, 'check_bookmark':check_bookmark},
                                   status=200)
                 else:
-                    print('asdfasdfasdf')
                     return render(request, 'articleapp/article_detail.html',
-                                  {'target_article': target_article, 'target_comment': target_comment,'best_comment':best_comment,
+                                  {'target_article': target_article, 'target_comment': target_comment,'best_comment':best_comment,'best_profiles':best_profiles,
                                    'left_content_articles': all_articles,
-                                   'left_content_recent_comments': recent_comments, 'like_article': like_article, 'check_bookmark':check_bookmark},
+                                   'left_content_recent_comments': recent_comments, 'target_profiles': target_profiles, 'like_article': like_article, 'check_bookmark':check_bookmark},
                                   status=200)
 
             except ObjectDoesNotExist:
                 return render(request, 'articleapp/article_detail.html',
-                              {'target_article': target_article,
-
-                               'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments, 'best_comment':best_comment, 'check_bookmark':check_bookmark, 'target_comment':target_comment},
-
-                              status=200)
+                              {'target_article': target_article,'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments,
+                               'best_comment':best_comment,'best_profiles':best_profiles,
+                               'target_profiles':target_profiles, 'target_comment':target_comment, 'check_bookmark': check_bookmark}, status=200)
 
         except ObjectDoesNotExist:
             return JsonResponse({'msg': "게시글이 존재하지 않습니다."}, status=404)
