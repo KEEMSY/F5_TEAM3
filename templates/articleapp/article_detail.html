@@ -290,11 +290,7 @@
                                                         <div class="comment_list_wrapper" id="{{ comment.pk }}">
                                                             <div class="timeline-item-description">
                                                                 <i class="avatar | small">
-                                                                    {% if profile.img == '' %}
-                                                                        <img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg"/>
-                                                                    {% else %}
-                                                                        <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ profile.img }}"/>
-                                                                    {% endif %}
+                                                                    <img src="{{ profile }}"/>
                                                                 </i>
                                                                 <span><a href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a>   작성된 날짜
 

@@ -36,7 +36,7 @@ class ArticleView(View):
         recent_comments = read_all_comment()[:5]
         check_bookmark = bookmark_check(request.user.id, article_id)
         try:
-            user_img = Profile.objects.get(user_id=request.user.id)
+            user_img = 'https://cofi.s3.ap-northeast-2.amazonaws.com/' + Profile.objects.get(user_id=request.user.id)
         except:
             user_img='https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg'
         try:
@@ -51,15 +51,13 @@ class ArticleView(View):
                 target_profiles = []
                 for comment in target_comment:
                     try:
-                        profile_img = Profile.objects.get(user_id=comment.user.id)
+                        profile_img = 'https://cofi.s3.ap-northeast-2.amazonaws.com/' + Profile.objects.get(user_id=comment.user.id)
                     except:
                         profile_img = 'https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg'
-
-
                     target_profiles.append(profile_img)
 
                 target_data =[]
-                for data in zip(target_comment,target_profiles):
+                for data in zip(target_comment, target_profiles):
                     target_data.append(data)
             else:
                 target_data = False
