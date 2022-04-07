@@ -487,9 +487,9 @@
                     <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
                     <li><a href="{% url 'articleapp:home' %}">커뮤니티</a>
                         <ul class="sub-menu">
-                            <li><a href="{% url 'temp1_free' %}">자유게시판</a></li>
-                            <li><a href="{% url 'temp1_tip' %}">꿀팁게시판</a></li>
-                            <li><a href="{% url 'temp1_question' %}">질문게시판</a></li>
+                            <li><a href="{% url 'articleapp:free' %}">자유게시판</a></li>
+                            <li><a href="{% url 'articleapp:tip' %}">꿀팁게시판</a></li>
+                            <li><a href="{% url 'articleapp:question' %}">질문게시판</a></li>
                         </ul>
                     </li>
                     {% if not user.is_authenticated %}
