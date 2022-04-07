@@ -22,6 +22,14 @@
         margin-left: 20px;
     }
 
+    .timeline-item {
+        margin-left: 7%;
+    }
+
+    .content_comment {
+        display: block;
+    }
+
     @media only screen and (max-width: 1150px) {
         .left_wrapper {
             display: none;
@@ -91,12 +99,13 @@
         }
 
         span.timeline-item-icon.\|.avatar-icon {
-    display: none;
-}
+            display: none;
+        }
 
         .timeline-item-icon.filled-icon {
             display: none;
         }
+
         .timeline {
             width: 100%;
             border: none;
@@ -107,11 +116,37 @@
             width: 69px;
             margin-left: 10px;
             font-size: 13px;
+        }
+
+    }
+
+    div#comment_here {
+    width: 100%;
 }
+
+    .comment_list_wrapper {
+    width: 100%;
+}
+
+    .comment {
+    width: 90%;
+        max-width: 33.85rem;
+}
+
+    @media only screen and (max-width: 600px) {
+        .timeline-item-description span time {
+            display: none;
+        }
 
     }
 
 
+    @media only screen and (max-width: 700px) {
+        .timeline-item-description span time {
+            display: none;
+        }
+
+    }
 </style>
 
 
@@ -140,7 +175,8 @@
                         <div class="content_title_footet">
                             <div class="content_title_footet_left_wrapper">
                             <span>
-                                {{ target_article.created_at|date:'Y-m-d H:i' }} by <a href="{% url 'user:profile' target_article.user.pk %}">{{ target_article.user.username }}</a>
+                                {{ target_article.created_at|date:'Y-m-d H:i' }} by <a
+                                    href="{% url 'user:profile' target_article.user.pk %}">{{ target_article.user.username }}</a>
                             </span>
                             </div>
                             <div class="content_title_footet_right_wrapper">
@@ -210,67 +246,66 @@
 
                                 <ol class="timeline">
                                     <li class="timeline-item | extra-space">
-                                    {% if best_comment %}
-                                    <span>
+                                        {% if best_comment %}
+                                            <span>
                                         <div style="width: 2rem; height: 2rem;">
                                             <img src="{% static 'img/recommendation.png' %}" alt="">
                                         </div>
 
                                     </span>
-                                        <div class="timeline-item-wrapper" id="comment_here">
-
+                                            <div class="timeline-item-wrapper" id="comment_here">
 
                                             <div class="timeline-item-description">
                                                 <i class="avatar | small">
-                                                    <img src="https://assets.codepen.io/285131/hat-man.png"/>
+                                                    <img src="https://assets.codepen.io/285131/hat-man.png">
                                                 </i>
-                                                <span><a href="{% url 'user:profile' best_comment.user.pk %}">{{ best_comment.user.username }}</a> commented on <time
+                                                <span><a
+                                                        href="{% url 'user:profile' best_comment.user.pk %}">{{ best_comment.user.username }}</a> commented on <time
                                                         datetime="20-01-2021">{{ best_comment.created_at|date:'Y-m-d H:i' }}</time></span>
                                             </div>
                                             <div class="comment">
                                                 <p>{{ best_comment.content }}</p>
                                             </div>
                                         {% endif %}
-                                            <br>
-                                            {#                                댓글 작성#}
-                                            {% if user.is_authenticated %}
-
-                                                </div>
-                                                </li>
-                                                <li class="timeline-item">
+                                        <br>
+                                        {#                                댓글 작성#}
+                                        {% if user.is_authenticated %}
+                                            </div></li>
+                                            <li class="timeline-item">
                                                     <span class="timeline-item-icon | avatar-icon">
                                                         <i class="avatar">
-                                                            <img src="https://assets.codepen.io/285131/hat-man.png"/>
+                                                            <img src="https://assets.codepen.io/285131/hat-man.png">
                                                         </i>
                                                     </span>
-                                                    {#                                        댓글 작성하는곳#}
-                                                    <div class="new-comment">
-                                                        {% csrf_token %}
-                                                        <input id="target_comment" type="text" placeholder="댓글을 작성해보세요!"/>
-                                                        <button type="button" class="btn btn-light" id="comment-submit-button" onclick="save_comment()">
-                                                            작성
-                                                        </button>
-                                                    </div>
-                                                </li>
-                                            {% else %}
-                                                <div class="login_required">
-                                                    <div class="login_required_title">
-                                                        <h5>로그인 후에 댓글을 작성 할 수 있습니다.</h5>
-                                                    </div>
-                                                    <div class="login_required_content">
-                                                        <a href="{% url 'user:login' %}">
-                                                            <span><span style="font-weight: bold">로그인</span> 을 해볼까?</span>
-                                                        </a>
-                                                        <a href="{% url 'user:sign-up' %}" style="display: block">
-                                                            <span style="font-size: 0.8rem">아니면</span>
-                                                            <span><span style="font-weight: bold">회원가입</span> 을 해볼까?</span>
-                                                        </a>
-                                                    </div>
+                                                {#                                        댓글 작성하는곳#}
+                                                <div class="new-comment">
+                                                    {% csrf_token %}
+                                                    <input id="target_comment" type="text" placeholder="댓글을 작성해보세요!">
+                                                    <button type="button" class="btn btn-light"
+                                                            id="comment-submit-button" onclick="save_comment()">
+                                                        작성
+                                                    </button>
                                                 </div>
-                                            {% endif %}
-
+                                            </li>
+                                        {% else %}
+                                            <div class="login_required">
+                                                <div class="login_required_title">
+                                                    <h5>로그인 후에 댓글을 작성 할 수 있습니다.</h5>
+                                                </div>
+                                                <div class="login_required_content">
+                                                    <a href="{% url 'user:login' %}">
+                                                        <span><span style="font-weight: bold">로그인</span> 을 해볼까?</span>
+                                                    </a>
+                                                    <a href="{% url 'user:sign-up' %}" style="display: block">
+                                                        <span style="font-size: 0.8rem">아니면</span>
+                                                        <span><span style="font-weight: bold">회원가입</span> 을 해볼까?</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        {% endif %}
                                     <div class="content_botton">
-                                        <button style="width: 8rem;" id="more_show_btn" onclick="open_comment() ">더보기</button>
+                                        <button style="width: 8rem;" id="more_show_btn" onclick="open_comment() ">더보기
+                                        </button>
                                     </div>
                                     <div id="comment_content" class="disp_none">
 
@@ -283,31 +318,32 @@
                                                 <div class="timeline-item-wrapper" id="comment_here">
                                                     <br>
                                                     {% if target_comment %}
-                                                    {% for comment in target_comment %}
-                                                        <div class="comment_list_wrapper" id="{{ comment.pk }}">
-                                                            <div class="timeline-item-description">
-                                                                <i class="avatar | small">
-                                                                    <img src="https://assets.codepen.io/285131/hat-man.png"/>
-                                                                </i>
-                                                                <span><a href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a>   작성된 날짜
+                                                        {% for comment in target_comment %}
+                                                            <div class="comment_list_wrapper" id="{{ comment.pk }}">
+                                                                <div class="timeline-item-description">
+                                                                    <i class="avatar | small">
+                                                                        <img src="https://assets.codepen.io/285131/hat-man.png">
+                                                                    </i>
+                                                                    <span><a
+                                                                            href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a>   작성된 날짜
+]
 
-
-                                                        <time
-                                                                datetime="{{ comment.created_at }}">{{ comment.created_at|date:'Y-m-d H:i' }}
+                                                        <time datetime="{{ comment.created_at }}">{{ comment.created_at|date:'Y-m-d H:i' }}
                                                         </time>
-                                                        {% if user == comment.user %}
-                                                        <button class="comment_delete_btn" onclick="delete_comment({{ comment.pk }})">삭제하기</button>
-                                                        {% endif %}
+                                                                        {% if user == comment.user %}
+                                                                            <button class="comment_delete_btn"
+                                                                                    onclick="delete_comment({{ comment.pk }})">삭제하기</button>
+                                                                        {% endif %}
                                                     </span>
+                                                                </div>
+                                                                <div class="comment" style="width: 33.85rem;">
+                                                                    <p>
+                                                                        {{ comment.content }}
+                                                                    </p>
+                                                                </div>
                                                             </div>
-                                                            <div class="comment" style="width: 33.85rem;">
-                                                                <p>
-                                                                    {{ comment.content }}
-                                                                </p>
-                                                            </div>
-                                                        </div>
 
-                                                    {% endfor %}
+                                                        {% endfor %}
                                                     {% endif %}
                                                 </div>
                                             </li>
@@ -333,17 +369,17 @@
 {% include 'js.html' %}
 
 <script>
-    function plus_comment_cnt(){
+    function plus_comment_cnt() {
         let comment_cnt = parseInt($('#comment_cnt').text())
         console.log(comment_cnt)
-        comment_cnt ++
+        comment_cnt++
         parseInt($('#comment_cnt').html(comment_cnt))
     }
 
-    function minus_comment_cnt(){
+    function minus_comment_cnt() {
         let comment_cnt = parseInt($('#comment_cnt').text())
         console.log(comment_cnt)
-        comment_cnt --
+        comment_cnt--
         parseInt($('#comment_cnt').html(comment_cnt))
     }
 
@@ -384,21 +420,21 @@
         });
     }
 
-  function save_comment(){
+    function save_comment() {
         let url = window.location.href.split('/')
         let article_id = url[url.length - 1]
         let comment = $('#target_comment').val()
-        let temp_html =``
+        let temp_html = ``
 
         $.ajax({
             type: "POST",
             url: '{% url 'commentapp:interatction_comment' %}',
             data: {
-                'article_id':article_id,
-                'content':comment
+                'article_id': article_id,
+                'content': comment
             },
             headers: {
-                'X-CSRFTOKEN' : '{{ csrf_token }}'
+                'X-CSRFTOKEN': '{{ csrf_token }}'
             },
             success: function (response) {
                 let username = response['comment']['username']
@@ -431,9 +467,9 @@
 
             }
         });
-  }
+    }
 
-    function bookmark_article(){
+    function bookmark_article() {
         $.ajax({
             type: 'POST',
             url: '{% url 'bookmarkapp:bookmark' target_article.pk %}',
@@ -445,7 +481,7 @@
         });
     }
 
-    function unbookmark_article(){
+    function unbookmark_article() {
         $.ajax({
             type: 'DELETE',
             url: '{% url 'bookmarkapp:bookmark' target_article.pk %}',
@@ -458,19 +494,19 @@
     }
 
 
-    function delete_comment(id){
-        let pk_data = JSON.stringify({"pk":id})
+    function delete_comment(id) {
+        let pk_data = JSON.stringify({"pk": id})
         $.ajax({
             type: "DELETE",
             url: '{% url 'commentapp:interatction_comment' %}',
-            contentType:"application/json",
+            contentType: "application/json",
             dataType: "JSON",
             data: pk_data,
             headers: {
-                'X-CSRFTOKEN' : '{{ csrf_token }}'
+                'X-CSRFTOKEN': '{{ csrf_token }}'
             },
             success: function (response) {
-                $('#'+id).remove()
+                $('#' + id).remove()
                 console.log(id)
                 {#window.location.reload(true)#}
                 minus_comment_cnt()

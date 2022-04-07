@@ -57,6 +57,7 @@ img {
 }
 .timeline-item + * {
     margin: 24px auto 0 auto;
+    margin-top: 24px;
 }
 .timeline-item + .extra-space {
   margin-top: 48px;
@@ -247,7 +248,7 @@ img {
   border-width: 0;
   background-color: white;
   border-radius: 0.5rem;
-  width: 10rem;
+  width: 6rem;
 }
 .comment_delete_btn:hover{
   font-weight: bold;
