@@ -1345,10 +1345,11 @@ table p {
 
 @media only screen and (max-width: 575px) {
     .home-slider-container .slider-content-area {
-        height: auto;
         padding: 104px 0 98px;
     }
 }
+
+
 
 .home-slider-container .slider-content-area:before {
     background-color: #272a33;
@@ -2738,9 +2739,13 @@ table p {
     bottom: -2px;
 }
 
+img.header_img {
+    background-repeat: no-repeat;
+    width: 100%;
+}
 
 .row .col-12 > * {
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 
@@ -8120,3 +8125,7 @@ table p {
 .footer-main .container.pt--0.pb--0 .row .col-lg-9 .row {
     text-align: center;
 }
+
+    @media only screen and (max-width: 500px) {
+
+    }

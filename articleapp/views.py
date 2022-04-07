@@ -46,17 +46,15 @@ class ArticleView(View):
             try:
                 like_article = ArticleLikes.objects.filter(article=article_id, user=request.user.id).get()
 
-
-
                 if not target_comment:
                     return render(request, 'articleapp/article_detail.html',
                                   {'target_article': target_article,
                                    'left_content_articles': all_articles,
-                                   'left_content_recent_comments': recent_comments, 'like_article': like_article, 'check_bookmark':check_bookmark},
+                                   'left_content_recent_comments': recent_comments, 'target_comment':target_comment,'like_article': like_article, 'check_bookmark':check_bookmark},
                                   status=200)
                 else:
                     return render(request, 'articleapp/article_detail.html',
-                                  {'target_article': target_article, 'target_comment': target_comment,
+                                  {'target_article': target_article, 'target_comment': target_comment,'best_comment':best_comment,
                                    'left_content_articles': all_articles,
                                    'left_content_recent_comments': recent_comments, 'like_article': like_article, 'check_bookmark':check_bookmark},
                                   status=200)
