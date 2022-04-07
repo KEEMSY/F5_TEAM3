@@ -1655,7 +1655,7 @@
                                                   title="2022-03-27T15:56:24">{{ article.created_at }}</span>
                                         </div>
                                         <h5 class="list-group-item-heading">
-                                            <a href="/communities/article/{{ article.id }}/">{{ article.title }}</a>
+                                            <a href="{% url 'articleapp:article_CRUD' article.id %} ">{{ article.title }}</a>
                                             <div class="list-group-item-author pull-right clearfix">
                                                 <div class="avatar clearfix avatar-x-small ">
                                                     <a href="{% url 'user:profile' article.user.id %}"
