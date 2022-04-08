@@ -293,7 +293,11 @@
                                     <li class="timeline-item">
                                                     <span class="timeline-item-icon | avatar-icon">
                                                         <i class="avatar">
+                                                            {% if user.profile.img %}
                                                             <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ user.profile.img }}"/>
+                                                            {% else %}
+                                                                <img src='https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg'/>
+                                                                {% endif %}
                                                         </i>
                                                     </span>
                                         {#                                        댓글 작성하는곳#}

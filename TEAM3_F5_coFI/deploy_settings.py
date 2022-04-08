@@ -20,7 +20,7 @@ with open(os.path.join(BASE_DIR, 'aws.json')) as f:
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # 아래 친구가 s3 경로의 스태틱을 쓰게 하는 친구
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3ManifestStaticStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3ManifestStaticStorage'
 AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
 AWS_STORAGE_BUCKET_NAME = secrets['AWS']['STORAGE_BUCKET_NAME']

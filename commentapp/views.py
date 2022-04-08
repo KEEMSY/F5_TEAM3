@@ -18,14 +18,17 @@ class CommentView(View):
         try:
             comment = create_comment(article_id=request.POST['article_id'], user_id=request.user.id,
                                      content=request.POST['content'])
-            print(comment.created_at.strftime('%Y년 %m월 %d일 %H:%M'))
-            print(Profile.objects.get(user_id=comment.user.id).img)
+
             try:
-                user_img = 'https://cofi.s3.ap-northeast-2.amazonaws.com/' + str(
-                    Profile.objects.get(user_id=comment.user.id).img)
-            except:
+                Profile.objects.filter(user_id=comment.user.id)
+
+                if Profile.objects.get(user_id=comment.user.id).img is not None or Profile.objects.get(user_id=comment.user.id) == '':
+                    user_img = 'https://cofi.s3.ap-northeast-2.amazonaws.com/' + str(
+                        Profile.objects.get(user_id=comment.user.id).img)
+                else:
+                    user_img = 'https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg'
+            except ObjectDoesNotExist:
                 user_img = 'https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg'
-            print(user_img)
             data = {
                 'username': comment.user.username,
                 'date': comment.created_at.strftime('%Y %m %d %H:%M'),
@@ -51,11 +54,8 @@ class CommentView(View):
 
     def delete(self, request):
         try:
-            print(request.body)
-            print(type(request.body))
             # comment_pk = request.DELETE.get('pk')
             comment_pk = json.loads(request.body)['pk']
-            print(comment_pk)
             delete_comment(comment_id=comment_pk)
             return JsonResponse({'msg': '댓글이 삭제되었습니다.'}, status=200)
 
