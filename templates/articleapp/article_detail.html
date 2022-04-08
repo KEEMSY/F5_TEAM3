@@ -170,6 +170,7 @@
     <!--== Start Header Wrapper ==-->
     {% include 'header_ver2.html' %}
     {# End Header Wrpper#}
+
     <div class="wraper_wraper">
         {% include 'articleapp/article_left_content.html' %}
         <div class="col-8">
@@ -189,6 +190,7 @@
                             </span>
                             </div>
                             <div class="content_title_footet_right_wrapper">
+
                                 <div class="right_wrapper_icons">
                                     <div class="icon_wrapper">
                                         <div class="like_function">
@@ -353,6 +355,7 @@
                                                                         href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a>   작성된 날짜
                                                                     <time
                                                                             datetime="{{ comment.created_at }}">{{ comment.created_at|date:'Y-m-d H:i' }}
+
                                                                     </time>
                                                                     {% if user == comment.user %}
                                                                         <button class="comment_delete_btn"
@@ -378,9 +381,8 @@
                                 </button>
                                 {#                                    문제점 1#}
                             </div>
-                        </div>
 
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>
@@ -497,6 +499,7 @@
                 'X-CSRFTOKEN': '{{ csrf_token }}'
             },
             success: function (response) {
+                console.log('되나?')
                 let username = response['comment']['username']
                 let date = response['comment']['date']
                 let content = response['comment']['content']
