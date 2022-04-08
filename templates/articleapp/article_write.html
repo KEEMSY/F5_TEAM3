@@ -11,43 +11,51 @@
             <h1 class="write_title">New post</h1>
 
             <div class="form-group-text">
-                <form method="POST" class="post-form" action="{% url 'articleapp:aritcle_write' %}">
-                                            {% csrf_token %}
-                                            {{ article_form.media }}
-{#                                            {{ article_form.as_p }}#}
-                                            {{ article_form.title | as_crispy_field }}
-                                            {{ article_form.category | as_crispy_field }}
-                                            {{ article_form.content | as_crispy_field | safe | escape}}
-{#                    <h3>Classic editor</h3>#}
-{#                    <div id="editor">#}
-{#                        <p>This is some sample content.</p>#}
-{#                    </div>#}
-{##}
-{#                    <button class="btn btn-light">등록</button>#}
+                <form method="POST" class="post-form" action="{% url 'articleapp:aritcle_write' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {#                                            {{ article_form.media }}#}
+                    {#                                            {{ article_form.as_p }}#}
+                    {#                                          {{ article_form.title | as_crispy_field }}#}
+                    {#                                            {{ article_form.category | as_crispy_field }}#}
+                    {#                                            {{ article_form.content | as_crispy_field | safe | escape}}#}
+                    {{ article_form.media }}
+                    {{ article_form.title | as_crispy_field}}
+                    {{ article_form.category | as_crispy_field}}
+                    {{ article_form.img | as_crispy_field }}
+                    {{ article_form.content | as_crispy_field}}
 
-
+                    <button class="btn btn-light" style="margin-top:1vw;">등록</button>
                 </form>
             </div>
         </div>
     </div>
-{##}
-{#    <script>#}
-{#        ClassicEditor#}
-{#        .create(document.querySelector('#editor'))#}
-{#        .then(editor => {#}
-{#            window.editor = editor;#}
-{##}
-{##}
-{#        })#}
-{#        .catch(error => {#}
-{#            console.error('Oops, something went wrong!');#}
-{#            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');#}
-{#            console.warn('Build id: qnsfalad7qf3-g4nq0xjomz3u');#}
-{#            console.error(error);#}
-{#        });#}
-{#    </script>#}
 
 {% endblock %}
 
 
-
+{##}
+{#{% extends 'articleapp/article_base.html' %}#}
+{##}
+{#{% block content %}#}
+{#{% load crispy_forms_tags %}#}
+{##}
+{#    <div class="col-8">#}
+{#        <div class="right_wrapper">#}
+{#            <div class="content_wrapper">#}
+{#            </div>#}
+{#            <h1 class="write_title">New post</h1>#}
+{#                <div class="form-group-text">#}
+{#                    <form method="POST" class="post-form" action="{% url 'articleapp:aritcle_write' %}" enctype="multipart/form-data">#}
+{#                        {% csrf_token %}#}
+{#                        <div class="article-upload-form-group" style="width: 100%">#}
+{#                            {{ article_form.title | as_crispy_field }}#}
+{#                            {{ article_form.category | as_crispy_field }}#}
+{#                            {{ article_form.img | as_crispy_field }}#}
+{#                            {{ article_form.content | as_crispy_field }}#}
+{#                        </div>#}
+{#                        <button class="btn btn-light" style="margin-top: 15px">등록</button>#}
+{#                    </form>#}
+{#                </div>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}

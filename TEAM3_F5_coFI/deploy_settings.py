@@ -9,6 +9,8 @@ DEBUG = False
 # ALLOWED_HOSTS = []
 # DEBUG = True
 
+
+
 # aws.json 가져와서 버킷,db 접근권한 주기
 with open(os.path.join(BASE_DIR, 'aws.json')) as f:
     secrets = json.loads(f.read())
@@ -26,6 +28,8 @@ AWS_DEFAULT_ACL = 'public-read' # 저같은 경우는 public-read로 지정 해 
 # AWS_S3_CUSTOM_DOMAIN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com" # 공식 문서를 참조해주세요. ( cdn 사용이냐, s3 사용이냐에 갈리지만, 여기선 s3 이므로 저는 f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"를 사용 하였습니다.)
 # STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/static/" # django 프로젝트에서 사용할 static 파일을 경로를 지정 해주세요. 저같은 경우는 f"https://{AWS_S3_CUSTOM_DOMAIN}/static/"을 사용 하였습니다.
 AWS_S3_REGION_NAME = 'ap-northeast-2'
+# ck_editor를 위한 설정!!!
+AWS_QUERYSTRING_AUTH = False
 
 
 # AWS db 연결
