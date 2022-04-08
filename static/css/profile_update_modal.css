@@ -20,25 +20,28 @@
 }
 
 #modal .modal-window {
-    background: rgba(69, 139, 197, 0.70);
+    background: whitesmoke;;
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(13.5px);
     -webkit-backdrop-filter: blur(13.5px);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     width: 400px;
-    height: 500px;
     position: relative;
     align-items: center;
     justify-content: center;
     padding: 10px;
+    height: 36rem;
 }
 
 #modal .title {
+    width: 100%;
+    display: flex;
+    margin: 3px auto;
+    justify-content: center;
     padding-left: 10px;
-    display: inline;
     text-shadow: 1px 1px 2px gray;
-    color: white;
+    color: black;
 
 }
 
@@ -52,11 +55,23 @@
     padding-right: 10px;
     cursor: pointer;
     text-shadow: 1px 1px 2px gray;
-    color: white;
+    color: black;
 }
 
 
 .modal-form-group {
-    margin-bottom: 10px;
     width: min-content;
+    margin: 0 auto;
+}
+
+#modal .content {
+    margin: 2.5rem auto;
+    padding: 0px 10px;
+    text-shadow: 1px 1px 2px gray;
+    color: black;
+    width: 100%;
+}
+
+.form-group {
+    width: 90%;
 }

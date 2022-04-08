@@ -2,87 +2,107 @@
 
 {% block content %}
 
-<div class="col-8">
-    <div class="page_content_wrap">
-        <div class="content_wrap">
-            <div class="content">
-                <article class="post_item post_item_single post_featured_left post_format_standard forum type-forum hentry">
-                    <h2 class="post_title entry-title">꿀팁 게시판</h2>
-                    {% if msg %}
-                        <h5>꿀팁 게시글이 존재하지 않습니다.</h5>
-                    {% else %}
-                        <section class="post_content">
-                            <div id="bbpress-forums">
-                                <div class="bbp-search-form">
-                                    <form role="search" method="get" id="bbp-search-form" action="#">
-                                        <div>
-                                            <label class="screen-reader-text hidden" for="bbp_search">Search for:</label>
-                                            <input type="hidden" name="action" value="bbp-search-request">
-                                            <input tabindex="101" type="text" value="" name="bbp_search" id="bbp_search">
-                                            <input tabindex="102" class="button" type="submit" id="bbp_search_submit" value="Search">
-                                        </div>
-                                    </form>
+    <div class="col-8">
+        <div class="page_content_wrap">
+            <div class="content_wrap">
+                <div class="content">
+                    <article
+                            class="post_item post_item_single post_featured_left post_format_standard forum type-forum hentry">
+                        <div style="display: flex">
+                            <h2 class="post_title entry-title">꿀팁 게시판</h2>
+                            {#                        모바일용 서브메뉴바#}
+                            <div class="article_submenu_comfort header-align-end">
+                                <div class="header-action-area">
+
+                                    <button class="btn-menu" type="button" data-bs-toggle="offcanvas"
+                                            data-bs-target="#AsideOffcanvasMenu" aria-controls="AsideOffcanvasMenu">
+                                        <i class="icofont-navigation-menu"></i>
+                                    </button>
                                 </div>
-                                <div class="bbp-breadcrumb">
-                                    <p>
-                                        <a href="{% url 'articleapp:home' %}" class="bbp-breadcrumb-home">카테고리</a>
-                                        <span class="bbp-breadcrumb-sep"> › </span>
-                                        <span class="bbp-breadcrumb-current">꿀팁 게시판</span>
-                                        <span class="bbp-breadcrumb-sep"> › </span>
-                                        <span><a href="{% url 'articleapp:aritcle_write' %}">게시글 작성</a></span>
-                                    </p>
-                                </div>
-                            <button class="article_write">게시글 작성</button>
-                            <ul id="forums-list-0" class="bbp-forums">
-                                <li class="bbp-header">
-                                    <ul class="forum-titles">
-                                        <li class="bbp-forum-info">제목</li>
-                                        <li class="bbp-forum-topic-count">조회</li>
-                                        <li class="bbp-forum-reply-count">좋아요</li>
-                                        <li class="bbp-forum-freshness">작성자</li>
-                                    </ul>
-                                </li>
-                                    {% for article in board_list %}
-                                        <li class="bbp-body">
-                                            <ul id="{{ article.id }}" class="loop-item-0 bbp-forum-status-open bbp-forum-visibility-publish forum type-forum hentry">
-                                                <li class="bbp-forum-info">
-                                                    <a class="bbp-forum-title" href="{% url 'articleapp:question_RUD' article.pk %}">{{ article.title }}</a>
-                                                    <div class="bbp-forum-content">
-                                                        {{ article.content }}
-                                                    </div>
-                                                </li>
-                                                <li class="bbp-forum-topic-count">{{ article.article_hits }}</li>
-                                                <li class="bbp-forum-reply-count">0</li>
-                                                <li class="bbp-forum-freshness">
-                                                    {{ article.user.name }}
-                                                    <p class="bbp-topic-meta">
+                            </div>
+                        </div>
+                        {% if msg %}
+                            <h5>꿀팁 게시글이 존재하지 않습니다.</h5>
+                        {% else %}
+                            <section class="post_content">
+                                <div id="bbpress-forums">
+                                    <div class="bbp-search-form">
+                                        <form role="search" method="get" id="bbp-search-form" action="#">
+                                            <div>
+                                                <label class="screen-reader-text hidden" for="bbp_search">Search
+                                                    for:</label>
+                                                <input type="hidden" name="action" value="bbp-search-request">
+                                                <input tabindex="101" type="text" value="" name="bbp_search"
+                                                       id="bbp_search">
+                                                <input tabindex="102" class="button" type="submit"
+                                                       id="bbp_search_submit" value="Search">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="bbp-breadcrumb">
+                                        <p>
+                                            <a href="{% url 'articleapp:home' %}" class="bbp-breadcrumb-home">카테고리</a>
+                                            <span class="bbp-breadcrumb-sep"> › </span>
+                                            <span class="bbp-breadcrumb-current">꿀팁 게시판</span>
+                                            <span class="bbp-breadcrumb-sep"> › </span>
+                                            <span><a href="{% url 'articleapp:aritcle_write' %}">게시글 작성</a></span>
+                                        </p>
+                                    </div>
+                                    <button onclick="location.href='/communities/article/write/'" class="article_write">
+                                        게시글 작성
+                                    </button>
+                                    <ul id="forums-list-0" class="bbp-forums">
+                                        <li class="bbp-header">
+                                            <ul class="forum-titles">
+                                                <li class="bbp-forum-info">제목</li>
+                                                <li class="bbp-forum-topic-count">조회</li>
+                                                <li class="bbp-forum-reply-count">좋아요</li>
+                                                <li class="bbp-forum-freshness">작성자</li>
+                                            </ul>
+                                        </li>
+                                        {% for article in board_list %}
+                                            <li class="bbp-body">
+                                                <ul id="{{ article.id }}"
+                                                    class="loop-item-0 bbp-forum-status-open bbp-forum-visibility-publish forum type-forum hentry">
+                                                    <li class="bbp-forum-info">
+                                                        <a class="bbp-forum-title"
+                                                           href="{% url 'articleapp:question_RUD' article.pk %}">{{ article.title }}</a>
+{#                                                        <div class="bbp-forum-content">#}
+{#                                                            {{ article.content | safe}}#}
+{#                                                        </div>#}
+                                                    </li>
+                                                    <li class="bbp-forum-topic-count">{{ article.article_hits }}</li>
+                                                    <li class="bbp-forum-reply-count">{{ article.like_cnt }}</li>
+                                                    <li class="bbp-forum-freshness">
+                                                        {{ article.user.username }}
+                                                        <p class="bbp-topic-meta">
                                                     <span class="bbp-topic-freshness-author">
 {#                                                        <img alt="" src="http://1.gravatar.com/avatar/?s=14&amp;d=mm&amp;r=g" class="avatar avatar-14 photo avatar-default" height="14" width="14">&nbsp;#}
                                                         {{ article.created_at|date:'Y-m-d H:i' }}
                                                     </span>
-                                                    </p>
-                                                </li>
-                                            </ul>
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                        {% endfor %}
+
+                                        <li class="bbp-footer">
+                                            <div class="tr">
+                                                <p class="td colspan4">&nbsp;
+                                                </p>
+                                            </div>
                                         </li>
+                                    </ul>
+                                </div>
+                            </section>
+                        {% endif %}
 
-                                    {% endfor %}
-
-                                <li class="bbp-footer">
-                                    <div class="tr">
-                                        <p class="td colspan4">&nbsp;
-                                        </p>
-                                    </div>
-                                </li>
-                            </ul>
-                            </div>
-                    </section>
-                {% endif %}
-
-                </article>
-                <section class="related_wrap related_wrap_empty"></section>
+                    </article>
+                    <section class="related_wrap related_wrap_empty"></section>
+                </div>
             </div>
-        </div>
-        <!--            페이지네이터 적용부분         -->
+            <!--            페이지네이터 적용부분         -->
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="pagination-area">
@@ -93,25 +113,25 @@
 
 
                                     {% if board_list.has_previous %}
-                                    <a class="abutton" href="?page=1">맨 앞으로</a>
-                                    <a class="abutton" href="?page={{ board_list.previous_page_number }}">이전</a>
+                                        <a class="abutton" href="?page=1">맨 앞으로</a>
+                                        <a class="abutton" href="?page={{ board_list.previous_page_number }}">이전</a>
                                     {% endif %}
                                 </div>
 
 
                                 {% for page in board_list.paginator.page_range %}
-                                {% if page >= board_list.number|add:-2 and page <= board_list.number|add:2 %}
-                                <li class="page-number {% if page == board_list.number %}active chosen_page{% endif %}">
-                                    <a href="?page={{ page }}">{{ page }}</a>
-                                </li>
+                                    {% if page >= board_list.number|add:-2 and page <= board_list.number|add:2 %}
+                                        <li class="page-number {% if page == board_list.number %}active chosen_page{% endif %}">
+                                            <a href="?page={{ page }}">{{ page }}</a>
+                                        </li>
 
-                                {% endif %}
+                                    {% endif %}
                                 {% endfor %}
 
                                 <div style="width:12vw; margin: 0 5px;">
                                     {% if board_list.has_next %}
-                                    <a class="abutton" href="?page={{ board_list.next_page_number }}">다음</a>
-                                    <a class="abutton" href="?page={{ board_list.paginator.num_pages }}">맨 뒤로</a>
+                                        <a class="abutton" href="?page={{ board_list.next_page_number }}">다음</a>
+                                        <a class="abutton" href="?page={{ board_list.paginator.num_pages }}">맨 뒤로</a>
                                     {% endif %}
                                 </div>
 
@@ -120,8 +140,8 @@
                     </div>
                 </div>
             </div>
+        </div>
     </div>
-</div>
-</div>
+    </div>
 
 {% endblock %}

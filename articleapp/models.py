@@ -1,6 +1,5 @@
 from ckeditor.fields import RichTextField
 from django.db import models
-
 from TEAM3_F5_coFI.models import BaseModel
 from userapp.models import User
 
@@ -14,6 +13,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 class Article(BaseModel):
     class Meta:
         db_table = "article"
@@ -21,10 +21,9 @@ class Article(BaseModel):
     title = models.CharField(max_length=50)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    content = models.TextField(null=True, blank=True)
+    content = RichTextField(blank=True, null=True)
     img = models.FileField(upload_to='uploads/%Y%m%d', blank=True, null=True)
     like_cnt = models.IntegerField(default=0)
-
     article_hits = models.IntegerField(default=0)
 
     def __str__(self):

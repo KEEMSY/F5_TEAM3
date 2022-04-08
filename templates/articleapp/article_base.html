@@ -9,6 +9,28 @@
 
 <style>
 
+    .article_submenu_comfort {
+        display: none;
+    }
+    {#모바일 화면용 서브메뉴바 생성#}
+    @media only screen and (max-width: 850px) {
+        h2.post_title.entry-title {
+            width: 100%;
+        }
+
+        .article_submenu_comfort {
+            display: block;
+        }
+
+        .article_submenu_comfort {
+            display: flex;
+            flex-direction: row-reverse;
+            position: relative;
+            bottom: 20px;
+        }
+
+    }
+
     #bbpress-forums div.bbp-search-form {
         width: 60%;
     }
@@ -28,6 +50,7 @@
         display: flex;
         margin-right: 5px;
     }
+
     .article_write {
         display: none;
     }
@@ -64,19 +87,21 @@
         li.bbp-forum-reply-count {
             width: 14%;
         }
+
     {#게시글 작성버튼#}
-    .article_write {
-        display: block;
-        padding: 11px 12px;
-        margin: 0;
-        border: none;
-        background-color: #67d3e0;
-        color: #ffffff;
-        border-radius: 5px;
-        font-family: "Lato", sans-serif;
-        font-weight: 600;
+        .article_write {
+            display: block;
+            padding: 11px 12px;
+            margin: 0;
+            border: none;
+            background-color: #67d3e0;
+            color: #ffffff;
+            border-radius: 5px;
+            font-family: "Lato", sans-serif;
+            font-weight: 600;
         }
     }
+
     @media only screen and (max-width: 1150px) {
         .left_wrapper {
             display: none;

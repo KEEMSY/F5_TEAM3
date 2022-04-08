@@ -1,5 +1,4 @@
 {% extends 'articleapp/article_base.html' %}
-
 {% block content %}
 
     <div class="col-8">
@@ -8,7 +7,19 @@
                 <div class="content">
                     <article
                             class="post_item post_item_single post_featured_left post_format_standard forum type-forum hentry">
-                        <h2 class="post_title entry-title">모든 게시글</h2>
+                        <div style="display: flex">
+                            <h2 class="post_title entry-title">모든 게시글</h2>
+{#                        모바일용 서브메뉴바#}
+                        <div class="article_submenu_comfort header-align-end">
+                        <div class="header-action-area">
+
+                            <button class="btn-menu" type="button" data-bs-toggle="offcanvas"
+                                    data-bs-target="#AsideOffcanvasMenu" aria-controls="AsideOffcanvasMenu">
+                                <i class="icofont-navigation-menu"></i>
+                            </button>
+                        </div>
+                    </div>
+                        </div>
                         <section class="post_content">
                             <div id="bbpress-forums">
                                 <div class="bbp-search-form">
@@ -34,7 +45,7 @@
                                         <span><a href="{% url 'articleapp:aritcle_write' %}">게시글 작성</a></span>
                                     </p>
                                 </div>
-                                <button class="article_write">게시글 작성</button>
+                                <button onclick="location.href='/communities/article/write/'" class="article_write">게시글 작성</button>
                                 <ul id="forums-list-0" class="bbp-forums">
                                     <li class="bbp-header">
                                         <ul class="forum-titles">
@@ -52,14 +63,14 @@
                                                 <li class="bbp-forum-info">
                                                     <a class="bbp-forum-title"
                                                        href="{% url 'articleapp:article_CRUD' article.pk %}">{{ article.title }}</a>
-                                                    <div class="bbp-forum-content">
-                                                        {{ article.content }}
-                                                    </div>
+{#                                                    <div class="bbp-forum-content">#}
+{#                                                        {{ article.content | safe}}#}
+{#                                                    </div>#}
                                                 </li>
                                                 <li class="bbp-forum-topic-count">{{ article.article_hits }}</li>
-                                                <li class="bbp-forum-reply-count">0</li>
+                                                <li class="bbp-forum-reply-count">{{ article.like_cnt }}</li>
                                                 <li class="bbp-forum-freshness">
-                                                    {{ article.user.name }}
+                                                    {{ article.user.username }}
                                                     <p class="bbp-topic-meta">
                                             <span class="bbp-topic-freshness-author">
 {#                                                <img alt=""#}

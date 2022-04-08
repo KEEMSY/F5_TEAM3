@@ -127,15 +127,6 @@
 
 }
 
-.content_img{
-    width: 250px;
-    height: 350px;
-    background-color: #badbcc;
-    text-align: center;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
 .content_details{
     width: 90%;
     margin: 0 auto;
@@ -283,6 +274,9 @@ hr{
 
 }
 
+.btn-light {
+    margin-top : 1rem;
+}
 .new-comment {
     display: flex;
     flex-direction: row;
@@ -298,4 +292,11 @@ hr{
 #comment-submit-button {
     width: 5rem;
     margin-left: 1rem;
+}
+#div_id_content{ width: 100%; }
+#cke_id_content{ width: 100%; }
+.django-ckeditor-widget
+{
+    width: 100%;
+    display: block;
 }

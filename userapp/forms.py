@@ -5,6 +5,7 @@ from django import forms
 from . import models
 from .models import Profile, User
 
+from django.utils.translation import gettext_lazy as _
 
 class SignUpForm(forms.Form):
 
@@ -71,8 +72,15 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username']
+        labels = {
+            'username': _('닉네임'),
+        }
 
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['img', 'skill', 'github', 'blog']
+        labels = {
+            'skill': _('언어 스택'),
+        }
+
