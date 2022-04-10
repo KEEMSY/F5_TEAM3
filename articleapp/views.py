@@ -43,7 +43,6 @@ class ArticleView(View):
             best_comment = read_best_comment()
 
             target_comment = read_target_article_comment(article_id)
-            print(type(target_comment))
 
             try:
                 like_article = ArticleLikes.objects.filter(article=article_id, user=request.user.id).get()
