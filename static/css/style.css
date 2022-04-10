@@ -1,3 +1,11 @@
+/*발표를 위해 검색바 디스플레이 논 처리*/
+
+.bbp-search-form {
+    display: none;
+}
+
+
+
 @charset "UTF-8";
 /*===================================================================
 [Table Of Content]
@@ -2617,7 +2625,7 @@ table p {
     padding-top: 0px;
     padding-bottom: 120px;
     margin-top: 110px;
-    width: 1000px;
+    width: 100%;
 }
 
 .google_wrap {
@@ -2688,14 +2696,14 @@ table p {
 @media only screen and (max-width: 575px) {
     .login-register-form-wrap {
         padding: 32px 34px 29px;
-        width: 450px;
+        width: 100%;
     }
 }
 
 @media only screen and (max-width: 400px) {
     .login-register-form-wrap {
         padding: 32px 34px 29px;
-        width: 360px;
+        width: 100%;
     }
 }
 
@@ -2754,7 +2762,7 @@ img.header_img {
     padding-top: 0px;
     padding-bottom: 120px;
     margin-top: 100px;
-    width: 1000px;
+    width: 100%;
 }
 
 .col-12 .form-group .btn-theme {
@@ -2785,7 +2793,7 @@ img.header_img {
 @media only screen and (max-width: 575px) {
     .only_register login-register-form-wrap {
         padding: 32px 34px 29px;
-        width: 450px;
+        width: 100%;
         margin-left: 3px;
     }
 }
@@ -2793,7 +2801,7 @@ img.header_img {
 @media only screen and (max-width: 1199px) {
     .only_register login-register-form-wrap {
         padding: 25px 34px 29px;
-        width: 450px;
+        width: 100%;
 
     }
 }

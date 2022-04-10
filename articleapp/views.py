@@ -37,11 +37,6 @@ class ArticleView(View):
         like_cnt = Article.objects.get(pk=article_id)
 
         try:
-            user_img = 'https://cofi.s3.ap-northeast-2.amazonaws.com/' + Profile.objects.get(user_id=request.user.id)
-        except:
-            user_img='https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg'
-
-        try:
             ip = get_client_ip(request)
 
             target_article = hit_article(ip, pk)
@@ -49,47 +44,25 @@ class ArticleView(View):
 
             target_comment = read_target_article_comment(article_id)
             print(type(target_comment))
-            if target_comment:
-                target_profiles = []
-                for comment in target_comment:
-                    try:
-                        profile_img = 'https://cofi.s3.ap-northeast-2.amazonaws.com/' + Profile.objects.get(user_id=comment.user.id)
-                    except:
-                        profile_img = 'https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg'
-                    target_profiles.append(profile_img)
-
-                target_data =[]
-                for data in zip(target_comment, target_profiles):
-                    target_data.append(data)
-            else:
-                target_data = False
 
             try:
                 like_article = ArticleLikes.objects.filter(article=article_id, user=request.user.id).get()
 
-                if best_comment:
-                    best_profile = Profile.objects.get(user_id=best_comment.user.id)
-                else:
-                    best_profile = False
                 return render(request, 'articleapp/article_detail.html',
-                              {'target_article': target_article, 'target_date': target_data,
-                               'target_comment': target_comment, 'user_img': user_img,
-                               'best_comment': best_comment,'best_profile':best_profile,
+                              {'target_article': target_article,
+                               'target_comment': target_comment, 'best_comment': best_comment,
                                'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments,
-                               'like_article': like_article, 'check_bookmark': check_bookmark , 'like_cnt':like_cnt},
+                               'like_article': like_article, 'check_bookmark': check_bookmark, 'like_cnt': like_cnt},
                               status=200)
             # 좋아요가 없을 때
             except ObjectDoesNotExist:
-                if best_comment:
-                    best_profile = Profile.objects.get(user_id=best_comment.user.id)
-                else:
-                    best_profile = False
 
                 return render(request, 'articleapp/article_detail.html',
-                              {'target_article': target_article, 'user_img': user_img,
+                              {'target_article': target_article,
                                'left_content_articles': all_articles, 'left_content_recent_comments': recent_comments,
-                               'best_comment':best_comment,'best_profiles':best_profile, 'target_date': target_data,
-                            'target_comment':target_comment, 'check_bookmark': check_bookmark, 'like_cnt':like_cnt}, status=200)
+                               'best_comment': best_comment,
+                               'target_comment': target_comment, 'check_bookmark': check_bookmark,
+                               'like_cnt': like_cnt}, status=200)
 
         except ObjectDoesNotExist:
             return JsonResponse({'msg': "게시글이 존재하지 않습니다."}, status=404)

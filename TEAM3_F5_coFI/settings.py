@@ -27,6 +27,7 @@ env = environ.Env(
 )
 
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -229,8 +230,9 @@ AUTHENTICATION_BACKENDS = (
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-#
+
 # try:
 #     from TEAM3_F5_coFI.deploy_settings import *
 # except ImportError:
 #     pass
+
