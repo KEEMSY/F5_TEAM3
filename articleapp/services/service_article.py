@@ -51,6 +51,7 @@ def read_article_by_user(user_id):
 
 def read_article_containing_username(keyword):
     users = User.objects.filter(username__icontains=keyword).order_by('-id')
+    print('fuc-user', users)
     article_list = []
     for user in users:
         article_list.append(read_article_by_user(user.id))
@@ -61,7 +62,7 @@ def read_article_containing_username(keyword):
 
         return article_queryset
     except IndexError:
-        return 0
+        return []
 
 
 def read_article_within_a_specific_period(date):

@@ -212,12 +212,15 @@ def search_article(request):
     period = request.POST.get('period', 'all')
     keyword = request.POST.get('keyword', '')
 
+    print('standard', standard)
+    print('keyword', keyword)
 
     if period == 'all':
         if standard == 'title':
             target_articles = read_article_by_title(keyword)
             page = int(request.GET.get('page', 1))
             board_list = get_page_context(target_articles, page)
+            print(board_list)
             return render(request, 'articleapp/article_search.html',
                           {'articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles[:8],
                            'left_content_recent_comments': recent_comments},
@@ -225,6 +228,7 @@ def search_article(request):
 
         else:
             target_articles = read_article_containing_username(keyword)
+            print('target_articles', target_articles)
             page = int(request.GET.get('page', 1))
             board_list = get_page_context(target_articles, page)
             return render(request, 'articleapp/article_search.html',
