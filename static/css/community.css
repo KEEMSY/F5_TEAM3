@@ -195,7 +195,6 @@
 
 .right_wrapper_icons {
     width: 5rem;
-    margin-right: 1rem;
     display: flex;
 
 }
@@ -347,4 +346,10 @@ hr {
     width: 100%;
     display: block;
 }
+.comment_footer_container{
+    width: 100%;
+}
 
+.comment_footer_wrapper{
+    width: 100%;
+}
