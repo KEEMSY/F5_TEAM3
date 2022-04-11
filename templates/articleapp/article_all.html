@@ -22,12 +22,13 @@
                         </div>
                         <section class="post_content">
                             <div id="bbpress-forums">
+                            <div>
                                 <div class="bbp-search-form">
                                     <form role="search" method="post" id="bbp-search-form" action="{% url 'articleapp:article_search' %}">
                                         {% csrf_token %}
                                         <div>
                                             <select class="form-select" aria-label="Default select example">
-                                                  <option selected>검색조건</option>
+                                                  <option selected disabled>검색조건</option>
                                                   <option value="title">제목</option>
                                                   <option value="user">작성자</option>
                                             </select>
@@ -40,16 +41,10 @@
                                     </form>
                                 </div>
                                 <div class="bbp-breadcrumb">
-                                    <p>
-                                        <a href="" class="bbp-breadcrumb-home">카테고리</a>
-                                        <span class="bbp-breadcrumb-sep"> › </span>
-                                        <span class="bbp-breadcrumb-current">모든 게시글</span>
-                                        <span class="bbp-breadcrumb-sep"> › </span>
-
-                                        <span><a href="{% url 'articleapp:aritcle_write' %}">게시글 작성</a></span>
-                                    </p>
+                                    <button onclick="location.href='/communities/article/write/'" class="article1_write">게시글 작성</button>
                                 </div>
                                 <button onclick="location.href='/communities/article/write/'" class="article_write">게시글 작성</button>
+                            </div>
                                 <ul id="forums-list-0" class="bbp-forums">
                                     <li class="bbp-header">
                                         <ul class="forum-titles">

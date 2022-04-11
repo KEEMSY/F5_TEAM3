@@ -74,7 +74,7 @@ section.post_content {
 }
 
 #bbpress-forums {
-    margin-bottom: 0px;
+    margin-top: 2rem;
     overflow: visible;
 }
 
@@ -874,3 +874,14 @@ img.avatar-14 {
     font-size: 1.1rem;
 }
 
+.article1_write{
+    display: block;
+    padding: 11px 12px;
+    margin: 0;
+    border: none;
+    background-color: #67d3e0;
+    color: #ffffff;
+    border-radius: 5px;
+    font-family: "Lato", sans-serif;
+    font-weight: 500;
+}
