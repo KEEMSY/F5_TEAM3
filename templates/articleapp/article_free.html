@@ -27,26 +27,24 @@
                             <section class="post_content">
                                 <div id="bbpress-forums">
                                     <div class="bbp-search-form">
-                                        <form role="search" method="get" id="bbp-search-form" action="#">
-                                            <div>
-                                                <label class="screen-reader-text hidden" for="bbp_search">Search
-                                                    for:</label>
-                                                <input type="hidden" name="action" value="bbp-search-request">
-                                                <input tabindex="101" type="text" value="" name="bbp_search"
+                                        <form role="search" method="post" id="bbp-search-form" action="{% url 'articleapp:article_search' %}">
+                                            {% csrf_token %}
+                                            <div class="search_bar">
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected disabled>검색조건</option>
+                                                    <option value="title">제목</option>
+                                                    <option value="user">작성자</option>
+                                                </select>
+                                                {#                                            <input type="hidden" name="action" value="bbp-search-request"> 뭐하는 친구인지 알 수 없음#}
+                                                <input placeholder="검색어를 입력하세요" type="text" value="" name="keyword"
                                                        id="bbp_search">
-                                                <input tabindex="102" class="button" type="submit"
-                                                       id="bbp_search_submit" value="Search">
+                                                <input class="button" type="submit" id="bbp_search_submit"
+                                                       value="Search">
                                             </div>
                                         </form>
                                     </div>
                                     <div class="bbp-breadcrumb">
-                                        <p>
-                                            <a href="{% url 'articleapp:home' %}" class="bbp-breadcrumb-home">카테고리</a>
-                                            <span class="bbp-breadcrumb-sep"> › </span>
-                                            <span class="bbp-breadcrumb-current">자유 게시판</span>
-                                            <span class="bbp-breadcrumb-sep"> › </span>
-                                            <span><a href="{% url 'articleapp:aritcle_write' %}">게시글 작성</a></span>
-                                        </p>
+                                        <button onclick="location.href='/communities/article/write/'" class="article1_write">게시글 작성</button>
                                     </div>
                                     <button onclick="location.href='/communities/article/write/'" class="article_write">
                                         게시글 작성
@@ -67,14 +65,16 @@
                                                     <li class="bbp-forum-info">
                                                         <a class="bbp-forum-title"
                                                            href="{% url 'articleapp:free_RUD' article.pk %}">{{ article.title }}</a>
-{#                                                        <div class="bbp-forum-content">#}
-{#                                                            {{ article.content | safe}}#}
-{#                                                        </div>#}
+                                                        {#                                                        <div class="bbp-forum-content">#}
+                                                        {#                                                            {{ article.content | safe}}#}
+                                                        {#                                                        </div>#}
                                                     </li>
                                                     <li class="bbp-forum-topic-count">{{ article.article_hits }}</li>
                                                     <li class="bbp-forum-reply-count">{{ article.like_cnt }}</li>
                                                     <li class="bbp-forum-freshness">
+                                                        <a href="{% url 'user:profile' article.user.pk %}">
                                                         {{ article.user.username }}
+                                                        </a>
                                                         <p class="bbp-topic-meta">
                                                     <span class="bbp-topic-freshness-author">
 {#                                                        <img alt="" src="http://1.gravatar.com/avatar/?s=14&amp;d=mm&amp;r=g" class="avatar avatar-14 photo avatar-default" height="14" width="14">&nbsp;#}

@@ -170,7 +170,6 @@
     <!--== Start Header Wrapper ==-->
     {% include 'header_ver2.html' %}
     {# End Header Wrpper#}
-
     <div class="wraper_wraper">
         {% include 'articleapp/article_left_content.html' %}
         <div class="col-8">
@@ -190,7 +189,6 @@
                             </span>
                             </div>
                             <div class="content_title_footet_right_wrapper">
-
                                 <div class="right_wrapper_icons">
                                     <div class="icon_wrapper">
                                         <div class="like_function">
@@ -249,6 +247,12 @@
                                     </div>
 
                                 </div>
+{#                            작업 중인 페이지 #}
+                                <div class="right_wrapper_icons">
+                                    <div class="icon_wrapper" type="button"  onclick="removeCheck_article({{ target_article.id }})">
+                                        <img src="{% static 'img/icons/delete-button.png' %}" alt="">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -296,10 +300,10 @@
                                                     <span class="timeline-item-icon | avatar-icon">
                                                         <i class="avatar">
                                                             {% if user.profile.img %}
-                                                            <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ user.profile.img }}"/>
+                                                                <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ user.profile.img }}"/>
                                                             {% else %}
                                                                 <img src='https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg'/>
-                                                                {% endif %}
+                                                            {% endif %}
                                                         </i>
                                                     </span>
                                         {#                                        댓글 작성하는곳#}
@@ -359,7 +363,7 @@
                                                                     </time>
                                                                     {% if user == comment.user %}
                                                                         <button class="comment_delete_btn"
-                                                                                onclick="delete_comment({{ comment.pk }})">삭제하기</button>
+                                                                                onclick="removeCheck_comment({{ comment.pk }})">삭제하기</button>
                                                                     {% endif %}
                                                                 </span>
                                                             </div>
@@ -383,131 +387,131 @@
                             </div>
 
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 
-</div>
 
-
-<!--== Start Aside Menu ==-->
-<aside class="off-canvas-wrapper offcanvas offcanvas-start" tabindex="-1" id="AsideOffcanvasMenu"
-       aria-labelledby="offcanvasExampleLabel">
-    <div class="offcanvas-header">
-        <h1 class="d-none" id="offcanvasExampleLabel">Aside Menu</h1>
-        <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">메뉴 <i
-                class="icofont-simple-left"></i></button>
-    </div>
-    <div class="offcanvas-body">
-        <!-- Mobile Menu Start -->
-        <div class="mobile-menu-items">
-            <ul class="nav-menu">
-                <li><a href="/">홈</a></li>
-                <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
-                <li><a href="{% url 'articleapp:home' %}">커뮤니티</a>
-                    <ul class="sub-menu">
-                        <li><a href="{% url 'articleapp:free' %}">자유게시판</a></li>
-                        <li><a href="{% url 'articleapp:tip' %}">꿀팁게시판</a></li>
-                        <li><a href="{% url 'articleapp:question' %}">질문게시판</a></li>
-                    </ul>
-                </li>
-                {% if not user.is_authenticated %}
-                    <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
-                    <li><a href="{% url 'user:sign-up' %}"><span>회원가입</span></a></li>
-                {% else %}
-                    <li class="has-submenu"><a
-                            href="{% url 'user:profile' user.pk %}"><span>마이페이지</span></a>
-                    </li>
-                    <li><a href="{% url 'user:logout' %}"><span>로그아웃</span></a></li>
-                {% endif %}
-                {#                    <li><a href="contact.html">Contact</a></li>#}
-            </ul>
+    <!--== Start Aside Menu ==-->
+    <aside class="off-canvas-wrapper offcanvas offcanvas-start" tabindex="-1" id="AsideOffcanvasMenu"
+           aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <h1 class="d-none" id="offcanvasExampleLabel">Aside Menu</h1>
+            <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">메뉴 <i
+                    class="icofont-simple-left"></i></button>
         </div>
-        <!-- Mobile Menu End -->
-    </div>
-</aside>
-<!--== End Aside Menu ==-->
-<!--=======================Javascript============================-->
+        <div class="offcanvas-body">
+            <!-- Mobile Menu Start -->
+            <div class="mobile-menu-items">
+                <ul class="nav-menu">
+                    <li><a href="/">홈</a></li>
+                    <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
+                    <li><a href="{% url 'articleapp:home' %}">커뮤니티</a>
+                        <ul class="sub-menu">
+                            <li><a href="{% url 'articleapp:free' %}">자유게시판</a></li>
+                            <li><a href="{% url 'articleapp:tip' %}">꿀팁게시판</a></li>
+                            <li><a href="{% url 'articleapp:question' %}">질문게시판</a></li>
+                        </ul>
+                    </li>
+                    {% if not user.is_authenticated %}
+                        <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
+                        <li><a href="{% url 'user:sign-up' %}"><span>회원가입</span></a></li>
+                    {% else %}
+                        <li class="has-submenu"><a
+                                href="{% url 'user:profile' user.pk %}"><span>마이페이지</span></a>
+                        </li>
+                        <li><a href="{% url 'user:logout' %}"><span>로그아웃</span></a></li>
+                    {% endif %}
+                    {#                    <li><a href="contact.html">Contact</a></li>#}
+                </ul>
+            </div>
+            <!-- Mobile Menu End -->
+        </div>
+    </aside>
+    <!--== End Aside Menu ==-->
+    <!--=======================Javascript============================-->
 
-{% include 'js.html' %}
+    {% include 'js.html' %}
 
-<script>
-    function plus_comment_cnt() {
-        let comment_cnt = parseInt($('#comment_cnt').text())
-        console.log(comment_cnt)
-        comment_cnt++
-        parseInt($('#comment_cnt').html(comment_cnt))
-    }
+    <script>
+        function plus_comment_cnt() {
+            let comment_cnt = parseInt($('#comment_cnt').text())
+            console.log(comment_cnt)
+            comment_cnt++
+            parseInt($('#comment_cnt').html(comment_cnt))
+        }
 
-    function minus_comment_cnt() {
-        let comment_cnt = parseInt($('#comment_cnt').text())
-        console.log(comment_cnt)
-        comment_cnt--
-        parseInt($('#comment_cnt').html(comment_cnt))
-    }
+        function minus_comment_cnt() {
+            let comment_cnt = parseInt($('#comment_cnt').text())
+            console.log(comment_cnt)
+            comment_cnt--
+            parseInt($('#comment_cnt').html(comment_cnt))
+        }
 
-    function open_comment() {
-        $('#comment_content').removeClass('disp_none')
-        $('#more_show_btn').addClass('disp_none')
-        $('#less_show_btn').removeClass('disp_none')
-    }
+        function open_comment() {
+            $('#comment_content').removeClass('disp_none')
+            $('#more_show_btn').addClass('disp_none')
+            $('#less_show_btn').removeClass('disp_none')
+        }
 
-    function close_comment() {
-        $('#comment_content').addClass('disp_none')
-        $('#more_show_btn').removeClass('disp_none')
-        $('#less_show_btn').addClass('disp_none')
-    }
+        function close_comment() {
+            $('#comment_content').addClass('disp_none')
+            $('#more_show_btn').removeClass('disp_none')
+            $('#less_show_btn').addClass('disp_none')
+        }
 
 
-    function like_article() {
-        $.ajax({
-            type: 'POST',
-            url: '{% url 'likeapp:articlelike' target_article.pk %}',
-            headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
-            success: function (response) {
-                window.location.reload(true)
-            }
-        });
-    }
+        function like_article() {
+            $.ajax({
+                type: 'POST',
+                url: '{% url 'likeapp:articlelike' target_article.pk %}',
+                headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+                success: function (response) {
+                    window.location.reload(true)
+                }
+            });
+        }
 
-    function unlike_article() {
-        $.ajax({
-            type: 'DELETE',
-            url: '{% url 'likeapp:articlelike' target_article.pk %}',
-            headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
-            success: function (response) {
-                window.location.reload(true)
-            }
-        });
-    }
+        function unlike_article() {
+            $.ajax({
+                type: 'DELETE',
+                url: '{% url 'likeapp:articlelike' target_article.pk %}',
+                headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+                success: function (response) {
+                    window.location.reload(true)
+                }
+            });
+        }
 
-    function save_comment() {
-        let url = window.location.href.split('/')
-        let article_id = url[url.length - 1]
-        let comment = $('#target_comment').val()
-        let temp_html = ``
+        function save_comment() {
+            let url = window.location.href.split('/')
+            let article_id = url[url.length - 1]
+            let comment = $('#target_comment').val()
+            let temp_html = ``
 
-        $.ajax({
-            type: "POST",
-            url: '{% url 'commentapp:interatction_comment' %}',
-            data: {
-                'article_id': article_id,
-                'content': comment
-            },
-            headers: {
-                'X-CSRFTOKEN': '{{ csrf_token }}'
-            },
-            success: function (response) {
-                console.log('되나?')
-                let username = response['comment']['username']
-                let date = response['comment']['date']
-                let content = response['comment']['content']
-                let comment_pk = response['comment']['comment_pk']
-                let user_pk = response['comment']['user_pk']
-                let user_img = response['comment']['user_img']
+            $.ajax({
+                type: "POST",
+                url: '{% url 'commentapp:interatction_comment' %}',
+                data: {
+                    'article_id': article_id,
+                    'content': comment
+                },
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                success: function (response) {
+                    console.log('되나?')
+                    let username = response['comment']['username']
+                    let date = response['comment']['date']
+                    let content = response['comment']['content']
+                    let comment_pk = response['comment']['comment_pk']
+                    let user_pk = response['comment']['user_pk']
+                    let user_img = response['comment']['user_img']
 
-                temp_html = `
+                    temp_html = `
                 <div id="${comment_pk}">
                     <div class="timeline-item-description">
                         <i class="avatar | small">
@@ -515,7 +519,7 @@
                         </i>
                         <span><a href="/users/profile/${user_pk}"> ${username} </a>   작성된 날짜 <time
                                 datetime="20-01-2021"> ${date} </time>
-                                <button class="comment_delete_btn" onclick="delete_comment(${comment_pk})">삭제하기</button>
+                                <button class="comment_delete_btn" onclick="removeCheck_comment(${comment_pk})">삭제하기</button>
                         </span>
                     </div>
                     <div class="comment">
@@ -524,63 +528,103 @@
                         </p>
                     </div>
                 </div>`
-                $('#comment_content2').append(temp_html)
-                {#window.location.reload(true)#}
-                $('#target_comment').val('')
-                open_comment()
-                plus_comment_cnt()
+                    $('#comment_content2').append(temp_html)
+                    {#window.location.reload(true)#}
+                    $('#target_comment').val('')
+                    open_comment()
+                    plus_comment_cnt()
+
+                }
+            });
+        }
+
+        function bookmark_article() {
+            $.ajax({
+                type: 'POST',
+                url: '{% url 'bookmarkapp:bookmark' target_article.pk %}',
+                headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+                success: function (response) {
+                    window.location.reload(true)
+                }
+            });
+        }
+
+        function unbookmark_article() {
+            $.ajax({
+                type: 'DELETE',
+                url: '{% url 'bookmarkapp:bookmark' target_article.pk %}',
+                headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+                success: function (response) {
+                    window.location.reload(true)
+                }
+            });
+        }
+
+
+        function delete_comment(id) {
+            let pk_data = JSON.stringify({"pk": id})
+            $.ajax({
+                type: "DELETE",
+                url: '{% url 'commentapp:interatction_comment' %}',
+                contentType: "application/json",
+                dataType: "JSON",
+                data: pk_data,
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                success: function (response) {
+                    $('#' + id).remove()
+                    console.log(id)
+                    {#window.location.reload(true)#}
+                    minus_comment_cnt()
+                }
+            });
+            open_comment()
+        }
+        function removeCheck_comment(id) {
+            if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+                delete_comment(id)
+            }else{   //취소
+                return false;
+            }
+        }
+
+
+         function delete_article(id) {
+            {#let pk_data = JSON.stringify({"pk": id})#}
+            $.ajax({
+                type: "DELETE",
+                url: '{% url 'articleapp:article_CRUD' target_article.pk %}',
+                contentType: "application/json",
+                dataType: "JSON",
+                data:{},
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                success: function (response) {
+                    window.location.replace({% url 'articleapp:home' %});
+                }
+            });
+        }
+
+
+        function removeCheck_article(id){
+            if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+                delete_article(id)
+            }else{   //취소
+
+                return false;
 
             }
-        });
-    }
-
-    function bookmark_article() {
-        $.ajax({
-            type: 'POST',
-            url: '{% url 'bookmarkapp:bookmark' target_article.pk %}',
-            headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
-            success: function (response) {
-                window.location.reload(true)
-            }
-        });
-    }
-
-    function unbookmark_article() {
-        $.ajax({
-            type: 'DELETE',
-            url: '{% url 'bookmarkapp:bookmark' target_article.pk %}',
-            headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
-            success: function (response) {
-                window.location.reload(true)
-            }
-        });
-    }
+        }
 
 
-    function delete_comment(id) {
-        let pk_data = JSON.stringify({"pk": id})
-        $.ajax({
-            type: "DELETE",
-            url: '{% url 'commentapp:interatction_comment' %}',
-            contentType: "application/json",
-            dataType: "JSON",
-            data: pk_data,
-            headers: {
-                'X-CSRFTOKEN': '{{ csrf_token }}'
-            },
-            success: function (response) {
-                $('#' + id).remove()
-                console.log(id)
-                {#window.location.reload(true)#}
-                minus_comment_cnt()
-            }
-        });
-        open_comment()
-    }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </body>
+
 {% include 'footer.html' %}
 
 </html>
