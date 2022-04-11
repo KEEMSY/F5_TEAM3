@@ -866,4 +866,11 @@ img.avatar-14 {
     clear: both;
 }
 
+.form-select{
+    width: 7rem;
+}
+
+#bbp_search{
+    font-size: 1.1rem;
+}
 

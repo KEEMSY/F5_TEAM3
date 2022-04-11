@@ -116,7 +116,7 @@ def write_article(request):
 
 
             # return redirect(f'/communities/{category}/') # 작성한 게시판으로 리로드 해놓음.
-            return redirect(f'/communities/article/{article.id}') # 작성한 글로 리로드 해놓음.
+            return redirect(f'/communities/article/{article.id}') # 작성한 글 리로드 해놓음.
 
     if request.method == 'GET':
         article_form = ArticleForm()
@@ -211,16 +211,19 @@ def search_article(request):
     all_articles = read_all_article()
     recent_comments = read_all_comment()[:5]
 
-    standard = request.POST['standard']
-    period = request.POST['period']
-    keyword = request.POST['keyword']
+    standard = request.POST.get('standard', 'title')
+    period = request.POST.get('period', 'all')
+    keyword = request.POST.get('keyword', '')
+    print('period: ', period)
+    print('standard: ', standard)
+    print('keyword: ', keyword)
 
     if period == 'all':
         if standard == 'title':
             target_articles = read_article_by_title(keyword)
             page = int(request.GET.get('page', 1))
             board_list = get_page_context(target_articles, page)
-            return render(request, 'community.html',
+            return render(request, 'articleapp/article_search.html',
                           {'articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles,
                            'left_content_recent_comments': recent_comments},
                           status=200)
@@ -229,7 +232,7 @@ def search_article(request):
             target_articles = read_article_containing_username(keyword)
             page = int(request.GET.get('page', 1))
             board_list = get_page_context(target_articles, page)
-            return render(request, 'community.html',
+            return render(request, 'articleapp/article_search.html',
                           {'articles': target_articles, 'board_list': board_list,
                            'left_content_articles': all_articles[:8],
                            'left_content_recent_comments': recent_comments},
@@ -241,7 +244,7 @@ def search_article(request):
                 target_articles = read_article_by_title_within_a_specific_period(period, keyword)
                 page = int(request.GET.get('page', 1))
                 board_list = get_page_context(target_articles, page)
-                return render(request, 'community.html',
+                return render(request, 'articleapp/article_search.html',
                               {'articles': target_articles, 'board_list': board_list,
                                'left_content_articles': all_articles[:8],
                                'left_content_recent_comments': recent_comments},
@@ -254,7 +257,7 @@ def search_article(request):
                 target_articles = read_article_containing_username_within_a_specific_period(period, keyword)
                 page = int(request.GET.get('page', 1))
                 board_list = get_page_context(target_articles, page)
-                return render(request, 'community.html',
+                return render(request, 'articleapp/article_search.html',
                               {'articles': target_articles, 'board_list': board_list,
                                'left_content_articles': all_articles[:8],
                                'left_content_recent_comments': recent_comments},
