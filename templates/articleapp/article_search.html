@@ -9,16 +9,16 @@
                             class="post_item post_item_single post_featured_left post_format_standard forum type-forum hentry">
                         <div style="display: flex">
                             <h2 class="post_title entry-title">검색 결과</h2>
-{#                        모바일용 서브메뉴바#}
-                        <div class="article_submenu_comfort header-align-end">
-                        <div class="header-action-area">
+                            {#                        모바일용 서브메뉴바#}
+                            <div class="article_submenu_comfort header-align-end">
+                                <div class="header-action-area">
 
-                            <button class="btn-menu" type="button" data-bs-toggle="offcanvas"
-                                    data-bs-target="#AsideOffcanvasMenu" aria-controls="AsideOffcanvasMenu">
-                                <i class="icofont-navigation-menu"></i>
-                            </button>
-                        </div>
-                    </div>
+                                    <button class="btn-menu" type="button" data-bs-toggle="offcanvas"
+                                            data-bs-target="#AsideOffcanvasMenu" aria-controls="AsideOffcanvasMenu">
+                                        <i class="icofont-navigation-menu"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         <section class="post_content">
                             <div id="bbpress-forums">
@@ -27,9 +27,9 @@
                                         {% csrf_token %}
                                         <div>
                                             <select class="form-select" name="standard">
-                                                  <option selected disabled>검색조건</option>
-                                                  <option value="title">제목</option>
-                                                  <option value="user">작성자</option>
+                                                <option selected disabled>검색조건</option>
+                                                <option value="title">제목</option>
+                                                <option value="user">작성자</option>
                                             </select>
                                             <input placeholder="검색어를 입력하세요" type="text" value="" name="keyword"
                                                    id="bbp_search">
@@ -59,9 +59,9 @@
                                                 <li class="bbp-forum-info">
                                                     <a class="bbp-forum-title"
                                                        href="{% url 'articleapp:article_CRUD' article.pk %}">{{ article.title }}</a>
-{#                                                    <div class="bbp-forum-content">#}
-{#                                                        {{ article.content | safe}}#}
-{#                                                    </div>#}
+                                                    {#                                                    <div class="bbp-forum-content">#}
+                                                    {#                                                        {{ article.content | safe}}#}
+                                                    {#                                                    </div>#}
                                                 </li>
                                                 <li class="bbp-forum-topic-count">{{ article.article_hits }}</li>
                                                 <li class="bbp-forum-reply-count">{{ article.like_cnt }}</li>
@@ -136,7 +136,6 @@
             </div>
         </div>
 
-    </div>
     </div>
 
 {% endblock %}

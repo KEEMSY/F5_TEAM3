@@ -202,7 +202,7 @@ def show_category_article(request):
     board_list = get_page_context(target_articles, page)
     return render(request, 'community.html',
                   {'target_articles': target_articles, 'board_list': board_list,
-                   'left_content_articles': all_articles[:5],
+                   'left_content_articles': all_articles[:8],
                    'left_content_recent_comments': recent_comments}, status=200)
 
 
@@ -224,7 +224,7 @@ def search_article(request):
             page = int(request.GET.get('page', 1))
             board_list = get_page_context(target_articles, page)
             return render(request, 'articleapp/article_search.html',
-                          {'articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles,
+                          {'articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles[:8],
                            'left_content_recent_comments': recent_comments},
                           status=200)
 
