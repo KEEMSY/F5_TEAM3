@@ -1,8 +1,9 @@
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
-from django.urls import reverse
 from django.views import View
 
 # 게시글 목록
@@ -13,19 +14,16 @@ from articleapp.services.service_article import (
     read_article_containing_username,
     read_article_containing_username_within_a_specific_period,
     read_category_article, read_target_article, update_article)
-from bookmarkapp.models import Bookmark
-from bookmarkapp.services.bookmark_service import bookmark_check
 # 단일 게시글 CRUD
-from commentapp.models import Comment
+
 
 from commentapp.services.comment_service import read_all_comment, read_target_article_comment, read_best_comment
 from bookmarkapp.services.bookmark_service import bookmark_check
-from likeapp.models import ArticleLikes
-from userapp.models import Profile
 
+from likeapp.models import ArticleLikes
 
 from .forms import ArticleForm
-from .models import Category, Article
+from .models import Article, Category
 
 
 class ArticleView(View):
@@ -43,7 +41,6 @@ class ArticleView(View):
             best_comment = read_best_comment()
 
             target_comment = read_target_article_comment(article_id)
-            print(type(target_comment))
 
             try:
                 like_article = ArticleLikes.objects.filter(article=article_id, user=request.user.id).get()
@@ -88,10 +85,11 @@ class ArticleView(View):
             except ObjectDoesNotExist:
                 return JsonResponse({'result': '게시글이 존재하지 않습니다.'}, status=404)
 
-    def delete(self, request, article_id):
+    def delete(self, request, pk):
         try:
-            delete_article(article_id)
+            delete_article(pk)
             return JsonResponse({'result': '게시글이 삭제되었습니다.'}, status=200)
+
         except ObjectDoesNotExist:
             return JsonResponse({'result': '게시글이 존재하지 않습니다.'}, status=404)
 
@@ -103,7 +101,6 @@ def write_article(request):
     recent_comments = read_all_comment()[:5]
     if request.method == 'POST':
         article_form = ArticleForm(request.POST, request.FILES)
-        print(request.FILES)
         category_id = request.POST.get('category')
         category = Category.objects.get(id=category_id)
 
@@ -113,7 +110,8 @@ def write_article(request):
             article.save()
 
 
-            return redirect(f'/communities/{category}/') # 작성한 게시판으로 리로드 해놓음.
+            # return redirect(f'/communities/{category}/') # 작성한 게시판으로 리로드 해놓음.
+            return redirect(f'/communities/article/{article.id}') # 작성한 글 리로드 해놓음.
 
     if request.method == 'GET':
         article_form = ArticleForm()
@@ -175,7 +173,6 @@ def show_tip_article(request):
     recent_comments = read_all_comment()[:5]
 
     target_articles = read_category_article('tip')
-    print(target_articles)
 
     if target_articles:
         page = int(request.GET.get('page', 1))
@@ -199,7 +196,7 @@ def show_category_article(request):
     board_list = get_page_context(target_articles, page)
     return render(request, 'community.html',
                   {'target_articles': target_articles, 'board_list': board_list,
-                   'left_content_articles': all_articles[:5],
+                   'left_content_articles': all_articles[:8],
                    'left_content_recent_comments': recent_comments}, status=200)
 
 
@@ -208,17 +205,18 @@ def search_article(request):
     all_articles = read_all_article()
     recent_comments = read_all_comment()[:5]
 
-    standard = request.POST['standard']
-    period = request.POST['period']
-    keyword = request.POST['keyword']
+    standard = request.POST.get('standard', 'title')
+    period = request.POST.get('period', 'all')
+    keyword = request.POST.get('keyword', '')
+
 
     if period == 'all':
         if standard == 'title':
             target_articles = read_article_by_title(keyword)
             page = int(request.GET.get('page', 1))
             board_list = get_page_context(target_articles, page)
-            return render(request, 'community.html',
-                          {'articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles,
+            return render(request, 'articleapp/article_search.html',
+                          {'articles': target_articles, 'board_list': board_list, 'left_content_articles': all_articles[:8],
                            'left_content_recent_comments': recent_comments},
                           status=200)
 
@@ -226,7 +224,7 @@ def search_article(request):
             target_articles = read_article_containing_username(keyword)
             page = int(request.GET.get('page', 1))
             board_list = get_page_context(target_articles, page)
-            return render(request, 'community.html',
+            return render(request, 'articleapp/article_search.html',
                           {'articles': target_articles, 'board_list': board_list,
                            'left_content_articles': all_articles[:8],
                            'left_content_recent_comments': recent_comments},
@@ -238,7 +236,7 @@ def search_article(request):
                 target_articles = read_article_by_title_within_a_specific_period(period, keyword)
                 page = int(request.GET.get('page', 1))
                 board_list = get_page_context(target_articles, page)
-                return render(request, 'community.html',
+                return render(request, 'articleapp/article_search.html',
                               {'articles': target_articles, 'board_list': board_list,
                                'left_content_articles': all_articles[:8],
                                'left_content_recent_comments': recent_comments},
@@ -251,7 +249,7 @@ def search_article(request):
                 target_articles = read_article_containing_username_within_a_specific_period(period, keyword)
                 page = int(request.GET.get('page', 1))
                 board_list = get_page_context(target_articles, page)
-                return render(request, 'community.html',
+                return render(request, 'articleapp/article_search.html',
                               {'articles': target_articles, 'board_list': board_list,
                                'left_content_articles': all_articles[:8],
                                'left_content_recent_comments': recent_comments},

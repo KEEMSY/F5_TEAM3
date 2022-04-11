@@ -139,4 +139,3 @@ def update_profile(request, pk):
         profile.save()
 
     return redirect(f'/users/profile/{int(pk)}/', pk=request.user.pk)  # 수정된 화면 보여주기
-
