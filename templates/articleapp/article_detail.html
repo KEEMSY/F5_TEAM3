@@ -358,7 +358,7 @@
                                                                     </time>
                                                                     {% if user == comment.user %}
                                                                         <button class="comment_delete_btn"
-                                                                                onclick="delete_comment({{ comment.pk }})">삭제하기</button>
+                                                                                onclick="removeCheck({{ comment.pk }})">삭제하기</button>
                                                                     {% endif %}
                                                                 </span>
                                                             </div>
@@ -514,7 +514,7 @@
                         </i>
                         <span><a href="/users/profile/${user_pk}"> ${username} </a>   작성된 날짜 <time
                                 datetime="20-01-2021"> ${date} </time>
-                                <button class="comment_delete_btn" onclick="delete_comment(${comment_pk})">삭제하기</button>
+                                <button class="comment_delete_btn" onclick="removeCheck(${comment_pk})">삭제하기</button>
                         </span>
                     </div>
                     <div class="comment">
@@ -576,7 +576,16 @@
         });
         open_comment()
     }
+    function removeCheck(id) {
+        if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+            delete_comment(id)
+        }else{   //취소
 
+            return false;
+
+        }
+
+    }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
