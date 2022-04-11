@@ -236,3 +236,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # except ImportError:
 #     pass
 
+# try:
+#     from TEAM3_F5_coFI.local_settings import *
+# except ImportError:
+#     pass
