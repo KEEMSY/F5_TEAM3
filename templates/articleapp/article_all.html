@@ -26,7 +26,7 @@
                                 <div class="bbp-search-form">
                                     <form role="search" method="post" id="bbp-search-form" action="{% url 'articleapp:article_search' %}">
                                         {% csrf_token %}
-                                        <div>
+                                        <div class="search_bar">
                                             <select class="form-select" aria-label="Default select example">
                                                   <option selected disabled>검색조건</option>
                                                   <option value="title">제목</option>
