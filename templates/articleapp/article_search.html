@@ -66,7 +66,9 @@
                                                 <li class="bbp-forum-topic-count">{{ article.article_hits }}</li>
                                                 <li class="bbp-forum-reply-count">{{ article.like_cnt }}</li>
                                                 <li class="bbp-forum-freshness">
-                                                    {{ article.user.username }}
+                                                    <a href="{% url 'user:profile' article.user.pk %}">
+                                                        {{ article.user.username }}
+                                                    </a>
                                                     <p class="bbp-topic-meta">
                                             <span class="bbp-topic-freshness-author">
 {#                                                <img alt=""#}
