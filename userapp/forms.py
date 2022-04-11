@@ -11,7 +11,7 @@ class SignUpForm(forms.Form):
 
     email = forms.EmailField(label="이메일")
     username = forms.CharField(max_length=15, label="이름")
-    password = forms.CharField(widget=forms.PasswordInput, label="비밀번호")
+    password = forms.CharField(widget=forms.PasswordInput, label="비밀번호(8자 이상 문자와 숫자 및 특수문자를 조합하시오.)")
     password1 = forms.CharField(widget=forms.PasswordInput, label="비밀번호 확인")
 
     def clean_email(self):
@@ -75,6 +75,14 @@ class UserForm(forms.ModelForm):
         labels = {
             'username': _('닉네임'),
         }
+
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+        try:
+            models.User.objects.get(username=username)
+            raise forms.ValidationError("닉네임이 이미 존재합니다.")
+        except models.User.DoesNotExist:
+            return username
 
 class ProfileForm(forms.ModelForm):
     class Meta:

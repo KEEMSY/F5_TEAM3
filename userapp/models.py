@@ -20,7 +20,7 @@ class Profile(models.Model):
     blog = models.URLField(max_length=250, blank=True)
 
     SKILL_A = 'Android'
-    SKILL_B = 'IOS'
+    SKILL_B = 'iOS'
     SKILL_C = 'C++'
     SKILL_D = 'C#'
     SKILL_E = 'Java'
@@ -35,7 +35,7 @@ class Profile(models.Model):
     SKILL_N = None
     SKILL_CHOICES = [
         (SKILL_A, 'Android'),
-        (SKILL_B, 'IOS'),
+        (SKILL_B, 'iOS'),
         (SKILL_C, 'C++'),
         (SKILL_D, 'C#'),
         (SKILL_E, 'Java'),

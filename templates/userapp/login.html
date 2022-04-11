@@ -7,6 +7,7 @@
 
 
 {% load static %}
+{% load crispy_forms_tags %}
 
 
 <style>
@@ -14,6 +15,8 @@
         display: none;
     }
 </style>
+
+
 
 <body>
 
@@ -35,28 +38,10 @@
                                 <form action="{% url 'user:login' %}" method="post" id="login-form">
                                     {% csrf_token %}
                                     <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label for="id_email"></label>
-                                                <input id="id_userLoginId" class="form-control" type="email"
-                                                       placeholder="Email"
-                                                       name="email" id="id_email" required>
-                                                <ul class="errorlist">
-                                                    {{ form.errors.email }}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label for="id_password"></label>
-                                                <input id="id_password" class="form-control" type="password"
-                                                       placeholder="Password"
-                                                       name="password" id="id_password" required>
-                                                <ul class="errorlist">
-                                                    {{ form.errors.password }}
-                                                </ul>
-                                            </div>
-                                        </div>
+
+                                        {{ form.email | as_crispy_field }}
+                                        {{ form.password | as_crispy_field }}
+
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <div class="remember-forgot-info">
@@ -148,6 +133,62 @@
 <script type="text/javascript" src="jquery-1.11.0.min.js" ></script>
 
 <script type="text/javascript" src="{% static '/js/user/save_checkbox.js' %}"></script>
+
+<script>
+    $(document).ready(function () {
+
+        // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
+        let key = getCookie("key");
+        $("#id_email").val(key);
+
+        if ($("#id_email").val() != "") { // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
+            $("#bxid_rememberMe_true").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
+        }
+
+        $("#bxid_rememberMe_true").change(function () { // 체크박스에 변화가 있다면,
+            if ($("#bxid_rememberMe_true").is(":checked")) { // 체크박스 체크했을 때,
+                setCookie("key", $("#id_email").val(), 7); // 7일 동안 쿠키 보관
+            } else { // ID 저장하기 체크 해제 시,
+                deleteCookie("key");
+            }
+        });
+        // ID 저장하기를 체크한 상태에서 ID를 입력하는 경우, 이럴 때도 쿠키 저장.
+        $("#id_email").keyup(function () { // ID 입력 칸에 ID를 입력할 때,
+            if ($("#bxid_rememberMe_true").is(":checked")) { // 체크박스를 체크한 상태라면,
+                setCookie("key", $("#id_email").val(), 7); // 7일 동안 쿠키 보관
+            }
+        });
+    });
+
+    function setCookie(cookieName, value, exdays) {
+        let exdate = new Date();
+        exdate.setDate(exdate.getDate() + exdays);
+        let cookieValue = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toGMTString());
+        document.cookie = cookieName + "=" + cookieValue;
+    }
+
+    function deleteCookie(cookieName) {
+        let expireDate = new Date();
+        expireDate.setDate(expireDate.getDate() - 1);
+        document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+    }
+
+    function getCookie(cookieName) {
+        cookieName = cookieName + '=';
+        let cookieData = document.cookie;
+        let start = cookieData.indexOf(cookieName);
+        let cookieValue = '';
+        if (start != -1) {
+            start += cookieName.length;
+            let end = cookieData.indexOf(';', start);
+            if (end == -1) end = cookieData.length;
+            cookieValue = cookieData.substring(start, end);
+        }
+        return unescape(cookieValue);
+    }
+
+</script>
+
 
 </body>
 </html>
