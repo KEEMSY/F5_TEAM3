@@ -72,7 +72,9 @@
                                                     <li class="bbp-forum-topic-count">{{ article.article_hits }}</li>
                                                     <li class="bbp-forum-reply-count">{{ article.like_cnt }}</li>
                                                     <li class="bbp-forum-freshness">
+                                                        <a href="{% url 'user:profile' article.user.pk %}">
                                                         {{ article.user.username }}
+                                                        </a>
                                                         <p class="bbp-topic-meta">
                                                     <span class="bbp-topic-freshness-author">
 {#                                                        <img alt="" src="http://1.gravatar.com/avatar/?s=14&amp;d=mm&amp;r=g" class="avatar avatar-14 photo avatar-default" height="14" width="14">&nbsp;#}
