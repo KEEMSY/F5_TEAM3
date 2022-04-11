@@ -127,6 +127,24 @@
 
 }
 
+/*article_write 위에 서브메뉴바 css*/
+    .content_wrapper_write {
+        display: none;
+        margin: 0; !important;
+        background-color: #9abbac; !important;
+}
+
+    @media only screen and (max-width: 850px) {
+        .content_wrapper_write {
+            display: block;
+        }
+
+        .header-action-area-write {
+            padding-right: 10px;
+            flex-direction: row-reverse;
+        }
+    }
+
 .content_details{
     width: 90%;
     margin: 0 auto;
@@ -300,3 +318,5 @@ hr{
     width: 100%;
     display: block;
 }
+
+

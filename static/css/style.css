@@ -1785,7 +1785,7 @@ table p {
 }
 
 .recent-job-item.recent-job-style2-item {
-    height: 440px;
+    height: 95%;
 }
 
 @media only screen and (max-width: 1199px) {
