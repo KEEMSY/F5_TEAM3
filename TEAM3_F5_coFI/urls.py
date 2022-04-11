@@ -22,7 +22,7 @@ from TEAM3_F5_coFI import views
 
 urlpatterns = [
 
-    path('admin/', admin.site.urls),
+    path('mbtif5/', admin.site.urls),
     path('users/', include("userapp.urls")),
 
     path("", include("likeapp.urls")),

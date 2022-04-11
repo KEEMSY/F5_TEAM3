@@ -9,6 +9,7 @@
 
 <head>
     {% load static %}
+    {% load crispy_forms_tags %}
 </head>
 
 
@@ -42,48 +43,10 @@
                                             {% csrf_token %}
                                             {#                        {{ form.as_p }}#}
                                             <div class="row">
-                                                <div class="col-12">
-                                                    <p class="form-group">
-                                                        <label for="id_email"></label>
-                                                        <input class="form-control" type="email" placeholder="Email"
-                                                               id="id_email" name="email"
-                                                               required>
-                                                    <ul class="errorlist">
-                                                        {{ form.errors.email }}
-                                                    </ul>
-                                                    </p>
-                                                </div>
-                                                <div class="col-12">
-                                                    <p class="form-group">
-                                                        <label for="id_username"></label>
-                                                        <input class="form-control" type="text" placeholder="Name"
-                                                               id="id_username" name="username" required>
-                                                    <ul class="errorlist">
-                                                        {{ form.errors.username }}
-                                                    </ul>
-                                                    </p>
-                                                </div>
-                                                <div class="col-12">
-                                                    <p class="form-group">
-                                                        <label for="id_password"></label>
-                                                        <input class="form-control" type="password"
-                                                               placeholder="Password" id="id_password" name="password"
-                                                               required>
-                                                    <ul class="errorlist">
-                                                        {{ form.errors.password1 }}
-                                                    </ul>
-                                                    </p>
-                                                </div>
-                                                <div class="col-12">
-                                                    <p class="form-group">
-                                                        <label for="id_password1"></label>
-                                                        <input class="form-control" type="password"
-                                                               placeholder="Confirm Password" id="id_password1"
-                                                               name="password1" required>
-                                                    </p>
-                                                </div>
-
-
+                                                {{ form.email | as_crispy_field }}
+                                                {{ form.username | as_crispy_field }}
+                                                {{ form.password | as_crispy_field }}
+                                                {{ form.password1 | as_crispy_field }}
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <button type="submit" class="btn-theme">회원가입</button>
@@ -92,51 +55,15 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="tab-pane fade" id="employer" role="tabpanel"
-                                         aria-labelledby="employer-tab">
-                                        <form action="#">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <input class="form-control" type="email" placeholder="Email">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <input class="form-control" type="password"
-                                                               placeholder="Password">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <input class="form-control" type="password"
-                                                               placeholder="Confirm Password">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <div class="remember-forgot-info">
-                                                            <div class="remember">
-                                                                <input class="form-check-input" type="checkbox" value=""
-                                                                       id="defaultCheck1">
-                                                                <label class="form-check-label" for="defaultCheck1">Aaccept
-                                                                    our terms and conditions and privacy policy.</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
                                 </div>
                                 <div class="login-register-form-info">
                                     <p>계정이 이미 있으신가요? <a href="{% url 'user:login' %}">로그인</a></p>
-                                    <div class="register_google_wrap">
-                                        <div class="google_class">
-                                            <a class="avatar-google-photo" href="{% provider_login_url 'google' %}"><img
-                                                    src="https://pbs.twimg.com/profile_images/770139154898382848/ndFg-IDH_200x200.jpg"></a>
-                                        </div>
-                                    </div>
+{#                                    <div class="register_google_wrap">#}
+{#                                        <div class="google_class">#}
+{#                                            <a class="avatar-google-photo" href="{% provider_login_url 'google' %}"><img#}
+{#                                                    src="https://pbs.twimg.com/profile_images/770139154898382848/ndFg-IDH_200x200.jpg"></a>#}
+{#                                        </div>#}
+{#                                    </div>#}
                                 </div>
                             </div>
                         </div>
@@ -167,7 +94,7 @@
                 <ul class="nav-menu">
                     <li><a href="/">홈</a></li>
                     <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
-                    <li><a href="{% url 'articleapp:home' %}">커뮤니티</a>
+                    <li><a href="{% url 'articleapp:home' %}">게시판</a>
                         <ul class="sub-menu">
                             <li><a href="{% url 'articleapp:free' %}">자유게시판</a></li>
                             <li><a href="{% url 'articleapp:tip' %}">꿀팁게시판</a></li>

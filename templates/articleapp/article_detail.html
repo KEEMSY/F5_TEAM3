@@ -171,7 +171,6 @@
     <!--== Start Header Wrapper ==-->
     {% include 'header_ver2.html' %}
     {# End Header Wrpper#}
-
     <div class="wraper_wraper">
         {% include 'articleapp/article_left_content.html' %}
         <div class="col-8">
@@ -191,26 +190,49 @@
                             </span>
                             </div>
 
-                        </div>
-                    </div>
-                    <div class="content_main">
-                        {% if target_article.img %}
-                            <div class="content_img">
-                                <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ target_article.img }}">
-                            </div>
-                        {% endif %}
-                        <span>
-                                <h3 class="article_content_main">{{ target_article.content | safe }}</h3>
-                            </span>
-                        <div class="content_title_footet_right_wrapper">
-
-                            <div class="right_wrapper_icons">
-                                <div class="icon_wrapper">
-                                    <div class="like_function">
-                                        {% csrf_token %}
-                                        {% if like_article %}
-                                            <div class="like_article" type="button" onclick="unlike_article()">
-                                                <img src="{% static 'img/icons/hearted.png' %}" alt="" width="36px"
+                            <div class="content_title_footet_right_wrapper">
+                                <div class="right_wrapper_icons">
+                                    <div class="icon_wrapper">
+                                        <div class="like_function">
+                                            {% csrf_token %}
+                                            {% if like_article %}
+                                                <div class="like_article" type="button" onclick="unlike_article()">
+                                                    <img src="{% static 'img/icons/hearted.png' %}" alt="" width="36px"
+                                                         height="36px">
+                                                </div>
+                                            {% else %}
+                                                <div class="unlike_article" type="button" onclick="like_article()">
+                                                    <img src="{% static 'img/icons/heart.png' %}" alt="" width="36px"
+                                                         height="36px">
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="icon_cnt">
+                                        {{ like_cnt.like_cnt }}
+                                    </div>
+                                </div>
+                                <div class="right_wrapper_icons">
+                                    <div class="icon_wrapper">
+                                        <img src="{% static 'img/icons/comment.png' %}" alt="">
+                                    </div>
+                                    <div class="icon_cnt">
+                                        <span id="comment_cnt">{{ target_comment.count }}</span>
+                                    </div>
+                                </div>
+                                <div class="right_wrapper_icons">
+                                    <div class="icon_wrapper">
+                                        <img src="{% static 'img/icons/eye.png' %}" alt="">
+                                    </div>
+                                    <div class="icon_cnt">
+                                        <span>{{ target_article.article_hits }}</span>
+                                    </div>
+                                </div>
+                                <div class="right_wrapper_icons">
+                                    <div class="icon_wrapper">
+                                        {% if check_bookmark %}
+                                            <div class="bookmark_article" type="button" onclick="unbookmark_article()">
+                                                <img src="{% static 'img/icons/bookmarked.png' %}" alt="" width="36px"
                                                      height="36px">
                                             </div>
                                         {% else %}
@@ -265,6 +287,12 @@
                                     <span></span>
                                 </div>
 
+{#                            작업 중인 페이지 #}
+                                <div class="right_wrapper_icons">
+                                    <div class="icon_wrapper" type="button"  onclick="removeCheck_article({{ target_article.id }})">
+                                        <img src="{% static 'img/icons/delete-button.png' %}" alt="">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -375,10 +403,8 @@
 
                                                                     {% if user == comment.user %}
                                                                         <button class="comment_delete_btn"
-                                                                                onclick="delete_comment({{ comment.pk }})">삭제하기</button>
 
-
-{#                                                                        <img src="{% static "img/icon/comment_liked.png" %}">#}
+                                                                                onclick="removeCheck_comment({{ comment.pk }})">삭제하기</button>
                                                                     {% endif %}
                                                                 </span>
                                                             </div>
@@ -407,29 +433,40 @@
             </div>
         </div>
 
+
     </div>
 
 
-    <!--== Start Aside Menu ==-->
-    <aside class="off-canvas-wrapper offcanvas offcanvas-start" tabindex="-1" id="AsideOffcanvasMenu"
-           aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
-            <h1 class="d-none" id="offcanvasExampleLabel">Aside Menu</h1>
-            <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">메뉴 <i
-                    class="icofont-simple-left"></i></button>
-        </div>
-        <div class="offcanvas-body">
-            <!-- Mobile Menu Start -->
-            <div class="mobile-menu-items">
-                <ul class="nav-menu">
-                    <li><a href="/">홈</a></li>
-                    <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
-                    <li><a href="{% url 'articleapp:home' %}">커뮤니티</a>
-                        <ul class="sub-menu">
-                            <li><a href="{% url 'articleapp:free' %}">자유게시판</a></li>
-                            <li><a href="{% url 'articleapp:tip' %}">꿀팁게시판</a></li>
-                            <li><a href="{% url 'articleapp:question' %}">질문게시판</a></li>
-                        </ul>
+    </div>
+
+<!--== Start Aside Menu ==-->
+<aside class="off-canvas-wrapper offcanvas offcanvas-start" tabindex="-1" id="AsideOffcanvasMenu"
+       aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <h1 class="d-none" id="offcanvasExampleLabel">Aside Menu</h1>
+        <button class="btn-menu-close" data-bs-dismiss="offcanvas" aria-label="Close">메뉴 <i
+                class="icofont-simple-left"></i></button>
+    </div>
+    <div class="offcanvas-body">
+        <!-- Mobile Menu Start -->
+        <div class="mobile-menu-items">
+            <ul class="nav-menu">
+                <li><a href="/">홈</a></li>
+                <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
+                <li><a href="{% url 'articleapp:home' %}">게시판</a>
+                    <ul class="sub-menu">
+                        <li><a href="{% url 'articleapp:free' %}">자유게시판</a></li>
+                        <li><a href="{% url 'articleapp:tip' %}">꿀팁게시판</a></li>
+                        <li><a href="{% url 'articleapp:question' %}">질문게시판</a></li>
+                    </ul>
+                </li>
+                {% if not user.is_authenticated %}
+                    <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
+                    <li><a href="{% url 'user:sign-up' %}"><span>회원가입</span></a></li>
+                {% else %}
+                    <li class="has-submenu"><a
+                            href="{% url 'user:profile' user.pk %}"><span>마이페이지</span></a>
+
                     </li>
                     {% if not user.is_authenticated %}
                         <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
@@ -534,7 +571,7 @@
                         </i>
                         <span><a href="/users/profile/${user_pk}"> ${username} </a>   작성된 날짜 <time
                                 datetime="20-01-2021"> ${date} </time>
-                                <button class="comment_delete_btn" onclick="delete_comment(${comment_pk})">삭제하기</button>
+                                <button class="comment_delete_btn" onclick="removeCheck_comment(${comment_pk})">삭제하기</button>
                         </span>
                     </div>
                     <div class="comment">
@@ -552,6 +589,7 @@
                 }
             });
         }
+
 
         function bookmark_article() {
             $.ajax({
@@ -574,7 +612,9 @@
                 }
             });
         }
-/*
+        
+        /*
+
         function like_comment(comment_id) {
 
             $.ajax({
@@ -585,10 +625,8 @@
                     window.location.reload(true)
                 }
             });
-        }
-
-        function unlike_comment(comment_id) {
-
+          
+          function unlike_comment(comment_id) {
             $.ajax({
                 type: 'DELETE',
                 url: '/comments/like/${comment_id}',
@@ -599,6 +637,8 @@
             });
         }
 */
+
+
 
         function delete_comment(id) {
             let pk_data = JSON.stringify({"pk": id})
@@ -620,11 +660,51 @@
             });
             open_comment()
         }
+        
+        function removeCheck_comment(id) {
+            if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+                delete_comment(id)
+            }else{   //취소
+                return false;
+            }
+        }
+
+         function delete_article(id) {
+            {#let pk_data = JSON.stringify({"pk": id})#}
+            $.ajax({
+                type: "DELETE",
+                url: '{% url 'articleapp:article_CRUD' target_article.pk %}',
+                contentType: "application/json",
+                dataType: "JSON",
+                data:{},
+
+                headers: {
+                    'X-CSRFTOKEN': '{{ csrf_token }}'
+                },
+                success: function (response) {
+
+                    window.location.replace({% url 'articleapp:home' %});
+                }
+            });
+        }
+
+
+        function removeCheck_article(id){
+            if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+                delete_article(id)
+            }else{   //취소
+
+                return false;
+
+            }
+        }
+
 
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</div>
+
 </body>
+
 {% include 'footer.html' %}
 
 </html>

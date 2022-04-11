@@ -1605,13 +1605,19 @@
                                 <h2>프로필 수정</h2>
                             </div>
                             <div class="close-area" id="close-area">X</div>
-                            <div class="content">
+                            <div class="modal-content">
                                 <form action="{% url 'user:update_profile' u.pk %}" method="post"
                                       class="modal-form-groups" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <div class="modal-form-group">
-                                        {{ profile_form.img }}
-                                        {{ user_form.username | as_crispy_field }}
+                                        <div id="div_id_img" class="form-group">
+                                            <label for="id_img" class="">이미지</label>
+                                            <div>
+                                                <input type="file" name="img"
+                                                       class="clearablefileinput form-control-file" id="id_img"
+                                                       accept="image/*">
+                                            </div>
+                                        </div>
                                         {{ profile_form.skill | as_crispy_field }}
                                         {{ profile_form.github | as_crispy_field }}
                                         {{ profile_form.blog | as_crispy_field }}
@@ -1802,7 +1808,7 @@
             <ul class="nav-menu">
                 <li><a href="/">홈</a></li>
                 <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
-                <li><a href="{% url 'articleapp:home' %}">커뮤니티</a>
+                <li><a href="{% url 'articleapp:home' %}">게시판</a>
                     <ul class="sub-menu">
                         <li><a href="{% url 'articleapp:free' %}">자유게시판</a></li>
                         <li><a href="{% url 'articleapp:tip' %}">꿀팁게시판</a></li>

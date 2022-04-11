@@ -9,10 +9,7 @@ from userapp.models import Profile, User
 
 def show_home(request):
     article_list = Article.objects.all().order_by("article_hits")
-
     news = News.objects.all().order_by("id")  # 모든 데이터 조회, id +순으로 해야 최신업데이트된게 위로 나옴.
-    target_user_id = request.user.id
-    target_user_profile = Profile.objects.filter(id=target_user_id)
 
     skill = 'Python'
     board_lists = []
@@ -22,25 +19,36 @@ def show_home(request):
     board = paginator.get_page(page)
     board_lists.append(board)
 
-    # 로그인했고, 로그인 한 사람이 스킬까지 있다면,-> **수정 필요
-
     if request.user.is_authenticated:
-        skills = []
-        for i in target_user_profile:
-            skills.append(i.skill)
+        target_user = request.user
 
-        board_lists = []
-        for skill in skills:
-            career = Career.objects.filter(skills=skill).order_by("id")  # 모든 데이터 조회, id +순으로 해야 최신업데이트된게 위로 나옴.
-            paginator = Paginator(career, 9)
-            page = int(request.GET.get('page', 1))
-            board = paginator.get_page(page)
-            board_lists.append(board)
+        try:  # 유저 프로필 가져오는 걸 시도
+            target_user_profile = Profile.objects.filter(user=target_user)
+            if target_user_profile[0].skill is '':
+                context = {'board_lists': board_lists, "news": news}
+                return render(request, 'base.html', context)
+            else:
+                skills = []
+                for i in target_user_profile:
+                    skills.append(i.skill)
+                board_lists = []
 
-        context = {'board_lists': board_lists, "news": news, "article_list": article_list}
-        return render(request, 'base.html', context)
+                for skill in skills:
+                    career = Career.objects.filter(skills=skill).order_by("id")  # 모든 데이터 조회, id +순으로 해야 최신업데이트된게 위로 나옴.
+                    paginator = Paginator(career, 9)
+                    page = int(request.GET.get('page', 1))
+                    board = paginator.get_page(page)
+                    board_lists.append(board)
 
-    context = {'board_lists': board_lists, "news": news, "article_list": article_list}
+                context = {'board_lists': board_lists, "news": news}
+                return render(request, 'base.html', context)
+        except:  # 유저 프로필 가져오는 걸 실패하면 패스하고 위의 skill은 파이썬 으로 진행
+            pass
+
+            context = {'board_lists': board_lists, "news": news}
+            return render(request, 'base.html', context)
+
+    context = {'board_lists': board_lists, "news": news}
     return render(request, 'base.html', context)
     
 

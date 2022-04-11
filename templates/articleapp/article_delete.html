@@ -1,0 +1,21 @@
+{% extends 'articleapp/article_base.html' %}
+{% load static %}
+
+{% block content %}
+    {% load crispy_forms_tags %}
+
+    <div class="col-8">
+        <div class="right_wrapper">
+            <div class="content_wrapper">
+            </div>
+            <h1 class="write_title">게시글 삭제</h1>
+
+            <div class="form-group-text">
+                <form method="DELETE" class="post-form" action="{% url 'articleapp:article_CRUD' article_id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <button class="btn btn-light" style="margin-top:1vw;">삭제하기</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
