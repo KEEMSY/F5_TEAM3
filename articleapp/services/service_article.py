@@ -103,7 +103,7 @@ def update_article(article_id, content):
 
 def delete_article(article_id):
     try:
-        target_article = Article.objects.get(pk=article_id)
+        target_article = Article.objects.get(id=article_id)
         target_article.delete()
     except ObjectDoesNotExist:
         return False

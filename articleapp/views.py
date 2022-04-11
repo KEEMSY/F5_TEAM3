@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
@@ -87,10 +89,11 @@ class ArticleView(View):
             except ObjectDoesNotExist:
                 return JsonResponse({'result': '게시글이 존재하지 않습니다.'}, status=404)
 
-    def delete(self, request, article_id):
+    def delete(self, request, pk):
         try:
-            delete_article(article_id)
+            delete_article(pk)
             return JsonResponse({'result': '게시글이 삭제되었습니다.'}, status=200)
+
         except ObjectDoesNotExist:
             return JsonResponse({'result': '게시글이 존재하지 않습니다.'}, status=404)
 
