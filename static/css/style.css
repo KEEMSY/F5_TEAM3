@@ -1,7 +1,7 @@
 /*발표를 위해 검색바 디스플레이 논 처리*/
 
 .bbp-search-form {
-    display: none;
+    /*display: none;*/
 }
 
 
@@ -760,9 +760,9 @@ table p {
 .mobile-menu-items ul li .mobile-menu-expand {
     position: absolute;
     right: 20px;
-    top: 15px;
-    width: 16px;
-    height: 16px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
 }
 
@@ -1784,6 +1784,10 @@ table p {
     -o-transition: all 0.3s ease-out;
 }
 
+.recent-job-item.recent-job-style2-item {
+    height: 95%;
+}
+
 @media only screen and (max-width: 1199px) {
     .recent-job-item {
         padding: 30px 28px 29px;
@@ -2627,6 +2631,11 @@ table p {
     margin-top: 110px;
     width: 100%;
 }
+@media only screen and (min-width: 575px){
+    .account-login-area .container {
+    padding-top: 50px;
+}
+}
 
 .google_wrap {
     margin-top: 30px;
@@ -2670,8 +2679,8 @@ table p {
 
 @media only screen and (max-width: 1199px) {
     .account-login-area .container {
-        padding-bottom: 80px;
-        padding-top: 80px;
+        /*padding-bottom: 80px;*/
+        /*padding-top: 80px;*/
     }
 }
 
@@ -2757,12 +2766,16 @@ img.header_img {
 }
 
 
-
 .sign-up-account-login-area .container {
     padding-top: 0px;
     padding-bottom: 120px;
     margin-top: 100px;
     width: 100%;
+}
+@media only screen and (min-width: 575px){
+    .sign-up-account-login-area .container {
+    padding-top: 50px;
+}
 }
 
 .col-12 .form-group .btn-theme {
