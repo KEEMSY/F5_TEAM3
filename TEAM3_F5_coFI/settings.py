@@ -232,7 +232,7 @@ LOGIN_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 try:
-    from TEAM3_F5_coFI.deploy_settings import *
+    from TEAM3_F5_coFI.local_settings import *
 except ImportError:
     pass
 
