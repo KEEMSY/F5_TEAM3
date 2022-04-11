@@ -16,13 +16,14 @@ from articleapp.services.service_article import (
     read_category_article, read_target_article, update_article)
 # 단일 게시글 CRUD
 
+
 from commentapp.services.comment_service import read_all_comment, read_target_article_comment, read_best_comment
 from bookmarkapp.services.bookmark_service import bookmark_check
+
 from likeapp.models import ArticleLikes
 
-
 from .forms import ArticleForm
-from .models import Category, Article
+from .models import Article, Category
 
 
 class ArticleView(View):

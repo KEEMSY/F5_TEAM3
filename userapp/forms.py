@@ -1,17 +1,17 @@
 import re
 
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from . import models
 from .models import Profile, User
 
-from django.utils.translation import gettext_lazy as _
 
 class SignUpForm(forms.Form):
 
     email = forms.EmailField(label="이메일")
     username = forms.CharField(max_length=15, label="이름")
-    password = forms.CharField(widget=forms.PasswordInput, label="비밀번호")
+    password = forms.CharField(widget=forms.PasswordInput, label="비밀번호(8자 이상 문자와 숫자 및 특수문자를 조합하시오.)")
     password1 = forms.CharField(widget=forms.PasswordInput, label="비밀번호 확인")
 
     def clean_email(self):
@@ -53,7 +53,7 @@ class SignUpForm(forms.Form):
 
 class LoginForm(forms.Form):
 
-    email = forms.EmailField(label='Email', required=True)
+    email = forms.EmailField(label='이메일', required=True)
     password = forms.CharField(widget=forms.PasswordInput, label="비밀번호")
 
     def clean(self):
@@ -68,13 +68,15 @@ class LoginForm(forms.Form):
         except models.User.DoesNotExist:
             self.add_error("email", forms.ValidationError("유저가 존재하지 않습니다."))
 
+
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username']
         labels = {
-            'username': _('닉네임'),
+            'username': _('이름'),
         }
+
 
 class ProfileForm(forms.ModelForm):
     class Meta:
@@ -82,5 +84,9 @@ class ProfileForm(forms.ModelForm):
         fields = ['img', 'skill', 'github', 'blog']
         labels = {
             'skill': _('언어 스택'),
+            'img': _('이미지'),
+
         }
+
+
 
