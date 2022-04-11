@@ -622,6 +622,7 @@
             success: function (response) {
                 $('#' + id).remove()
                 console.log(id)
+                alert(response['msg'])
                 {#window.location.reload(true)#}
                 minus_comment_cnt()
             }
