@@ -3,7 +3,6 @@ import json
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
 from django.http import JsonResponse
-
 from django.shortcuts import render
 # Create your views here.
 from django.views import View
