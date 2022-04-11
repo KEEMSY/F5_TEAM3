@@ -265,9 +265,11 @@
                                 </div>
                             </div>
                             <div class="right_wrapper_icons">
+                                {% if target_article.user.id == user.id %}
                                 <div class="icon_wrapper" type="button"  onclick="removeCheck_article({{ target_article.id }})">
                                     <img src="{% static 'img/icons/delete-button.png' %}" alt="">
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
 
