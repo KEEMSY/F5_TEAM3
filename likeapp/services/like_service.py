@@ -4,6 +4,13 @@ from articleapp.models import Article
 from commentapp.models import Comment
 from likeapp.models import ArticleLikes, CommentLikes
 
+def comment_like_check(user_id, comment_id):
+    try:
+        check = CommentLikes.objects.filter(comment_id=comment_id, user_id=user_id).get()
+        return check
+    except ObjectDoesNotExist:
+        return False
+
 
 def do_article_like(user_id: int, article_id: int) -> ArticleLikes:
     article = Article.objects.filter(pk=article_id).get()
@@ -28,14 +35,13 @@ def do_comment_like(user_id: int, comment_id: int) -> CommentLikes:
     Like = CommentLikes.objects.create(user_id=user_id, comment_id=comment_id)
     comment.like_count += 1
     comment.save()
-    return Like
 
 
 def undo_comment_like(user_id: int, comment_id: int) -> None:
-    delete_cnt, _ = CommentLikes.objects.filter(
-        user_id=user_id, comment_id=comment_id
-    ).delete()  # 삭제된 로우의 개수(deleted_cnt)와 딕셔너리(_)
-    if delete_cnt:
-        comment = Comment.objects.filter(pk=comment_id).get()
-        comment.like_count -= 1
-        comment.save()
+    comment = Comment.objects.filter(pk=comment_id).get()
+    CommentLikes.objects.get(user_id=user_id, comment_id=comment_id).delete()
+    # delete_cnt, _ = CommentLikes.objects.filter(
+    #     user_id=user_id, comment_id=comment_id
+    # ).delete()  # 삭제된 로우의 개수(deleted_cnt)와 딕셔너리(_)
+    comment.like_count -= 1
+    comment.save()

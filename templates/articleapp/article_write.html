@@ -5,13 +5,14 @@
     {% load crispy_forms_tags %}
 
     <div class="col-8">
-        <div class="right_wrapper">
+        <div class="right_wrapper" id="center_write">
             <div class="content_wrapper">
             </div>
             <h1 class="write_title">New post</h1>
 
             <div class="form-group-text">
-                <form method="POST" class="post-form" action="{% url 'articleapp:aritcle_write' %}" enctype="multipart/form-data">
+                <form method="POST" class="post-form" action="{% url 'articleapp:aritcle_write' %}"
+                      enctype="multipart/form-data">
                     {% csrf_token %}
                     {#                                            {{ article_form.media }}#}
                     {#                                            {{ article_form.as_p }}#}
@@ -19,18 +20,18 @@
                     {#                                            {{ article_form.category | as_crispy_field }}#}
                     {#                                            {{ article_form.content | as_crispy_field | safe | escape}}#}
                     {{ article_form.media }}
-                    {{ article_form.title | as_crispy_field}}
-                    {{ article_form.category | as_crispy_field}}
+                    {{ article_form.title | as_crispy_field }}
+                    {{ article_form.category | as_crispy_field }}
                     {{ article_form.img | as_crispy_field }}
-                    {{ article_form.content | as_crispy_field}}
+                    {{ article_form.content | as_crispy_field }}
 
-                    <button class="btn btn-light" style="margin-top:1vw;">등록</button>
+                    <button class="btn btn-light" style="margin-top:1vw; margin-bottom: 1vw; display: flex;">등록</button>
                 </form>
             </div>
         </div>
+
     </div>
-
-
+{% endblock %}
 {##}
 {#{% extends 'articleapp/article_base.html' %}#}
 {##}

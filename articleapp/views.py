@@ -34,6 +34,7 @@ class ArticleView(View):
         all_articles = read_all_article()[:8]
         recent_comments = read_all_comment()[:5]
         check_bookmark = bookmark_check(request.user.id, article_id)
+
         like_cnt = Article.objects.get(pk=article_id)
 
         try:
@@ -42,11 +43,12 @@ class ArticleView(View):
             target_article = hit_article(ip, pk)
             best_comment = read_best_comment()
 
+
             target_comment = read_target_article_comment(article_id)
-            print(type(target_comment))
 
             try:
                 like_article = ArticleLikes.objects.filter(article=article_id, user=request.user.id).get()
+
 
                 return render(request, 'articleapp/article_detail.html',
                               {'target_article': target_article,
