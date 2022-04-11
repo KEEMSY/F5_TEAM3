@@ -31,7 +31,7 @@
     align-items: center;
     justify-content: center;
     padding: 10px;
-    height: 36rem;
+    height: 27rem;
 }
 
 #modal .title {
@@ -64,7 +64,7 @@
     margin: 0 auto;
 }
 
-#modal .content {
+#modal .modal-content {
     margin: 2.5rem auto;
     padding: 0px 10px;
     text-shadow: 1px 1px 2px gray;
@@ -73,5 +73,5 @@
 }
 
 .form-group {
-    width: 90%;
+    width: 100%;
 }

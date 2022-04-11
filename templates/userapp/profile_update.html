@@ -6,7 +6,6 @@
 {% include 'head.html' %}
 
 
-
 <head>
     {% load static %}
     {% load crispy_forms_tags %}
@@ -15,8 +14,13 @@
 
 <style>
     .header_img {
-    display: none;
-}
+        display: none;
+    }
+
+    input#id_img {
+        margin: 0 auto 20px;
+    }
+
 </style>
 
 <body>
@@ -39,30 +43,29 @@
                                 <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="candidate" role="tabpanel"
                                          aria-labelledby="candidate-tab">
-                                        <form action="{% url 'user:sign-up' %}" method="post" id="signup-form">
+                                        <form action="{% url 'user:update_profile' u.pk %}" method="post" id="profile-update-form" enctype="multipart/form-data">
                                             {% csrf_token %}
                                             {#                        {{ form.as_p }}#}
                                             <div class="row">
-                                                {{ form.email | as_crispy_field }}
-                                                {{ form.username | as_crispy_field }}
-                                                {{ form.password | as_crispy_field }}
-                                                {{ form.password1 | as_crispy_field }}
+
+                                                <div id="div_id_img" class="form-group">
+                                                    <label for="id_img" class="">이미지</label>
+                                                    <div>
+                                                        <input type="file" name="img" class="clearablefileinput form-control-file" id="id_img" accept="image/*">
+                                                    </div>
+                                                </div>
+
+                                                {{ profile_form.skill | as_crispy_field }}
+                                                {{ profile_form.github | as_crispy_field }}
+                                                {{ profile_form.blog | as_crispy_field }}
+
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <button type="submit" class="btn-theme">회원가입</button>
+                                                        <button type="submit" class="btn-theme">저장</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </form>
-                                    </div>
-                                </div>
-                                <div class="login-register-form-info">
-                                    <p>계정이 이미 있으신가요? <a href="{% url 'user:login' %}">로그인</a></p>
-                                    <div class="register_google_wrap">
-                                        <div class="google_class">
-                                            <a class="avatar-google-photo" href="{% provider_login_url 'google' %}"><img
-                                                    src="https://pbs.twimg.com/profile_images/770139154898382848/ndFg-IDH_200x200.jpg"></a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -53,7 +53,7 @@ class SignUpForm(forms.Form):
 
 class LoginForm(forms.Form):
 
-    email = forms.EmailField(label='Email', required=True)
+    email = forms.EmailField(label='이메일', required=True)
     password = forms.CharField(widget=forms.PasswordInput, label="비밀번호")
 
     def clean(self):
@@ -68,21 +68,15 @@ class LoginForm(forms.Form):
         except models.User.DoesNotExist:
             self.add_error("email", forms.ValidationError("유저가 존재하지 않습니다."))
 
+
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username']
         labels = {
-            'username': _('닉네임'),
+            'username': _('이름'),
         }
 
-    def clean_username(self):
-        username = self.cleaned_data.get("username")
-        try:
-            models.User.objects.get(username=username)
-            raise forms.ValidationError("닉네임이 이미 존재합니다.")
-        except models.User.DoesNotExist:
-            return username
 
 class ProfileForm(forms.ModelForm):
     class Meta:
@@ -90,5 +84,9 @@ class ProfileForm(forms.ModelForm):
         fields = ['img', 'skill', 'github', 'blog']
         labels = {
             'skill': _('언어 스택'),
+            'img': _('이미지'),
+
         }
+
+
 
