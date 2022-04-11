@@ -7,6 +7,7 @@
 
     <div class="col-8">
 
+
         <div class="right_wrapper">
             <div class="content_wrapper content_wrapper_write">
                 <div class="header-action-area header-action-area-write">
@@ -24,6 +25,7 @@
                       enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ article_form.media }}
+
                     {{ article_form.title | as_crispy_field}}
                     {{ article_form.category | as_crispy_field}}
 
@@ -38,13 +40,13 @@
 
                     {{ article_form.content | as_crispy_field}}
 
-                    <button class="btn btn-light" style="margin-top:1vw;">등록</button>
+
+                    <button class="btn btn-light" style="margin-top:1vw; margin-bottom: 1vw; display: flex;">등록</button>
                 </form>
             </div>
         </div>
     </div>
 {% endblock %}
-
 {##}
 {#{% extends 'articleapp/article_base.html' %}#}
 {##}

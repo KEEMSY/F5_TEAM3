@@ -10,14 +10,17 @@ from django.views import View
 from commentapp.services.comment_service import (create_comment,
                                                  delete_comment,
                                                  update_comment)
+from likeapp.models import CommentLikes
+from likeapp.services.like_service import comment_like_check
 from userapp.models import Profile
-
+from commentapp.models import Comment
 
 class CommentView(View):
     def post(self, request):
         try:
             comment = create_comment(article_id=request.POST['article_id'], user_id=request.user.id,
                                      content=request.POST['content'])
+
 
             try:
                 Profile.objects.filter(user_id=comment.user.id)
@@ -36,7 +39,9 @@ class CommentView(View):
                 'content': comment.content,
                 'comment_pk': comment.id,
                 'user_pk': comment.user.id,
-                'user_img': user_img
+                'user_img': user_img,
+
+
             }
 
             return JsonResponse({'comment': data}, status=200)

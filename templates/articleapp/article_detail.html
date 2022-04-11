@@ -67,7 +67,8 @@
         }
 
         .content_title_footet_right_wrapper {
-            width: 75%;
+            width: 100%;
+            display: flex;
         }
     }
 
@@ -177,7 +178,7 @@
                 <div class="content_wrapper">
                     <div class="content_details">
                         <div class="content_title">
-                            <h1>
+                            <h1 class="article_title_main">
                                 {{ target_article.title }}
                             </h1>
                         </div>
@@ -188,6 +189,7 @@
                                         href="{% url 'user:profile' target_article.user.pk %}">{{ target_article.user.username }}</a>
                             </span>
                             </div>
+
                             <div class="content_title_footet_right_wrapper">
                                 <div class="right_wrapper_icons">
                                     <div class="icon_wrapper">
@@ -233,20 +235,58 @@
                                                 <img src="{% static 'img/icons/bookmarked.png' %}" alt="" width="36px"
                                                      height="36px">
                                             </div>
-
                                         {% else %}
-                                            <div class="unbookmark_article" type="button" onclick="bookmark_article()">
-                                                <img src="{% static 'img/icons/bookmark.png' %}" alt="" width="36px"
+                                            <div class="unlike_article" type="button" onclick="like_article()">
+                                                <img src="{% static 'img/icons/heart.png' %}" alt="" width="36px"
                                                      height="36px">
                                             </div>
                                         {% endif %}
                                     </div>
-
-                                    <div class="icon_cnt">
-                                        <span></span>
-                                    </div>
-
                                 </div>
+                                <div class="icon_cnt">
+                                    {{ like_cnt.like_cnt }}
+                                </div>
+                            </div>
+                            <div class="right_wrapper_icons">
+                                <div class="icon_wrapper">
+                                    <img src="{% static 'img/icons/comment.png' %}" alt="">
+                                </div>
+                                <div class="icon_cnt">
+                                    {% if target_comment %}
+                                        <span id="comment_cnt">{{ target_comment.count }}</span>
+                                    {% else %}
+                                        <span id="comment_cnt">0</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="right_wrapper_icons">
+                                <div class="icon_wrapper">
+                                    <img src="{% static 'img/icons/eye.png' %}" alt="">
+                                </div>
+                                <div class="icon_cnt">
+                                    <span>{{ target_article.article_hits }}</span>
+                                </div>
+                            </div>
+                            <div class="right_wrapper_icons">
+                                <div class="icon_wrapper">
+                                    {% if check_bookmark %}
+                                        <div class="bookmark_article" type="button" onclick="unbookmark_article()">
+                                            <img src="{% static 'img/icons/bookmarked.png' %}" alt="" width="36px"
+                                                 height="36px">
+                                        </div>
+
+                                    {% else %}
+                                        <div class="unbookmark_article" type="button" onclick="bookmark_article()">
+                                            <img src="{% static 'img/icons/bookmark.png' %}" alt="" width="36px"
+                                                 height="36px">
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="icon_cnt">
+                                    <span></span>
+                                </div>
+
 {#                            작업 중인 페이지 #}
                                 <div class="right_wrapper_icons">
                                     <div class="icon_wrapper" type="button"  onclick="removeCheck_article({{ target_article.id }})">
@@ -255,16 +295,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="content_main">
-                        {% if target_article.img %}
-                            <div class="content_img">
-                                <img src="https://cofi.s3.ap-northeast-2.amazonaws.com/{{ target_article.img }}">
-                            </div>
-                        {% endif %}
-                        <span>
-                                <h3>{{ target_article.content | safe }}</h3>
-                            </span>
                     </div>
                     <br>
                     <hr>
@@ -355,14 +385,25 @@
                                                                         <img src="https://png.clipart.me/istock/previews/9349/93493545-people-icon.jpg">
                                                                     {% endif %}
                                                                 </i>
-                                                                <span><a
-                                                                        href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a>   작성된 날짜
+                                                                <span class="comment_container">
+                                                                    <a href="{% url 'user:profile' comment.user.pk %}">{{ comment.user.username }}</a>   작성된 날짜
                                                                     <time
                                                                             datetime="{{ comment.created_at }}">{{ comment.created_at|date:'Y-m-d H:i' }}
-
                                                                     </time>
+
+{#                                                                    {% if check_commentlike %}#}
+{#                                                                    <div class="like_comment" type="button" onclick="unlike_comment({{ comment.id }})">#}
+{#                                                                        <img src="{% static "img/icons/comment_liked.png" %}" style="width: 4vw; margin: 0 0.5vw;">#}
+{#                                                                    </div>#}
+{#                                                                    {% else %}#}
+{#                                                                    <div class="unlike_comment" type="button" onclick="like_comment({{ comment.id }})">#}
+{#                                                                        <img src="{% static "img/icons/comment_like.png" %}" style="width: 4vw; margin: 0 0.5vw;">#}
+{#                                                                    </div>#}
+{#                                                                    {% endif %}#}
+
                                                                     {% if user == comment.user %}
                                                                         <button class="comment_delete_btn"
+
                                                                                 onclick="removeCheck_comment({{ comment.pk }})">삭제하기</button>
                                                                     {% endif %}
                                                                 </span>
@@ -391,6 +432,10 @@
                 </div>
             </div>
         </div>
+
+
+    </div>
+
 
     </div>
 
@@ -421,6 +466,7 @@
                 {% else %}
                     <li class="has-submenu"><a
                             href="{% url 'user:profile' user.pk %}"><span>마이페이지</span></a>
+
                     </li>
                     {% if not user.is_authenticated %}
                         <li><a href="{% url 'user:login' %}"><span>로그인</span></a></li>
@@ -544,6 +590,7 @@
             });
         }
 
+
         function bookmark_article() {
             $.ajax({
                 type: 'POST',
@@ -565,6 +612,32 @@
                 }
             });
         }
+        
+        /*
+
+        function like_comment(comment_id) {
+
+            $.ajax({
+                type: 'POST',
+                url: '/comments/like/${comment_id}',
+                headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+                success: function (response) {
+                    window.location.reload(true)
+                }
+            });
+          
+          function unlike_comment(comment_id) {
+            $.ajax({
+                type: 'DELETE',
+                url: '/comments/like/${comment_id}',
+                headers: {'X-CSRFTOKEN': '{{ csrf_token }}'},
+                success: function (response) {
+                    window.location.reload(true)
+                }
+            });
+        }
+*/
+
 
 
         function delete_comment(id) {
@@ -587,6 +660,7 @@
             });
             open_comment()
         }
+        
         function removeCheck_comment(id) {
             if (confirm("정말 삭제하시겠습니까??") == true){    //확인
                 delete_comment(id)
@@ -594,7 +668,6 @@
                 return false;
             }
         }
-
 
          function delete_article(id) {
             {#let pk_data = JSON.stringify({"pk": id})#}
@@ -604,10 +677,12 @@
                 contentType: "application/json",
                 dataType: "JSON",
                 data:{},
+
                 headers: {
                     'X-CSRFTOKEN': '{{ csrf_token }}'
                 },
                 success: function (response) {
+
                     window.location.replace({% url 'articleapp:home' %});
                 }
             });
@@ -627,7 +702,6 @@
 
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 
 </body>
 

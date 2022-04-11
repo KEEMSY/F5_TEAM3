@@ -31,6 +31,7 @@ def read_target_article_comment(pk):
         return False
 
 
+
 def update_comment(comment_id, content):
     try:
         target_comment = Comment.objects.get(id=comment_id)
