@@ -115,7 +115,8 @@ def write_article(request):
             article.save()
 
 
-            return redirect(f'/communities/{category}/') # 작성한 게시판으로 리로드 해놓음.
+            # return redirect(f'/communities/{category}/') # 작성한 게시판으로 리로드 해놓음.
+            return redirect(f'/communities/article/{article.id}') # 작성한 글로 리로드 해놓음.
 
     if request.method == 'GET':
         article_form = ArticleForm()

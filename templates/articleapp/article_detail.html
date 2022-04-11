@@ -363,7 +363,7 @@
                                                                     </time>
                                                                     {% if user == comment.user %}
                                                                         <button class="comment_delete_btn"
-                                                                                onclick="removeCheck({{ comment.pk }})">삭제하기</button>
+                                                                                onclick="removeCheck_comment({{ comment.pk }})">삭제하기</button>
                                                                     {% endif %}
                                                                 </span>
                                                             </div>
@@ -581,7 +581,7 @@
             });
             open_comment()
         }
-        function removeCheck(id) {
+        function removeCheck_comment(id) {
             if (confirm("정말 삭제하시겠습니까??") == true){    //확인
                 delete_comment(id)
             }else{   //취소
