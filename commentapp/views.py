@@ -42,7 +42,6 @@ class CommentView(View):
 
             return JsonResponse({'comment': data}, status=200)
 
-
         except IntegrityError:
             return JsonResponse({'msg': '게시글이 존재하지 않습니다.'}, status=400)
 
