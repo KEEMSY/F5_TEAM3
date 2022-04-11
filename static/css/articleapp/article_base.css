@@ -246,12 +246,10 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
     cursor: pointer;
 }
 
-div.bbp-breadcrumb {
-    float: none;
-}
 
 div.bbp-breadcrumb {
-    font-size: 12px;
+    font-size: 1.1rem;
+    float: none;
 }
 
 #bbpress-forums div.bbp-breadcrumb p {
