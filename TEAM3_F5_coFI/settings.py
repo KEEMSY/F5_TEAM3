@@ -194,7 +194,8 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_IMAGE_BACKEND = 'pillow'
 CKEDITOR_CONFIGS = {
     'default': {
-        'height': 300,
+        'height': 0,
+        'width': 0,
     }
 }
 
