@@ -195,7 +195,6 @@ CKEDITOR_IMAGE_BACKEND = 'pillow'
 CKEDITOR_CONFIGS = {
     'default': {
         'height': 300,
-        'width': 800,
     }
 }
 
@@ -235,4 +234,3 @@ try:
     from TEAM3_F5_coFI.deploy_settings import *
 except ImportError:
     pass
-
