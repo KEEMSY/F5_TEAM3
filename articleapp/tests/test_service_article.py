@@ -307,6 +307,7 @@ class TestView(TestCase):
         # Expect
         self.assertEqual(False, within_one_week_title)
 
+
 #     ''' U P D A T E '''
 
     def test_update_article(self):
