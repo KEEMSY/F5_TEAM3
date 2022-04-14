@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 
 from articleapp.models import Article, ArticleHits, Category
 from userapp.models import User
-
+from django.db.models import F
 """
 Service
 1. article_CRUD
@@ -125,10 +125,10 @@ def hit_article(ip, article_id):
     target_article = Article.objects.get(pk=article_id)
 
     if not ArticleHits.objects.filter(client_ip=ip, article=article_id):
-        target_article.article_hits += 1
-        target_article.save()
-
+        # target_article.article_hits += 1
+        # target_article.save()
         ArticleHits.objects.create(client_ip=ip, article_id=article_id)
+        Article.objects.filter(id=article_id).update(article_hits=F('article_hits') + 1)
 
     return Article.objects.get(pk=article_id)
 

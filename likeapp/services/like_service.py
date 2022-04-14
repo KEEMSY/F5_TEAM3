@@ -25,7 +25,7 @@ def do_article_like(user_id: int, article_id: int) -> ArticleLikes:
     Article.objects.filter(id=article_id).get()
 
     like = ArticleLikes.objects.create(user_id=user_id, article_id=article_id)
-    Article.objects.filter(id=article_id).update(like_count=F("like_count") + 1)
+    Article.objects.filter(id=article_id).update(like_cnt=F("like_cnt") + 1)
 
     return like
 
@@ -42,7 +42,7 @@ def undo_article_like(user_id: int, article_id: int) -> None:
 
     deleted_cnt, _ = ArticleLikes.objects.filter(user_id=user_id, article_id=article_id).delete()
     if deleted_cnt:
-        Article.objects.filter(id=article_id).update(like_count=F("like_count") - 1)
+        Article.objects.filter(id=article_id).update(like_cnt=F("like_cnt") - 1)
 
 
 def do_comment_like(user_id: int, comment_id: int) -> CommentLikes:
