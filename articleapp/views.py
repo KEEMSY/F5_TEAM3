@@ -104,16 +104,12 @@ def write_article(request):
     recent_comments = read_all_comment()[:5]
     if request.method == 'POST':
         article_form = ArticleForm(request.POST, request.FILES)
-        category_id = request.POST.get('category')
-        category = Category.objects.get(id=category_id)
 
         if article_form.is_valid():
             article = article_form.save(commit=False)
             article.user = request.user
             article.save()
 
-
-            # return redirect(f'/communities/{category}/') # 작성한 게시판으로 리로드 해놓음.
             return redirect(f'/communities/article/{article.id}') # 작성한 글 리로드 해놓음.
 
     if request.method == 'GET':
@@ -211,9 +207,6 @@ def search_article(request):
     standard = request.POST.get('standard', 'title')
     period = request.POST.get('period', 'all')
     keyword = request.POST.get('keyword', '')
-
-    print('standard', standard)
-    print('keyword', keyword)
 
     if period == 'all':
         if standard == 'title':
