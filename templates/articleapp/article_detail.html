@@ -147,6 +147,11 @@
         width: 90%;
         max-width: 33.85rem;
     }
+    {#작성버튼 왼쪽으로 쏠려서 킹받는 거 해결#}
+    button#comment-submit-button {
+        display: flex;
+        justify-content: center;
+}
 
     @media only screen and (max-width: 600px) {
         .timeline-item-description span time {
@@ -265,9 +270,11 @@
                                 </div>
                             </div>
                             <div class="right_wrapper_icons">
+                                {% if target_article.user.id == user.id %}
                                 <div class="icon_wrapper" type="button"  onclick="removeCheck_article({{ target_article.id }})">
                                     <img src="{% static 'img/icons/delete-button.png' %}" alt="">
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
 
@@ -620,6 +627,7 @@
             success: function (response) {
                 $('#' + id).remove()
                 console.log(id)
+                alert(response['msg'])
                 {#window.location.reload(true)#}
                 minus_comment_cnt()
             }

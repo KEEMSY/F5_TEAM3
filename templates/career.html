@@ -44,12 +44,12 @@
                                 <div class="recent-job-item recent-job-style2-item">
                                     <div class="company-info">
                                         <div class="logo">
-                                            <a href="{{ career.link }}"><img src="{{ career.logo }}" width="75"
+                                            <a target="_blank" href="{{ career.link }}"><img src="{{ career.logo }}" width="75"
                                                                              height="75" alt="Image-HasTech"></a>
                                         </div>
                                         <div class="content">
-                                            <h4 class="name"><a href="{{ career.link }}">{{ career.name }}</a></h4>
-                                            <a href="https://www.rocketpunch.com/"><p class="address">로켓펀치</p></a>
+                                            <h4 class="name"><a target="_blank" href="{{ career.link }}">{{ career.name }}</a></h4>
+                                            <a target="_blank" href="https://www.rocketpunch.com/"><p class="address">로켓펀치</p></a>
                                         </div>
                                     </div>
                                     <div class="main-content">
@@ -63,7 +63,7 @@
                                             {#                  <p></p>#}
                                         </div>
 
-                                        <a class="btn-theme btn-sm" href="{{ career.link }}">바로 지원</a>
+                                        <a target="_blank" class="btn-theme btn-sm" href="{{ career.link }}">바로 지원</a>
                                     </div>
                                 </div>
                                 <!--== End Recent Job Item ==-->
@@ -139,7 +139,7 @@
                 <ul class="nav-menu">
                     <li><a href="/">홈</a></li>
                     <li><a href="{% url 'careerapp:job' %}">채용정보</a></li>
-                    <li><a href="{% url 'articleapp:home' %}">게시판</a>티
+                    <li><a href="{% url 'articleapp:home' %}">게시판</a>
                         <ul class="sub-menu">
                             <li><a href="{% url 'articleapp:free' %}">자유게시판</a></li>
                             <li><a href="{% url 'articleapp:tip' %}">꿀팁게시판</a></li>

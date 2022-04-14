@@ -4,10 +4,10 @@ import os
 
 from TEAM3_F5_coFI.settings import BASE_DIR
 
-# ALLOWED_HOSTS = ['cofi-f5.com']
-# DEBUG = False
-ALLOWED_HOSTS = []
-DEBUG = True
+ALLOWED_HOSTS = ['cofi-f5.com']
+DEBUG = False
+# ALLOWED_HOSTS = []
+# DEBUG = True
 
 
 
@@ -19,8 +19,7 @@ with open(os.path.join(BASE_DIR, 'aws.json')) as f:
 # https://kangraemin.github.io/django/2020/09/29/elasticbeanstalk-s3/    <<-- 블로그에 잘 정리되어있음.
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # 아래 친구가 s3 경로의 스태틱을 쓰게 하는 친구
-
-#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3ManifestStaticStorage'
 AWS_ACCESS_KEY_ID = secrets['AWS']['ACCESS_KEY_ID']
 AWS_SECRET_ACCESS_KEY = secrets['AWS']['SECRET_ACCESS_KEY']
